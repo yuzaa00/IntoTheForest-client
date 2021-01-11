@@ -101,4 +101,4 @@
 
 # For project details
 
-[https://github.com/codestates/shigo-jago-client/wiki/worklog](https://github.com/codestates/shigo-jago-client/wiki/worklog)
+[https://github.com/codestates/Into-the-Forest-client/wiki/worklog](https://github.com/codestates/Into-the-Forest-client/wiki/worklog)
