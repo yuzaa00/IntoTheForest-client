@@ -108,6 +108,6 @@
 
 
 
-# For project details
+# For project worklog
 
 [https://github.com/codestates/Into-the-Forest-client/wiki/worklog](https://github.com/codestates/Into-the-Forest-client/wiki/worklog)
