@@ -13,7 +13,7 @@
 
 ![](https://img.shields.io/badge/FRONT-React-61DAFB?style=for-the-badge&logo=React) ![](https://img.shields.io/badge/FRONT-React--hook-61DAFB?style=for-the-badge&logo=React) 
 
-![](https://img.shields.io/badge/FRONT-redux--saga-springgreen?style=for-the-badge&logo=redux) 
+![](https://img.shields.io/badge/FRONT-redux--saga-lightgreenm?style=for-the-badge&logo=redux) 
 
 ![](https://img.shields.io/badge/FRONT-phaser-skyblue?style=for-the-badge&logo=appveyor) 
 
