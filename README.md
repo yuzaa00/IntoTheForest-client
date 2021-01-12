@@ -5,6 +5,24 @@
 ***Into the Forest***에서는...
 ***Into the Forest*** 
 
+# Introduction
+
+Into the Forest는 횡스크롤 러닝 액션 게임으로 길잃은 강아지가 집을 찾아가는 게임입니다. <br>
+가볍게 솔로 모드로 플레이하시거나, 친한 친구들과 멀티 모드로 추억을 남겨보세요!
+
+# 시연 영상 
+
+...
+
+* 배포 사이트: <a href="">배포 링크</a>
+* 클라이언트: <a href="https://github.com/codestates/Into-the-Forest-client">Client</a>
+* 서버: <a href="https://github.com/codestates/Into-the-Forest-server">Server</a>
+
+
+# Features
+
+...
+
 
 # 🕵🏼 어떤 기술이 사용되었나요?
 
