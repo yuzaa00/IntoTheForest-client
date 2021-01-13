@@ -14,7 +14,7 @@ Into the Forest는 횡스크롤 러닝 액션 게임으로 길잃은 강아지�
 
 ...
 
-* 배포 사이트: <a href="">배포 링크</a>
+* 배포 사이트: <a href="http://intotheforest.space">배포 링크</a>
 * Repository
   * 클라이언트: <a href="https://github.com/codestates/Into-the-Forest-client">Client</a>
   * 서버: <a href="https://github.com/codestates/Into-the-Forest-server">Server</a>
