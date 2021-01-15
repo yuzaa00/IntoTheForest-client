@@ -13,6 +13,12 @@ export const config: Phaser.Types.Core.GameConfig = {
   width: 1600,
   height: 1200,
   parent: 'game-container',
-  physics: { default: 'arcade' },
+  physics: {
+    default: 'arcade',
+    arcade: {
+        gravity: { y: 500 },
+        debug: false
+    }
+},
   scene: Boot,
 }
