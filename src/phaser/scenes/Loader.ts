@@ -9,9 +9,16 @@ import dudes from '../../resource/images/dude.png'
 import sky_cloud from '../../resource/images/sky-clouds.jpg'
 import mountain_skyline from '../../resource/images/mountain-skyline.png'
 import bird from '../../resource/images/104.png'
+import sunset from '../../resource/images/72.png'
+import groundDark from '../../resource/images/groundDark.png'
+import skydark from '../../resource/images/country-platform.png'
+import gameOver from '../../resource/images/gameover.png'
+import inu from '../../resource/images/310.png'
 const stage1_BGM = require("../../resource/sound/bgm/stage1_bgm.mp3")
 const scoreEffect = require('../../resource/sound/effect/fx_mixdown.ogg')
 const scoreEffectjson = require('../../resource/sound/effect/fx_mixdown.json')
+const font1 = require('../../resource/font/font.fnt')
+const font2 = require('../../resource/font/font.png')
 
 let player: any
 let platforms: any
@@ -33,10 +40,18 @@ export default class Loader extends Phaser.Scene {
     this.load.image('sky_cloud', sky_cloud)
     this.load.image('mountain_skyline', mountain_skyline)
     this.load.image('bird', bird)
+    this.load.image('sunset', sunset)
+    this.load.image('groundDark', groundDark)
+    this.load.image('skydark', skydark)
+    this.load.image('skydark', skydark)
+    this.load.image('gameOver', gameOver)
+    this.load.image('inu', inu)
+    this.load.bitmapFont('font', font2, font1)
     this.load.spritesheet('dude', dudes, { frameWidth: 32, frameHeight: 48 })
     // this.load.spritesheet('dude2', dudes2, { frameWidth: 156, frameHeight: 260 })
     this.load.audio('stage1_bgm', stage1_BGM)
     this.load.audioSprite('sfx', scoreEffectjson, scoreEffect)
+    
     
 }
 
@@ -58,28 +73,7 @@ export default class Loader extends Phaser.Scene {
     // player = this.physics.add.sprite(100, 700, 'dude')
 
     // player.setBounce(0.4)
-    // player.setCollideWorldBounds(true)
-    
-    this.anims.create({
-        key: 'left',
-        frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
-        frameRate: 8,
-        repeat: -1
-    })
-
-    this.anims.create({
-        key: 'turn',
-        frames: [ { key: 'dude', frame: 4 } ],
-        frameRate: 10
-    })
-
-    this.anims.create({
-        key: 'right',
-        frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
-        frameRate: 8,
-        repeat: -1
-    })
-    
+    // player.setCollideWorldBounds(true)  
     // cursors = this.input.keyboard.createCursorKeys()
     
 
