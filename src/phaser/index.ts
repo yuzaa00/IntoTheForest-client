@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 
+import { SETTING } from '../GameSetting/index'
 
 import Boot from './scenes/Boot';
 import Loader from './scenes/Loader';
@@ -10,8 +11,8 @@ import Stage3 from './scenes/Stage3';
 export const config: Phaser.Types.Core.GameConfig = {
   title: 'Into the Forest',
   type: Phaser.AUTO,
-  width: 1600,
-  height: 1200,
+  width: SETTING.WIDTH,
+  height: SETTING.HEIGHT,
   parent: 'game-container',
   physics: {
     default: 'arcade',
@@ -19,6 +20,6 @@ export const config: Phaser.Types.Core.GameConfig = {
         gravity: { y: 500 },
         debug: false
     }
-},
-  scene: Boot,
+  },
+  scene: [Boot, Loader, MainGame],
 }
