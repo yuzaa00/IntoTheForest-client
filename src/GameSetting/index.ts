@@ -1,6 +1,6 @@
 export const enum SETTING {
-    WIDTH = 1000,
-    HEIGHT = 800,
+    WIDTH = 800,
+    HEIGHT = 600,
 }
   
 export const enum TEXTURE {

@@ -12,15 +12,33 @@ let tori: any
 let subchas: any
 let vertical: any
 let myCam: any
+let groundDark: any // 수정 예정
 
 export default class MainGame extends Phaser.Scene {
+    private scoreText!: Phaser.GameObjects.BitmapText
+    private lifeText!: Phaser.GameObjects.BitmapText
+    private worldTimer!: Phaser.Time.TimerEvent
+
     constructor() {
         super('MainGame')
     }
+
+    public init(): void {
+        this.registry.set('score', 0)
+        this.registry.set('life', 1000)
+      }
   
     public create(): void {
+
+        this.lifeText = this.add // 라이프 텍스트 생성
+        .bitmapText(30, 30, 'font', `LIFE ${this.registry.values.life}`)
+        .setDepth(6)
+  
+        this.scoreText = this.add // 점수 텍스트 생성
+        .bitmapText(530, 30, 'font', `SCORE ${this.registry.values.score}`)
+        .setDepth(6)
         
-        skyTile = this.add.tileSprite(600, 300, 1200, 800, 'sky')
+        skyTile = this.add.tileSprite(0, 0, 800, 600, 'skydark').setOrigin(0).setDepth(0) 
         platforms = this.physics.add.staticGroup()
         target = this.physics.add.staticGroup()
         subchas = this.physics.add.staticGroup()
@@ -52,18 +70,34 @@ export default class MainGame extends Phaser.Scene {
         //     c.body.immovable = true
         // }
 
-        platforms.create(800, 700, 'ground').setScale(4).refreshBody()
+          // add the ground layer which is only 48 pixels tall
+        // groundDark = this.add.tileSprite(0, 0, SETTING.WIDTH, 300, "groundDark")
+        // groundDark.setOrigin(0, 0)
+        // groundDark.setScrollFactor(0)
+        // // sinc this tile is shorter I positioned it at the bottom of he screen
+        // groundDark.y = 550
+        // platforms.add(groundDark)
 
-        target.create(180, 600, 'star').setScale(4).refreshBody()
-        target.create(300, 600, 'star').setScale(4).refreshBody()
-        target.create(400, 600, 'star').setScale(4).refreshBody()
+        this.worldTimer = this.time.addEvent({ // 게임에서 시간 이벤트 등록, 1초당 콜백 호출 (콜백내용은 초당 체력 감소)
+            delay: 1000,
+            callback: this.worldTime,
+            callbackScope: this,
+            loop: true,
+          })
 
-        player = this.physics.add.sprite(100, 700, 'dude')
+
+        platforms.create(800, 700, 'ground').setScale(4).refreshBody() // 삭제 예정 코드
+
+        target.create(180, 500, 'star').setScale(4).refreshBody()
+        target.create(300, 500, 'star').setScale(4).refreshBody()
+        target.create(400, 500, 'star').setScale(4).refreshBody()
+
+        player = this.physics.add.sprite(100, 500, 'dude')  // 플레이어 생성
         
         myCam = this.cameras.main
-        myCam.setBackgroundColor(0xbababa)
+        myCam.setBackgroundColor(0xbababa) // 게임 배경색
         myCam.setBounds(0, 0, SETTING.WIDTH * 3, SETTING.HEIGHT)
-        myCam.startFollow(player)
+        myCam.startFollow(player)  // 카메라 따라가기
 
         // player.setBounce(0.1)
         player.setCollideWorldBounds(true)
@@ -101,16 +135,16 @@ export default class MainGame extends Phaser.Scene {
             
         // })
 
-        this.physics.add.collider(player, platforms)
+        this.physics.add.collider(player, platforms) // 첫번째인자와 두번째 인자 충돌 관련
         this.physics.add.collider(stars, platforms)
         this.physics.add.collider(target, platforms)
     
-        this.physics.add.overlap(player, stars, this.collectStar, undefined, this)
-        this.physics.add.collider(player, target, this.nextStage, undefined, this)
+        this.physics.add.overlap(player, stars, this.collectStar, undefined, this) // player와 stars가 만나면 3번째 함수 실행
+        this.physics.add.collider(player, target, this.getSubcha, undefined, this)
     }
     
     public update(time: number, delta: number): void {
-        // this.background.update()
+         // this.background.update()
         if (cursors.left.isDown) {
             player.setVelocityX(-12)
             skyTile.tilePositionX -= 5
@@ -145,7 +179,24 @@ export default class MainGame extends Phaser.Scene {
                 }
             })
         }
+        if (this.registry.values.life === 0) { // 게임 오버
+            this.time.addEvent({
+              delay: 300,
+              callback: () => {
+                this.add.tileSprite(0, 0, 800, 600, 'gameOver').setOrigin(0).setDepth(0)
+                this.scene.pause()
+              },
+              callbackScope: this,
+            })
+          }
     }
+    private worldTime(): void {
+        this.registry.values.score += 10
+        this.scoreText.setText(`SCORE ${this.registry.values.score}`)
+        this.registry.values.life -= 100
+        this.lifeText.setText(`LIFE ${this.registry.values.life}`)
+    }
+
       collectStar (player: any, star: any):void {
         star.disableBody(true, true)
         if (stars.countActive(true) === 0) {
@@ -155,15 +206,28 @@ export default class MainGame extends Phaser.Scene {
         }
       }
 
-      nextStage (player: any, target: any):void {
+      // 점수 아이템
+      // 서브캐 따라오기
+      // 배경 밀림
+      // 플레이어 땅위에
+      // stage2, 3
+      
+      
+
+      nextStage () : void {
+        this.scene.start('Stage2', { score: this.registry.values.score, life: this.registry.values.life  })
+      }
+
+      getSubcha (player: any, target: any):void {
         target.disableBody(true, true)
         
         let bird = subchas.create(player.x - (30 + subchas.children.entries.length * 80), player.y, 'bird').setScale(0.14)
-        
         subchas.add(bird)
+        this.registry.values.score += 100
+        this.scoreText.setText(`SCORE ${this.registry.values.score}`)
+
         
         
-        console.log(bird)
         // var distance = bird.game.math.distance(bird.x, bird.y, target.x, target.y)
         // console.log(distance)
 
