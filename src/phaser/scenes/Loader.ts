@@ -1,11 +1,9 @@
 import Phaser from 'phaser'
 import skys from '../../resource/images/sky.png'
 import starss from '../../resource/images/star.png'
-import bombs from '../../resource/images/bomb.png'
 import trees from '../../resource/images/tree.png'
 import platformss from '../../resource/images/platform.png'
 import dudes from '../../resource/images/dude.png'
-// import dudes2 from '../../resource/images/dude2.png'
 import sky_cloud from '../../resource/images/sky-clouds.jpg'
 import mountain_skyline from '../../resource/images/mountain-skyline.png'
 import bird from '../../resource/images/104.png'
@@ -14,6 +12,7 @@ import groundDark from '../../resource/images/groundDark.png'
 import skydark from '../../resource/images/country-platform.png'
 import gameOver from '../../resource/images/gameover.png'
 import inu from '../../resource/images/310.png'
+import way from '../../resource/images/way.png'
 const stage1_BGM = require("../../resource/sound/bgm/stage1_bgm.mp3")
 const scoreEffect = require('../../resource/sound/effect/fx_mixdown.ogg')
 const scoreEffectjson = require('../../resource/sound/effect/fx_mixdown.json')
@@ -46,6 +45,7 @@ export default class Loader extends Phaser.Scene {
     this.load.image('skydark', skydark)
     this.load.image('gameOver', gameOver)
     this.load.image('inu', inu)
+    this.load.image('way', way)
     this.load.bitmapFont('font', font2, font1)
     this.load.spritesheet('dude', dudes, { frameWidth: 32, frameHeight: 48 })
     // this.load.spritesheet('dude2', dudes2, { frameWidth: 156, frameHeight: 260 })
