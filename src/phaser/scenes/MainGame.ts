@@ -25,7 +25,7 @@ export default class MainGame extends Phaser.Scene {
 
     public init(): void {
         this.registry.set('score', 0)
-        this.registry.set('life', 1000)
+        this.registry.set('life', 2000)
       }
   
     public create(): void {
@@ -71,11 +71,11 @@ export default class MainGame extends Phaser.Scene {
         // }
 
           // add the ground layer which is only 48 pixels tall
-        // groundDark = this.add.tileSprite(0, 0, SETTING.WIDTH, 300, "groundDark")
-        // groundDark.setOrigin(0, 0)
-        // groundDark.setScrollFactor(0)
-        // // sinc this tile is shorter I positioned it at the bottom of he screen
-        // groundDark.y = 550
+        groundDark = this.add.tileSprite(0, 0, SETTING.WIDTH, 160, 'way')
+        groundDark.setOrigin(0, 0)
+        groundDark.setScrollFactor(0)
+        // sinc this tile is shorter I positioned it at the bottom of he screen
+        groundDark.y = 475
         // platforms.add(groundDark)
 
         this.worldTimer = this.time.addEvent({ // 게임에서 시간 이벤트 등록, 1초당 콜백 호출 (콜백내용은 초당 체력 감소)
@@ -103,20 +103,20 @@ export default class MainGame extends Phaser.Scene {
         player.setCollideWorldBounds(true)
         // this.cameras.main.startFollow(player)
         
-        this.anims.create({
+        this.anims.create({  // 플레이어 왼쪽 동작시 0번 ~ 3번 프레임 8fps로 재생
             key: 'left',
             frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
             frameRate: 8,
             repeat: -1
         })
     
-        this.anims.create({
+        this.anims.create({ // 플레이어 기본 프레임 4번
             key: 'turn',
-            frames: [ { key: 'dude', frame: 4 } ],
+            frames: [ { key: 'dude', frame: 4 } ], 
             frameRate: 10
         })
     
-        this.anims.create({
+        this.anims.create({ // 플레이어 오른쪽 동작시 5번 ~ 8번 프레임 8fps로 재생
             key: 'right',
             frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
             frameRate: 8,
@@ -125,38 +125,37 @@ export default class MainGame extends Phaser.Scene {
         
         cursors = this.input.keyboard.createCursorKeys()
 
-        stars = this.physics.add.group({
+        stars = this.physics.add.group({  // 별 20개 생성 (현재는 좌표설정이 없어서 제대로 동작하지않음)
             key: 'star',
             repeat: 20,
-            
         })
     
-        // stars.children.iterate(function (child: any):void {
+        // stars.children.iterate(function (child: any):void {  // 별 뿌리는 함수
             
         // })
 
-        this.physics.add.collider(player, platforms) // 첫번째인자와 두번째 인자 충돌 관련
+        this.physics.add.collider(player, platforms) // 첫번째인자와 두번째 인자간의 충돌 관련
         this.physics.add.collider(stars, platforms)
         this.physics.add.collider(target, platforms)
     
         this.physics.add.overlap(player, stars, this.collectStar, undefined, this) // player와 stars가 만나면 3번째 함수 실행
-        this.physics.add.collider(player, target, this.getSubcha, undefined, this)
+        this.physics.add.collider(player, target, this.getSubcha, undefined, this) // player와 target이 만나면 3번째 함수 실행
     }
     
     public update(time: number, delta: number): void {
          // this.background.update()
-        if (cursors.left.isDown) {
+        if (cursors.left.isDown) {   // 키보드 방향키 왼쪽 입력시 플레이어 -12 왼쪽이동
             player.setVelocityX(-12)
             skyTile.tilePositionX -= 5
             player.anims.play('left', true)
         }
 
-        else if (cursors.right.isDown) {
+        else if (cursors.right.isDown) { // 키보드 방향키 왼쪽 입력시 플레이어 +12 오른쪽이동
             player.setVelocityX(12)
             skyTile.tilePositionX += 5
             player.anims.play('right', true)
             
-            subchas.children.iterate(function (child: any, idx: number) {
+            subchas.children.iterate(function (child: any, idx: number) {  //서브캐릭들 붙이는 함수
                 if(player.x - (50 + idx * 50) > child.x) {
                     child.x += 1
                 }
@@ -171,7 +170,7 @@ export default class MainGame extends Phaser.Scene {
             player.anims.play('turn')
         }
     
-        if (cursors.space.isDown) {
+        if (cursors.space.isDown) { // 스페이스바 입력시 점프
             player.setVelocityY(-330)
             subchas.children.iterate(function (child: any, idx: number) {
                 if(player.y > child.y) {
@@ -190,14 +189,14 @@ export default class MainGame extends Phaser.Scene {
             })
           }
     }
-    private worldTime(): void {
+    private worldTime(): void {  // 1초당 실행되는 함수 this.worldTimer 참조
         this.registry.values.score += 10
         this.scoreText.setText(`SCORE ${this.registry.values.score}`)
         this.registry.values.life -= 100
         this.lifeText.setText(`LIFE ${this.registry.values.life}`)
     }
 
-      collectStar (player: any, star: any):void {
+      collectStar (player: any, star: any):void { // 별 다모으면 다시 만드는 함수
         star.disableBody(true, true)
         if (stars.countActive(true) === 0) {
             stars.children.iterate(function (child: any) {
@@ -211,14 +210,15 @@ export default class MainGame extends Phaser.Scene {
       // 배경 밀림
       // 플레이어 땅위에
       // stage2, 3
+      // cloudfront 배포
       
-      
-
-      nextStage () : void {
+      nextStage () : void { // 다음 스테이지로 넘어가는 함수 (아직 사용중인 곳은 없음)
         this.scene.start('Stage2', { score: this.registry.values.score, life: this.registry.values.life  })
       }
-
-      getSubcha (player: any, target: any):void {
+      
+      //this.physics.add.collider(player, target, this.getSubcha, undefined, this) 에서 사용된 함수
+      //서브캐 습득시 자리정렬과 스코어 합산
+      getSubcha (player: any, target: any):void { 
         target.disableBody(true, true)
         
         let bird = subchas.create(player.x - (30 + subchas.children.entries.length * 80), player.y, 'bird').setScale(0.14)
