@@ -27,7 +27,7 @@ function App() {
     count ? <div><Game></Game></div> :
     <div className="App">
       <header className="App-header">
-        <img src='images/charactor/logo.png' className="App-logo" alt="logo" />
+        <img src='images/character/logo.png' className="App-logo" alt="logo" />
         <button onClick={()=> setCount(1)}>
           Game Start!!!
         </button>
