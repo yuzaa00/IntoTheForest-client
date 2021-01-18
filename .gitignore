@@ -26,3 +26,11 @@ yarn-error.log*
 .env
 .cache
 dist
+
+
+# test component
+src/components/Counter
+src/redux/actions/counter
+src/redux/actions/types
+src/redux/reducers/counter
+src/redux/reducers/index
