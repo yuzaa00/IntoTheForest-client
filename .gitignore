@@ -26,11 +26,3 @@ yarn-error.log*
 .env
 .cache
 dist
-
-
-# test component
-src/components/Counter.tsx
-src/redux/actions/counter.ts
-src/redux/actions/types.ts
-src/redux/reducers/counter.ts
-src/redux/reducers/index.ts

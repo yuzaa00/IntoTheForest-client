@@ -1,6 +1,4 @@
-import G from 'glob';
 import React, { useState }from 'react';
-
 import './App.css';
 import Game from './game';
 import Counter from './Counter';
@@ -29,7 +27,7 @@ function App() {
     count ? <div><Game></Game></div> :
     <div className="App">
       <header className="App-header">
-        <img src={'images/character/logo.png'} className="App-logo" alt="logo" />
+        <img src='images/charactor/logo.png' className="App-logo" alt="logo" />
         <button onClick={()=> setCount(1)}>
           Game Start!!!
         </button>
@@ -38,7 +36,6 @@ function App() {
           onIncrease={onIncrease} 
           onDecrease={onDecrease}
          /> */}
-        <button className='load_record'>load Record</button>
       </header>
     </div>
   );
