@@ -17,7 +17,7 @@ let next: any
 let boneLayer: any
 let subSquiLayer: any
 let subBirdLayer: any
-
+let yellowBallLayer: any
 let potionLayer: any
 let map: any
 
@@ -74,12 +74,15 @@ export default class Stage1 extends Phaser.Scene {
         subBirdLayer = map.createDynamicLayer('subBirds', subBirdTiles, 0, 0);
         subBirdLayer.setTileIndexCallback(1, this.collectSubBird, this).setDepth(1);
 
-       
-
         let potionTiles = map.addTilesetImage('potion');
         // add bones as tiles
         potionLayer = map.createDynamicLayer('potions', potionTiles, 0, 0);
         potionLayer.setTileIndexCallback(4, this.collectPotion, this).setDepth(1);
+
+        let yellowBallTiles = map.addTilesetImage('yellowBall');
+        // add bones as tiles
+        yellowBallLayer = map.createDynamicLayer('yellowBalls', yellowBallTiles, 0, 0);
+        yellowBallLayer.setTileIndexCallback(5, this.collectyellowBall, this).setDepth(1);
         
         groundDark = this.add.tileSprite(0, 0, SETTING.WIDTH, 160, 'way')
         groundDark.setOrigin(0, 0)
@@ -153,6 +156,7 @@ export default class Stage1 extends Phaser.Scene {
         this.physics.add.overlap(player, boneLayer);
         this.physics.add.overlap(player, subSquiLayer);
         this.physics.add.overlap(player, subBirdLayer);
+        this.physics.add.overlap(player, yellowBallLayer);
         this.physics.add.overlap(player, potionLayer);
     }
     
@@ -235,7 +239,12 @@ export default class Stage1 extends Phaser.Scene {
         //return false;
       }
 
-
+      collectyellowBall(player: any, tile: any):void {
+        yellowBallLayer.removeTileAt(tile.x, tile.y); // remove the tile/coin
+        //coinScore ++; // increment the score
+        //text.setText(`Coins: ${coinScore}x`); // set the text to show the current score
+        //return false;
+      }
 
       collectPotion(player: any, tile: any):void {
         potionLayer.removeTileAt(tile.x, tile.y); // remove the tile/coin
