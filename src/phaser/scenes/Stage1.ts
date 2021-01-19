@@ -14,6 +14,12 @@ let vertical: any
 let myCam: any
 let groundDark: any // 수정 예정
 let next: any
+let boneLayer: any
+let subSquiLayer: any
+let subBirdLayer: any
+
+let potionLayer: any
+let map: any
 
 export default class Stage1 extends Phaser.Scene {
     private scoreText!: Phaser.GameObjects.BitmapText
@@ -49,6 +55,32 @@ export default class Stage1 extends Phaser.Scene {
         subchas = this.physics.add.staticGroup()
         next = this.physics.add.staticGroup()
 
+
+        map = this.make.tilemap({ key: "map" });
+
+        // bone image used as tileset
+        let boneTiles = map.addTilesetImage('bone');
+        // add bones as tiles
+        boneLayer = map.createDynamicLayer('bones', boneTiles, 0, 0);
+        boneLayer.setTileIndexCallback(3, this.collectBone, this).setDepth(1);
+
+        let subSquiTiles = map.addTilesetImage('subSqui');
+        // add bones as tiles
+        subSquiLayer = map.createDynamicLayer('subSquis', subSquiTiles, 0, 0);
+        subSquiLayer.setTileIndexCallback(2, this.collectSubSqui, this).setDepth(1);
+
+        let subBirdTiles = map.addTilesetImage('subBird');
+        // add bones as tiles
+        subBirdLayer = map.createDynamicLayer('subBirds', subBirdTiles, 0, 0);
+        subBirdLayer.setTileIndexCallback(1, this.collectSubBird, this).setDepth(1);
+
+       
+
+        let potionTiles = map.addTilesetImage('potion');
+        // add bones as tiles
+        potionLayer = map.createDynamicLayer('potions', potionTiles, 0, 0);
+        potionLayer.setTileIndexCallback(4, this.collectPotion, this).setDepth(1);
+        
         groundDark = this.add.tileSprite(0, 0, SETTING.WIDTH, 160, 'way')
         groundDark.setOrigin(0, 0)
         groundDark.setScrollFactor(0)
@@ -118,6 +150,10 @@ export default class Stage1 extends Phaser.Scene {
         this.physics.add.overlap(player, stars, this.collectStar, undefined, this) // player와 stars가 만나면 3번째 함수 실행
         this.physics.add.collider(player, target, this.getSubcha, undefined, this) // player와 target이 만나면 3번째 함수 실행
         this.physics.add.collider(player, next, this.nextStage, undefined, this) // player와 next가 만나면 3번째 함수 실행
+        this.physics.add.overlap(player, boneLayer);
+        this.physics.add.overlap(player, subSquiLayer);
+        this.physics.add.overlap(player, subBirdLayer);
+        this.physics.add.overlap(player, potionLayer);
     }
     
     public update(time: number, delta: number): void {
@@ -176,6 +212,36 @@ export default class Stage1 extends Phaser.Scene {
                 child.enableBody(true, child.x, 700, true, true)
             })
         }
+      }
+
+      collectBone(player: any, tile: any):void {
+        boneLayer.removeTileAt(tile.x, tile.y); // remove the tile/coin
+        //coinScore ++; // increment the score
+        //text.setText(`Coins: ${coinScore}x`); // set the text to show the current score
+        //return false;
+      }
+
+      collectSubSqui(player: any, tile: any):void {
+        subSquiLayer.removeTileAt(tile.x, tile.y); // remove the tile/coin
+        //coinScore ++; // increment the score
+        //text.setText(`Coins: ${coinScore}x`); // set the text to show the current score
+        //return false;
+      }
+
+      collectSubBird(player: any, tile: any):void {
+        subBirdLayer.removeTileAt(tile.x, tile.y); // remove the tile/coin
+        //coinScore ++; // increment the score
+        //text.setText(`Coins: ${coinScore}x`); // set the text to show the current score
+        //return false;
+      }
+
+
+
+      collectPotion(player: any, tile: any):void {
+        potionLayer.removeTileAt(tile.x, tile.y); // remove the tile/coin
+        //coinScore ++; // increment the score
+        //text.setText(`Coins: ${coinScore}x`); // set the text to show the current score
+        //return false;
       }
 
       // 점수 아이템
