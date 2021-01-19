@@ -17,6 +17,8 @@ export default class Loader extends Phaser.Scene { // resource load scene
     this.load.image('skydark', 'images/background/country-platform.png')
     this.load.image('gameOver', 'images/background/gameover.png')
     this.load.image('way', 'images/background/way.png')
+    this.load.image('molebg', 'images/mole/bg.png')
+    this.load.image('mole', 'images/mole/mole.png')
     
     this.load.bitmapFont('font', 'font/font.png', 'font/font.fnt')
     this.load.spritesheet('dog', 'images/character/dog2.png', { frameWidth: 80.25, frameHeight: 100 })

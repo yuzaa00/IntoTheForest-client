@@ -1,4 +1,5 @@
-import React, { useState }from 'react';
+import React, { useState, useEffect }from 'react';
+import axios from 'axios'
 import './App.css';
 import Game from './game';
 import Counter from './Counter';
@@ -7,8 +8,18 @@ import { RootState } from '../redux/reducers';
 import { useSelector, useDispatch } from 'react-redux';
 import { increase, decrease } from '../redux/actions/counter';
 
+
 function App() {
   const [count, setCount] = useState(0);
+  
+  useEffect(() => {
+      const data =  axios.get('https://elb.intotheforest.space/rank/load', {
+        headers: {
+          "secretCode": "shelter"
+        }
+      }).then(data => console.log(data))
+  }, []);
+  
 
   // 상태를 조회합니다. 상태를 조회 할 때에는 state 의 타입을 RootState 로 지정해야합니다.
   const secCount = useSelector((state: RootState) => state.counter.count); // useSelector : 리덕스 스토어의 상태에 접근
@@ -27,10 +38,10 @@ function App() {
     count ? <div><Game></Game></div> :
     <div className="App">
       <header className="App-header">
-        <img src='images/charactor/logo.png' className="App-logo" alt="logo" />
+        <img src='images/character/logo.png' className="App-logo" alt="logo" />
         <button onClick={()=> setCount(1)}>
           Game Start!!!
-        </button>
+        </button>₩
         {/* <Counter 
           count={secCount} 
           onIncrease={onIncrease} 
