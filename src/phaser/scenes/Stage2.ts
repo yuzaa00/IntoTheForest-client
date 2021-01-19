@@ -7,6 +7,7 @@ export default class Stage2 extends Phaser.Scene {
   public init(data: any){
     this.registry.set('score', data.score) // 이전 scene에서 올라온 데이터
     this.registry.set('life', data.life) // 이전 scene에서 올라온 데이터
+    this.registry.set('life', data.stage) // 이전 scene에서 올라온 데이터
   }
 
   public update(): void {
@@ -15,7 +16,7 @@ export default class Stage2 extends Phaser.Scene {
         delay: 100,
         callback: () => {
           // this.add.tileSprite(0, 0, 800, 600, 'gameOver').setOrigin(0).setDepth(0)
-          this.scene.start('Stage2Event', { score: this.registry.values.score, life: this.registry.values.life  })
+          this.scene.start('Stage2Event', { score: this.registry.values.score + 10000, life: this.registry.values.life, stage: 3  })
       },
       callbackScope: this,
       })

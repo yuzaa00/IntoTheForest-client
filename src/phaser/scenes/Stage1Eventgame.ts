@@ -114,12 +114,12 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
   }
 
   public update(): void {
-    if (this.registry.values.time < 0) { // 30초 지난 후 콜백 실행
+    if (this.registry.values.time < 1) { // 30초 지난 후 콜백 실행
       this.time.addEvent({
         delay: 100,
         callback: () => {
           // this.add.tileSprite(0, 0, 800, 600, 'gameOver').setOrigin(0).setDepth(0)
-          this.scene.start('Stage2', { score: this.registry.values.score, life: this.registry.values.life, stage: 2  })
+          this.scene.start('Stage2Event', { score: this.registry.values.score, life: this.registry.values.life + (attempts * 200), stage: 2  })
       },
       callbackScope: this,
       })
@@ -158,9 +158,9 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
     const efficiency = attempts ? (this.matchedCards()/attempts*100).toFixed(0) : 0;
 
     score.text = `
-      Attempts:${attempts}
-      Matches: ${this.matchedCards()}
-      Efficiency: ${efficiency}%
+      시도 :${attempts}
+      맞춘 카드 : ${this.matchedCards()}
+      효율성 : ${efficiency}%
     `;
   }
 

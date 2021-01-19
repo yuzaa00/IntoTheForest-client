@@ -9,8 +9,12 @@ export default class Stage2Eventgame extends Phaser.Scene {
   public init(data: any){
     this.registry.set('score', data.score) // 이전 scene에서 올라온 데이터
     this.registry.set('life', data.life) // 이전 scene에서 올라온 데이터
-    this.registry.set('time', 3000)
-    this.registry.set('card', 0)
+    this.registry.set('stage', data.stage)
+    this.registry.set('time', 100000)
+  }
+
+  public preload(): void {
+    this.add.image(0, 0, 'molebg').setOrigin(0,0)
   }
 
   public create(): void {

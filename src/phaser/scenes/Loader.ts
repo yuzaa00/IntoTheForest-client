@@ -22,6 +22,8 @@ export default class Loader extends Phaser.Scene { // resource load scene
     this.load.image("potion", 'images/object/potion.png');
     this.load.image("subBird", 'images/object/subBird.png');
     this.load.image("subSqui", 'images/object/subSqui.png');
+    this.load.image('molebg', 'images/mole/bg.png')
+    this.load.image('mole', 'images/mole/mole.png')
     
     this.load.tilemapTiledJSON("map", 'map2.json');
     this.load.bitmapFont('font', 'font/font.png', 'font/font.fnt')
