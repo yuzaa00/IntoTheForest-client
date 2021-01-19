@@ -32,12 +32,12 @@ export default class Stage1 extends Phaser.Scene {
 
     public init(): void {
         this.registry.set('score', 0)
-        this.registry.set('life', 4000)
+        this.registry.set('life', 80000)
         this.registry.set('stage', 1)
     }
   
     public create(): void {
-        this.physics.world.setBounds(0, 0, 6666, 600)
+        this.physics.world.setBounds(0, 0, 20000, 600)
 
         this.lifeText = this.add // 라이프 텍스트 생성
         .bitmapText(30, 30, 'font', `LIFE ${this.registry.values.life}`)
@@ -49,7 +49,7 @@ export default class Stage1 extends Phaser.Scene {
         .setDepth(6)
         .setScrollFactor(0)
         
-        skyTile = this.add.tileSprite(0, 0, 8000, 600, 'skydark').setOrigin(0).setDepth(0) 
+        skyTile = this.add.tileSprite(0, 0, 20000, 600, 'skydark').setScrollFactor(0).setOrigin(0).setDepth(0)
         platforms = this.physics.add.staticGroup()
         target = this.physics.add.staticGroup()
         subchas = this.physics.add.staticGroup()
@@ -84,9 +84,9 @@ export default class Stage1 extends Phaser.Scene {
         yellowBallLayer = map.createDynamicLayer('yellowBalls', yellowBallTiles, 0, 0);
         yellowBallLayer.setTileIndexCallback(5, this.collectyellowBall, this).setDepth(1);
         
-        groundDark = this.add.tileSprite(0, 0, SETTING.WIDTH, 160, 'way')
+        groundDark = this.add.tileSprite(0, 0, 20000, 160, 'way')
         groundDark.setOrigin(0, 0)
-        groundDark.setScrollFactor(0)
+        // groundDark.setScrollFactor(0)
         // sinc this tile is shorter I positioned it at the bottom of he screen
         groundDark.y = 475
         // platforms.add(groundDark)
@@ -161,7 +161,7 @@ export default class Stage1 extends Phaser.Scene {
     }
     
     public update(time: number, delta: number): void {
- 
+        console.log(player)
         this.physics.world.wrap(player, 5000)
          // this.background.update()
         if (cursors.left.isDown) {   // 키보드 방향키 왼쪽 입력시 플레이어 -12 왼쪽이동
@@ -171,8 +171,8 @@ export default class Stage1 extends Phaser.Scene {
         }
 
         else if (cursors.right.isDown) { // 키보드 방향키 오른쪽 입력시 플레이어 +12 오른쪽이동
-            player.setVelocityX(150)
-            skyTile.tilePositionX += 20
+            player.setVelocityX(250)
+            skyTile.tilePositionX += 0.1
             player.anims.play('right', true)
                     
             subchas.children.iterate(function (child: any, idx: number) {  //서브캐릭들 붙이는 함수

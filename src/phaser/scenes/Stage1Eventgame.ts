@@ -1,21 +1,22 @@
 import Card from '../helper/card'
 let target: any
-// let cards: any[]
+
 let attempts = 0;
 let waitForNewRound = false;
 let score: any
+
 const images = {
-    'back.png' : "af78827932337650d2785b3bbe3ff81b.png",
-    'card1.png' : "768c213aa0755fbb6f0d7539b2469ddb.png",
-    'card2.png' : "028bde1ce32a283aa3bcb5b5d6e2de90.png",
-    'card3.png' : "a48401c6f2aea3e45d36829cd3c83884.png",
-    'card4.png' : "6fe9011c8d13779f879869b529a740fd.png",
-    'card5.png' : "768c213aa0755fbb6f0d7539b2469ddb.png",
-    'card6.png' : "028bde1ce32a283aa3bcb5b5d6e2de90.png",
-    'card7.png' : "a48401c6f2aea3e45d36829cd3c83884.png",
-    'card8.png' : "6fe9011c8d13779f879869b529a740fd.png",
-    'front.png' : "7ab6fa294abdb99329c00176e38eab0d.png"
-}
+  "back.png": "b9a80f88810fc29b34f58e235214e144.png",
+  "card1.png": "9bcf0b24503994316476c7c003e5222f.png",
+  "card2.png": "4a9bbf837385923213b414f3535e4037.png",
+  "card3.png": "c51db3d76ce12d85f6f71344aaa93fce.png",
+  "card4.png": "6b48715741c7f18fe74e7c66b8f1f49d.png",
+  "card5.png": "f5ffa19121a0bb258401d2700c05d202.png",
+  "card6.png": "5e2b9c97ed48a517c6d111583d110106.png",
+  "card7.png": "af02febc13262ff971680447e93e31b8.png",
+  "card8.png": "2f9853ca3389e87936ed37d1b076bd01.png",
+  "front.png": "7ab6fa294abdb99329c00176e38eab0d.png"
+ }
 
 export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토리 줍기 미니게임
   private scoreText!: Phaser.GameObjects.BitmapText
