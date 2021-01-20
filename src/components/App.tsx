@@ -3,6 +3,7 @@ import axios from 'axios'
 import './App.css';
 import Game from './game';
 import Counter from './Counter';
+import KakaoShareButton from './kakaoShareButton';
 import { RootState } from '../redux/reducers';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -13,7 +14,7 @@ function App() {
   const [count, setCount] = useState(0);
   
   useEffect(() => {
-      const data =  axios.get('https://elb.intotheforest.space/rank/load', {
+      const data =  axios.get('http://localhost:4000/rank/load', {
         headers: {
           "secretCode": "shelter"
         }
@@ -41,7 +42,9 @@ function App() {
         <img src='images/character/logo.png' className="App-logo" alt="logo" />
         <button onClick={()=> setCount(1)}>
           Game Start!!!
-        </button>₩
+        </button>
+        <KakaoShareButton></KakaoShareButton>
+        
         {/* <Counter 
           count={secCount} 
           onIncrease={onIncrease} 
