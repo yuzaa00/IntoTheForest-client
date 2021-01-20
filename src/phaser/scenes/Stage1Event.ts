@@ -8,6 +8,12 @@ export default class Stage1Event extends Phaser.Scene {
     super('Stage1Event')
   } 
 
+  public init(data: any){
+    this.registry.set('score', data.score) // 이전 scene에서 올라온 데이터 등록
+    this.registry.set('life', data.life) // 이전 scene에서 올라온 데이터 등록
+    this.registry.set('stage', data.stage) // 이전 scene에서 올라온 데이터 등록
+  }
+
   preload(): void {
 
   this.popup = this.add.graphics()
@@ -23,7 +29,7 @@ export default class Stage1Event extends Phaser.Scene {
   this.button.fillRect(325, 465, 150, 50)
 
     this.add
-      .text(400, 83, "미니 게임", {
+      .text(400, 83, "보너스 게임", {
         color: '#bfff00',
         fontSize: '40px',
         fontStyle: 'bold',

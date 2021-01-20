@@ -12,13 +12,13 @@ import { increase, decrease } from '../redux/actions/counter';
 function App() {
   const [count, setCount] = useState(0);
   
-  useEffect(() => {
-      const data =  axios.get('https://elb.intotheforest.space/rank/load', {
-        headers: {
-          "secretCode": "shelter"
-        }
-      }).then(data => console.log(data))
-  }, []);
+  // useEffect(() => {
+  //     const data =  axios.get('https://elb.intotheforest.space/rank/load', {
+  //       headers: {
+  //         "secretCode": "shelter"
+  //       }
+  //     }).then(data => console.log(data))
+  // }, []);
   
 
   // 상태를 조회합니다. 상태를 조회 할 때에는 state 의 타입을 RootState 로 지정해야합니다.

@@ -47,13 +47,14 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
     this.load.image('card6.png', 'images/card/card6.png')
     this.load.image('card7.png', 'images/card/card7.png')
     this.load.image('card8.png', 'images/card/card8.png')
-    
     this.load.image('front.png', 'images/card/front.png')
+    this.load.image('cardbg','images/card/cardbg.png')
 
     this.newRound()
   } 
 
   public create(): void {
+    this.add.image(0, 0, 'cardbg').setOrigin(0,0).setDepth(0)
     this.lifeText = this.add // 라이프 텍스트 생성
     .bitmapText(30, 30, 'font', `남은 시간 ${this.registry.values.time}`)
     .setDepth(6)
@@ -69,8 +70,8 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
     const PAIRS = 8;
     const H_OFFSET = 120;
     const V_OFFSET = 120;
-    const INITIAL_X = 170;
-    const INITIAL_Y = 150;
+    const INITIAL_X = 225;
+    const INITIAL_Y = 127;
     const lines = 4
     
     const numberOfCards = PAIRS * 2;
@@ -154,7 +155,7 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
     var style = { font: 'bold 20px Arial', fill: '#fff', boundsAlignH: 'center', boundsAlignV: 'middle' };
 
     if (!score) {
-      score = this.add.text(580, 20, '', style);
+      score = this.add.text(11, 50, '', style);
     }
     const efficiency = attempts ? (this.matchedCards()/attempts*100).toFixed(0) : 0;
 

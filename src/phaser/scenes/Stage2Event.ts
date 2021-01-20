@@ -28,7 +28,7 @@ export default class Stage2Event extends Phaser.Scene {
     this.button.fillRect(325, 465, 150, 50)
   
       this.add
-        .text(400, 83, "미니 게임 두더지 잡기", {
+        .text(400, 83, "보너스 게임 두더지 잡기", {
           color: '#bfff00',
           fontSize: '40px',
           fontStyle: 'bold',
