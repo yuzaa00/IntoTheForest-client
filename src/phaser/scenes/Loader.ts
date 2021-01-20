@@ -24,6 +24,7 @@ export default class Loader extends Phaser.Scene { // resource load scene
     this.load.image("subSqui", 'images/object/subSqui.png');
     this.load.image('molebg', 'images/mole/bg.png')
     this.load.image('mole', 'images/mole/mole.png')
+    this.load.image('card6.png', 'images/card/card6.png')
     
     this.load.tilemapTiledJSON("map", 'map2.json');
     this.load.bitmapFont('font', 'font/font.png', 'font/font.fnt')
@@ -33,7 +34,7 @@ export default class Loader extends Phaser.Scene { // resource load scene
   }
   
   update ():void {
-    this.scene.start('Stage1');
+    this.scene.start('Stage1')
   }
 }
 

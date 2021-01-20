@@ -1,6 +1,7 @@
 import { group } from 'console'
 import { Background } from '../object/BackGround'
 import { SETTING } from '../../GameSetting/index'
+// import { Dog } from '../object/dog'
 
 let player: any
 let platforms: any
@@ -25,6 +26,8 @@ export default class Stage1 extends Phaser.Scene {
     private scoreText!: Phaser.GameObjects.BitmapText
     private lifeText!: Phaser.GameObjects.BitmapText
     private worldTimer!: Phaser.Time.TimerEvent
+    private isDoubleJump: boolean = false
+    // private dog!: Dog 
 
     constructor() {
       super('Stage1')
@@ -37,7 +40,7 @@ export default class Stage1 extends Phaser.Scene {
     }
   
     public create(): void {
-        this.physics.world.setBounds(0, 0, 20000, 600)
+        this.physics.world.setBounds(0, 0, 30000, 600)
 
         this.lifeText = this.add // 라이프 텍스트 생성
         .bitmapText(30, 30, 'font', `LIFE ${this.registry.values.life}`)
@@ -49,7 +52,7 @@ export default class Stage1 extends Phaser.Scene {
         .setDepth(6)
         .setScrollFactor(0)
         
-        skyTile = this.add.tileSprite(0, 0, 20000, 600, 'skydark').setScrollFactor(0).setOrigin(0).setDepth(0)
+        skyTile = this.add.tileSprite(0, 0, 30000, 600, 'skydark').setScrollFactor(0).setOrigin(0).setDepth(0)
         platforms = this.physics.add.staticGroup()
         target = this.physics.add.staticGroup()
         subchas = this.physics.add.staticGroup()
@@ -84,12 +87,9 @@ export default class Stage1 extends Phaser.Scene {
         yellowBallLayer = map.createDynamicLayer('yellowBalls', yellowBallTiles, 0, 0);
         yellowBallLayer.setTileIndexCallback(5, this.collectyellowBall, this).setDepth(1);
         
-        groundDark = this.add.tileSprite(0, 0, 20000, 160, 'way')
-        groundDark.setOrigin(0, 0)
-        // groundDark.setScrollFactor(0)
-        // sinc this tile is shorter I positioned it at the bottom of he screen
-        groundDark.y = 475
-        // platforms.add(groundDark)
+        groundDark = this.add.tileSprite(0, 600, 30000, 100, 'way').setScrollFactor(0)
+        
+        platforms.add(groundDark)
 
         this.worldTimer = this.time.addEvent({ // 게임에서 시간 이벤트 등록, 1초당 콜백 호출 (콜백내용은 초당 체력 감소)
             delay: 1000,
@@ -98,15 +98,13 @@ export default class Stage1 extends Phaser.Scene {
             loop: true,
           })
 
-        // platforms.create(800, 700, 'ground').setScale(4).refreshBody() // 삭제 예정 코드
-
         target.create(180, 500, 'star').setScale(4).refreshBody()
         target.create(300, 500, 'star').setScale(4).refreshBody()
         target.create(400, 500, 'star').setScale(4).refreshBody()
 
-        next.create(1750, 500, 'logo').setScale(0.5).refreshBody()
+        // next.create(1750, 500, 'logo').setScale(0.05).refreshBody()
 
-        player = this.physics.add.sprite(100, 500, 'dog').setScale(1.2)  // 플레이어 생성
+        player = this.physics.add.sprite(100, 400, 'dog').setScale(1.2)  // 플레이어 생성
         
         myCam = this.cameras.main
         myCam.setBackgroundColor(0xbababa) // 게임 배경색
@@ -160,8 +158,7 @@ export default class Stage1 extends Phaser.Scene {
         this.physics.add.overlap(player, potionLayer);
     }
     
-    public update(time: number, delta: number): void {
-        console.log(player)
+    public update(time: number, delta: number): void {        
         this.physics.world.wrap(player, 5000)
          // this.background.update()
         if (cursors.left.isDown) {   // 키보드 방향키 왼쪽 입력시 플레이어 -12 왼쪽이동
@@ -171,8 +168,8 @@ export default class Stage1 extends Phaser.Scene {
         }
 
         else if (cursors.right.isDown) { // 키보드 방향키 오른쪽 입력시 플레이어 +12 오른쪽이동
-            player.setVelocityX(250)
-            skyTile.tilePositionX += 0.1
+            player.setVelocityX(550)
+            skyTile.tilePositionX += 0.3
             player.anims.play('right', true)
                     
             subchas.children.iterate(function (child: any, idx: number) {  //서브캐릭들 붙이는 함수
@@ -188,14 +185,27 @@ export default class Stage1 extends Phaser.Scene {
             player.setVelocityX(0)
             player.anims.play('turn')
         }
-        if (cursors.space.isDown) { // 스페이스바 입력시 점프
-            player.setVelocityY(-330)
-            subchas.children.iterate(function (child: any, idx: number) {
-                if(player.y > child.y) {
-                    child.y += 1
-                }
-            })
+        
+        const didJump = Phaser.Input.Keyboard.JustDown(cursors.space)
+        
+        // console.log("땅에 있음?", player.body.onFloor(), "canDoubleJump : ", this.canDoubleJump)
+        if (didJump) {
+          if (player.body.onFloor()) {
+            this.isDoubleJump = true;
+            player.body.setVelocityY(-850);
+          } else if (this.isDoubleJump) {
+            this.isDoubleJump = false;
+            player.body.setVelocityY(-850);
+          }
         }
+        // if (cursors.space.isDown) { // 스페이스바 입력시 점프
+        //     player.setVelocityY(-700)
+        //     subchas.children.iterate(function (child: any, idx: number) {
+        //         if(player.y > child.y) {
+        //             child.y += 1
+        //         }
+        //     })
+        // }
         if (this.registry.values.life < 0) { // 게임 오버
             console.log('die')
             this.scene.pause()
