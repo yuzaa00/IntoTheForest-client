@@ -1,16 +1,11 @@
 import React, { useEffect } from 'react'
 
-  
-declare global {
-  interface Window { Kakao: any;}
-}
-
 const KakaoShareButton = () => {
   useEffect(() => {
-    createKakaoButton()
+    createShareButton()
   }, [])
 
-  const createKakaoButton = () => {
+  const createShareButton = () => {
     
     if(window.Kakao) {
       const kakao = window.Kakao

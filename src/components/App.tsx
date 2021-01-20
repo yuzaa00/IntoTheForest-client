@@ -4,23 +4,25 @@ import './App.css';
 import Game from './game';
 import Counter from './Counter';
 import KakaoShareButton from './kakaoShareButton';
+import KakaoProfileButton from './kakaoProfileButton';
+import KakaoProfileDelete from './kakaoProfileDelete';
+
 import { RootState } from '../redux/reducers';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { increase, decrease } from '../redux/actions/counter';
 
+declare global {
+  interface Window { Kakao: any;}
+}
 
 function App() {
   const [count, setCount] = useState(0);
+  const [accessToken, setAccessToken] = useState<string>('');
   
-//   useEffect(() => {
-//       const data =  axios.get('https://elb.intotheforest.space/rank/load', {
-//         headers: {
-//           "secretCode": "shelter"
-//         }
-//       }).then(data => console.log(data))
-//   }, []);
-  
+  useEffect(() => {
+    getProfile()
+  }, [accessToken]);
 
   // 상태를 조회합니다. 상태를 조회 할 때에는 state 의 타입을 RootState 로 지정해야합니다.
   const secCount = useSelector((state: RootState) => state.counter.count); // useSelector : 리덕스 스토어의 상태에 접근
@@ -34,7 +36,21 @@ function App() {
   const onDecrease = () => {
     dispatch(decrease());
   }
-  
+
+  const handleAccToken = (accessToken: string) => {
+    setAccessToken(accessToken);
+  }
+
+  const getProfile = () => {
+    if(accessToken) {
+      window.Kakao.Auth.setAccessToken(accessToken);
+      window.Kakao.API.request({
+        url: '/v2/user/me',
+        success: (response: any) => console.log(response),
+        fail: (error: any) => console.log(error)})
+    }
+  }
+
   return (
     count ? <div><Game></Game></div> :
     <div className="App">
@@ -43,8 +59,9 @@ function App() {
         <button onClick={()=> setCount(1)}>
           Game Start!!!
         </button>
-        <KakaoShareButton></KakaoShareButton>
-        
+        <KakaoShareButton/>
+        <KakaoProfileButton handleAccToken={handleAccToken} />
+        <KakaoProfileDelete handleAccToken={handleAccToken} />
         {/* <Counter 
           count={secCount} 
           onIncrease={onIncrease} 
