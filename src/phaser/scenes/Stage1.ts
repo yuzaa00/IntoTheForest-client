@@ -1,6 +1,7 @@
 import { group } from 'console'
 import { Background } from '../object/BackGround'
 import { SETTING } from '../../GameSetting/index'
+import { Scene } from 'phaser'
 // import { Dog } from '../object/dog'
 
 let player: any
@@ -20,6 +21,9 @@ let subSquiLayer: any
 let subBirdLayer: any
 let yellowBallLayer: any
 let potionLayer: any
+let mushLayer: any
+let signLayer: any
+let bundLayer: any
 let map: any
 
 export default class Stage1 extends Phaser.Scene {
@@ -27,6 +31,11 @@ export default class Stage1 extends Phaser.Scene {
     private lifeText!: Phaser.GameObjects.BitmapText
     private worldTimer!: Phaser.Time.TimerEvent
     private isDoubleJump: boolean = false
+    private stage1Bgm: any = this
+    private button!: any
+    private moveButton!: any
+    private jumpButton!: any
+    
     // private dog!: Dog 
 
     constructor() {
@@ -38,8 +47,37 @@ export default class Stage1 extends Phaser.Scene {
         this.registry.set('life', 80000)
         this.registry.set('stage', 1)
     }
+
+    public preload(): void {
+      
+      
+      this.button = this.add.graphics().setDepth(8).setScrollFactor(0)
+      this.button.lineStyle(4, 0x2a275c)
+      
+      this.button.fillStyle(0xfd6a41, 0.5)
+      this.button.strokeRect(630, 450, 140, 80)
+      this.button.fillRect(630, 450, 140, 80)
+
+      this.moveButton = this.add
+      .text(700, 490, 'Jump', {
+        color: '#2A275C',
+        fontSize: '22px',
+        fontStyle: 'bold',
+      }).setDepth(8)
+      .setOrigin(0.5).setScrollFactor(0).setScale(2)
+      this.moveButton.setInteractive()
+    
+    }
   
     public create(): void {
+      this.game.input.addPointer()
+
+       this.stage1Bgm.sound.add('stage1_bgm').play({
+            loop: true
+        }) // 노래 재생하기
+        this.stage1Bgm.sound.setVolume(0.1)
+       
+      
         this.physics.world.setBounds(0, 0, 30000, 600)
 
         this.lifeText = this.add // 라이프 텍스트 생성
@@ -58,35 +96,32 @@ export default class Stage1 extends Phaser.Scene {
         subchas = this.physics.add.staticGroup()
         next = this.physics.add.staticGroup()
 
-
+       
         map = this.make.tilemap({ key: "map" });
 
-        // bone image used as tileset
-        let boneTiles = map.addTilesetImage('bone');
-        // add bones as tiles
-        boneLayer = map.createDynamicLayer('bones', boneTiles, 0, 0);
-        boneLayer.setTileIndexCallback(3, this.collectBone, this).setDepth(1);
-
-        let subSquiTiles = map.addTilesetImage('subSqui');
-        // add bones as tiles
-        subSquiLayer = map.createDynamicLayer('subSquis', subSquiTiles, 0, 0);
+        let boneTiles = map.addTilesetImage('bone')
+        boneLayer = map.createLayer('boneLayer', boneTiles, 0, 0);
+        boneLayer.setTileIndexCallback(3, this.collectBone, this).setDepth(1).setScale(1)
+        let subSquiTiles =map.addTilesetImage('subSqui');
+        subSquiLayer = map.createLayer('subSquiLayer', subSquiTiles, 0, 0);
         subSquiLayer.setTileIndexCallback(2, this.collectSubSqui, this).setDepth(1);
-
         let subBirdTiles = map.addTilesetImage('subBird');
-        // add bones as tiles
-        subBirdLayer = map.createDynamicLayer('subBirds', subBirdTiles, 0, 0);
+        subBirdLayer = map.createLayer('subBirdLayer', subBirdTiles, 0, 0);
         subBirdLayer.setTileIndexCallback(1, this.collectSubBird, this).setDepth(1);
-
         let potionTiles = map.addTilesetImage('potion');
-        // add bones as tiles
-        potionLayer = map.createDynamicLayer('potions', potionTiles, 0, 0);
+        potionLayer = map.createLayer('potionLayer', potionTiles, 0, 0);
         potionLayer.setTileIndexCallback(4, this.collectPotion, this).setDepth(1);
-
-        let yellowBallTiles = map.addTilesetImage('yellowBall');
-        // add bones as tiles
-        yellowBallLayer = map.createDynamicLayer('yellowBalls', yellowBallTiles, 0, 0);
-        yellowBallLayer.setTileIndexCallback(5, this.collectyellowBall, this).setDepth(1);
-        
+        let mushroomBallTiles = map.addTilesetImage('mushroom');
+        mushLayer = map.createLayer('mushLayer', mushroomBallTiles, 0, 0);
+        mushLayer.setTileIndexCallback(6, this.collectMush, this).setDepth(1);
+        let signExitTiles = map.addTilesetImage('signExit');
+        signLayer = map.createLayer('signLayer', signExitTiles, 0, 0);
+        signLayer.setTileIndexCallback(7, this.collectSignExit, this).setDepth(1);
+        let bundTiles = map.addTilesetImage('bund');
+        bundLayer = map.createLayer('bundLayer', bundTiles, 0, 0);
+        signLayer.setTileIndexCallback(7, this.collectSignExit, this).setDepth(1);
+        bundLayer.setCollisionByExclusion(-1, true)
+      
         groundDark = this.add.tileSprite(0, 600, 30000, 100, 'way').setScrollFactor(0)
         
         platforms.add(groundDark)
@@ -97,39 +132,27 @@ export default class Stage1 extends Phaser.Scene {
             callbackScope: this,
             loop: true,
           })
+        next.create(10000, 500, 'logo').setScale(2.2).refreshBody()
 
-        target.create(180, 500, 'star').setScale(4).refreshBody()
-        target.create(300, 500, 'star').setScale(4).refreshBody()
-        target.create(400, 500, 'star').setScale(4).refreshBody()
-
-        // next.create(1750, 500, 'logo').setScale(0.05).refreshBody()
-
-        player = this.physics.add.sprite(100, 400, 'dog').setScale(1.2)  // 플레이어 생성
+        player = this.physics.add.sprite(600, 400, 'dog').setScale(1.6).setDepth(3)  // 플레이어 생성
         
         myCam = this.cameras.main
         myCam.setBackgroundColor(0xbababa) // 게임 배경색
-        myCam.setBounds(0, 0, Infinity, 200, true)
+        myCam.setBounds(-200, 0, Infinity, 200, true)
         this.cameras.main.startFollow(player)
         
         player.setCollideWorldBounds(true)
 
-        this.anims.create({  // 플레이어 왼쪽 동작시 0번 ~ 3번 프레임 8fps로 재생
-            key: 'left',
-            frames: this.anims.generateFrameNumbers('dog', { start: 0, end: 5 }),
-            frameRate: 8,
-            repeat: -1
-        })
-    
         this.anims.create({ // 플레이어 기본 프레임 4번
             key: 'turn',
-            frames: [ { key: 'dog', frame: 6 } ], 
+            frames: [ { key: 'dog', frame: 0 } ], 
             frameRate: 10
         })
     
         this.anims.create({ // 플레이어 오른쪽 동작시 5번 ~ 8번 프레임 8fps로 재생
             key: 'right',
-            frames: this.anims.generateFrameNumbers('dog', { start: 7, end: 11 }),
-            frameRate: 8,
+            frames: this.anims.generateFrameNumbers('dog', { start: 1, end: 11 }),
+            frameRate: 10,
             repeat: -1
         })
         
@@ -140,38 +163,54 @@ export default class Stage1 extends Phaser.Scene {
             repeat: 20,
         })
     
-        // stars.children.iterate(function (child: any):void {  // 별 뿌리는 함수
-            
-        // })
-
-        this.physics.add.collider(player, platforms) // 첫번째인자와 두번째 인자간의 충돌 관련
+        this.physics.add.collider(player, bundLayer) // 첫번째인자와 두번째 인자간의 충돌 관련
         this.physics.add.collider(stars, platforms)
         this.physics.add.collider(target, platforms)
     
-        this.physics.add.overlap(player, stars, this.collectStar, undefined, this) // player와 stars가 만나면 3번째 함수 실행
-        this.physics.add.collider(player, target, this.getSubcha, undefined, this) // player와 target이 만나면 3번째 함수 실행
-        this.physics.add.collider(player, next, this.nextStage, undefined, this) // player와 next가 만나면 3번째 함수 실행
-        this.physics.add.overlap(player, boneLayer);
-        this.physics.add.overlap(player, subSquiLayer);
-        this.physics.add.overlap(player, subBirdLayer);
-        this.physics.add.overlap(player, yellowBallLayer);
-        this.physics.add.overlap(player, potionLayer);
+        this.physics.add.overlap(player, stars, this.collectStar, undefined, this) 
+        this.physics.add.collider(player, target, this.getSubcha, undefined, this) 
+        this.physics.add.collider(player, next, this.nextStage, undefined, this) 
+        
+        this.physics.add.overlap(player, boneLayer, this.collectBone, undefined, this)
+        this.physics.add.overlap(player, bundLayer, this.collectBund, undefined, this)
+        this.physics.add.overlap(player, subSquiLayer, this.collectSubSqui, undefined, this)
+        this.physics.add.overlap(player, subBirdLayer, this.collectSubBird, undefined, this)
+        this.physics.add.overlap(player, potionLayer, this.collectPotion, undefined, this)
+        this.physics.add.overlap(player, mushLayer, this.collectMush, undefined, this)
+        this.physics.add.overlap(player, signLayer, this.collectSignExit, undefined, this)
+        
     }
     
-    public update(time: number, delta: number): void {        
+    public update(time: number, delta: number): void {  
+      console.log(player.x)  
+    var pointer = this.game.input.activePointer
+    // if (pointer.isDown) {
+    //   console.log(pointer)
+    //   player.setVelocityX(550)
+    //   skyTile.tilePositionX += 0.3
+    //   player.anims.play('right', true)
+    // }
+    this.moveButton.on(
+      'pointerdown',
+      () => {
+        if (player.body.onFloor()) {
+          this.isDoubleJump = true;
+          player.body.setVelocityY(-850);
+        } else if (this.isDoubleJump) {
+          this.isDoubleJump = false;
+          player.body.setVelocityY(-850);
+        }
+      },
+      this
+    )    
         this.physics.world.wrap(player, 5000)
          // this.background.update()
-        if (cursors.left.isDown) {   // 키보드 방향키 왼쪽 입력시 플레이어 -12 왼쪽이동
-            player.setVelocityX(-30)
-            skyTile.tilePositionX -= 20
-            player.anims.play('left', true)
-        }
 
-        else if (cursors.right.isDown) { // 키보드 방향키 오른쪽 입력시 플레이어 +12 오른쪽이동
+        if (cursors.right.isDown || this.game.input.pointers[1].isDown) { 
+            player.anims.play('right', true)// 키보드 방향키 오른쪽 입력시 플레이어 +12 오른쪽이동
             player.setVelocityX(550)
             skyTile.tilePositionX += 0.3
-            player.anims.play('right', true)
-                    
+            
             subchas.children.iterate(function (child: any, idx: number) {  //서브캐릭들 붙이는 함수
                 if(player.x - (50 + idx * 50) > child.x) {
                     child.x += 1
@@ -229,48 +268,37 @@ export default class Stage1 extends Phaser.Scene {
       }
 
       collectBone(player: any, tile: any):void {
-        boneLayer.removeTileAt(tile.x, tile.y); // remove the tile/coin
-        //coinScore ++; // increment the score
-        //text.setText(`Coins: ${coinScore}x`); // set the text to show the current score
-        //return false;
+        boneLayer.removeTileAt(tile.x, tile.y)
       }
 
       collectSubSqui(player: any, tile: any):void {
-        subSquiLayer.removeTileAt(tile.x, tile.y); // remove the tile/coin
-        //coinScore ++; // increment the score
-        //text.setText(`Coins: ${coinScore}x`); // set the text to show the current score
-        //return false;
+        subSquiLayer.removeTileAt(tile.x, tile.y)
       }
 
       collectSubBird(player: any, tile: any):void {
-        subBirdLayer.removeTileAt(tile.x, tile.y); // remove the tile/coin
-        //coinScore ++; // increment the score
-        //text.setText(`Coins: ${coinScore}x`); // set the text to show the current score
-        //return false;
+        subBirdLayer.removeTileAt(tile.x, tile.y)
       }
 
       collectyellowBall(player: any, tile: any):void {
-        yellowBallLayer.removeTileAt(tile.x, tile.y); // remove the tile/coin
-        //coinScore ++; // increment the score
-        //text.setText(`Coins: ${coinScore}x`); // set the text to show the current score
-        //return false;
+        yellowBallLayer.removeTileAt(tile.x, tile.y)
       }
 
       collectPotion(player: any, tile: any):void {
-        potionLayer.removeTileAt(tile.x, tile.y); // remove the tile/coin
-        //coinScore ++; // increment the score
-        //text.setText(`Coins: ${coinScore}x`); // set the text to show the current score
-        //return false;
+        potionLayer.removeTileAt(tile.x, tile.y)
+      }
+      collectMush(player: any, tile: any):void {
+        mushLayer.removeTileAt(tile.x, tile.y)
+      }
+      collectSignExit(player: any, tile: any):void {
+        signLayer.removeTileAt(tile.x, tile.y)
+      }
+      collectBund(player: any, tile: any):void {
+        bundLayer.removeTileAt(tile.x, tile.y)
       }
 
-      // 점수 아이템
-      // 서브캐 따라오기
-      // 배경 밀림
-      // 플레이어 땅위에
-      // stage2, 3
-      // cloudfront 배포 
-      
-      nextStage () : void { // 다음 스테이지로 넘어가는 함수 (아직 사용중인 곳은 없음)
+    
+      nextStage () : void { // 다음 스테이지로 넘어가는 함수
+        this.game.sound.stopAll()
         this.scene.start('Stage1Event', { score: this.registry.values.score + 10000, life: this.registry.values.life + 1000, stage: 2  }) // stage1Event로 scene 이동 (데이터 이전)
       }
       
@@ -286,9 +314,7 @@ export default class Stage1 extends Phaser.Scene {
 
     }
       
-}
-
-   // vertical = this.physics.add.staticGroup()
+}   // vertical = this.physics.add.staticGroup()
         // vertical.enableBody = true
         // vertical.createMultiple(12, 'ground') 
         // vertical.setAll('checkWorldBounds', true)
@@ -303,10 +329,7 @@ export default class Stage1 extends Phaser.Scene {
         // tori.enableBody = true
         // tori.physicsBodyType = Phaser.Physics.Arcade
 
-        // var jungle = this.sound.add('stage1_bgm') // 노래 재생하기
-        // jungle.play({
-        //     loop: true
-        // })
+        
         
         // for (var i = 0 i < 50 i++)
         // {

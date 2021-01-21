@@ -37,8 +37,6 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
   }
   
   preload(): void {
-    
-    this.load.image('back.png', 'images/card/back.png')
     this.load.image('card1.png', 'images/card/card1.png')
     this.load.image('card2.png', 'images/card/card2.png')
     this.load.image('card3.png', 'images/card/card3.png')
@@ -48,12 +46,15 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
     this.load.image('card7.png', 'images/card/card7.png')
     this.load.image('card8.png', 'images/card/card8.png')
     this.load.image('front.png', 'images/card/front.png')
-    this.load.image('cardbg','images/card/cardbg.png')
+    this.sound.add('stage1-2_bgm').play({
+      loop: true
+    }) // 노래 재생하기
 
     this.newRound()
   } 
 
   public create(): void {
+    
     this.add.image(0, 0, 'cardbg').setOrigin(0,0).setDepth(0)
     this.lifeText = this.add // 라이프 텍스트 생성
     .bitmapText(30, 30, 'font', `남은 시간 ${this.registry.values.time}`)
@@ -102,13 +103,12 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
       }
     }
     positions.forEach(ele => console.log(ele))
-    console.log(positions.length)
+
     while (positions.length) {
       const posA = positions.splice(this.getRandomInt(positions.length), 1)[0];
       const posB = positions.splice(this.getRandomInt(positions.length), 1)[0];
       const key = imageNames.splice(this.getRandomInt(imageNames.length), 1)[0];
-      console.log(key)
-      
+
       this.cards.push(new Card( {key, gameScene: this, ...posA, handler: this.cardClickHandler.bind(this)} ));
       this.cards.push(new Card( {key, gameScene: this, ...posB, handler: this.cardClickHandler.bind(this)} ));
     }
@@ -116,11 +116,13 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
   }
 
   public update(): void {
+
     if (this.registry.values.time < 1) { // 30초 지난 후 콜백 실행
       this.time.addEvent({
         delay: 100,
         callback: () => {
           // this.add.tileSprite(0, 0, 800, 600, 'gameOver').setOrigin(0).setDepth(0)
+          this.game.sound.stopAll()
           this.scene.start('Stage2Event', { score: this.registry.values.score, life: this.registry.values.life + (attempts * 200), stage: 2  })
       },
       callbackScope: this,
@@ -134,18 +136,18 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
   }
 
   private newRound(): void {
-    waitForNewRound = true;
+    waitForNewRound = true
     setTimeout(() => {
       if (this.matchCards()) {
-        this.setAsReadOnly();
+        this.setAsReadOnly()
       } else {
-        this.faceCardsDown();
+        this.faceCardsDown()
       }
-      this.updateScore();
-      this.selectedCards.length = 0;
-      waitForNewRound = false;
-      attempts++;
-    }, 1000);
+      this.updateScore()
+      this.selectedCards.length = 0
+      waitForNewRound = false
+      attempts++
+    }, 1500)
   }
   private matchedCards(): number {
     return this.cards.filter((card) => card.outOfTheGame).length / 2;
@@ -167,6 +169,7 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
   }
 
   private cardClickHandler (card: any) {
+    console.log('4', card.out)
     if (waitForNewRound || card.out) { return; }
     card.faceUp();
     this.selectedCards.push(card);
@@ -176,19 +179,20 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
   }
 
   private setAsReadOnly() {
-    this.selectedCards.forEach((card) => card.readOnly());
+    this.selectedCards.forEach((card) => card.readOnly())
   }
 
   private faceCardsDown() {
-    this.selectedCards.forEach((card) => card.faceDown());
+    this.selectedCards.forEach((card) => card.faceDown())
+    waitForNewRound = false
   }
 
   private matchCards () {
-    if (!this.selectedCards.length) { return; }
-    const cardA = this.selectedCards[0];
-    const cardB = this.selectedCards[1];
+    if (!this.selectedCards.length) { return }
+    const cardA = this.selectedCards[0]
+    const cardB = this.selectedCards[1]
 
-    return cardA.key === cardB.key;
+    return cardA.key === cardB.key
   }
 
   private getRandomInt = (max: number) => {

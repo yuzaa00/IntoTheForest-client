@@ -1,6 +1,6 @@
 import React from 'react';
 
-type CounterProps {
+type CounterProps = {
   count: number;
   onIncrease: () => void;
   onDecrease: () => void;
