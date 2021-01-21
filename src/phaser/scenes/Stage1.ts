@@ -102,24 +102,29 @@ export default class Stage1 extends Phaser.Scene {
         let boneTiles = map.addTilesetImage('bone')
         boneLayer = map.createLayer('boneLayer', boneTiles, 0, 0);
         boneLayer.setTileIndexCallback(3, this.collectBone, this).setDepth(1).setScale(1)
-        let subSquiTiles =map.addTilesetImage('subSqui');
-        subSquiLayer = map.createLayer('subSquiLayer', subSquiTiles, 0, 0);
-        subSquiLayer.setTileIndexCallback(2, this.collectSubSqui, this).setDepth(1);
+        
+        let subSquiTiles =map.addTilesetImage('subSqui')
+        subSquiLayer = map.createLayer('subSquiLayer', subSquiTiles, 0, 0)
+        subSquiLayer.setTileIndexCallback(2, this.collectSubSqui, this).setDepth(1)
+        
         let subBirdTiles = map.addTilesetImage('subBird');
-        subBirdLayer = map.createLayer('subBirdLayer', subBirdTiles, 0, 0);
-        subBirdLayer.setTileIndexCallback(1, this.collectSubBird, this).setDepth(1);
-        let potionTiles = map.addTilesetImage('potion');
-        potionLayer = map.createLayer('potionLayer', potionTiles, 0, 0);
-        potionLayer.setTileIndexCallback(4, this.collectPotion, this).setDepth(1);
-        let mushroomBallTiles = map.addTilesetImage('mushroom');
-        mushLayer = map.createLayer('mushLayer', mushroomBallTiles, 0, 0);
-        mushLayer.setTileIndexCallback(6, this.collectMush, this).setDepth(1);
-        let signExitTiles = map.addTilesetImage('signExit');
-        signLayer = map.createLayer('signLayer', signExitTiles, 0, 0);
-        signLayer.setTileIndexCallback(7, this.collectSignExit, this).setDepth(1);
-        let bundTiles = map.addTilesetImage('bund');
-        bundLayer = map.createLayer('bundLayer', bundTiles, 0, 0);
-        signLayer.setTileIndexCallback(7, this.collectSignExit, this).setDepth(1);
+        subBirdLayer = map.createLayer('subBirdLayer', subBirdTiles, 0, 0)
+        subBirdLayer.setTileIndexCallback(1, this.collectSubBird, this).setDepth(1)
+        
+        let potionTiles = map.addTilesetImage('potion')
+        potionLayer = map.createLayer('potionLayer', potionTiles, 0, 0)
+        potionLayer.setTileIndexCallback(4, this.collectPotion, this).setDepth(1)
+        
+        let mushroomBallTiles = map.addTilesetImage('mushroom')
+        mushLayer = map.createLayer('mushLayer', mushroomBallTiles, 0, 0)
+        mushLayer.setTileIndexCallback(6, this.collectMush, this).setDepth(1)
+        
+        let signExitTiles = map.addTilesetImage('signExit')
+        signLayer = map.createLayer('signLayer', signExitTiles, 0, 0)
+        signLayer.setTileIndexCallback(7, this.collectSignExit, this).setDepth(1)
+        
+        let bundTiles = map.addTilesetImage('bund')
+        bundLayer = map.createLayer('bundLayer', bundTiles, 0, 0)
         bundLayer.setCollisionByExclusion(-1, true)
       
         groundDark = this.add.tileSprite(0, 600, 30000, 100, 'way').setScrollFactor(0)
