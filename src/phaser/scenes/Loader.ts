@@ -34,7 +34,7 @@ export default class Loader extends Phaser.Scene { // resource load scene
     
     this.load.tilemapTiledJSON("map", 'map66.json')
     this.load.bitmapFont('font', 'font/font.png', 'font/font.fnt')
-    this.load.spritesheet('dog', 'images/character/dog6.png', { frameWidth: 77.7, frameHeight: 100 })
+    this.load.spritesheet('dog', 'images/character/dog2.png', { frameWidth: 500, frameHeight: 500 })
     this.load.audio('stage1_bgm', 'sound/bgm/stage1-1.mp3')
     this.load.audio('stage1-2_bgm', 'sound/bgm/stage1-2.mp3')
     this.load.audio('stage2-2_bgm', 'sound/bgm/stage2-2.mp3')
