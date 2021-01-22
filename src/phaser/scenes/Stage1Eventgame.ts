@@ -30,10 +30,12 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
 
   public init(data: any){
     this.registry.set('score', data.score) // 이전 scene에서 올라온 데이터 등록
-    this.registry.set('life', data.life) // 이전 scene에서 올라온 데이터 등록
-    this.registry.set('stage', data.stage) // 이전 scene에서 올라온 데이터 등록
+    this.registry.set('life', data.life) 
+    this.registry.set('stage', data.stage) 
+    this.registry.set('bird', data.bird) 
+    this.registry.set('squi', data.squi) 
     this.registry.set('time', 30)
-    this.registry.set('dotori', 0)
+    this.registry.set('recovery', 0)
   }
   
   preload(): void {
@@ -123,7 +125,8 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
         callback: () => {
           // this.add.tileSprite(0, 0, 800, 600, 'gameOver').setOrigin(0).setDepth(0)
           this.game.sound.stopAll()
-          this.scene.start('Stage2Event', { score: this.registry.values.score, life: this.registry.values.life + (attempts * 200), stage: 2  })
+          this.scene.start('Stage2', { score: this.registry.values.score, life: this.registry.values.life + (attempts * 50) > 10000 ? 10000 : this.registry.values.life + (attempts * 50) , stage: 2,
+            bird: this.registry.values.bird, squi: this.registry.values.squi  })
       },
       callbackScope: this,
       })
@@ -159,12 +162,11 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
     if (!score) {
       score = this.add.text(11, 50, '', style);
     }
-    const efficiency = attempts ? (this.matchedCards()/attempts*100).toFixed(0) : 0;
 
     score.text = `
-      시도 :${attempts}
+      시도 : ${attempts}
       맞춘 카드 : ${this.matchedCards()}
-      효율성 : ${efficiency}%
+      체력 회복 : ${this.matchedCards() * 100} 포인트
     `;
   }
 

@@ -10,15 +10,17 @@ export default class Stage1Event extends Phaser.Scene {
 
   public init(data: any){
     this.registry.set('score', data.score) // 이전 scene에서 올라온 데이터 등록
-    this.registry.set('life', data.life) // 이전 scene에서 올라온 데이터 등록
-    this.registry.set('stage', data.stage) // 이전 scene에서 올라온 데이터 등록
+    this.registry.set('life', data.life) 
+    this.registry.set('stage', data.stage) 
+    this.registry.set('bird', data.bird)
+    this.registry.set('squi', data.squi)
   }
 
   preload(): void {
-
+  
   this.popup = this.add.graphics()
   this.popup.lineStyle(1, 0x2a275c)
-  this.popup.fillStyle(0xf89b00, 0.6)
+  this.popup.fillStyle(0x00ff00, 0.6)
   this.popup.strokeRect(25, 25, 750, 550)
   this.popup.fillRect(25, 25, 750, 550)
   //start button square
@@ -71,7 +73,7 @@ export default class Stage1Event extends Phaser.Scene {
     this.startButton.on(
       'pointerdown',
       () => {
-        this.scene.start('Stage1Eventgame')
+        this.scene.start('Stage1Eventgame', { score: this.registry.values.score + 10000, life: this.registry.values.life + 1000, stage: 2, bird: this.registry.values.bird, squi: this.registry.values.squi  })
       },
       this
     )

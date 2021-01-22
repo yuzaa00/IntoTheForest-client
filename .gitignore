@@ -26,3 +26,4 @@ yarn-error.log*
 .env
 .cache
 dist
+backup.ts
