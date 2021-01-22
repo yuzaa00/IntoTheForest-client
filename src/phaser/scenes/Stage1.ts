@@ -152,7 +152,7 @@ export default class Stage1 extends Phaser.Scene {
             loop: true,
           })
         // next.create(10000, 500, 'logo').setScale(2.2).refreshBody() 
-        player = this.physics.add.sprite(600, 400, 'dog').setScale(0.25).setDepth(3)  // 플레이어 생성
+        player = this.physics.add.sprite(600, 400, 'dog').setScale(0.25).setDepth(3)  // 플레이어 생성 이동
         
         myCam = this.cameras.main
         myCam.setBackgroundColor(0xbababa) // 게임 배경색

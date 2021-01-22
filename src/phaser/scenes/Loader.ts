@@ -50,7 +50,7 @@ export default class Loader extends Phaser.Scene { // resource load scene
   }
   
   update ():void {
-    this.scene.start('Stage2')
+    this.scene.start('Stage1') // 첫 스테이지 선택
   }
 }
 
