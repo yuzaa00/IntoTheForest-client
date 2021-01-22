@@ -25,7 +25,6 @@ let map: any
 let count: number = 0
 let isSub: boolean = false
 
-
 export default class Stage2 extends Phaser.Scene {
     private hp!: any
     private scoreText!: Phaser.GameObjects.BitmapText
@@ -45,6 +44,7 @@ export default class Stage2 extends Phaser.Scene {
     private middle!: any
     private rightCap!:any
     private scoreMove: number = 510
+    private autoRun!: any
     
     // private dog!: Dog 
 
@@ -157,6 +157,12 @@ export default class Stage2 extends Phaser.Scene {
             callbackScope: this,
             loop: true,
           })
+          this.autoRun = this.time.addEvent({ // 게임에서 시간 이벤트 등록, 1초당 콜백 호출 (콜백내용은 초당 체력 감소)
+            delay: 1,
+            callback: this.autoMove,
+            callbackScope: this,
+            loop: true,
+          })
         // next.create(10000, 500, 'logo').setScale(2.2).refreshBody() 
         player = this.physics.add.sprite(600, 400, 'dog').setScale(0.25).setDepth(3)  // 플레이어 생성 이동
         
@@ -265,29 +271,6 @@ export default class Stage2 extends Phaser.Scene {
        )    
         this.physics.world.wrap(player, 5000)
          // this.background.update()
-
-        if (cursors.right.isDown || this.game.input.pointers[1].isDown) { 
-            player.anims.play('right', true)// 키보드 방향키 오른쪽 입력시 플레이어 +12 오른쪽이동
-            player.setVelocityX(550)
-            skyTile.tilePositionX += 0.3
-            subchas.children.iterate(function (child: any, idx: number) {
-              if(Phaser.Math.Distance.BetweenPoints(child, player) > 100 && child.x < player.x - (80 + idx * 80)) {
-              child.setVelocityX(550)
-            }
-              else {
-              child.setVelocityX(0)
-            }       
-            })
-            
-        }
-        else {
-            player.setVelocityX(0)
-            player.anims.play('turn')
-            subchas.children.iterate((child: any) => child.setVelocityX(0))
-        }
-
-
-        
         const didJump = Phaser.Input.Keyboard.JustDown(cursors.space)
         
         if (didJump) {
@@ -353,6 +336,12 @@ export default class Stage2 extends Phaser.Scene {
             this.scene.pause()
             this.scene.start('StageOver', { score: this.registry.values.score, life: this.registry.values.life, stage: 1  })
           }
+    }
+
+    private autoMove(): void {  // 1초당 실행되는 함수 this.worldTimer 참조
+      player.setVelocityX(550)
+      player.anims.play('right', true)
+      skyTile.tilePositionX += 0.3
     }
 
     private worldTime(): void {  // 1초당 실행되는 함수 this.worldTimer 참조

@@ -17,6 +17,7 @@ let vertical: any
 let myCam: any
 let groundDark: any // 수정 예정
 let next: any
+let enemies: any
 let boneLayer: any
 let subSquiLayer: any
 let subBirdLayer: any
@@ -28,6 +29,7 @@ let bundLayer: any
 let map: any
 let count: number = 0
 let isSub: boolean = false
+let temp: any
 
 
 export default class Stage1 extends Phaser.Scene {
@@ -45,10 +47,11 @@ export default class Stage1 extends Phaser.Scene {
     private birdIdx: number = 0
     private squiIdx: number = 0
     private fullWidth: number = 300
-    private leftCap!: any
-    private middle!: any
-    private rightCap!:any
     private scoreMove: number = 510
+    private autoRun!: any
+    private moveHp!: any
+    private enemiesTimer: Array<any> = [4, 4, 5, 5, 6, 6, 7, 7, 8, 8]
+    private enemiesOn: boolean = false
     
     constructor() {
       super('Stage1')
@@ -68,11 +71,11 @@ export default class Stage1 extends Phaser.Scene {
       this.button.lineStyle(4, 0x2a275c)
       
       this.button.fillStyle(0xfd6a41, 0.5)
-      this.button.strokeRect(630, 450, 140, 80)
-      this.button.fillRect(630, 450, 140, 80)
+      this.button.strokeRect(1030, 480, 140, 80)
+      this.button.fillRect(1030, 480, 140, 80)
 
       this.moveButton = this.add
-      .text(700, 490, 'Jump', {
+      .text(1100, 520, 'Jump', {
         color: '#2A275C',
         fontSize: '22px',
         fontStyle: 'bold',
@@ -83,7 +86,7 @@ export default class Stage1 extends Phaser.Scene {
     }
   
     public create(): void {
-      this.hp = new HealthBar(this, 32, 80)
+      this.hp = new HealthBar(this, 240, 80)
       this.game.input.addPointer()
 
        this.stage1Bgm.sound.add('stage1_bgm').play({
@@ -100,15 +103,24 @@ export default class Stage1 extends Phaser.Scene {
         .setScrollFactor(0)
   
         this.scoreText = this.add // 점수 텍스트 생성 10000 490, 1000 500, 100 510
-        .bitmapText(490, 30, 'font', `SCORE 00000`)
+        .bitmapText(890, 30, 'font', `SCORE 00000`)
         .setDepth(6)
         .setScrollFactor(0)
-        
+
+        this.moveHp = this.add.text(925, 80, `${this.registry.values.life / 100}%`, {
+          fontSize: '22px',
+          fontStyle: 'bold',
+          font: 'bold 20px Arial'
+        })
+        .setDepth(8)
+        .setScrollFactor(0)
+
         skyTile = this.add.tileSprite(0, 0, 30000, 600, 'stage1').setScrollFactor(0).setOrigin(0).setDepth(0)
         platforms = this.physics.add.staticGroup()
         target = this.physics.add.staticGroup()
         subchas = this.physics.add.staticGroup()
         next = this.physics.add.staticGroup()
+        enemies = this.physics.add.staticGroup()
         
         
         map = this.make.tilemap({ key: "map" })
@@ -151,6 +163,18 @@ export default class Stage1 extends Phaser.Scene {
             callbackScope: this,
             loop: true,
           })
+        this.autoRun = this.time.addEvent({ // 게임에서 시간 이벤트 등록, 1초당 콜백 호출 (콜백내용은 초당 체력 감소)
+            delay: 10,
+            callback: this.autoMove,
+            callbackScope: this,
+            loop: true,
+          })
+        this.time.addEvent({ // 게임에서 시간 이벤트 등록, 1초당 콜백 호출 (콜백내용은 초당 체력 감소)
+          delay: 1000,
+          callback: this.regenEnemy,
+          callbackScope: this,
+          loop: true,
+        })
         // next.create(10000, 500, 'logo').setScale(2.2).refreshBody() 
         player = this.physics.add.sprite(600, 400, 'dog').setScale(0.25).setDepth(3)  // 플레이어 생성 이동
         
@@ -185,12 +209,11 @@ export default class Stage1 extends Phaser.Scene {
         this.physics.add.collider(stars, platforms)
         this.physics.add.collider(target, platforms)
         this.physics.add.collider(subchas, groundDark)
-        
-    
+        this.physics.add.collider(enemies, groundDark)
         
         // this.physics.add.collider(player, target, this.getSubcha, undefined, this) 
         this.physics.add.collider(player, next, this.nextStage, undefined, this) 
-        this.physics.add.collider(subchas, bundLayer)
+        this.physics.add.collider(player, enemies)
         
         this.physics.add.overlap(player, boneLayer, this.collectBone, undefined, this)
         this.physics.add.overlap(player, bundLayer, this.collectBund, undefined, this)
@@ -200,27 +223,10 @@ export default class Stage1 extends Phaser.Scene {
         this.physics.add.overlap(player, mushLayer, this.collectMush, undefined, this)
         this.physics.add.overlap(player, signLayer, this.collectSignExit, undefined, this)
         
+        player.setVelocityX(550)
     }
     
     public update(time: number, delta: number): void {  
-      let selfs = this
-      subchas.children.iterate(function (child: any, idx: number) {
-        if(child.texture.key === 'bird') {
-          child.x = player.x - (70 + selfs.birdIdx * 40)
-          child.y = player.y - 50 
-          selfs.birdIdx++
-        }
-        else if(child.texture.key === 'squi') {
-          child.x = player.x - (70 + selfs.squiIdx * 40)
-          child.y = player.y + 15
-          selfs.squiIdx++
-        }
-        
-        if(selfs.squiArr.length + selfs.birdArr.length - 1 === idx) {
-          selfs.squiIdx = 0
-          selfs.birdIdx = 0
-        }
-      }) 
       
       var pointer = this.game.input.activePointer
 
@@ -234,33 +240,30 @@ export default class Stage1 extends Phaser.Scene {
               this.isDoubleJump = false;
               player.body.setVelocityY(-850)
             }
-         },
-        this
-       )    
+         }, this)    
+         
         this.physics.world.wrap(player, 5000)
          // this.background.update()
 
-        if (cursors.right.isDown || this.game.input.pointers[1].isDown) { 
-            player.anims.play('right', true)// 키보드 방향키 오른쪽 입력시 플레이어 +12 오른쪽이동
-            player.setVelocityX(550)
-            skyTile.tilePositionX += 0.3
-            subchas.children.iterate(function (child: any, idx: number) {
-              if(Phaser.Math.Distance.BetweenPoints(child, player) > 100 && child.x < player.x - (80 + idx * 80)) {
-              child.setVelocityX(550)
-            }
-              else {
-              child.setVelocityX(0)
-            }       
-            })
+        // if (cursors.right.isDown || this.game.input.pointers[1].isDown) { 
+        //     player.anims.play('right', true)// 키보드 방향키 오른쪽 입력시 플레이어 +12 오른쪽이동
+        //     player.setVelocityX(550)
+        //     skyTile.tilePositionX += 0.3
+        //     subchas.children.iterate(function (child: any, idx: number) {
+        //       if(Phaser.Math.Distance.BetweenPoints(child, player) > 100 && child.x < player.x - (80 + idx * 80)) {
+        //       child.setVelocityX(550)
+        //     }
+        //       else {
+        //       child.setVelocityX(0)
+        //     }       
+        //     })
             
-        }
-        else {
-            player.setVelocityX(0)
-            player.anims.play('turn')
-            subchas.children.iterate((child: any) => child.setVelocityX(0))
-        }
-
-
+        // }
+        // else {
+        //     player.setVelocityX(0)
+        //     player.anims.play('turn')
+        //     subchas.children.iterate((child: any) => child.setVelocityX(0))
+        // }
         
         const didJump = Phaser.Input.Keyboard.JustDown(cursors.space)
         
@@ -269,36 +272,83 @@ export default class Stage1 extends Phaser.Scene {
             this.isDoubleJump = true
             player.body.setVelocityY(-850)
             var self = this
-            // subchas.children.iterate(function (child: any, idx: number) {
-            //   if(child.body.onFloor()) {
-            //     setTimeout(() => child.setVelocityY(-850), (100 + idx * 15)) 
-            //   }
-            // })
+            subchas.children.iterate(function (child: any, idx: number) {
+              if(child.body.onFloor()) {
+                setTimeout(() => child.setVelocityY(-850), (100 + idx * 150)) 
+              }
+            })
           } else if (this.isDoubleJump) {
             this.isDoubleJump = false
             player.body.setVelocityY(-850)
-            // subchas.children.iterate(function (child: any, idx: number) {
-            //   setTimeout(() => child.setVelocityY(-850), (100 + idx * 15)) 
-            // })
+            subchas.children.iterate(function (child: any, idx: number) {
+              setTimeout(() => child.setVelocityY(-850), (100 + idx * 180)) 
+            })
           }
         }
-        
-
-       
-
-        if (this.registry.values.life < 0) { // 게임 오버
+      
+        if (this.registry.values.life <= 0) { // 게임 오버
+            this.game.sound.stopAll()
             this.scene.pause()
-            this.scene.start('StageOver', { score: this.registry.values.score, life: this.registry.values.life, stage: 1  })
+            this.scene.start('StageOver', { score: this.registry.values.score, stage: 1  })
           }
     }
 
     private worldTime(): void {  // 1초당 실행되는 함수 this.worldTimer 참조
-        this.registry.values.score += 88
+        this.registry.values.score += 1
         this.scoreText.setText(`SCORE ${this.registry.values.score > 0 && this.registry.values.score < 10 ? '0000' : this.registry.values.score > 0 && this.registry.values.score < 100 ? '000' : this.registry.values.score >= 100 && this.registry.values.score < 1000 ? '00' : this.registry.values.score >= 1000 && this.registry.values.score < 10000 ? '0' : this.registry.values.score >= 10000 ? '' : null }${this.registry.values.score}`)
         this.registry.values.life -= 100
         this.lifeText.setText(`LIFE ${this.registry.values.life}`)
         this.hp.decrease(1)
+        this.moveHp.setText(`${this.registry.values.life / 100}%`)
+        this.moveHp.x -= 6.75
     }
+
+    private autoMove(): void {  // 1초당 실행되는 함수 this.worldTimer 참조
+      player.setVelocityX(550)
+      let self = this
+      console.log()
+      
+      subchas.children.iterate(function (child: any, idx: number): void {
+        if(idx === 0 ) {
+          self.physics.moveToObject(child, {x: player.x - 50 , y: player.y + 10}, 0, 150)
+        }
+        else {
+          self.physics.moveToObject(child, {x: subchas.children.entries[idx - 1].x - 30 , y: subchas.children.entries[idx - 1].y - (idx * 2)}, 0, 150)
+        }
+      })
+      player.anims.play('right', true)// 키보드 방향키 오른쪽 입력시 플레이어 +12 오른쪽이동
+      skyTile.tilePositionX += 0.3
+      // subchas.children.iterate(function (child: any, idx: number): void {
+      //   if(Phaser.Math.Distance.BetweenPoints(child, player) > 100 && child.x < player.x - (80 + idx * 70)) {
+      //     child.setVelocityX(580)
+      //   }
+      //   else {
+      //     child.setVelocityX(0)
+      //   }       
+      // })
+    }
+
+      private regenEnemy(): void {
+        if(!this.enemiesOn) {
+          console.log('?')
+          this.enemiesOn = true
+          this.sound.add('wolfEcho').play()
+          setTimeout(() => {
+            let wolf = this.physics.add.image(player.x +1000, 530, 'wolf')
+            wolf.setVelocityX(-600).setDepth(2)
+            wolf.body.setAllowGravity(false)
+            setTimeout(() => {
+              wolf.destroy()
+            },2000)
+          },2000)
+          setTimeout(() => {
+            console.log('4천함수')
+            this.enemiesOn = false
+            console.log('넌 몇인데 ',this.enemiesTimer[Math.floor(Math.random() * 10)] * 1000)
+          },this.enemiesTimer[Math.floor(Math.random() * 10)] * 1000)
+        } 
+
+      }
 
       subchaPickup (player: any, target: any):void { // 별 다모으면 다시 만드는 함수
         // target.x = player.x - 100
@@ -334,9 +384,11 @@ export default class Stage1 extends Phaser.Scene {
         let potion = potionLayer.removeTileAt(tile.x, tile.y)
         if(potion) {
           if(potion.index !== -1) {
-            this.hp.decrease(-5)
-            this.registry.values.life + 500 >= 10000 ? this.registry.values.life = 10000 : this.registry.values.life += 500
+            this.hp.decrease(-2)
+            this.registry.values.life + 200 >= 10000 ? this.registry.values.life = 10000 : this.registry.values.life += 200
             this.lifeText.setText(`LIFE ${this.registry.values.life}`)
+            this.moveHp.setText(`${this.registry.values.life / 100}%`)
+            this.moveHp.x += 10
           }
         }
       }
@@ -367,8 +419,8 @@ export default class Stage1 extends Phaser.Scene {
       //서브캐 습득시 자리정렬과 스코어 합산
       getSubcha (player: any, name: string):void {
         if(name === 'bird') {
-          let bird = this.physics.add.image(player.x, player.y, 'bird').setScale(0.09)
-          bird.body.setAllowGravity(false)
+          let bird = this.physics.add.image(player.x, player.y, 'bird').setScale(0.12)
+          // bird.body.setAllowGravity(false)
           bird.setCollideWorldBounds(true)
           bird.setDepth(4)
           this.birdArr.push(bird)
@@ -376,82 +428,34 @@ export default class Stage1 extends Phaser.Scene {
         }
 
         if(name === 'squi') {
-          let squi = this.physics.add.image(player.x , player.y , 'squi').setScale(0.09)
-          squi.body.setAllowGravity(false)
+          let squi = this.physics.add.image(player.x , player.y , 'squi').setScale(0.13)
+          // squi.body.setAllowGravity(false)
           squi.setCollideWorldBounds(true)
           squi.setDepth(4)
           this.squiArr.push(squi)
           subchas.add(squi)
         }
         // let bird = subchas.create(player.x - (30 + subchas.children.entries.length * 80), player.y, 'bird').setScale(0.14)
-       
-
-         
         this.registry.values.score += 500
         this.scoreText.setText(`SCORE ${this.registry.values.score > 0 && this.registry.values.score < 10 ? '0000' : this.registry.values.score > 0 && this.registry.values.score < 100 ? '000' : this.registry.values.score >= 100 && this.registry.values.score < 1000 ? '00' : this.registry.values.score >= 1000 && this.registry.values.score < 10000 ? '0' : this.registry.values.score >= 10000 ? '' : null }${this.registry.values.score}`)
-      }
-      
-}   // vertical = this.physics.add.staticGroup()
-        // vertical.enableBody = true
-        // vertical.createMultiple(12, 'ground') 
-        // vertical.setAll('checkWorldBounds', true)
-        // vertical.setAll('outOfBoundsKill', true)
-        // for(var i=0 i<12 i++) {
-        //     let newItem = vertical.create(null, 600, 'ground')
-        //     newItem.body.immovable = true
-        //     newItem.body.velocity.x = -250           
-        // }
-        
-        // tori = this.physics.add.group()
-        // tori.enableBody = true
-        // tori.physicsBodyType = Phaser.Physics.Arcade
+      }    
+} 
 
+         // let selfs = this
+      // subchas.children.iterate(function (child: any, idx: number) {
+      //   if(child.texture.key === 'bird') {
+      //     child.x = player.x - (70 + selfs.birdIdx * 40)
+      //     child.y = player.y - 50 
+      //     selfs.birdIdx++
+      //   }
+      //   else if(child.texture.key === 'squi') {
+      //     child.x = player.x - (70 + selfs.squiIdx * 40)
+      //     child.y = player.y + 15
+      //     selfs.squiIdx++
+      //   }
         
-        
-        // for (var i = 0 i < 50 i++)
-        // {
-        //     var c = tori.create(this.world.randomX, Math.random() * 500, 'star', this.rnd.integerInRange(0, 36))
-        //     c.name = 'veg' + i
-        //     c.body.immovable = true
-        // }
-
-         //  subchas.children.iterate(function (child: any, idx: number) {
-  
-          
-        //    if(child.body.onFloor()) {
-        //      isSub = false
-        //    }
-   
-        //    if(Phaser.Math.Distance.BetweenPoints(child, player) > 10) {
-        //     child.setVelocityY(300)
-        //   }
-        //   else {
-        //     child.setVelocityY(0)
-        //   }
-          //  if(Phaser.Math.Distance.Between(child.x, child.y, player.x, player.y) > 100) {
-          //    console.log('달림')
-          //   child.setVelocityX(300) 
-          //   child.setVelocityY(300)
-          //  }
-          //  else {
-          //   console.log('걷기')
-          //    child.setVelocityX(0)
-          //    child.setVelocityY(0)
-          //  }
-            // if(child.x <= player.x - (80 + idx * 80)) {
-            //   child.setVelocityX(550)
-            // } 
-            // else {
-            //   child.setVelocityX(0)
-            // }
-            
-            //   if(child.y < player.y) {
-            //     child.setVelocityY(250)
-            //   }
-            //   else {
-            //     child.setVelocityY(0)
-            //   }
-            
-        //   })
-
-        
+      //   if(selfs.squiArr.length + selfs.birdArr.length - 1 === idx) {
+      //     selfs.squiIdx = 0
+      //     selfs.birdIdx = 0
+      //   }
+      // }) 

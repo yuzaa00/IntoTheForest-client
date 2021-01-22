@@ -35,7 +35,7 @@ export default class HealthBar {
         this.bar.clear()
 
         this.bar.fillStyle(0x000000)
-        this.bar.fillRect(this.x, this.y, 733, 16)
+        this.bar.fillRect(this.x, this.y, 733, 24)
 
         this.bar.fillStyle(0xffffff)
   
@@ -53,7 +53,7 @@ export default class HealthBar {
         }
         let length = Math.floor(this.p * this.value)
         
-        this.bar.fillRect(this.x + 2, this.y + 2, length, 12)
+        this.bar.fillRect(this.x + 2, this.y + 2, length, 20)
         this.bar.setDepth(8).setScrollFactor(0)
     }
 
