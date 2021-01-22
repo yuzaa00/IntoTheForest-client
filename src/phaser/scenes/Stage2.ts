@@ -20,6 +20,7 @@ let potionLayer: any
 let mushLayer: any
 let signLayer: any
 let bundLayer: any
+let bundLayer2: any
 let map: any
 let count: number = 0
 let isSub: boolean = false
@@ -53,7 +54,7 @@ export default class Stage2 extends Phaser.Scene {
 
     public init(data: any){
       this.registry.set('score', data.score || 0) // 이전 scene에서 올라온 데이터 등록
-      this.registry.set('life', data.life || 0) 
+      this.registry.set('life', data.life || 10000) 
       this.registry.set('stage', data.stage || 0)
       this.registry.set('bird', data.bird || 0)
       this.registry.set('squi', data.squi || 0) 
@@ -83,7 +84,7 @@ export default class Stage2 extends Phaser.Scene {
   
     public create(): void {
       this.game.input.addPointer()
-
+      this.game.sound.stopAll()
        this.stage1Bgm.sound.add('stage2-1_bgm').play({
             loop: true
         }) // 노래 재생하기
@@ -97,7 +98,7 @@ export default class Stage2 extends Phaser.Scene {
         .setScrollFactor(0)
   
         this.scoreText = this.add // 점수 텍스트 생성
-        .bitmapText(530, 30, 'font', `SCORE ${this.registry.values.score}`)
+        .bitmapText(490, 30, 'font', `SCORE ${this.registry.values.score}`)
         .setDepth(6)
         .setScrollFactor(0)
         
@@ -108,7 +109,7 @@ export default class Stage2 extends Phaser.Scene {
         next = this.physics.add.staticGroup()
 
 
-        map = this.make.tilemap({ key: "map" })
+        map = this.make.tilemap({ key: "map2" })
 
         let boneTiles = map.addTilesetImage('bone')
         boneLayer = map.createLayer('boneLayer', boneTiles, 0, 0);
@@ -137,6 +138,14 @@ export default class Stage2 extends Phaser.Scene {
         let bundTiles = map.addTilesetImage('bund')
         bundLayer = map.createLayer('bundLayer', bundTiles, 0, 0)
         bundLayer.setCollisionByExclusion(-1, true)
+
+        let bundTiles2 = map.addTilesetImage('bund2')
+        bundLayer2 = map.createLayer('bundLayer2', bundTiles2, 0, 0)
+        bundLayer2.setCollisionByExclusion(-1, true)
+
+        
+
+        
       
         groundDark = this.add.tileSprite(0, 622 , 30000, 100, 'way').setScrollFactor(0)
         
@@ -149,7 +158,7 @@ export default class Stage2 extends Phaser.Scene {
             loop: true,
           })
         // next.create(10000, 500, 'logo').setScale(2.2).refreshBody() 
-        player = this.physics.add.sprite(600, 400, 'dog').setScale(0.25).setDepth(3)  // 플레이어 생성
+        player = this.physics.add.sprite(22000, 400, 'dog').setScale(0.25).setDepth(3)  // 플레이어 생성
         
         myCam = this.cameras.main
         myCam.setBackgroundColor(0xbababa) // 게임 배경색
@@ -179,6 +188,7 @@ export default class Stage2 extends Phaser.Scene {
         })
     
         this.physics.add.collider(player, bundLayer) // 첫번째인자와 두번째 인자간의 충돌 관련
+        this.physics.add.collider(player, bundLayer2)
         this.physics.add.collider(stars, platforms)
         this.physics.add.collider(target, platforms)
         this.physics.add.collider(subchas, groundDark)
@@ -189,6 +199,7 @@ export default class Stage2 extends Phaser.Scene {
         
         this.physics.add.overlap(player, boneLayer, this.collectBone, undefined, this)
         this.physics.add.overlap(player, bundLayer, this.collectBund, undefined, this)
+        
         this.physics.add.overlap(player, subSquiLayer, this.collectSubSqui, undefined, this)
         this.physics.add.overlap(player, subBirdLayer, this.collectSubBird, undefined, this)
         this.physics.add.overlap(player, potionLayer, this.collectPotion, undefined, this)

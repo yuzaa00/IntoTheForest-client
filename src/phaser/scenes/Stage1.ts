@@ -55,6 +55,7 @@ export default class Stage1 extends Phaser.Scene {
     }
 
     public init(): void {
+      
         this.registry.set('score', 0)
         this.registry.set('life', 10000)
         this.registry.set('stage', 1)
@@ -89,7 +90,7 @@ export default class Stage1 extends Phaser.Scene {
             loop: true
         }) // 노래 재생하기
         this.stage1Bgm.sound.setVolume(0.1)
-       
+        
       
         this.physics.world.setBounds(0, 0, 30000, 600)
 
@@ -108,20 +109,21 @@ export default class Stage1 extends Phaser.Scene {
         target = this.physics.add.staticGroup()
         subchas = this.physics.add.staticGroup()
         next = this.physics.add.staticGroup()
-
-        map = this.make.tilemap({ key: "map" });
+        
+        
+        map = this.make.tilemap({ key: "map" })
 
         let boneTiles = map.addTilesetImage('bone')
         boneLayer = map.createLayer('boneLayer', boneTiles, 0, 0);
-        boneLayer.setTileIndexCallback(1, this.collectBone, this).setDepth(1)
-
+        boneLayer.setTileIndexCallback(3, this.collectBone, this).setDepth(1).setScale(1)
+        
         let subSquiTiles =map.addTilesetImage('subSqui')
         subSquiLayer = map.createLayer('subSquiLayer', subSquiTiles, 0, 0)
-        subSquiLayer.setTileIndexCallback(7, this.collectSubSqui, this).setDepth(1)
-
+        subSquiLayer.setTileIndexCallback(2, this.collectSubSqui, this).setDepth(1)
+        
         let subBirdTiles = map.addTilesetImage('subBird');
         subBirdLayer = map.createLayer('subBirdLayer', subBirdTiles, 0, 0)
-        subBirdLayer.setTileIndexCallback(6, this.collectSubBird, this).setDepth(1)
+        subBirdLayer.setTileIndexCallback(1, this.collectSubBird, this).setDepth(1)
         
         let potionTiles = map.addTilesetImage('potion')
         potionLayer = map.createLayer('potionLayer', potionTiles, 0, 0)
@@ -129,11 +131,11 @@ export default class Stage1 extends Phaser.Scene {
         
         let mushroomBallTiles = map.addTilesetImage('mushroom')
         mushLayer = map.createLayer('mushLayer', mushroomBallTiles, 0, 0)
-        mushLayer.setTileIndexCallback(3, this.collectMush, this).setDepth(1)
+        mushLayer.setTileIndexCallback(6, this.collectMush, this).setDepth(1)
         
         let signExitTiles = map.addTilesetImage('signExit')
         signLayer = map.createLayer('signLayer', signExitTiles, 0, 0)
-        signLayer.setTileIndexCallback(5, this.collectSignExit, this).setDepth(1)
+        signLayer.setTileIndexCallback(7, this.collectSignExit, this).setDepth(1)
         
         let bundTiles = map.addTilesetImage('bund')
         bundLayer = map.createLayer('bundLayer', bundTiles, 0, 0)
@@ -149,9 +151,8 @@ export default class Stage1 extends Phaser.Scene {
             callbackScope: this,
             loop: true,
           })
-        //next.create(10000, 500, 'logo').setScale(2.2).refreshBody()
-
-        player = this.physics.add.sprite(600, 400, 'dog').setScale(1.6).setDepth(3)  // 플레이어 생성
+        // next.create(10000, 500, 'logo').setScale(2.2).refreshBody() 
+        player = this.physics.add.sprite(600, 400, 'dog').setScale(0.25).setDepth(3)  // 플레이어 생성
         
         myCam = this.cameras.main
         myCam.setBackgroundColor(0xbababa) // 게임 배경색
@@ -191,14 +192,13 @@ export default class Stage1 extends Phaser.Scene {
         this.physics.add.collider(player, next, this.nextStage, undefined, this) 
         this.physics.add.collider(subchas, bundLayer)
         
-        this.physics.add.overlap(player, boneLayer)
-        //this.physics.add.overlap(player, bundLayer)
-        this.physics.add.overlap(player, subSquiLayer)
-        this.physics.add.overlap(player, subBirdLayer)
-        this.physics.add.overlap(player, potionLayer)
-        this.physics.add.overlap(player, mushLayer)
-        this.physics.add.overlap(player, signLayer)
-   
+        this.physics.add.overlap(player, boneLayer, this.collectBone, undefined, this)
+        this.physics.add.overlap(player, bundLayer, this.collectBund, undefined, this)
+        this.physics.add.overlap(player, subSquiLayer, this.collectSubSqui, undefined, this)
+        this.physics.add.overlap(player, subBirdLayer, this.collectSubBird, undefined, this)
+        this.physics.add.overlap(player, potionLayer, this.collectPotion, undefined, this)
+        this.physics.add.overlap(player, mushLayer, this.collectMush, undefined, this)
+        this.physics.add.overlap(player, signLayer, this.collectSignExit, undefined, this)
         
     }
     
@@ -284,44 +284,7 @@ export default class Stage1 extends Phaser.Scene {
         }
         
 
-        //  subchas.children.iterate(function (child: any, idx: number) {
-  
-          
-        //    if(child.body.onFloor()) {
-        //      isSub = false
-        //    }
-   
-        //    if(Phaser.Math.Distance.BetweenPoints(child, player) > 10) {
-        //     child.setVelocityY(300)
-        //   }
-        //   else {
-        //     child.setVelocityY(0)
-        //   }
-        //   //  if(Phaser.Math.Distance.Between(child.x, child.y, player.x, player.y) > 100) {
-        //   //    console.log('달림')
-        //   //   child.setVelocityX(300) 
-        //   //   child.setVelocityY(300)
-        //   //  }
-        //   //  else {
-        //   //   console.log('걷기')
-        //   //    child.setVelocityX(0)
-        //   //    child.setVelocityY(0)
-        //   //  }
-        //     // if(child.x <= player.x - (80 + idx * 80)) {
-        //     //   child.setVelocityX(550)
-        //     // } 
-        //     // else {
-        //     //   child.setVelocityX(0)
-        //     // }
-            
-        //     //   if(child.y < player.y) {
-        //     //     child.setVelocityY(250)
-        //     //   }
-        //     //   else {
-        //     //     child.setVelocityY(0)
-        //     //   }
-            
-        //   })
+       
 
         if (this.registry.values.life < 0) { // 게임 오버
             this.scene.pause()
@@ -451,3 +414,44 @@ export default class Stage1 extends Phaser.Scene {
         //     c.name = 'veg' + i
         //     c.body.immovable = true
         // }
+
+         //  subchas.children.iterate(function (child: any, idx: number) {
+  
+          
+        //    if(child.body.onFloor()) {
+        //      isSub = false
+        //    }
+   
+        //    if(Phaser.Math.Distance.BetweenPoints(child, player) > 10) {
+        //     child.setVelocityY(300)
+        //   }
+        //   else {
+        //     child.setVelocityY(0)
+        //   }
+          //  if(Phaser.Math.Distance.Between(child.x, child.y, player.x, player.y) > 100) {
+          //    console.log('달림')
+          //   child.setVelocityX(300) 
+          //   child.setVelocityY(300)
+          //  }
+          //  else {
+          //   console.log('걷기')
+          //    child.setVelocityX(0)
+          //    child.setVelocityY(0)
+          //  }
+            // if(child.x <= player.x - (80 + idx * 80)) {
+            //   child.setVelocityX(550)
+            // } 
+            // else {
+            //   child.setVelocityX(0)
+            // }
+            
+            //   if(child.y < player.y) {
+            //     child.setVelocityY(250)
+            //   }
+            //   else {
+            //     child.setVelocityY(0)
+            //   }
+            
+        //   })
+
+        

@@ -37,7 +37,8 @@ export default class Loader extends Phaser.Scene { // resource load scene
     this.load.image('mole', 'images/mole/mole.png')
     this.load.image('card6.png', 'images/card/card6.png')
     
-    this.load.tilemapTiledJSON("map", 'stage1_map')
+    this.load.tilemapTiledJSON("map", 'stage1_map.json')
+    this.load.tilemapTiledJSON("map2", 'stage2_map.json')
     this.load.bitmapFont('font', 'font/font.png', 'font/font.fnt')
     this.load.spritesheet('dog', 'images/character/dog2.png', { frameWidth: 500, frameHeight: 500 })
     this.load.audio('stage1_bgm', 'sound/bgm/stage1-1.mp3')
@@ -45,10 +46,11 @@ export default class Loader extends Phaser.Scene { // resource load scene
     this.load.audio('stage2-1_bgm', 'sound/bgm/stage2-1.mp3')
     this.load.audio('stage2-2_bgm', 'sound/bgm/stage2-2.mp3')
     // this.load.audioSprite('sfx', scoreEffectjson, scoreEffect)
+    
   }
   
   update ():void {
-    this.scene.start('Stage1Event')
+    this.scene.start('Stage2')
   }
 }
 
