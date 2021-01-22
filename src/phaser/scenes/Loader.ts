@@ -16,10 +16,6 @@ export default class Loader extends Phaser.Scene { // resource load scene
     this.load.image('skydark', 'images/background/sunset.png')
     this.load.image('gameOver', 'images/background/gameover.png')
     this.load.image('way', 'images/background/way.png')
-    this.load.image('cave_1', 'images/background/cave_1.png')
-    this.load.image('cave_2', 'images/background/cave_2.png')
-    this.load.image('cave_3', 'images/background/cave_3.png')
-    this.load.image('cave_4', 'images/background/cave_4.png')
     this.load.image("bone", 'images/object/bone.png')
     this.load.image("yellowBall", 'images/object/yellowBall.png')
     this.load.image("potion", 'images/object/potion.png')
@@ -27,6 +23,7 @@ export default class Loader extends Phaser.Scene { // resource load scene
     this.load.image("subSqui", 'images/object/subSqui.png')
     this.load.image("mushroom", 'images/object/mushroom.png')
     this.load.image("bund", 'images/object/bund.png')
+    this.load.image("bund2", 'images/object/bund2.png')
     this.load.image("signExit", 'images/object/signExit.png')
     
     this.load.image('back.png', 'images/card/back.png')

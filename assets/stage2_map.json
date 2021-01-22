@@ -1,12 +1,5 @@
 { "compressionlevel":-1,
- "editorsettings":
-    {
-     "export":
-        {
-         "format":"json",
-         "target":"..\/..\/..\/Desktop\/codestates\/Into-the-Forest\/Into-the-Forest-client\/assets\/map66.json"
-        }
-    },
+
  "height":10,
  "infinite":false,
  "layers":[

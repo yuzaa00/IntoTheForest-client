@@ -24,10 +24,6 @@ let potionLayer: any
 let mushLayer: any
 let signLayer: any
 let bundLayer: any
-let cave1: any
-let cave2: any
-let cave3: any
-let cave4: any
 let map: any
 
 export default class Stage1 extends Phaser.Scene {
@@ -130,22 +126,6 @@ export default class Stage1 extends Phaser.Scene {
         let bundTiles = map.addTilesetImage('bund')
         bundLayer = map.createLayer('bundLayer', bundTiles, 0, 0)
         bundLayer.setCollisionByExclusion(-1, true)
-      
-        let cave1Tiles = map.addTilesetImage('cave_1')
-        cave1 = map.createLayer('cave1Layer', cave1Tiles, 0, 0)
-        cave1.setTileIndexCallback(8, this).setDepth(1)
-
-        let cave2Tiles = map.addTilesetImage('cave_2')
-        cave2 = map.createLayer('cave2Layer', cave2Tiles, 0, 0)
-        cave2.setTileIndexCallback(9, this).setDepth(1)
-
-        let cave3Tiles = map.addTilesetImage('cave_3')
-        cave3 = map.createLayer('cave3Layer', cave3Tiles, 0, 0)
-        cave3.setTileIndexCallback(10, this).setDepth(1)
-
-        let cave4Tiles = map.addTilesetImage('cave_4')
-        cave4 = map.createLayer('cave4Layer', cave4Tiles, 0, 0)
-        cave4.setTileIndexCallback(11, this).setDepth(1)
 
         groundDark = this.add.tileSprite(0, 600, 30000, 100, 'way').setScrollFactor(0)
         
