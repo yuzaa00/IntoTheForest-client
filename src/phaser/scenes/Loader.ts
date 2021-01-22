@@ -39,7 +39,7 @@ export default class Loader extends Phaser.Scene { // resource load scene
     this.load.image('card6.png', 'images/card/card6.png')
     
     this.load.tilemapTiledJSON("map", 'stage1_map.json')
-    this.load.tilemapTiledJSON("map2", 'stage3_map.json')
+    this.load.tilemapTiledJSON("map2", 'stage2_map.json')
     this.load.bitmapFont('font', 'font/font.png', 'font/font.fnt')
     this.load.spritesheet('dog', 'images/character/dog2.png', { frameWidth: 500, frameHeight: 500 })
 
@@ -55,7 +55,7 @@ export default class Loader extends Phaser.Scene { // resource load scene
   }
   
   update ():void {
-    this.scene.start('Stage2') // 첫 스테이지 선택
+    this.scene.start('Stage1') // 첫 스테이지 선택
   }
 }
 
