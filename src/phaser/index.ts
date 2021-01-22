@@ -21,8 +21,8 @@ import StageOver from './scenes/StageOver'
 export const config: Phaser.Types.Core.GameConfig = {
   title: 'Into the Forest',
   type: Phaser.AUTO,
-  width: SETTING.WIDTH,
-  height: SETTING.HEIGHT,
+  width: 1600,
+  height: 1200,
   parent: 'game-container',
   scale: {
     mode: Phaser.Scale.FIT,

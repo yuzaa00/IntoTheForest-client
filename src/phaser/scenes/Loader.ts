@@ -8,13 +8,17 @@ export default class Loader extends Phaser.Scene { // resource load scene
 
   preload(): void {
     this.load.image('logo', 'images/character/logo.png')
-    this.load.image('ground', 'images/object/platform.png')
     this.load.image('star', 'images/object/star.png')
     this.load.image('bird', 'images/character/bird.png')
-    this.load.image('sunset', 'images/background/sunset.png')
+    this.load.image('squi', 'images/character/squi.png')
+
+    this.load.image('ground', 'images/object/platform.png')
     this.load.image('groundDark', 'images/background/groundDark.png')
-    this.load.image('skydark', 'images/background/sunset.png')
+
+    this.load.image('stage1', 'images/background/stage1.png')
+    this.load.image('stage2', 'images/background/stage2.png')
     this.load.image('gameOver', 'images/background/gameover.png')
+
     this.load.image('way', 'images/background/way.png')
     this.load.image("bone", 'images/object/bone.png')
     this.load.image("yellowBall", 'images/object/yellowBall.png')
@@ -32,17 +36,18 @@ export default class Loader extends Phaser.Scene { // resource load scene
     this.load.image('mole', 'images/mole/mole.png')
     this.load.image('card6.png', 'images/card/card6.png')
     
-    this.load.tilemapTiledJSON("map", 'map66.json')
+    this.load.tilemapTiledJSON("map", 'stage1_map')
     this.load.bitmapFont('font', 'font/font.png', 'font/font.fnt')
-    this.load.spritesheet('dog', 'images/character/dog6.png', { frameWidth: 77.7, frameHeight: 100 })
+    this.load.spritesheet('dog', 'images/character/dog2.png', { frameWidth: 500, frameHeight: 500 })
     this.load.audio('stage1_bgm', 'sound/bgm/stage1-1.mp3')
     this.load.audio('stage1-2_bgm', 'sound/bgm/stage1-2.mp3')
+    this.load.audio('stage2-1_bgm', 'sound/bgm/stage2-1.mp3')
     this.load.audio('stage2-2_bgm', 'sound/bgm/stage2-2.mp3')
     // this.load.audioSprite('sfx', scoreEffectjson, scoreEffect)
   }
   
   update ():void {
-    this.scene.start('Stage1')
+    this.scene.start('Stage1Event')
   }
 }
 
