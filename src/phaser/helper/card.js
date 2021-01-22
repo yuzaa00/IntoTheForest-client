@@ -11,8 +11,17 @@ export default class Card {
     draw(x, y) {
       this.frontbg = this.gameScene.add.sprite(x, y, 'front.png').setInteractive().setScale(0.6)
       this.cover = this.gameScene.add.sprite(x, y, 'back.png').setInteractive().setScale(0.6)
-      this.front = this.gameScene.add.sprite(x, y, this.key).setInteractive().setScale(0.6)
-  
+
+      if(this.key === 'card8.png') { // 새
+        this.front = this.gameScene.add.sprite(x, y, this.key).setInteractive().setScale(0.5)
+      } else if(this.key === 'card2.png') { // 치와와
+        this.front = this.gameScene.add.sprite(x, y, this.key).setInteractive().setScale(0.5)
+      } else if(this.key === 'card3.png') { // 늑대
+        this.front = this.gameScene.add.sprite(x, y, this.key).setInteractive().setScale(0.5)
+      } else {
+        this.front = this.gameScene.add.sprite(x, y, this.key).setInteractive().setScale(0.6)
+      }
+
       this.cover.on('pointerdown', this.onClickHandler.bind(this))
       this.front.on('pointerdown', this.onClickHandler.bind(this))
   

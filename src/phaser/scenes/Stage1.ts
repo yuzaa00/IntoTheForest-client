@@ -139,7 +139,7 @@ export default class Stage1 extends Phaser.Scene {
           })
         next.create(10000, 500, 'logo').setScale(2.2).refreshBody()
 
-        player = this.physics.add.sprite(600, 400, 'dog').setScale(1.6).setDepth(3)  // 플레이어 생성
+        player = this.physics.add.sprite(600, 400, 'dog').setScale(0.25).setDepth(3)  // 플레이어 생성
         
         myCam = this.cameras.main
         myCam.setBackgroundColor(0xbababa) // 게임 배경색
@@ -156,7 +156,7 @@ export default class Stage1 extends Phaser.Scene {
     
         this.anims.create({ // 플레이어 오른쪽 동작시 5번 ~ 8번 프레임 8fps로 재생
             key: 'right',
-            frames: this.anims.generateFrameNumbers('dog', { start: 1, end: 11 }),
+            frames: this.anims.generateFrameNumbers('dog', { start: 1, end: 8 }),
             frameRate: 10,
             repeat: -1
         })
