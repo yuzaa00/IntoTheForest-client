@@ -24,6 +24,10 @@ let potionLayer: any
 let mushLayer: any
 let signLayer: any
 let bundLayer: any
+let cave1: any
+let cave2: any
+let cave3: any
+let cave4: any
 let map: any
 
 export default class Stage1 extends Phaser.Scene {
@@ -101,15 +105,15 @@ export default class Stage1 extends Phaser.Scene {
 
         let boneTiles = map.addTilesetImage('bone')
         boneLayer = map.createLayer('boneLayer', boneTiles, 0, 0);
-        boneLayer.setTileIndexCallback(3, this.collectBone, this).setDepth(1).setScale(1)
-        
+        boneLayer.setTileIndexCallback(1, this.collectBone, this).setDepth(1)
+
         let subSquiTiles =map.addTilesetImage('subSqui')
         subSquiLayer = map.createLayer('subSquiLayer', subSquiTiles, 0, 0)
-        subSquiLayer.setTileIndexCallback(2, this.collectSubSqui, this).setDepth(1)
-        
+        subSquiLayer.setTileIndexCallback(7, this.collectSubSqui, this).setDepth(1)
+
         let subBirdTiles = map.addTilesetImage('subBird');
         subBirdLayer = map.createLayer('subBirdLayer', subBirdTiles, 0, 0)
-        subBirdLayer.setTileIndexCallback(1, this.collectSubBird, this).setDepth(1)
+        subBirdLayer.setTileIndexCallback(6, this.collectSubBird, this).setDepth(1)
         
         let potionTiles = map.addTilesetImage('potion')
         potionLayer = map.createLayer('potionLayer', potionTiles, 0, 0)
@@ -117,16 +121,32 @@ export default class Stage1 extends Phaser.Scene {
         
         let mushroomBallTiles = map.addTilesetImage('mushroom')
         mushLayer = map.createLayer('mushLayer', mushroomBallTiles, 0, 0)
-        mushLayer.setTileIndexCallback(6, this.collectMush, this).setDepth(1)
+        mushLayer.setTileIndexCallback(3, this.collectMush, this).setDepth(1)
         
         let signExitTiles = map.addTilesetImage('signExit')
         signLayer = map.createLayer('signLayer', signExitTiles, 0, 0)
-        signLayer.setTileIndexCallback(7, this.collectSignExit, this).setDepth(1)
+        signLayer.setTileIndexCallback(5, this.collectSignExit, this).setDepth(1)
         
         let bundTiles = map.addTilesetImage('bund')
         bundLayer = map.createLayer('bundLayer', bundTiles, 0, 0)
         bundLayer.setCollisionByExclusion(-1, true)
       
+        let cave1Tiles = map.addTilesetImage('cave_1')
+        cave1 = map.createLayer('cave1Layer', cave1Tiles, 0, 0)
+        cave1.setTileIndexCallback(8, this).setDepth(1)
+
+        let cave2Tiles = map.addTilesetImage('cave_2')
+        cave2 = map.createLayer('cave2Layer', cave2Tiles, 0, 0)
+        cave2.setTileIndexCallback(9, this).setDepth(1)
+
+        let cave3Tiles = map.addTilesetImage('cave_3')
+        cave3 = map.createLayer('cave3Layer', cave3Tiles, 0, 0)
+        cave3.setTileIndexCallback(10, this).setDepth(1)
+
+        let cave4Tiles = map.addTilesetImage('cave_4')
+        cave4 = map.createLayer('cave4Layer', cave4Tiles, 0, 0)
+        cave4.setTileIndexCallback(11, this).setDepth(1)
+
         groundDark = this.add.tileSprite(0, 600, 30000, 100, 'way').setScrollFactor(0)
         
         platforms.add(groundDark)
@@ -137,7 +157,7 @@ export default class Stage1 extends Phaser.Scene {
             callbackScope: this,
             loop: true,
           })
-        next.create(10000, 500, 'logo').setScale(2.2).refreshBody()
+        //next.create(10000, 500, 'logo').setScale(2.2).refreshBody()
 
         player = this.physics.add.sprite(600, 400, 'dog').setScale(1.6).setDepth(3)  // 플레이어 생성
         
@@ -176,13 +196,14 @@ export default class Stage1 extends Phaser.Scene {
         this.physics.add.collider(player, target, this.getSubcha, undefined, this) 
         this.physics.add.collider(player, next, this.nextStage, undefined, this) 
         
-        this.physics.add.overlap(player, boneLayer, this.collectBone, undefined, this)
-        this.physics.add.overlap(player, bundLayer, this.collectBund, undefined, this)
-        this.physics.add.overlap(player, subSquiLayer, this.collectSubSqui, undefined, this)
-        this.physics.add.overlap(player, subBirdLayer, this.collectSubBird, undefined, this)
-        this.physics.add.overlap(player, potionLayer, this.collectPotion, undefined, this)
-        this.physics.add.overlap(player, mushLayer, this.collectMush, undefined, this)
-        this.physics.add.overlap(player, signLayer, this.collectSignExit, undefined, this)
+        this.physics.add.overlap(player, boneLayer)
+        //this.physics.add.overlap(player, bundLayer)
+        this.physics.add.overlap(player, subSquiLayer)
+        this.physics.add.overlap(player, subBirdLayer)
+        this.physics.add.overlap(player, potionLayer)
+        this.physics.add.overlap(player, mushLayer)
+        this.physics.add.overlap(player, signLayer)
+   
         
     }
     
