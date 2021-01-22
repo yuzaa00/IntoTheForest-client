@@ -1,0 +1,168 @@
+@font-face {
+    font-family: 'S-CoreDream-8Heavy';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-8Heavy.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'BMDOHYEON';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Y_Spotlight';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/Y_Spotlight.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PFStardust';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/PFStardust.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+.game-size {
+    width: 800px;
+    height: 600px;
+    background: black;
+    color: white;
+    background-image: url('../../assets/images/background/sunset.png');
+    box-sizing: border-box;
+    font-family: 'BMDOHYEON';
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+.mode {
+    /* grid-template-columns: 1fr 1fr; */
+    height: 500px;
+    display: flex;
+}
+
+.text {
+    height: 40px;
+    line-height: 40px;
+    display: flex;
+    margin: 20px 0 20px 0;
+    font-weight: bold;
+    font-family: 'PFStardust';
+}
+
+.choiceMode {
+    width: 70%;
+    background: rgba(255, 255, 255, .3);
+    color: black;
+    margin: 0 2% 0 2%;
+    border-radius: 15px;
+}
+
+.exit {
+    width: 400%;
+    background: red;
+    margin: 0 2% 0 2%;
+    border-radius: 15px;
+    /* display: block; */
+    cursor: pointer;
+}
+
+.exit Link {
+    background: green;
+}
+
+.exit:hover {
+    background: #E60304;
+    color: black;
+}
+
+.mode-solo {
+    width: 47%;
+    height: 490px;
+    /* margin: 20px 20px 0 20px; */
+    border-radius: 20px;
+    font-size: 40px;
+    /* box-sizing: border-box; */
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: 2px 2px 2px 5px rgba(0, 0, 0, .2);
+    margin-right: 5%;
+}
+
+.mode-solo button {
+    /* padding: 95px 0 ; */
+    height: 360px;
+    font-size: 50px;
+    z-index: 1;
+}
+
+.mode-solo button:hover {
+    background: #028CFE;
+    /* color: rgba(255, 255, 255, .5); */
+}
+
+.mode-multi {
+    width: 47%;
+    height: 490px;
+    /* margin: 20px 20px 0 20px; */
+    border-radius: 20px;
+    font-size: 40px;
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: 2px 2px 2px 5px rgba(0, 0, 0, .2);
+}
+
+.mode-name {
+    height: 100px;
+    line-height: 100px;
+}
+
+button {
+    width: 85%;
+    height: 170px;
+    line-height: 170px;
+    /* padding: 50px 0; */
+    border-radius: 40px;
+    border: none;
+    box-shadow: 2px 2px 10px 5px rgba(0, 0, 0, .5);
+    background: #0294FE;
+    color: white;
+    font-family: 'BMDOHYEON';
+    cursor: pointer;
+}
+
+button:focus {
+    outline: none;
+}
+
+button:hover {
+    color: rgba(0, 0, 0, .5);
+}
+
+.multi-create {
+    margin-bottom: 20px;
+    font-size: 50px;
+    background: #FF7B12;
+}
+
+.multi-create:hover {
+    background: #FF6E12;
+}
+
+.multi-join {
+    padding: 2px 0;
+    font-size: 50px;
+    background: #1AC8BE;
+}
+
+.multi-join:hover {
+    background: #1ABCBE;
+}

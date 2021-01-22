@@ -1,16 +1,17 @@
 import React, { useState, useEffect }from 'react';
-import axios from 'axios'
+import { Switch, Route, Link } from 'react-router-dom';
+import axios from 'axios';
 import './App.css';
 import Game from './game';
-import Counter from './Counter';
+import ChoiceMode from './ChoiceMode';
+
+import Story from './Story';
+
 import KakaoShareButton from './kakaoShareButton';
 import KakaoProfileButton from './kakaoProfileButton';
 import KakaoProfileDelete from './kakaoProfileDelete';
 
-import { RootState } from '../redux/reducers';
-
 import { useSelector, useDispatch } from 'react-redux';
-import { increase, decrease } from '../redux/actions/counter';
 
 declare global {
   interface Window { Kakao: any;}
@@ -23,19 +24,6 @@ function App() {
   useEffect(() => {
     getProfile()
   }, [accessToken]);
-
-  // 상태를 조회합니다. 상태를 조회 할 때에는 state 의 타입을 RootState 로 지정해야합니다.
-  const secCount = useSelector((state: RootState) => state.counter.count); // useSelector : 리덕스 스토어의 상태에 접근
-  // const result : any = useSelector(selector : Function, deps : any[])
-  const dispatch = useDispatch();
-
-  const onIncrease = () => {
-    dispatch(increase());
-  }
-
-  const onDecrease = () => {
-    dispatch(decrease());
-  }
 
   const handleAccToken = (accessToken: string) => {
     setAccessToken(accessToken);
