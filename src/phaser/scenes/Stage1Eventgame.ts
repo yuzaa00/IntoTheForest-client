@@ -69,22 +69,22 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
       loop: true,
     })
 
-    const MAX_CARD_PER_LINE = 4;
-    const PAIRS = 8;
-    const H_OFFSET = 120;
-    const V_OFFSET = 120;
-    const INITIAL_X = 225;
-    const INITIAL_Y = 127;
+    const MAX_CARD_PER_LINE = 4
+    const PAIRS = 8
+    const H_OFFSET = 120
+    const V_OFFSET = 130
+    const INITIAL_X = 425
+    const INITIAL_Y = 117
     const lines = 4
     
-    const numberOfCards = PAIRS * 2;
-    const positions = [];
+    const numberOfCards = PAIRS * 2
+    const positions = []
     
     const imageNames = Object.keys(images).filter((name) => {
-      return name.includes('card');
-    }).slice(0, PAIRS);
+      return name.includes('card')
+    }).slice(0, PAIRS)
     
-    let total = numberOfCards;
+    let total = numberOfCards
     // positions.push({
     //   x: 10,
     //   y: 10
@@ -99,20 +99,20 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
           positions.push({
             x: INITIAL_X + (H_OFFSET * pos),
             y: INITIAL_Y + (V_OFFSET * line)
-          });
+          })
         }
-        total--;
+        total--
       }
     }
     positions.forEach(ele => console.log(ele))
 
     while (positions.length) {
-      const posA = positions.splice(this.getRandomInt(positions.length), 1)[0];
-      const posB = positions.splice(this.getRandomInt(positions.length), 1)[0];
-      const key = imageNames.splice(this.getRandomInt(imageNames.length), 1)[0];
+      const posA = positions.splice(this.getRandomInt(positions.length), 1)[0]
+      const posB = positions.splice(this.getRandomInt(positions.length), 1)[0]
+      const key = imageNames.splice(this.getRandomInt(imageNames.length), 1)[0]
 
-      this.cards.push(new Card( {key, gameScene: this, ...posA, handler: this.cardClickHandler.bind(this)} ));
-      this.cards.push(new Card( {key, gameScene: this, ...posB, handler: this.cardClickHandler.bind(this)} ));
+      this.cards.push(new Card( {key, gameScene: this, ...posA, handler: this.cardClickHandler.bind(this)} ))
+      this.cards.push(new Card( {key, gameScene: this, ...posB, handler: this.cardClickHandler.bind(this)} ))
     }
 
   }
@@ -153,14 +153,14 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
     }, 1500)
   }
   private matchedCards(): number {
-    return this.cards.filter((card) => card.outOfTheGame).length / 2;
+    return this.cards.filter((card) => card.outOfTheGame).length / 2
   }
 
   private updateScore() {
-    var style = { font: 'bold 20px Arial', fill: '#fff', boundsAlignH: 'center', boundsAlignV: 'middle' };
+    var style = { font: 'bold 20px Arial', fill: '#fff', boundsAlignH: 'center', boundsAlignV: 'middle' }
 
     if (!score) {
-      score = this.add.text(11, 50, '', style);
+      score = this.add.text(11, 50, '', style)
     }
 
     score.text = `
@@ -198,7 +198,7 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
   }
 
   private getRandomInt = (max: number) => {
-    return Math.floor(Math.random() * Math.floor(max));
+    return Math.floor(Math.random() * Math.floor(max))
   };
 }
 

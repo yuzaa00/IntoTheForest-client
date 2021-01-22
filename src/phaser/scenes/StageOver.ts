@@ -11,7 +11,7 @@ export default class StageOver extends Phaser.Scene {
   }
 
   public create(): void {
-    this.add.image(0, 0, 'gameOver').setOrigin(0,0)
+    this.add.image(200, 0, 'gameOver').setOrigin(0, 0)
       
   }
 
