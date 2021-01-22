@@ -27,6 +27,7 @@ export default class Loader extends Phaser.Scene { // resource load scene
     this.load.image("subSqui", 'images/object/subSqui.png')
     this.load.image("mushroom", 'images/object/mushroom.png')
     this.load.image("bund", 'images/object/bund.png')
+    this.load.image("bund2", 'images/object/bund2.png')
     this.load.image("signExit", 'images/object/signExit.png')
     
     this.load.image('back.png', 'images/card/back.png')
