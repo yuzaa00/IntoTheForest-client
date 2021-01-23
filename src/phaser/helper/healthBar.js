@@ -5,7 +5,7 @@ export default class HealthBar {
         this.x = x
         this.y = y
         this.value = 100
-        this.p = 7.280
+        this.p = 5.66
 
         this.draw()
         scene.add.existing(this.bar)
@@ -35,7 +35,7 @@ export default class HealthBar {
         this.bar.clear()
 
         this.bar.fillStyle(0x000000)
-        this.bar.fillRect(this.x, this.y, 733, 24)
+        this.bar.fillRect(this.x, this.y, 570, 30)
 
         this.bar.fillStyle(0xffffff)
   
@@ -46,14 +46,14 @@ export default class HealthBar {
             this.bar.fillStyle(0xFFA500)
         }
         else if(this.value < 60) {
-            this.bar.fillStyle(0xFFFF00)
+            this.bar.fillStyle(0xFFD700)
         }
         else {
             this.bar.fillStyle(0x00ff00)
         }
         let length = Math.floor(this.p * this.value)
         
-        this.bar.fillRect(this.x + 2, this.y + 2, length, 20)
+        this.bar.fillRect(this.x + 2, this.y + 2, length, 26)
         this.bar.setDepth(8).setScrollFactor(0)
     }
 

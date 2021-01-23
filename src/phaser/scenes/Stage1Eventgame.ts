@@ -16,7 +16,7 @@ const images = {
   "card7.png": "af02febc13262ff971680447e93e31b8.png",
   "card8.png": "2f9853ca3389e87936ed37d1b076bd01.png",
   "front.png": "7ab6fa294abdb99329c00176e38eab0d.png"
- }
+}
 
 export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토리 줍기 미니게임
   private scoreText!: Phaser.GameObjects.BitmapText
@@ -28,16 +28,16 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
     super('Stage1Eventgame');
   }
 
-  public init(data: any){
+  public init(data: any) {
     this.registry.set('score', data.score) // 이전 scene에서 올라온 데이터 등록
-    this.registry.set('life', data.life) 
-    this.registry.set('stage', data.stage) 
-    this.registry.set('bird', data.bird) 
-    this.registry.set('squi', data.squi) 
+    this.registry.set('life', data.life)
+    this.registry.set('stage', data.stage)
+    this.registry.set('bird', data.bird)
+    this.registry.set('squi', data.squi)
     this.registry.set('time', 30)
     this.registry.set('recovery', 0)
   }
-  
+
   preload(): void {
     this.load.image('card1.png', 'images/card/card1.png')
     this.load.image('card2.png', 'images/card/card2.png')
@@ -53,14 +53,14 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
     }) // 노래 재생하기
 
     this.newRound()
-  } 
+  }
 
   public create(): void {
-    
-    this.add.image(0, 0, 'cardbg').setOrigin(0,0).setDepth(0)
+
+    this.add.image(0, 0, 'cardbg').setOrigin(0, 0).setDepth(0)
     this.lifeText = this.add // 라이프 텍스트 생성
-    .bitmapText(30, 30, 'font', `남은 시간 ${this.registry.values.time}`)
-    .setDepth(6)
+      .bitmapText(30, 30, 'font', `남은 시간 ${this.registry.values.time}`)
+      .setDepth(6)
 
     this.time.addEvent({ // 게임에서 시간 이벤트 등록, 1초당 콜백 호출 (콜백내용은 초당 체력 감소)
       delay: 1000,
@@ -76,14 +76,14 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
     const INITIAL_X = 425
     const INITIAL_Y = 117
     const lines = 4
-    
+
     const numberOfCards = PAIRS * 2
     const positions = []
-    
+
     const imageNames = Object.keys(images).filter((name) => {
       return name.includes('card')
     }).slice(0, PAIRS)
-    
+
     let total = numberOfCards
     // positions.push({
     //   x: 10,
@@ -95,7 +95,7 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
     // })
     for (let line = 0; line < lines; line++) {
       for (let pos = 0; pos < MAX_CARD_PER_LINE; pos++) {
-        if (total > 0) { 
+        if (total > 0) {
           positions.push({
             x: INITIAL_X + (H_OFFSET * pos),
             y: INITIAL_Y + (V_OFFSET * line)
@@ -111,24 +111,27 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
       const posB = positions.splice(this.getRandomInt(positions.length), 1)[0]
       const key = imageNames.splice(this.getRandomInt(imageNames.length), 1)[0]
 
-      this.cards.push(new Card( {key, gameScene: this, ...posA, handler: this.cardClickHandler.bind(this)} ))
-      this.cards.push(new Card( {key, gameScene: this, ...posB, handler: this.cardClickHandler.bind(this)} ))
+      this.cards.push(new Card({ key, gameScene: this, ...posA, handler: this.cardClickHandler.bind(this) }))
+      this.cards.push(new Card({ key, gameScene: this, ...posB, handler: this.cardClickHandler.bind(this) }))
     }
 
   }
 
   public update(): void {
-
     if (this.registry.values.time < 1) { // 30초 지난 후 콜백 실행
       this.time.addEvent({
         delay: 100,
         callback: () => {
-          // this.add.tileSprite(0, 0, 800, 600, 'gameOver').setOrigin(0).setDepth(0)
           this.game.sound.stopAll()
-          this.scene.start('Stage2', { score: this.registry.values.score, life: this.registry.values.life + (attempts * 50) > 10000 ? 10000 : this.registry.values.life + (attempts * 50) , stage: 2,
-            bird: this.registry.values.bird, squi: this.registry.values.squi  })
-      },
-      callbackScope: this,
+          this.scene.start('Stage2', {
+            score: this.registry.values.score, 
+            life: this.registry.values.life + (attempts * 50) > 10000 ? 10000 : this.registry.values.life + (attempts * 50), 
+            stage: 2,
+            bird: this.registry.values.bird, 
+            squi: this.registry.values.squi
+          })
+        },
+        callbackScope: this,
       })
     }
   }
@@ -162,7 +165,6 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
     if (!score) {
       score = this.add.text(11, 50, '', style)
     }
-
     score.text = `
       시도 : ${attempts}
       맞춘 카드 : ${this.matchedCards()}
@@ -170,7 +172,7 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
     `;
   }
 
-  private cardClickHandler (card: any) {
+  private cardClickHandler(card: any) {
     console.log('4', card.out)
     if (waitForNewRound || card.out) { return; }
     card.faceUp();
@@ -189,7 +191,7 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
     waitForNewRound = false
   }
 
-  private matchCards () {
+  private matchCards() {
     if (!this.selectedCards.length) { return }
     const cardA = this.selectedCards[0]
     const cardB = this.selectedCards[1]

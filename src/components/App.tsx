@@ -2,7 +2,7 @@ import React, { useState, useEffect }from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
 import axios from 'axios';
 import './App.css';
-import Game from './game';
+import Game from './Game'
 import ChoiceMode from './ChoiceMode';
 
 import Story from './Story';

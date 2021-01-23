@@ -1,34 +1,34 @@
 export default class Stage1Event extends Phaser.Scene {
-  
+
   private popup!: any
   private button!: any
   private startButton!: any
 
   constructor() {
     super('Stage1Event')
-  } 
+  }
 
-  public init(data: any){
+  public init(data: any) {
     this.registry.set('score', data.score) // 이전 scene에서 올라온 데이터 등록
-    this.registry.set('life', data.life) 
-    this.registry.set('stage', data.stage) 
+    this.registry.set('life', data.life)
+    this.registry.set('stage', data.stage)
     this.registry.set('bird', data.bird)
     this.registry.set('squi', data.squi)
   }
 
   preload(): void {
-  
-  this.popup = this.add.graphics()
-  this.popup.lineStyle(1, 0x2a275c)
-  this.popup.fillStyle(0x00ff00, 0.6)
-  this.popup.strokeRect(25, 25, 750, 550)
-  this.popup.fillRect(25, 25, 750, 550)
-  //start button square
-  this.button = this.add.graphics()
-  this.button.lineStyle(1, 0x2a275c)
-  this.button.fillStyle(0xf6d304, 0.5)
-  this.button.strokeRect(325, 465, 150, 50)
-  this.button.fillRect(325, 465, 150, 50)
+
+    this.popup = this.add.graphics()
+    this.popup.lineStyle(1, 0x2a275c)
+    this.popup.fillStyle(0x00ff00, 0.6) // 배경색
+    this.popup.strokeRect(25, 25, 750, 550)
+    this.popup.fillRect(25, 25, 750, 550)
+    //start button square
+    this.button = this.add.graphics()
+    this.button.lineStyle(1, 0x2a275c)
+    this.button.fillStyle(0xf6d304, 0.5)
+    this.button.strokeRect(325, 465, 150, 50)
+    this.button.fillRect(325, 465, 150, 50)
 
     this.add
       .text(400, 83, "보너스 게임", {
@@ -73,11 +73,12 @@ export default class Stage1Event extends Phaser.Scene {
     this.startButton.on(
       'pointerdown',
       () => {
-        this.scene.start('Stage1Eventgame', { score: this.registry.values.score + 10000, life: this.registry.values.life + 1000, stage: 2, bird: this.registry.values.bird, squi: this.registry.values.squi  })
+        console.log(3)
+        this.scene.start('Stage1Eventgame', { score: this.registry.values.score, life: this.registry.values.life, stage: 1, bird: this.registry.values.bird, squi: this.registry.values.squi  })
       },
       this
     )
   }
-  
-  
+
+
 }

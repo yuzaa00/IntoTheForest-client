@@ -1,15 +1,16 @@
 export const enum SETTING {
-    WIDTH = 800,
+    WIDTH = 1200,
     HEIGHT = 600,
 }
   
 export const enum TEXTURE {
     BG = 'background',
     SKY = 'sky',
-    CLOUDS_1 = 'clouds1',
-    CLOUDS_2 = 'clouds2',
-    HOLE_1 = 'hole01',
-    HOLE_2 = 'hole02',
-    HOLE_3 = 'hole03',
+    DOG_1 = 'dog',
+    DOG_2 = 'dog2',
+    DOG_3 = 'dog3',
+    MONSTER_1 = 'monster01',
+    MONSTER_2 = 'monster02',
+    MONSTER_3 = 'monster03',
     FONT = 'font',
 }
