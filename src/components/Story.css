@@ -1,68 +1,154 @@
+@font-face {
+    font-family: 'S-CoreDream-8Heavy';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-8Heavy.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'BMDOHYEON';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Y_Spotlight';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/Y_Spotlight.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PFStardust';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/PFStardust.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/******** common ********/
+
+button {
+    background: #233F4E;
+    color: white;
+    font-family: 'BMDOHYEON';
+    font-size: 1.2rem;
+    margin-top: 2%;
+    text-align: center;
+
+}
+
+button:focus {
+    outline: none;
+}
+
+button:hover {
+    background: #08293B;
+}
+
+/***********************/
+
+
 .full-screen {
     width: 100%;
     height: 100vh;
-    background: #ddd;
+    background: url('../../assets/images/background/night-더-어두운.png') no-repeat;
+    background-size: 100%;
     text-align: center;
     margin: 0 auto;
     overflow: hidden;
+    color: white;
+    font-family: 'Y_Spotlight';
+    font-size: 1rem;
 }
 
 .full-screen h2 {
-    border: 3px solid purple;
+    font-family: 'BMDOHYEON';
+    font-size: 50px;;
+    margin-top: 4%;
+    /* border: 3px solid purple; */
+    text-shadow: #FC0 1px 0 10px;
 }
 
 .full-screen .story-area {
-    width: 100%;
-    height: 80%;
-    margin-top: 80px;
+    width: 70%;
+    height: 60%;
+    line-height: 70%;
+    margin: 40px auto 0;
+    padding: 20px 0;
     overflow: hidden;
-    border: 3px solid orange;
-    /* position: relative; */
+    background: rgba(255, 255, 255, .1);
+    border-radius: 50px;
 }
 
-.full-screen .story-area div.storytelling {
-    /* margin-top: 10%; */
-    border: 6px solid pink;
+.full-screen .story-area .only-hidden {
+    height: 100%;
+    margin-top: 40px 0;
+    overflow: hidden;
 }
+
+/* .full-screen .story-area div.storytelling {
+    border: 6px solid pink;
+} */
 
 .full-screen .story-area div.storytelling .storytelling-start {
+    height: inherit;
+    line-height: 300%;
+    padding-top: 10%;
+    animation: slidein-start 3s linear;
+    animation-fill-mode: both;
     /* animation-duration: 15s;
     transition-timing-function: linear;
     animation-name: slidein; */
-    animation: slidein 2s linear;
-    animation-fill-mode: both;
 }
 
 .full-screen .story-area div.storytelling .storytelling-restart {
     width: 100%;
-    margin-top: 3%;
-    position: absolute;
-    top: 50%;
+    line-height: 300%;
+    /* position: absolute;
+    top: 58%; */
     margin: 0 auto;
-    animation: slidein 2s linear;
-    animation-fill-mode: both;
+    animation: slidein-restart 80s linear;
+    animation-delay: 0.2s;
+    /* animation-fill-mode: both; */
 }
 
-.full-screen .story-area .more {
-    width: 200px;
-    height: 80px;
-    position: fixed;
-    bottom: 2%;
-    display: block;
+/* .full-screen .story-area .moreOrSkip {
+} */
+
+.full-screen .moreOrSkip .more {
+    padding: 1.2% 3%;
+    margin-right: 2%;
+    border-radius: 200px;
 }
 
-@keyframes slidein {
+.full-screen .moreOrSkip .skip {
+    /* width: 6%;
+    height: 6%; */
+    position: absolute;
+    top: 2%;
+    right: 1%;
+    margin-top: 1%;
+    padding: 1% 1.5%;
+    border-radius: 200px;
+}
+
+@keyframes slidein-start {
     0% {
-        margin-top: 25%;
-        /* width: 300%; */
+        margin-top: 40%;
     }
 
-    /* 50% {
-        
-    } */
+    100% {
+        margin-top: 0;
+    }
+}
+
+@keyframes slidein-restart {
+    0% {
+        margin-top: 0;
+    }
 
     100% {
-        margin-top: 10%;
-        /* width: 100%; */
+        margin-top: -1000%;
     }
 }

@@ -40,23 +40,24 @@ function App() {
   }
 
   return (
-    count ? <div><Game></Game></div> :
-    <div className="App">
-      <header className="App-header">
-        <img src='images/character/logo.png' className="App-logo" alt="logo" />
-        <button onClick={()=> setCount(1)}>
-          Game Start!!!
-        </button>
-        <KakaoShareButton/>
-        <KakaoProfileButton handleAccToken={handleAccToken} />
-        <KakaoProfileDelete handleAccToken={handleAccToken} />
-        {/* <Counter 
-          count={secCount} 
-          onIncrease={onIncrease} 
-          onDecrease={onDecrease}
-         /> */}
-      </header>
-    </div>
+    // count ? <div><Game></Game></div> :
+    // <div className="App">
+    //   <header className="App-header">
+    //     <img src='images/character/logo.png' className="App-logo" alt="logo" />
+    //     <button onClick={()=> setCount(1)}>
+    //       Game Start!!!
+    //     </button>
+    //     <KakaoShareButton/>
+    //     <KakaoProfileButton handleAccToken={handleAccToken} />
+    //     <KakaoProfileDelete handleAccToken={handleAccToken} />
+    //     {/* <Counter 
+    //       count={secCount} 
+    //       onIncrease={onIncrease} 
+    //       onDecrease={onDecrease}
+    //      /> */}
+    //   </header>
+    // </div>
+    <Story />
   );
 }
 
