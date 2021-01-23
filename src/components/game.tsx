@@ -8,6 +8,8 @@ import { config } from '../phaser/index'
 
 export default function Game({  }) {
     const history = useHistory();
+
+    
     
     useEffect(() => {
       const newGame = new Phaser.Game(config);
