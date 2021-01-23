@@ -188,9 +188,9 @@ export default class Stage1 extends Phaser.Scene {
     })
 
     this.player = this.physics.add
-      .sprite(28600, 400, this.registry.values.char)
+      .sprite(600, 400, this.registry.values.char) // 플레이어 생성 이동
       .setScale(0.25)
-      .setDepth(3)  // 플레이어 생성 이동
+      .setDepth(3)  
 
     this.myCam = this.cameras.main
     this.myCam.setBackgroundColor(0xbababa) // 게임 배경색
@@ -301,7 +301,7 @@ export default class Stage1 extends Phaser.Scene {
     this.subchas.children.iterate(function (child: any, idx: number): void { // 서브캐릭터 강아지 따라오는 반복 함수
       self.physics.moveToObject(child, { x: self.player.x - (50 * idx), y: self.player.y + 10 }, 0, 150)
     }, this)
-    this.player.anims.play('right', true)// 키보드 방향키 오른쪽 입력시 플레이어 +12 오른쪽이동
+    this.player.anims.play('right', true)
     this.skyTile.tilePositionX += 0.3 // 배경 움직임
   }
 
@@ -384,7 +384,7 @@ export default class Stage1 extends Phaser.Scene {
     this.mushLayer.removeTileAt(tile.x, tile.y)
   }
 
-  collectSignExit(player: any, tile: any): void { // 오브젝트 간 충돌 이벤트, 다음 스테이지로 이동
+  collectSignExit(player: any, tile: any): void { // 오브젝트 간 충돌 이벤트
     this.signLayer.removeTileAt(tile.x, tile.y)
     if (tile.index !== -1) {
       this.game.sound.stopAll()

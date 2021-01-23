@@ -46,9 +46,9 @@ export default class Loader extends Phaser.Scene { // resource load scene
     this.load.image('card6.png', 'images/card/card6.png')
     
     // tiled map, font
-    this.load.tilemapTiledJSON("map", 'stage1_map.json')
-    this.load.tilemapTiledJSON("map2", 'stage2_map.json')
-    this.load.tilemapTiledJSON("map3", 'stage3_map.json')
+    this.load.tilemapTiledJSON("map", 'map/stage1_map.json')
+    this.load.tilemapTiledJSON("map2", 'map/stage2_map.json')
+    this.load.tilemapTiledJSON("map3", 'map/stage3_map.json')
     this.load.bitmapFont('font', 'font/font.png', 'font/font.fnt')
 
     //audio load
