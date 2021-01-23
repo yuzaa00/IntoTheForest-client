@@ -16,13 +16,16 @@ import Stage2Eventgame from './scenes/Stage2Eventgame'
 import Stage3 from './scenes/Stage3';
 import StageEndcredits from './scenes/StageEndcredits'
 
+import StageStop from './scenes/StageStop'
 import StageOver from './scenes/StageOver'
+import StageResult from './scenes/StageResult'
+
 
 export const config: Phaser.Types.Core.GameConfig = {
   title: 'Into the Forest',
   type: Phaser.AUTO,
-  width: 1200,
-  height: 600,
+  width: SETTING.WIDTH,
+  height: SETTING.HEIGHT,
   parent: 'game-container',
   scale: {
     mode: Phaser.Scale.FIT,
@@ -39,5 +42,5 @@ export const config: Phaser.Types.Core.GameConfig = {
         debug: false
     }
   },
-  scene: [Boot, Loader, Stage1, Stage1Event, Stage1Eventgame, Stage2, Stage2Event, Stage2Eventgame, Stage3, StageEndcredits, StageOver]
+  scene: [Boot, Loader, Stage1, Stage1Event, Stage1Eventgame, Stage2, Stage2Event, Stage2Eventgame, Stage3, StageEndcredits, StageStop, StageOver, StageResult]
 }
