@@ -20,6 +20,8 @@ export default class Loader extends Phaser.Scene { // resource load scene
     this.load.image('groundDark', 'images/background/groundDark.png')
     this.load.image('gameOver', 'images/background/gameover.png')
     this.load.image('way', 'images/background/way.png')
+    this.load.image('cave', 'images/background/forestCave.png')
+
 
     //object load
     this.load.image("bone", 'images/object/bone.png')

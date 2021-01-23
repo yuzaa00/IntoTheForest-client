@@ -16,12 +16,12 @@ let subchas: any
 let vertical: any
 let myCam: any
 let groundDark: any // 수정 예정
+let gate: any
 let next: any
 let enemies: any
 let boneLayer: any
 let subSquiLayer: any
 let subBirdLayer: any
-let yellowBallLayer: any
 let potionLayer: any
 let mushLayer: any
 let signLayer: any
@@ -121,6 +121,7 @@ export default class Stage1 extends Phaser.Scene {
         subchas = this.physics.add.staticGroup()
         next = this.physics.add.staticGroup()
         enemies = this.physics.add.staticGroup()
+        gate = this.physics.add.staticGroup()
         
         
         map = this.make.tilemap({ key: "map" })
@@ -147,7 +148,7 @@ export default class Stage1 extends Phaser.Scene {
         
         let signExitTiles = map.addTilesetImage('signExit')
         signLayer = map.createLayer('signLayer', signExitTiles, 0, 0)
-        signLayer.setTileIndexCallback(7, this.collectSignExit, this).setDepth(1)
+        signLayer.setTileIndexCallback(7, this).setDepth(0)
         
         let bundTiles = map.addTilesetImage('bund')
         bundLayer = map.createLayer('bundLayer', bundTiles, 0, 0)
@@ -176,7 +177,7 @@ export default class Stage1 extends Phaser.Scene {
           loop: true,
         })
         // next.create(10000, 500, 'logo').setScale(2.2).refreshBody() 
-        player = this.physics.add.sprite(600, 400, 'dog').setScale(0.25).setDepth(3)  // 플레이어 생성 이동
+        player = this.physics.add.sprite(28000, 400, 'dog').setScale(0.25).setDepth(3)  // 플레이어 생성 이동
         
         myCam = this.cameras.main
         myCam.setBackgroundColor(0xbababa) // 게임 배경색
@@ -204,6 +205,8 @@ export default class Stage1 extends Phaser.Scene {
             key: 'star',
             repeat: 20,
         })
+
+        
     
         this.physics.add.collider(player, bundLayer) // 첫번째인자와 두번째 인자간의 충돌 관련
         this.physics.add.collider(stars, platforms)
@@ -221,8 +224,13 @@ export default class Stage1 extends Phaser.Scene {
         this.physics.add.overlap(player, subBirdLayer, this.collectSubBird, undefined, this)
         this.physics.add.overlap(player, potionLayer, this.collectPotion, undefined, this)
         this.physics.add.overlap(player, mushLayer, this.collectMush, undefined, this)
-        this.physics.add.overlap(player, signLayer, this.collectSignExit, undefined, this)
-        
+        this.physics.add.overlap(player, signLayer)
+
+        //next.create(10000, 500, 'logo').setScale(2.2).refreshBody() 
+        gate.create(30240, 400, 'cave').setDepth(1).setScale(1.5).refreshBody() 
+        this.physics.add.overlap(player, gate, this.collectSignExit, undefined, this)
+
+
         player.setVelocityX(550)
     }
     
@@ -376,9 +384,9 @@ export default class Stage1 extends Phaser.Scene {
         }
       }
 
-      collectyellowBall(player: any, tile: any):void {
-        yellowBallLayer.removeTileAt(tile.x, tile.y)
-      }
+      //collectOrangePotion(player: any, tile: any):void {
+      //  OrangePotionLayer.removeTileAt(tile.x, tile.y)
+      //}
 
       collectPotion(player: any, tile: any):void {
         let potion = potionLayer.removeTileAt(tile.x, tile.y)
@@ -395,9 +403,8 @@ export default class Stage1 extends Phaser.Scene {
       collectMush(player: any, tile: any):void {
         mushLayer.removeTileAt(tile.x, tile.y)
       }
-      collectSignExit(player: any, tile: any):void {
-        let sign = signLayer.removeTileAt(tile.x, tile.y)
-        if(sign.index !== -1) {
+      collectSignExit(player: any):void {
+        if(gate.index !== -1) {
           this.game.sound.stopAll()
           this.scene.start('Stage1Event', { score: this.registry.values.score + 10000, life: this.registry.values.life, stage: 2, bird: this.birdArr.length, squi: this.squiArr.length  }) // stage1Event로 scene 이동 (데이터 이전) 
         }
