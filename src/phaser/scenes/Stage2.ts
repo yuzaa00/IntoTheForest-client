@@ -13,37 +13,37 @@ export default class Stage2 extends Phaser.Scene {
   private boneLayer!: Phaser.Tilemaps.TilemapLayer
   private subSquiLayer!: Phaser.Tilemaps.TilemapLayer
   private subBirdLayer!: Phaser.Tilemaps.TilemapLayer
-  private yellowBallLayer!: Phaser.Tilemaps.TilemapLayer
   private potionLayer!: Phaser.Tilemaps.TilemapLayer
   private mushLayer!: Phaser.Tilemaps.TilemapLayer
   private signLayer!: Phaser.Tilemaps.TilemapLayer
   private bundLayer!: Phaser.Tilemaps.TilemapLayer
   private orangePotionLayer!: Phaser.Tilemaps.TilemapLayer
 
-  private subchas!: any
+  private enemyCollider!: Phaser.Physics.Arcade.Collider
   private enemies!: Phaser.Physics.Arcade.StaticGroup
+  private subchas!: any
 
   private myCam!: Phaser.Cameras.Scene2D.BaseCamera
   private scoreText!: Phaser.GameObjects.BitmapText
   private lifeText!: Phaser.GameObjects.BitmapText
   private moveHp!: Phaser.GameObjects.Text
-  private spaceBar!: any
+  private spaceBar!: Phaser.Input.Keyboard.Key
 
   private moveButton!: Phaser.GameObjects.Image
   private muteButton!: Phaser.GameObjects.Image
 
-  private birdArr: Array<any> = new Array<any>()
-  private squiArr: Array<any> = new Array<any>()
-  private enemiesTimer: Array<any> = [4, 4, 5, 5, 6, 6, 7, 7, 8, 8]
+  private birdArr: Array<Phaser.GameObjects.Image> = []
+  private squiArr: Array<Phaser.GameObjects.Image> = []
+  private enemiesTimer: Array<number> = [4, 4, 5, 5, 6, 6, 7, 7, 8, 8]
 
   private pauseGame: boolean = false
   private isDoubleJump: boolean = false
   private enemiesOn: boolean = false
   private hurtOn: boolean = false
 
-  private invincibility: any
-  private reInvincibility: any
-  private particles!: any
+  private invincibility!: ReturnType<typeof setTimeout>
+  private reInvincibility!: ReturnType<typeof setTimeout>
+  private particles!: Phaser.GameObjects.Particles.ParticleEmitterManager
 
   constructor() {
     super('Stage2')
@@ -91,7 +91,9 @@ export default class Stage2 extends Phaser.Scene {
   }
 
   public create(): void {
-    this.hp = new HealthBar(this, 270, 19)  // 체력바 인스턴스 생성
+    this.hp = new HealthBar(this, 270, 19) // 체력바 인스턴스 생성
+    this.hp.set(this.registry.values.life / 100)
+    
     this.game.input.addPointer() // 마우스 포인터
 
     this.sound.add('stage2-1_bgm').play({  //BGM 재생
@@ -188,9 +190,9 @@ export default class Stage2 extends Phaser.Scene {
     })
 
     this.player = this.physics.add
-      .sprite(600, 400, this.registry.values.char)
+      .sprite(600, 400, this.registry.values.char) // 플레이어 생성 이동
       .setScale(0.25)
-      .setDepth(3)  // 플레이어 생성 이동
+      .setDepth(3)
 
     this.myCam = this.cameras.main
     this.myCam.setBackgroundColor(0xbababa) // 게임 배경색
@@ -253,7 +255,6 @@ export default class Stage2 extends Phaser.Scene {
           this.player.body.setVelocityY(-850)
         }
       }, this)
-    this.physics.world.wrap(this.player, 5000)
 
     let didJump = Phaser.Input.Keyboard.JustDown(this.spaceBar) // 스페이스바 입력 감지
 
@@ -314,8 +315,11 @@ export default class Stage2 extends Phaser.Scene {
       setTimeout(() => {
         let wolf = this.physics.add.image(this.player.x + 1000, 540, 'wolf')
         this.physics.world.enableBody(wolf, 0)
-        wolf.setVelocityX(-650).setScale(1.2).setDepth(3).body.setAllowGravity(false)
-        this.physics.add.collider(this.player, wolf, this.hurt, undefined, this)
+        wolf.setVelocityX(-650)
+        .setScale(1.2)
+        .setDepth(3)
+        .body.setAllowGravity(false)
+        this.enemyCollider = this.physics.add.collider(this.player, wolf, this.hurt, undefined, this)
         this.enemies.add(wolf)
       }, 2000)
       setTimeout(() => {
@@ -352,19 +356,15 @@ export default class Stage2 extends Phaser.Scene {
     }
   }
 
-  collectyellowBall(player: any, tile: any): void { // 오브젝트 간 충돌 이벤트
-    this.yellowBallLayer.removeTileAt(tile.x, tile.y)
-  }
-
   collectPotion(player: any, tile: any): void { // 오브젝트 간 충돌 이벤트
     this.potionLayer.removeTileAt(tile.x, tile.y)
     if (tile.index !== -1) {
       this.sound.add('heal', { volume: 2 }).play()
-      this.hp.decrease(-2)
-      this.registry.values.life + 200 >= 10000 ? this.registry.values.life = 10000 : this.registry.values.life += 200
+      this.hp.decrease(-3)
+      this.registry.values.life + 300 >= 10000 ? this.registry.values.life = 10000 : this.registry.values.life += 300
       this.lifeText.setText(`LIFE ${this.registry.values.life}`)
       this.moveHp.setText(`${Math.floor(this.registry.values.life / 100)}%`)
-      this.moveHp.x += 10
+      this.moveHp.x += 15
       player.setScale(0.4)
       clearTimeout(this.invincibility)
       this.hurtOn = true
@@ -372,18 +372,48 @@ export default class Stage2 extends Phaser.Scene {
       this.reInvincibility = setTimeout(() => {
         player.setScale(0.25)
         this.hurtOn = false
-      }, 9000)
+      }, 4000)
     }
   }
 
   collectOrangePotion(player: any, tile: any): void {
     this.orangePotionLayer.removeTileAt(tile.x, tile.y)
     if (tile.index !== -1) {
+      this.sound.add('heal', { volume: 1 }).play()
+      this.hp.decrease(-3)
+      this.registry.values.life + 300 >= 10000 ? this.registry.values.life = 10000 : this.registry.values.life += 300
+      this.lifeText.setText(`LIFE ${this.registry.values.life}`)
+      this.moveHp.setText(`${Math.floor(this.registry.values.life / 100)}%`)
+      this.moveHp.x += 15
     }
   }
 
   collectMush(player: any, tile: any): void { // 오브젝트 간 충돌 이벤트
     this.mushLayer.removeTileAt(tile.x, tile.y)
+    if (tile.index !== -1) {
+      this.hp.decrease(3)
+      this.registry.values.life -= 300
+      this.lifeText.setText(`LIFE ${this.registry.values.life}`)
+      this.moveHp.setText(`${Math.floor(this.registry.values.life / 100)}%`)
+      this.moveHp.x -= 15
+      let time = this.time.addEvent({ 
+        delay: 200,
+        callback: () => this.player.tint = 0xff00ff,
+        callbackScope: this,
+        loop: true,
+      })
+      let time2 = this.time.addEvent({
+        delay: 300,
+        callback: () => this.player.tint = 0xFFFFFF,
+        callbackScope: this,
+        loop: true,
+      })
+      setTimeout(() => {
+        time.destroy()
+        time2.destroy()
+        this.player.tint = 0xFFFFFF
+      }, 1200)
+    }
   }
 
   collectSignExit(player: any, tile: any): void { // 오브젝트 간 충돌 이벤트, 다음 스테이지로 이동
@@ -393,7 +423,7 @@ export default class Stage2 extends Phaser.Scene {
       this.scene.start('StageResult', {
         score: this.registry.values.score + 10000,
         life: this.registry.values.life, 
-        stage: 2,
+        stage: 3,
         bird: this.birdArr.length,
         squi: this.squiArr.length,
         char: this.registry.values.char
@@ -405,13 +435,17 @@ export default class Stage2 extends Phaser.Scene {
     if (!this.hurtOn) {
       this.hurtOn = true
       enemy.destroy()
-      this.cameras.main.shake(1000, 0.06, true)
-      this.sound.add('heat', { volume: 1 }).play()
+      this.cameras.main.shake(700, 0.04, true)
       let sub = this.subchas.children.entries
       if (sub.length === 0) {
+        this.hp.decrease(8)
+        this.registry.values.life - 800 >= 10000 ? this.registry.values.life = 10000 : this.registry.values.life -= 800
+        this.lifeText.setText(`LIFE ${this.registry.values.life}`)
+        this.moveHp.setText(`${Math.floor(this.registry.values.life / 100)}%`)
+        this.moveHp.x -= 40
       }
       else {
-        this.particles.emitParticleAt(sub[sub.length - 1].x - 100, sub[sub.length - 1].y)
+        this.particles.emitParticleAt(sub[sub.length - 1].x - 30, sub[sub.length - 1].y)
         sub[sub.length - 1].destroy()
       }
       this.invincibility = setTimeout(() => this.hurtOn = false, 2000)
@@ -419,6 +453,8 @@ export default class Stage2 extends Phaser.Scene {
     else {
       enemy.setDepth(8)
       this.physics.moveToObject(enemy, { x: player.x + 1350, y: player.y - 850 }, 0, 1300)
+      this.physics.world.removeCollider(this.enemyCollider)
+      this.sound.add('heat', { volume: 1 }).play()
       this.time.addEvent({
       })
       let time = this.time.addEvent({ //  시간 이벤트 등록, 날아가는 몬스터 회전

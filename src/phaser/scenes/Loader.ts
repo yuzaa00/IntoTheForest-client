@@ -8,17 +8,16 @@ export default class Loader extends Phaser.Scene { // resource load scene
   }
 
   preload(): void {
-    
     //character load
     this.load.image('logo', 'images/character/logo.png')
     this.load.image('bird', 'images/character/bird.png')
     this.load.image('squi', 'images/character/squi.png')
     this.load.spritesheet('dog', 'images/character/dog2.png', { frameWidth: 500, frameHeight: 500 })
     
-    
     //background load
     this.load.image('stage1', 'images/background/stage1.png')
     this.load.image('stage2', 'images/background/stage2.png')
+    this.load.image('stage3', 'images/background/stage3.png')
     this.load.image('groundDark', 'images/background/groundDark.png')
     this.load.image('gameOver', 'images/background/gameover.png')
     this.load.image('way', 'images/background/way.png')
@@ -52,10 +51,11 @@ export default class Loader extends Phaser.Scene { // resource load scene
     this.load.bitmapFont('font', 'font/font.png', 'font/font.fnt')
 
     //audio load
-    this.load.audio('stage1_bgm', 'sound/bgm/stage1-1.mp3')
+    this.load.audio('stage1_1bgm', 'sound/bgm/stage1-1.mp3')
     this.load.audio('stage1-2_bgm', 'sound/bgm/stage1-2.mp3')
     this.load.audio('stage2-1_bgm', 'sound/bgm/stage2-1.mp3')
     this.load.audio('stage2-2_bgm', 'sound/bgm/stage2-2.mp3')
+    this.load.audio('stage3_bgm', 'sound/bgm/stage3.mp3')
     
     // effect
     this.load.image('wolf', 'images/card/card3.png')
@@ -70,7 +70,7 @@ export default class Loader extends Phaser.Scene { // resource load scene
   }
   
   update ():void {
-    this.scene.start('Stage1') // 첫 스테이지 선택
+    this.scene.start('Stage1Eventgame') // 첫 스테이지 선택
   }
 }
 
