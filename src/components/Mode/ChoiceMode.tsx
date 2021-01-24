@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Link, Route, Switch } from 'react-router-dom';
+import { Link, Route, Switch, useHistory } from 'react-router-dom';
 import './ChoiceMode.css';
-import Story from './Story';
+import Story from '../Ready/Story';
 // import CreateRoom from './CreateRoom';
 // import GoRoom from './GoRoom';
 
@@ -13,8 +13,9 @@ const ChoiceMode = () => {
 
     // const dispatch = useDispatch();
     // const mode = useSelector((state: null) => state); // state: RootState
-    const [modeClick, setModeClick] = useState(null);
-    const [modeHover, setModeHover] = useState(null);
+    const [modeClick, setModeClick] = useState('');
+    const [modeHover, setModeHover] = useState('');
+    const history = useHistory();
 
     const soloMode = ()=> {
         // const solo = dispatch(choiceSolo('solo'));
@@ -22,6 +23,7 @@ const ChoiceMode = () => {
         const text ='솔로 모드';
         setModeClick(text);
         setModeHover(text);
+
     }
 
     const multiModeCreateRoom = ()=> {
@@ -36,23 +38,19 @@ const ChoiceMode = () => {
         setModeHover(text);
     }
 
-    return  (<Switch>
-                <Route path="/choicemode">
-                <div className="game-size" onMouseOut={() => setModeHover(null)}>
+    return (
+                <div className="game-size" onMouseOut={() => setModeHover('')}>
                     <div className="mode">
                         <div className="mode-solo">
                             <div className="mode-name">
                                 솔로
                             </div>
-                                <Link to="/story">
                                     <button
-                                        onClick={soloMode}
+                                        onClick={() => history.push('/ready/story')}
                                         onMouseOver={soloMode}
-                                        className="button-design"
-                                    >
+                                        className="button-design">
                                         혼자하기
                                     </button>
-                                </Link>
                         </div>
                         <div className="mode-multi">
                             <div className="mode-name">멀티</div>
@@ -85,18 +83,7 @@ const ChoiceMode = () => {
                         </Link>
                     </div>
                 </div>
-                </Route>
-
-                <Route exact path="/story">
-                    <Story />
-                </Route>
-                {/* <Route exact path="/createroom">
-                    <CreateRoom />
-                </Route>
-                <Route exact path="/goroom">
-                    <GoRoom />
-                </Route> */}
-            </Switch>)
+    )
 }
 
 export default ChoiceMode;

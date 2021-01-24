@@ -11,8 +11,7 @@ const KakaoProfileButton = ( { handleAccToken }: ProfileProps ) => {
       const kakao = window.Kakao
       
       if(!kakao.isInitialized()) {
-        kakao.init(process.env.REACT_APP_KAKAO_KEY)
-      }
+        kakao.init(process.env.REACT_APP_KAKAO_KEY)}
       
       type AuthRes = {access_token: string}
 

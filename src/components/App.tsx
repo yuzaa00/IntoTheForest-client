@@ -1,56 +1,23 @@
-import React, { useState, useEffect }from 'react';
-import { Switch, Route, Link } from 'react-router-dom';
-import axios from 'axios';
-import './App.css';
-import Game from './Game'
-import ChoiceMode from './ChoiceMode';
+import { Switch, Route } from 'react-router-dom';
 
-import KakaoShareButton from './kakaoShareButton';
-import KakaoProfileButton from './kakaoProfileButton';
-import KakaoProfileDelete from './kakaoProfileDelete';
-
-import { useSelector, useDispatch } from 'react-redux';
-
-declare global {
-  interface Window { Kakao: any;}
-}
+import Welcome from './Welcome/Welcome' //랜딩페이지
+import ChoiceMode from './Mode/ChoiceMode'; 
+import Ready from './Ready/Ready'
+import Room from './Room/Room';
+import Game from './Game/Game';
+import Result from './Result/Result';
 
 function App() {
-  const [count, setCount] = useState(0);
-  const [accessToken, setAccessToken] = useState<string>('');
-  
-  useEffect(() => {
-    getProfile()
-  }, [accessToken]);
-
-  const handleAccToken = (accessToken: string) => {
-    setAccessToken(accessToken);
-  }
-
-  const getProfile = () => {
-    if(accessToken) {
-      window.Kakao.Auth.setAccessToken(accessToken);
-      window.Kakao.API.request({
-        url: '/v2/user/me',
-        success: (response: any) => console.log(response),
-        fail: (error: any) => console.log(error)})
-    }
-  }
 
   return (
-    // <ChoiceMode />
-    count ? <div><Game></Game></div> :
-    <div className="App">
-      <header className="App-header">
-        <img src='images/character/logo.png' className="App-logo" alt="logo" />
-        <button onClick={()=> setCount(1)}>
-          Game Start!!!
-        </button>
-        <KakaoShareButton/>
-        <KakaoProfileButton handleAccToken={handleAccToken} />
-        <KakaoProfileDelete handleAccToken={handleAccToken} />
-      </header> 
-    </div>
+    <Switch>
+      <Route exact path='/' component={Welcome} /> 
+      <Route path='/mode' component={ChoiceMode} /> 
+      <Route path='/ready' component={Ready} /> 
+      <Route path='/room' component={Room} />
+      <Route path='/game' component={Game} />
+      <Route path='/result' component={Result} />
+    </Switch>
   );
 }
 

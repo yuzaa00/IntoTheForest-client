@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { config } from '../phaser/index'
+import { config } from '../../phaser/index'
 
 // import { GameProgress } from '~/types/game.type';
 // import { selectGame } from '~/store/gameSlice';
