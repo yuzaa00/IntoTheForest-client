@@ -1,6 +1,4 @@
 export default class Stage1Event extends Phaser.Scene {
-  private popup!: Phaser.GameObjects.Graphics
-  private button!: Phaser.GameObjects.Graphics
 
   constructor() {
     super('Stage1Event')
@@ -15,59 +13,85 @@ export default class Stage1Event extends Phaser.Scene {
   }
 
   preload(): void {
-    this.popup = this.add.graphics()
-    this.popup.lineStyle(1, 0x2a275c)
-    this.popup.fillStyle(0x00ff00, 0.6)
-    this.popup.strokeRect(25, 25, 750, 550)
-    this.popup.fillRect(25, 25, 750, 550)
+    this.add.image(0, 0, 'cardbg').setOrigin(0, 0).setDepth(0)
+
+    this.add.graphics()
+      .lineStyle(20, 0x501f0e)
+      .fillStyle(0xffffff) // 배경색, 투명도
+      .strokeRoundedRect(300, 120, 600, 400)
+      .fillRoundedRect(300, 120, 600, 400)
+
+    this.add.graphics()
+      .fillStyle(0x501f0e) // 배경색
+      .fillRoundedRect(450, 85, 300, 60, 30)
+
     //start button square
-    this.button = this.add.graphics()
-    this.button.lineStyle(1, 0x2a275c)
-    this.button.fillStyle(0xf6d304, 0.5)
-    this.button.strokeRect(325, 465, 150, 50)
-    this.button.fillRect(325, 465, 150, 50)
+    this.add.graphics()
+      .lineStyle(1, 0x2a275c)
+      .fillStyle(0xf6d304, 0.5)
+      .strokeRoundedRect(525, 440, 150, 50, 5)
+      .fillRoundedRect(525, 440, 150, 50, 5)
 
     this.add
-      .text(400, 83, "보너스 게임", {
-        color: '#bfff00',
+      .text(600, 117, "보너스 게임", {
+        color: '#ffffff',
         fontSize: '40px',
         fontStyle: 'bold',
       })
-      .setOrigin(0.5)
+      .setOrigin()
 
-    this.add.text(400, 200, '주어진 시간 30초 동안 최대한 많은 수의 카드를 뒤집으세요! 카드를 맞추면 체력이 회복됩니다!', {
-      color: '#CED4D6',
+    this.add.text(600, 200, '주어진 시간 30초 동안', {
+      color: '#000000',
       fontSize: '20px',
       fontStyle: 'bold',
       align: 'center',
       wordWrap: { width: 480, useAdvancedWrap: true },
-    }
-    )
-      .setOrigin(0.5)
+    })
+      .setOrigin()
 
-    this.add.text(400, 400, '작동방법 : 카드를 마우스로 클릭', {
-      color: '#CED4D6',
+    this.add.text(600, 250, '최대한 많은 수의 카드를 뒤집으세요!', {
+      color: '#000000',
       fontSize: '20px',
       fontStyle: 'bold',
       align: 'center',
     })
-      .setOrigin(0.5)
+      .setOrigin()
 
-    this.add.text(400, 490, 'Start', {
-        color: '#2A275C',
-        fontSize: '30px',
-        fontStyle: 'bold',
-      })
-      .setOrigin(0.5)
+    this.add.text(600, 300, '카드를 맞추면 보너스 체력을 얻습니다', {
+      color: '#000000',
+      fontSize: '20px',
+      fontStyle: 'bold',
+      align: 'center',
+    })
+      .setOrigin()
+
+    this.add.text(600, 380, '작동방법 : 카드를 마우스로 클릭', {
+      color: '#000000',
+      fontSize: '20px',
+      fontStyle: 'bold',
+      align: 'center',
+    })
+      .setOrigin()
+
+    this.add.text(600, 465, 'Start', {
+      color: '#2A275C',
+      fontSize: '30px',
+      fontStyle: 'bold',
+    })
+      .setOrigin()
       .setInteractive()
-      .on('pointerdown', () => {
-        this.scene.start('Stage1Eventgame', {
-          score: this.registry.values.score,
-          life: this.registry.values.life + 1000,
-          stage: 2,
-          bird: this.registry.values.bird,
-          squi: this.registry.values.squi
-        })
-      }, this)
+      .on(
+        'pointerdown',
+        () => {
+          this.scene.start('Stage1Eventgame', {
+            score: this.registry.values.score,
+            life: this.registry.values.life,
+            stage: 2,
+            bird: this.registry.values.bird,
+            squi: this.registry.values.squi
+          })
+        },
+        this
+      )
   }
 }
