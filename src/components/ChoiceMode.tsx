@@ -47,7 +47,8 @@ const ChoiceMode = () => {
                                 <Link to="/story">
                                     <button
                                         onClick={soloMode}
-                                        onMouseOver={soloMode} 
+                                        onMouseOver={soloMode}
+                                        className="button-design"
                                     >
                                         혼자하기
                                     </button>
@@ -55,24 +56,20 @@ const ChoiceMode = () => {
                         </div>
                         <div className="mode-multi">
                             <div className="mode-name">멀티</div>
-                            {/* <Link to="/createroom"> */}
-                                <button
-                                    onClick={multiModeCreateRoom}
-                                    onMouseOver={multiModeCreateRoom}
-                                    className="multi-create"
+                            <button
+                                onClick={multiModeCreateRoom}
+                                onMouseOver={multiModeCreateRoom}
+                                className="multi-create button-design"
+                            >
+                                방 생성
+                            </button>
+                            <button
+                                onClick={multiModeGoRoom}
+                                onMouseOver={multiModeGoRoom}
+                                className="multi-join button-design"
                                 >
-                                    생성
-                                </button>
-                            {/* </Link> */}
-                            {/* <Link to="/goroom"> */}
-                                <button
-                                    onClick={multiModeGoRoom}
-                                    onMouseOver={multiModeGoRoom}
-                                    className="multi-join"
-                                    >
-                                    참가
-                                </button>
-                            {/* </Link> */}
+                                방 참가
+                            </button>
                         </div>
                     </div>
                     <div className="text">

@@ -3,7 +3,7 @@ export default class Card {
       this.key = key
       this.gameScene = gameScene
       this.handler = handler
-      this.outOfTheGame = false;
+      this.outOfTheGame = false
       this.draw(x, y)
       console.log(x, y)
     }
@@ -23,8 +23,6 @@ export default class Card {
       }
 
       this.cover.on('pointerdown', this.onClickHandler.bind(this))
-      this.front.on('pointerdown', this.onClickHandler.bind(this))
-  
       this.faceDown()
     }
   
@@ -51,7 +49,7 @@ export default class Card {
         this.cover.visible = false
       }
     }
-  
+
     onClickHandler() {
       this.handler(this)
     }
