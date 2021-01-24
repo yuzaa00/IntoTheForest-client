@@ -13,7 +13,7 @@
 .logoForest1,
 .logoForest2 {
     position: absolute;
-    right: 0%;
+    
     z-index: -1;
 
 }
@@ -21,30 +21,35 @@
 .logoForest {
     height: 100px;
     top: 6%;
-    transform: translate(100%, -6%);
-    animation: logoForest 7s ease infinite ;
+    transform: translate(350%, -6%);
+    
 }
 
 .logoForest1 {
     height: 200px;
     top: 10%;
     transform: translate(100%, -10%);
-    animation: logoForest 7s ease infinite 2.5s;
+   
 
 }
 
 .logoForest2 {
     height: 300px;
-    top: 16%;
-    transform: translate(100%, -16%);
-    animation: logoForest 7s ease infinite 5s;
+    top: 30%;
+    transform: translate(12%, -30%);
+  
     
 }
 
 
 .logoDog {
-    height: 80px;
-    animation: logoDog 1s ease infinite alternate;
+    position: absolute;
+    left: 0%;
+    top: 47%;
+    transform: translate(100%, -16%);
+    animation: logoDog 4s linear infinite;
+    left: 0%;
+    
 }
 
 .preload h3 {
@@ -56,20 +61,10 @@
 
 @keyframes logoDog {
     from{
-        transform: translateY(0px);
+        left: 0%;
     }
     to{
-        transform: translatey(15px);
+        left: 42%;
     }
 }
 
-@keyframes logoForest {
-    from{
-        right: 0%;
-        transform: translateX(-30px);
-    }
-    to{
-        right: 130%;
-        transform: translateX(70px);
-    }
-}
