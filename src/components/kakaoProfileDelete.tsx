@@ -11,8 +11,7 @@ const KakaoProfileDelete: any = ( { handleAccToken }: ProfileProps ) => {
       const kakao = window.Kakao
       
       if(!kakao.isInitialized()) {
-        kakao.init(process.env.REACT_APP_KAKAO_KEY)
-      }
+        kakao.init(process.env.REACT_APP_KAKAO_KEY)}
       
       kakao.API.request({
         url: '/v1/user/unlink',
