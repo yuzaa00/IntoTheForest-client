@@ -16,10 +16,12 @@ export default class Stage3 extends Phaser.Scene {
   private mushLayer!: Phaser.Tilemaps.TilemapLayer
   private signLayer!: Phaser.Tilemaps.TilemapLayer
   private bundLayer!: Phaser.Tilemaps.TilemapLayer
+  private bundLayer2!: Phaser.Tilemaps.TilemapLayer
   private orangePotionLayer!: Phaser.Tilemaps.TilemapLayer
 
   private enemyCollider!: Phaser.Physics.Arcade.Collider
   private enemies!: Phaser.Physics.Arcade.StaticGroup
+  private potion!: Phaser.Physics.Arcade.StaticGroup
   private subchas!: any
 
   private myCam!: Phaser.Cameras.Scene2D.BaseCamera
@@ -125,8 +127,12 @@ export default class Stage3 extends Phaser.Scene {
       .setScrollFactor(0)
       .setOrigin(0)
       .setDepth(0)
+    
+    this.potion = this.physics.add.staticGroup()
     this.subchas = this.physics.add.staticGroup()
     this.enemies = this.physics.add.staticGroup().setActive(true)
+
+    this.potion.create(29450, 200,'stagePotion',undefined,true,true).setScale(0.4)
 
     this.map = this.make.tilemap({ key: "map3" })
 
@@ -156,6 +162,9 @@ export default class Stage3 extends Phaser.Scene {
 
     let bundTiles = this.map.addTilesetImage('bund')
     this.bundLayer = this.map.createLayer('bundLayer', bundTiles, 0, 0).setCollisionBetween(1, 50)
+
+    let bundTiles2 = this.map.addTilesetImage('bund2')
+    this.bundLayer2 = this.map.createLayer('bundLayer2', bundTiles, 0, 0).setCollisionBetween(1, 50)
 
     let orangePotionTiles = this.map.addTilesetImage('orangePotion')
     this.orangePotionLayer = this.map.createLayer('potionLayer2', orangePotionTiles, 0, 0)
@@ -189,7 +198,7 @@ export default class Stage3 extends Phaser.Scene {
     })
 
     this.player = this.physics.add
-      .sprite(600, 400, this.registry.values.char) // 플레이어 생성 이동
+      .sprite(28500, 400, this.registry.values.char) // 플레이어 생성 이동
       .setScale(0.25)
       .setDepth(3)
 
@@ -214,6 +223,7 @@ export default class Stage3 extends Phaser.Scene {
     })
 
     this.physics.add.collider(this.player, this.bundLayer) // 첫번째인자와 두번째 인자간의 충돌 관련
+    this.physics.add.collider(this.player, this.bundLayer2)
     this.physics.add.collider(this.subchas, this.ground)
     this.physics.add.collider(this.enemies, this.ground)
     this.physics.add.collider(this.player, this.enemies, this.hurt, undefined, this)
@@ -223,6 +233,7 @@ export default class Stage3 extends Phaser.Scene {
     this.physics.add.overlap(this.player, this.subBirdLayer, this.collectSubBird, undefined, this)
     this.physics.add.overlap(this.player, this.potionLayer, this.collectPotion, undefined, this)
     this.physics.add.overlap(this.player, this.orangePotionLayer, this.collectOrangePotion, undefined, this)
+    this.physics.add.overlap(this.player, this.potion, this.collectStagePotion, undefined, this) // stagePotion
     this.physics.add.overlap(this.player, this.mushLayer, this.collectMush, undefined, this)
     this.physics.add.overlap(this.player, this.signLayer, this.collectSignExit, undefined, this)
     this.physics.add.overlap(this.player, this.enemies, this.hurt, undefined, this)
@@ -396,6 +407,16 @@ export default class Stage3 extends Phaser.Scene {
     }
   }
 
+  collectStagePotion(player: any, object: any): void {
+    this.potion.remove(object, true)
+    this.sound.add('heal', { volume: 3 }).play()
+      this.hp.decrease(-15)
+      this.registry.values.life + 1500 >= 10000 ? this.registry.values.life = 10000 : this.registry.values.life += 1500
+      this.lifeText.setText(`LIFE ${this.registry.values.life}`)
+      this.moveHp.setText(`${Math.floor(this.registry.values.life / 100)}%`)
+      this.moveHp.x += 75
+  }
+
   collectMush(player: any, tile: any): void { // 오브젝트 간 충돌 이벤트
     this.mushLayer.removeTileAt(tile.x, tile.y)
     if (tile.index !== -1) {
@@ -424,7 +445,7 @@ export default class Stage3 extends Phaser.Scene {
     }
   }
 
-  collectSignExit(player: any, tile: any): void { // 오브젝트 간 충돌 이벤트, 결과 스테이지로 이동
+  collectSignExit(player: any, tile: any): void { // 오브젝트 간 충돌 이벤트, 결과 스테이지로 
     this.signLayer.removeTileAt(tile.x, tile.y)
     if (tile.index !== -1) {
       this.game.sound.stopAll()

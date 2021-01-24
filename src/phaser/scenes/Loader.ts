@@ -13,6 +13,7 @@ export default class Loader extends Phaser.Scene { // resource load scene
     this.load.image('bird', 'images/character/bird.png')
     this.load.image('squi', 'images/character/squi.png')
     this.load.spritesheet('dog', 'images/character/dog2.png', { frameWidth: 500, frameHeight: 500 })
+    // this.load.spritesheet('dog2', 'images/character/dog2-running-test.png', { frameWidth: 220, frameHeight: 220})
     
     //background load
     this.load.image('stage1', 'images/background/stage1.png')
@@ -28,7 +29,8 @@ export default class Loader extends Phaser.Scene { // resource load scene
     //object load
     this.load.image("bone", 'images/object/bone.png')
     this.load.image("potion", 'images/object/potion.png')
-    this.load.image("orangePotion", 'images/object/orangePotion.png')
+    this.load.image("orangePotion", 'images/object/bluepotion.png')
+    this.load.image("stagePotion", 'images/object/stagepotion.png')
     this.load.image("subBird", 'images/object/subBird.png')
     this.load.image("subSqui", 'images/object/subSqui.png')
     this.load.image("mushroom", 'images/object/mushroom.png')

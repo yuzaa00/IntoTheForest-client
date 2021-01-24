@@ -4,6 +4,7 @@ import axios from 'axios';
 import './App.css';
 import Game from './Game'
 import ChoiceMode from './ChoiceMode';
+import ReactLoading from 'react-loading';
 
 import KakaoShareButton from './kakaoShareButton';
 import KakaoProfileButton from './kakaoProfileButton';
@@ -46,6 +47,7 @@ function App() {
         <button onClick={()=> setCount(1)}>
           Game Start!!!
         </button>
+        <ReactLoading type='spin' color={'#FFB857'} width={'15%'} height={'15%'} />
         <KakaoShareButton/>
         <KakaoProfileButton handleAccToken={handleAccToken} />
         <KakaoProfileDelete handleAccToken={handleAccToken} />

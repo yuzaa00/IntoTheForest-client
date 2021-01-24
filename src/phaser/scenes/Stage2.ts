@@ -21,6 +21,7 @@ export default class Stage2 extends Phaser.Scene {
 
   private enemyCollider!: Phaser.Physics.Arcade.Collider
   private enemies!: Phaser.Physics.Arcade.StaticGroup
+  private potion!: Phaser.Physics.Arcade.StaticGroup
   private subchas!: any
 
   private myCam!: Phaser.Cameras.Scene2D.BaseCamera
@@ -126,8 +127,12 @@ export default class Stage2 extends Phaser.Scene {
       .setScrollFactor(0)
       .setOrigin(0)
       .setDepth(0)
+
+    this.potion = this.physics.add.staticGroup()
     this.subchas = this.physics.add.staticGroup()
     this.enemies = this.physics.add.staticGroup().setActive(true)
+
+    this.potion.create(29450, 200,'stagePotion',undefined,true,true).setScale(0.4)
 
     this.map = this.make.tilemap({ key: "map2" })
 
@@ -193,7 +198,7 @@ export default class Stage2 extends Phaser.Scene {
     })
 
     this.player = this.physics.add
-      .sprite(600, 200, this.registry.values.char) // 플레이어 생성 이동
+      .sprite(28500, 200, this.registry.values.char) // 플레이어 생성 이동
       .setScale(0.25)
       .setDepth(3)
 
@@ -217,8 +222,8 @@ export default class Stage2 extends Phaser.Scene {
       repeat: -1
     })
 
-    this.physics.add.collider(this.player, this.ground)
-    this.physics.add.collider(this.player, this.bundLayer) // 첫번째인자와 두번째 인자간의 충돌 관련
+    this.physics.add.collider(this.player, this.ground) // 첫번째인자와 두번째 인자간의 충돌 관련
+    this.physics.add.collider(this.player, this.bundLayer) 
     this.physics.add.collider(this.player, this.bundLayer2)
     this.physics.add.collider(this.subchas, this.ground)
     this.physics.add.collider(this.enemies, this.ground)
@@ -229,6 +234,7 @@ export default class Stage2 extends Phaser.Scene {
     this.physics.add.overlap(this.player, this.subBirdLayer, this.collectSubBird, undefined, this)
     this.physics.add.overlap(this.player, this.potionLayer, this.collectPotion, undefined, this)
     this.physics.add.overlap(this.player, this.orangePotionLayer, this.collectOrangePotion, undefined, this)
+    this.physics.add.overlap(this.player, this.potion, this.collectStagePotion, undefined, this) // stagePotion
     this.physics.add.overlap(this.player, this.mushLayer, this.collectMush, undefined, this)
     this.physics.add.overlap(this.player, this.signLayer, this.collectSignExit, undefined, this)
     this.physics.add.overlap(this.player, this.enemies, this.hurt, undefined, this)
@@ -309,7 +315,7 @@ export default class Stage2 extends Phaser.Scene {
     this.subchas.children.iterate(function (child: any, idx: number): void { // 서브캐릭터 강아지 따라오는 반복 함수
       self.physics.moveToObject(child, { x: self.player.x - (50 * idx), y: self.player.y + 10 }, 0, 150)
     }, this)
-    this.player.anims.play('right', true)// 키보드 방향키 오른쪽 입력시 플레이어 +12 오른쪽이동
+    this.player.anims.play('right', true)// 
     this.skyTile.tilePositionX += 0.3 // 배경 움직임
   }
 
@@ -400,6 +406,16 @@ export default class Stage2 extends Phaser.Scene {
     }
   }
 
+  collectStagePotion(player: any, object: any): void {
+    this.potion.remove(object, true)
+    this.sound.add('heal', { volume: 3 }).play()
+      this.hp.decrease(-15)
+      this.registry.values.life + 1500 >= 10000 ? this.registry.values.life = 10000 : this.registry.values.life += 1500
+      this.lifeText.setText(`LIFE ${this.registry.values.life}`)
+      this.moveHp.setText(`${Math.floor(this.registry.values.life / 100)}%`)
+      this.moveHp.x += 75
+  }
+
   collectMush(player: any, tile: any): void { // 오브젝트 간 충돌 이벤트
     this.mushLayer.removeTileAt(tile.x, tile.y)
     if (tile.index !== -1) {
@@ -428,7 +444,7 @@ export default class Stage2 extends Phaser.Scene {
     }
   }
 
-  collectSignExit(player: any, tile: any): void { // 오브젝트 간 충돌 이벤트, 다음 스테이지로 이동
+  collectSignExit(player: any, tile: any): void { // 오브젝트 간 충돌 이벤트, 다음 스테이지로
     this.signLayer.removeTileAt(tile.x, tile.y)
     if (tile.index !== -1) {
       this.game.sound.stopAll()
