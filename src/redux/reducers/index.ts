@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import counter from './counter';
+
 
 const rootReducer = combineReducers({
-  counter
+  
 });
 
 // 루트 리듀서를 내보내주세요.

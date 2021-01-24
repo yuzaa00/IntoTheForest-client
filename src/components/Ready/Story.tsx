@@ -35,8 +35,7 @@ const Story = () => {
     // }
 
     return (
-        <Switch>
-            <Route path="/story">
+     
                 <div className="full-screen">
                     <h2>게임 스토리 설명</h2>
                     <div className="story-area">
@@ -58,14 +57,12 @@ const Story = () => {
                     </div>
                     <div className="moreOrSkip">
                         {showMoreButton && <button className="more" onClick={moreStory}>더보기</button>}
-                        {showSkipButton && <Link to="/choicedog"><button className="skip">SKIP</button></Link>}
+                        {showSkipButton && <Link to="/ready/character"><button className="skip">SKIP</button></Link>}
                     </div>
                 </div>
-            </Route>
-            <Route exact path="/choicedog">
-                <ChoiceCharacter />
-            </Route>
-        </Switch>
+      
+      
+       
     )
 }
 
