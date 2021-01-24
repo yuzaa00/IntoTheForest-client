@@ -5,8 +5,6 @@ import './App.css';
 import Game from './Game'
 import ChoiceMode from './ChoiceMode';
 
-import Story from './Story';
-
 import KakaoShareButton from './kakaoShareButton';
 import KakaoProfileButton from './kakaoProfileButton';
 import KakaoProfileDelete from './kakaoProfileDelete';
@@ -40,19 +38,19 @@ function App() {
   }
 
   return (
-    // <Story />
-    count ? <div><Game></Game></div> :
-    <div className="App">
-      <header className="App-header">
-        <img src='images/character/logo.png' className="App-logo" alt="logo" />
-        <button onClick={()=> setCount(1)}>
-          Game Start!!!
-        </button>
-        <KakaoShareButton/>
-        <KakaoProfileButton handleAccToken={handleAccToken} />
-        <KakaoProfileDelete handleAccToken={handleAccToken} />
-      </header> 
-    </div>
+    <ChoiceMode />
+    // count ? <div><Game></Game></div> :
+    // <div className="App">
+    //   <header className="App-header">
+    //     <img src='images/character/logo.png' className="App-logo" alt="logo" />
+    //     <button onClick={()=> setCount(1)}>
+    //       Game Start!!!
+    //     </button>
+    //     <KakaoShareButton/>
+    //     <KakaoProfileButton handleAccToken={handleAccToken} />
+    //     <KakaoProfileDelete handleAccToken={handleAccToken} />
+    //   </header> 
+    // </div>
   );
 }
 
