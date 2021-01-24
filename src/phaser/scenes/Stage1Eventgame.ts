@@ -30,7 +30,7 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
     this.registry.set('stage', data.stage)
     this.registry.set('bird', data.bird)
     this.registry.set('squi', data.squi)
-    this.registry.set('time', 30)
+    this.registry.set('time', 5)
     this.registry.set('recovery', 0)
   }
 
@@ -100,25 +100,45 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
       this.cards.push(new Card({ key, gameScene: this, ...posA, handler: this.cardClickHandler.bind(this) }))
       this.cards.push(new Card({ key, gameScene: this, ...posB, handler: this.cardClickHandler.bind(this) }))
     }
+    // const image = this.add.image(1800, 300, 'stage2')
+    // this.tweens.add({
+    //   targets: image,
+    //   x: 100,
+    //   ease: 'Sine.easeInOut',
+    //   yoyo: true,
+    //   repeat: -1,
+    //   duration: 3000
+    // });
+    // this.cameras.main.once('camerafadeincomplete', function (camera) {
+    //   camera.fadeOut(6000);
+    // });
 
   }
 
   public update(): void {
-    if (this.registry.values.time <= 0) { // 30초 지난 후 콜백 실행
-      this.game.sound.stopAll()
-      this.scene.start('Stage2', {
-        score: this.registry.values.score,
-        life: this.registry.values.life + (this.attempts * 50) > 10000 ? 10000 : this.registry.values.life + (this.attempts * 50),
-        stage: 2,
-        bird: this.registry.values.bird,
-        squi: this.registry.values.squi
-      })
-    }
   }
 
   private worldTime(): void {  // 1초당 실행되는 함수 this.worldTimer 참조
     this.registry.values.time -= 1
     this.lifeText.setText(`남은 시간 ${this.registry.values.time}`)
+    if (this.registry.values.time <= -1) {
+      // 30초 지난 후 콜백 실행
+      this.game.sound.stopAll()
+      this.cameras.main.fadeIn(3000)
+      this.time.addEvent({
+        delay: 1050,
+        callback: () => this.scene.start('Stage2', {
+          score: this.registry.values.score,
+          life: this.registry.values.life + (this.attempts * 50) > 10000 ? 10000 : this.registry.values.life + (this.attempts * 50),
+          stage: 2,
+          bird: this.registry.values.bird,
+          squi: this.registry.values.squi
+        }),
+        callbackScope: this,
+        loop: true,
+      })
+
+    }
   }
 
   private newRound(): void {
@@ -133,8 +153,9 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
       this.selectedCards.length = 0
       this.waitForNewRound = false
       this.attempts++
-    }, 2000)
+    }, 1500)
   }
+
   private matchedCards(): number {
     return this.cards.filter((card) => card.outOfTheGame).length / 2
   }
@@ -153,11 +174,9 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
   }
 
   private cardClickHandler(card: any) {
-    if (this.waitForNewRound) return 
+    if (this.waitForNewRound) return
     card.faceUp()
-    
     this.selectedCards.push(card)
-    console.log(this.selectedCards)
     if (this.selectedCards.length === 2) {
       this.waitForNewRound = true
       this.newRound()
