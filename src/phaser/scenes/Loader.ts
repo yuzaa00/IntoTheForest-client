@@ -58,7 +58,6 @@ export default class Loader extends Phaser.Scene { // resource load scene
     this.load.audio('stage3_bgm', 'sound/bgm/stage3.mp3')
     
     // effect
-    this.load.image('wolf', 'images/card/card3.png')
     this.load.audio('wolfEcho', 'sound/effect/wolf.mp3')
     this.load.audio('heat', 'sound/effect/jab.mp3')
     this.load.audio('coin', 'sound/effect/coin.wav')
@@ -70,7 +69,7 @@ export default class Loader extends Phaser.Scene { // resource load scene
   }
   
   update ():void {
-    this.scene.start('Stage1Eventgame') // 첫 스테이지 선택
+    this.scene.start('Stage1') // 첫 스테이지 선택
   }
 }
 
