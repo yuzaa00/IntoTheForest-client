@@ -16,6 +16,7 @@ export default class Stage2 extends Phaser.Scene {
   private mushLayer!: Phaser.Tilemaps.TilemapLayer
   private signLayer!: Phaser.Tilemaps.TilemapLayer
   private bundLayer!: Phaser.Tilemaps.TilemapLayer
+  private bundLayer2!: Phaser.Tilemaps.TilemapLayer
   private orangePotionLayer!: Phaser.Tilemaps.TilemapLayer
 
   private enemyCollider!: Phaser.Physics.Arcade.Collider
@@ -158,7 +159,7 @@ export default class Stage2 extends Phaser.Scene {
     this.bundLayer = this.map.createLayer('bundLayer', bundTiles, 0, 0).setCollisionBetween(1, 50)
 
     let bundTiles2 = this.map.addTilesetImage('bund2')
-    this.bundLayer = this.map.createLayer('bundLayer2', bundTiles2, 0, 0).setCollisionBetween(1, 50)
+    this.bundLayer2 = this.map.createLayer('bundLayer2', bundTiles2, 0, 0).setCollisionBetween(1, 50)
 
     let orangePotionTiles = this.map.addTilesetImage('orangePotion')
     this.orangePotionLayer = this.map.createLayer('potionLayer2', orangePotionTiles, 0, 0)
@@ -192,7 +193,7 @@ export default class Stage2 extends Phaser.Scene {
     })
 
     this.player = this.physics.add
-      .sprite(600, 400, this.registry.values.char) // 플레이어 생성 이동
+      .sprite(600, 200, this.registry.values.char) // 플레이어 생성 이동
       .setScale(0.25)
       .setDepth(3)
 
@@ -216,7 +217,9 @@ export default class Stage2 extends Phaser.Scene {
       repeat: -1
     })
 
+    this.physics.add.collider(this.player, this.ground)
     this.physics.add.collider(this.player, this.bundLayer) // 첫번째인자와 두번째 인자간의 충돌 관련
+    this.physics.add.collider(this.player, this.bundLayer2)
     this.physics.add.collider(this.subchas, this.ground)
     this.physics.add.collider(this.enemies, this.ground)
     this.physics.add.collider(this.player, this.enemies, this.hurt, undefined, this)

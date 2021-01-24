@@ -193,7 +193,7 @@ export default class Stage1 extends Phaser.Scene {
 
     this.myCam = this.cameras.main
     this.myCam.setBackgroundColor(0xbababa) // 게임 배경색
-    this.myCam.setBounds(-200, 0, Infinity, 200, true)
+    this.myCam.setBounds(-400, 0, Infinity, 200, true)
     this.cameras.main.startFollow(this.player)  // 카메라 캐릭터 따라다님
 
     this.player.setCollideWorldBounds(true)

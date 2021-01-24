@@ -157,9 +157,6 @@ export default class Stage3 extends Phaser.Scene {
     let bundTiles = this.map.addTilesetImage('bund')
     this.bundLayer = this.map.createLayer('bundLayer', bundTiles, 0, 0).setCollisionBetween(1, 50)
 
-    let bundTiles2 = this.map.addTilesetImage('bund2')
-    this.bundLayer = this.map.createLayer('bundLayer2', bundTiles2, 0, 0).setCollisionBetween(1, 50)
-
     let orangePotionTiles = this.map.addTilesetImage('orangePotion')
     this.orangePotionLayer = this.map.createLayer('potionLayer2', orangePotionTiles, 0, 0)
     this.orangePotionLayer.setTileIndexCallback(4, this.collectOrangePotion, this).setDepth(1)
