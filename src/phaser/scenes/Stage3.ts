@@ -313,7 +313,7 @@ export default class Stage3 extends Phaser.Scene {
       this.enemiesOn = true
       this.sound.add('wolfEcho').play()
       setTimeout(() => {
-        let wolf = this.physics.add.image(this.player.x + 1000, 540, 'wolf')
+        let wolf = this.physics.add.image(this.player.x + 1000, 540, 'card3.png')
         this.physics.world.enableBody(wolf, 0)
         wolf.setVelocityX(-650)
         .setScale(1.2)

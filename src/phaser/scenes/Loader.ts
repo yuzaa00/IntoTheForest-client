@@ -37,12 +37,20 @@ export default class Loader extends Phaser.Scene { // resource load scene
     this.load.image("signExit", 'images/object/signExit.png')
     
     //bonus game
-    this.load.image('back.png', 'images/card/back.png')
-    this.load.image('cardbg','images/card/cardbg.png')
     this.load.image('molebg', 'images/mole/bg.png')
     this.load.image('moleBG', 'images/mole/molebg.png')
     this.load.image('mole', 'images/mole/mole.png')
-    this.load.image('card6.png', 'images/card/card6.png')
+    this.load.image('card1.png', 'images/card/card1.png') // 곰
+    this.load.image('card2.png', 'images/card/card2.png') // 치와와
+    this.load.image('card3.png', 'images/card/card3.png') // 늑대
+    this.load.image('card4.png', 'images/card/card4.png') // 멧돼지
+    this.load.image('card5.png', 'images/card/card5.png') // 갱얼쥐
+    this.load.image('card6.png', 'images/card/card6.png') // 뱀뱀
+    this.load.image('card7.png', 'images/card/card7.png') // 다람쥐
+    this.load.image('card8.png', 'images/card/card8.png') // 아기새
+    this.load.image('front.png', 'images/card/front.png')
+    this.load.image('back.png', 'images/card/back.png')
+    this.load.image('cardbg','images/card/cardbg.png')
     
     // tiled map, font
     this.load.tilemapTiledJSON("map", 'map/stage1_map.json')

@@ -35,15 +35,6 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
   }
 
   preload(): void {
-    this.load.image('card1.png', 'images/card/card1.png')
-    this.load.image('card2.png', 'images/card/card2.png')
-    this.load.image('card3.png', 'images/card/card3.png')
-    this.load.image('card4.png', 'images/card/card4.png')
-    this.load.image('card5.png', 'images/card/card5.png')
-    this.load.image('card6.png', 'images/card/card6.png')
-    this.load.image('card7.png', 'images/card/card7.png')
-    this.load.image('card8.png', 'images/card/card8.png')
-    this.load.image('front.png', 'images/card/front.png')
     this.sound.add('stage1-2_bgm').play({
       loop: true
     }) // 노래 재생하기
