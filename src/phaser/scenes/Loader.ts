@@ -67,6 +67,9 @@ export default class Loader extends Phaser.Scene { // resource load scene
     
     // effect
     this.load.audio('wolfEcho', 'sound/effect/wolf.mp3')
+    this.load.audio('boarEcho', 'sound/effect/boar.mp3')
+    this.load.audio('snakeEcho', 'sound/effect/snake.mp3')
+    this.load.audio('dogEcho', 'sound/effect/dogBite.mp3')
     this.load.audio('heat', 'sound/effect/jab.mp3')
     this.load.audio('coin', 'sound/effect/coin.wav')
     this.load.audio('get', 'sound/effect/get.mp3')

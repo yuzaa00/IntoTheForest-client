@@ -19,14 +19,14 @@ export default class Stage1 extends Phaser.Scene {
   private orangePotionLayer!: Phaser.Tilemaps.TilemapLayer
 
   private enemyCollider!: Phaser.Physics.Arcade.Collider
-  private subchas!: any
   private enemies!: Phaser.Physics.Arcade.StaticGroup
+  private subchas!: any
 
   private myCam!: Phaser.Cameras.Scene2D.BaseCamera
   private scoreText!: Phaser.GameObjects.BitmapText
   private lifeText!: Phaser.GameObjects.BitmapText
   private moveHp!: Phaser.GameObjects.Text
-  private spaceBar!: any
+  private spaceBar!: Phaser.Input.Keyboard.Key
 
   private moveButton!: Phaser.GameObjects.Image
   private muteButton!: Phaser.GameObjects.Image
@@ -308,16 +308,16 @@ export default class Stage1 extends Phaser.Scene {
   private regenEnemy(): void {
     if (!this.enemiesOn) {
       this.enemiesOn = true
-      this.sound.add('wolfEcho').play()
+      this.sound.add('snakeEcho').play()
       setTimeout(() => {
-        let wolf = this.physics.add.image(this.player.x + 1000, 540, 'card3.png')
-        this.physics.world.enableBody(wolf, 0)
-        wolf.setVelocityX(-650)
+        let monster = this.physics.add.image(this.player.x + 1000, 540, 'card6.png')
+        this.physics.world.enableBody(monster, 0)
+        monster.setVelocityX(-350)
         .setScale(1.2)
         .setDepth(3)
         .body.setAllowGravity(false)
-        this.enemyCollider = this.physics.add.collider(this.player, wolf, this.hurt, undefined, this)
-        this.enemies.add(wolf)
+        this.enemyCollider = this.physics.add.collider(this.player, monster, this.hurt, undefined, this)
+        this.enemies.add(monster)
       }, 2000)
       setTimeout(() => {
         this.enemiesOn = false
@@ -435,11 +435,12 @@ export default class Stage1 extends Phaser.Scene {
       this.cameras.main.shake(700, 0.04, true)
       let sub = this.subchas.children.entries
       if (sub.length === 0) {
-        this.hp.decrease(8)
-        this.registry.values.life - 800 >= 10000 ? this.registry.values.life = 10000 : this.registry.values.life -= 800
+        this.sound.add('dogEcho').play()
+        this.hp.decrease(5)
+        this.registry.values.life - 500 >= 10000 ? this.registry.values.life = 10000 : this.registry.values.life -= 800
         this.lifeText.setText(`LIFE ${this.registry.values.life}`)
         this.moveHp.setText(`${Math.floor(this.registry.values.life / 100)}%`)
-        this.moveHp.x -= 40
+        this.moveHp.x -= 25
       }
       else {
         this.particles.emitParticleAt(sub[sub.length - 1].x - 30, sub[sub.length - 1].y)

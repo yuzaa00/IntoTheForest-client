@@ -2,7 +2,6 @@ import { SETTING } from '../../GameSetting/index'
 import Phaser, { Scene } from 'phaser'
 import HealthBar from '../helper/healthBar'
 
-
 export default class Stage2 extends Phaser.Scene {
   private player!: any
   private hp!: HealthBar
@@ -34,7 +33,7 @@ export default class Stage2 extends Phaser.Scene {
 
   private birdArr: Array<Phaser.GameObjects.Image> = []
   private squiArr: Array<Phaser.GameObjects.Image> = []
-  private enemiesTimer: Array<number> = [4, 4, 5, 5, 6, 6, 7, 7, 8, 8]
+  private enemiesTimer: Array<number> = [4, 4, 5, 5, 6, 6, 7, 7, 6, 6]
 
   private pauseGame: boolean = false
   private isDoubleJump: boolean = false
@@ -50,11 +49,11 @@ export default class Stage2 extends Phaser.Scene {
   }
 
   public init(data: any) {
-    this.registry.set('score', data.score) // 이전 scene에서 올라온 데이터 등록
-    this.registry.set('life', data.life)
-    this.registry.set('stage', data.stage)
-    this.registry.set('bird', data.bird)
-    this.registry.set('squi', data.squi)
+    this.registry.set('score', data.score || 0) // 이전 scene에서 올라온 데이터 등록
+    this.registry.set('life', data.life || 10000)
+    this.registry.set('stage', data.stage || 2)
+    this.registry.set('bird', data.bird || 0)
+    this.registry.set('squi', data.squi || 0)
   }
 
   public preload(): void {
@@ -156,7 +155,10 @@ export default class Stage2 extends Phaser.Scene {
     this.signLayer.setTileIndexCallback(7, this.collectSignExit, this).setDepth(1)
 
     let bundTiles = this.map.addTilesetImage('bund')
-    this.bundLayer = this.map.createLayer('bundLayer', bundTiles, 0, 0).setCollisionBetween(1, 50);
+    this.bundLayer = this.map.createLayer('bundLayer', bundTiles, 0, 0).setCollisionBetween(1, 50)
+
+    let bundTiles2 = this.map.addTilesetImage('bund2')
+    this.bundLayer = this.map.createLayer('bundLayer2', bundTiles2, 0, 0).setCollisionBetween(1, 50)
 
     let orangePotionTiles = this.map.addTilesetImage('orangePotion')
     this.orangePotionLayer = this.map.createLayer('potionLayer2', orangePotionTiles, 0, 0)
@@ -311,16 +313,23 @@ export default class Stage2 extends Phaser.Scene {
   private regenEnemy(): void {
     if (!this.enemiesOn) {
       this.enemiesOn = true
-      this.sound.add('wolfEcho').play()
+      const enemyList = [
+        ['snakeEcho', 'card6.png', -450],
+        ['boarEcho', 'card4.png', -850, ],
+      ]
+      let selectEnemy: Array<any> = []
+      if((Math.random() * 10) > 4) selectEnemy = enemyList[0]
+      else selectEnemy = enemyList[1]
+      this.sound.add(selectEnemy[0]).play()
       setTimeout(() => {
-        let wolf = this.physics.add.image(this.player.x + 1000, 540, 'card3.png')
-        this.physics.world.enableBody(wolf, 0)
-        wolf.setVelocityX(-650)
+        let monster = this.physics.add.image(this.player.x + 1000, 540, selectEnemy[1])
+        this.physics.world.enableBody(monster, 0)
+        monster.setVelocityX(selectEnemy[2])
         .setScale(1.2)
         .setDepth(3)
         .body.setAllowGravity(false)
-        this.enemyCollider = this.physics.add.collider(this.player, wolf, this.hurt, undefined, this)
-        this.enemies.add(wolf)
+        this.enemyCollider = this.physics.add.collider(this.player, monster, this.hurt, undefined, this)
+        this.enemies.add(monster)
       }, 2000)
       setTimeout(() => {
         this.enemiesOn = false
@@ -433,16 +442,18 @@ export default class Stage2 extends Phaser.Scene {
 
   hurt(player: any, enemy: any): void { // 몬스터에게 피격 이벤트 함수
     if (!this.hurtOn) {
+      let x = enemy.texture.key === 'card6.png' ? 5 : enemy.texture.key === 'card4.png' ? 7 : 10
       this.hurtOn = true
       enemy.destroy()
       this.cameras.main.shake(700, 0.04, true)
       let sub = this.subchas.children.entries
       if (sub.length === 0) {
-        this.hp.decrease(8)
-        this.registry.values.life - 800 >= 10000 ? this.registry.values.life = 10000 : this.registry.values.life -= 800
+        this.sound.add('dogEcho').play()
+        this.hp.decrease(x)
+        this.registry.values.life - (x*100) >= 10000 ? this.registry.values.life = 10000 : this.registry.values.life -= 800
         this.lifeText.setText(`LIFE ${this.registry.values.life}`)
         this.moveHp.setText(`${Math.floor(this.registry.values.life / 100)}%`)
-        this.moveHp.x -= 40
+        this.moveHp.x -= (x*5)
       }
       else {
         this.particles.emitParticleAt(sub[sub.length - 1].x - 30, sub[sub.length - 1].y)
