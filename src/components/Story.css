@@ -24,7 +24,7 @@ button:hover {
 .full-screen {
     width: 100%;
     height: 100vh;
-    background: url('../../assets/images/background/night-더-어두운.png') no-repeat;
+    background: url('../../assets/images/background/nightDark.png') no-repeat;
     background-size: 100%;
     text-align: center;
     margin: 0 auto;
