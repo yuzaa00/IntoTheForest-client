@@ -1,0 +1,75 @@
+.preload {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} 
+
+.logoForest, 
+.logoForest1,
+.logoForest2 {
+    position: absolute;
+    right: 0%;
+    z-index: -1;
+
+}
+
+.logoForest {
+    height: 100px;
+    top: 6%;
+    transform: translate(100%, -6%);
+    animation: logoForest 7s ease infinite ;
+}
+
+.logoForest1 {
+    height: 200px;
+    top: 10%;
+    transform: translate(100%, -10%);
+    animation: logoForest 7s ease infinite 2.5s;
+
+}
+
+.logoForest2 {
+    height: 300px;
+    top: 16%;
+    transform: translate(100%, -16%);
+    animation: logoForest 7s ease infinite 5s;
+    
+}
+
+
+.logoDog {
+    height: 80px;
+    animation: logoDog 1s ease infinite alternate;
+}
+
+.preload h3 {
+    position: absolute;
+    top: 75%;
+    transform: translateY(-75%);
+    font-size: 30px;
+}
+
+@keyframes logoDog {
+    from{
+        transform: translateY(0px);
+    }
+    to{
+        transform: translatey(15px);
+    }
+}
+
+@keyframes logoForest {
+    from{
+        right: 0%;
+        transform: translateX(-30px);
+    }
+    to{
+        right: 130%;
+        transform: translateX(70px);
+    }
+}
