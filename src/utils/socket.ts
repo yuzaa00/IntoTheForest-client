@@ -40,7 +40,7 @@ export const getMySocketId = () => socket.id;
 const roomSocket = {
   createRoom({ roomData }, cb) {
     console.log(roomData)
-    socket.emit('create room', { roomData }, cb)
+    socket.emit('create room', roomData , cb)
   },
 
   joinRoom({ roomData }, cb) {
