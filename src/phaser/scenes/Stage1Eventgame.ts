@@ -30,7 +30,7 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
     this.registry.set('stage', data.stage)
     this.registry.set('bird', data.bird)
     this.registry.set('squi', data.squi)
-    this.registry.set('time', 5)
+    this.registry.set('time', 30)
     this.registry.set('recovery', 0)
   }
 

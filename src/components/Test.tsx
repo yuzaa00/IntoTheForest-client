@@ -1,23 +1,25 @@
 import React, { useState, useEffect }from 'react';
+import axios from 'axios'
 import { RootState } from '../redux/reducers';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { io } from 'socket.io-client'
-
-
-
+import io from 'socket.io-client';
+ 
 function Test() {
   const [isConnected, setIsConnected] = useState(false);
   const [lastMessage, setLastMessage] = useState(null);
 
-  const socket = io('http://localhost:4000', {transports: ['websocket']})
+  const socket = io('https://elb.intotheforest.space', {transports: ['websocket']})
 
   useEffect(() => {
+    axios.get('https://elb.intotheforest.space/rank/load', {
+      headers: {
+        secretCode: 'shelter'
+      }
+    })
     socket.on('connect', () => {
+      console.log(3)
       setIsConnected(true);
-    });
-    socket.on('disconnect', () => {
-      setIsConnected(false);
     });
     //socket.emit('events', { test: 'test' });
 
@@ -28,6 +30,7 @@ function Test() {
     socket.on('message', (data:any) => {
       setLastMessage(data);
     });
+
     return () => {
       socket.off('connect');
       socket.off('disconnect');
@@ -36,7 +39,7 @@ function Test() {
   });
 
   const sendMessage = () => {
-    socket.emit('hello!');
+    socket.emit('hello!', 'hello');
   }
 
   return (
