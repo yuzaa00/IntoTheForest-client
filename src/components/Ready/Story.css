@@ -1,20 +1,20 @@
 /******** common ********/
 
-button {
+.story-button {
     background: #233F4E;
     color: white;
     font-family: 'BMDOHYEON';
-    font-size: 1.2rem;
+    font-size: 1rem;
     margin-top: 2%;
     text-align: center;
 
 }
 
-button:focus {
+.story-button:focus {
     outline: none;
 }
 
-button:hover {
+.story-button:hover {
     background: #08293B;
 }
 
@@ -22,8 +22,8 @@ button:hover {
 
 
 .full-screen {
-    width: 100%;
-    height: 100vh;
+    width: 1200px;
+    height: 600px;
     background: url('../../../assets/images/background/nightDark.png') no-repeat;
     background-size: 100%;
     text-align: center;
@@ -32,21 +32,25 @@ button:hover {
     color: white;
     font-family: 'Y_Spotlight';
     font-size: 1rem;
+    position: relative;
 }
 
 .full-screen h2 {
+    width: inherit;
+    height: 30px;
+    line-height: 30px;
     font-family: 'BMDOHYEON';
-    font-size: 50px;;
-    margin-top: 4%;
-    /* border: 3px solid purple; */
+    font-size: 45px;
     text-shadow: #FC0 1px 0 10px;
 }
 
 .full-screen .story-area {
-    width: 70%;
-    height: 60%;
+    /* width: 70%;
+    height: 60%; */
+    width: 900px;
+    height: 350px;
     line-height: 70%;
-    margin: 40px auto 0;
+    margin: 20px auto 0;
     padding: 20px 0;
     overflow: hidden;
     background: rgba(255, 255, 255, .1);
@@ -66,7 +70,7 @@ button:hover {
 .full-screen .story-area div.storytelling .storytelling-start {
     height: inherit;
     line-height: 300%;
-    padding-top: 10%;
+    padding-top: 4%;
     animation: slidein-start 3s linear;
     animation-fill-mode: both;
     /* animation-duration: 15s;
@@ -90,7 +94,6 @@ button:hover {
 
 .full-screen .moreOrSkip .more {
     padding: 1.2% 3%;
-    margin-right: 2%;
     border-radius: 200px;
 }
 
@@ -99,15 +102,15 @@ button:hover {
     height: 6%; */
     position: absolute;
     top: 2%;
-    right: 1%;
+    right: 2%;
     margin-top: 1%;
-    padding: 1% 1.5%;
+    padding: 1% 2.5%;
     border-radius: 200px;
 }
 
 @keyframes slidein-start {
     0% {
-        margin-top: 40%;
+        margin-top: 35%;
     }
 
     100% {
