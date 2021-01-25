@@ -1,0 +1,123 @@
+/******** common ********/
+
+ul {
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+.control-button {
+  color: white;
+  font-family: 'BMDOHYEON';
+  font-size: 1rem;
+  margin-top: 2%;
+  text-align: center;
+
+}
+
+.control-button:focus {
+  outline: none;
+}
+
+/***********************/
+
+
+.control-canvas {
+  width: 1200px;
+  height: 600px;
+  background: url('../../../assets/images/background/nightDark.png') no-repeat;
+  background-size: 100%;
+  text-align: center;
+  margin: 0 auto;
+  overflow: hidden;
+  color: white;
+  font-family: 'Y_Spotlight';
+  font-size: 1rem;
+  position: relative;
+}
+
+.control-canvas h2 {
+  width: inherit;
+  height: 30px;
+  line-height: 30px;
+  font-family: 'BMDOHYEON';
+  font-size: 45px;
+  text-shadow: #FC0 1px 0 10px;
+}
+
+.control-canvas .description-area {
+  /* width: 70%;
+  height: 60%; */
+  width: 900px;
+  height: 350px;
+  line-height: 70%;
+  margin: 20px auto 0;
+  padding: 20px 0;
+  overflow: scroll;
+  background: rgba(255, 255, 255, .1);
+  border-radius: 50px;
+}
+
+/* .control-canvas .description-area .game-control h3{
+  font-size: 30px;
+  margin-bottom: 50px;
+} */
+
+.control-canvas .description-area .control-description {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(250px, auto));
+  margin-bottom: 30px;
+}
+
+.control-canvas .description-area .control-description .control-layout {
+  width: inherit;
+  padding: 20px;
+}
+
+.control-canvas .description-area .control-description .item-data {
+  width: 205px;
+  line-height: 25px;
+  /* border: 1px solid purple; */
+  /* text-align: left; */
+  margin: 0 auto;
+}
+
+.control-canvas .description-area .first-p {
+  /* width: 90%; */
+  padding-top: 80px;
+  border-top: 5px solid rgba(255, 255, 255, .1);
+  /* text-align: center; */
+}
+
+.control-canvas .description-area .second-p {
+  padding-bottom: 50px;
+}
+
+.control-canvas .description-area .control-description .item-data li {
+  /* width: 200px; */
+  /* padding-left: 8% */
+}
+
+.control-canvas .button-area .description {
+  background: #233F4E;
+  margin-right: 30px;
+  padding: 1.5% 3%;
+  border-radius: 200px;
+}
+
+.control-canvas .button-area .description:hover {
+  background: #08293B;
+}
+
+.control-canvas .button-area .start {
+  background: red;
+  margin-top: 1%;
+  padding: 1.5% 2.5%;
+  border-radius: 200px;
+}
+
+.control-canvas .button-area .start:hover {
+  background: #E60304;
+}
