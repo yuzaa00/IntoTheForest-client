@@ -6,6 +6,7 @@ import { JsxChild, JsxElement } from 'typescript';
 import Modal from './Modal'
 import { roomSocket } from '../../utils/socket';
 import CreateRoomForm from './CreateRoomForm';
+import JoinRoomForm from './JoinRoomForm';
 
 const ChoiceMode = () => {
 
@@ -33,18 +34,27 @@ const ChoiceMode = () => {
     setModeHover(text);
   }
 
-  const moveToRoom = (roomId: any) => history.push(`rooms/${roomId}`);
+  const moveToRoom = (roomId: string) => {
+    history.push(`rooms/${roomId}`)
+  };
+
+
+  // joinRoom({ roomId, user }, cb) {
+  //   socket.emit('join room', { roomId, user }, cb);
+  // },
+
+  const joinRoom = (roomData: any) => {
+    roomSocket.joinRoom({ roomData }, (roomId: string) => moveToRoom(roomId))
+  }
 
   const createRoom = (roomData: any) => {
-    console.log(roomData)
-    roomSocket.createRoom({ roomData }, ({ roomId }) => moveToRoom(roomId));
-  };
+    roomSocket.createRoom({ roomData }, (roomId: string) => moveToRoom(roomId))
+  }
   
   const openModal = (modalComponents: null) => {
-    console.log(1)
     setmodalContent(modalComponents)
     setModalOpen(true)
-  };
+  }
 
   return (
     <div className="game-size" onMouseOut={() => setModeHover('')}>
@@ -70,7 +80,7 @@ const ChoiceMode = () => {
             방 생성
                             </button>
           <button
-            onClick={multiModeGoRoom}
+            onClick={() => openModal(<JoinRoomForm onSubmit={joinRoom} />)}
             onMouseOver={multiModeGoRoom}
             className="multi-join button-design"
           >

@@ -3,17 +3,17 @@ import PropTypes from 'prop-types';
 
 function CreateRoomForm({ onSubmit }) {
   const [inputs, setInputs] = useState({
-    title: '',
+    roomCode: '',
     maxNum: '2',
   });
 
   const submitRoomData = ev => {
     ev.preventDefault();
-    const { title, maxNum } = inputs;
-    onSubmit({ title, maxNum: Number(maxNum) });
+    const { roomCode, maxNum } = inputs;
+    onSubmit({ roomCode, maxNum: Number(maxNum) });
   };
 
-  const handleInputChange = ev => {
+  const handleInputChange = (ev: { target: { value: string, name: string } }) => {
     const { name, value } = ev.target;
     setInputs(prev => ({ ...prev, [name]: value }));
   };
@@ -25,10 +25,10 @@ function CreateRoomForm({ onSubmit }) {
       <form onSubmit={submitRoomData}>
         <input
           type='text'
-          name='title'
-          minLength='2'
-          maxLength='12'
-          value={inputs.title}
+          name='roomCode'
+          min='2'
+          max='6'
+          value={inputs.roomCode}
           onChange={handleInputChange}
           required
         />
