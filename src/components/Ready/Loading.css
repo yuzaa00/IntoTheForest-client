@@ -1,3 +1,12 @@
+.loadingScreen {
+    width: 1200px;
+    height: 600px;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+  
 .preload {
     position: fixed;
     top: 0;
@@ -9,41 +18,18 @@
     align-items: center;
 } 
 
-.logoForest, 
-.logoForest1,
-.logoForest2 {
-    position: absolute;
-    
-    z-index: -1;
-
-}
 
 .logoForest {
-    height: 100px;
-    top: 6%;
-    transform: translate(350%, -6%);
-    
-}
-
-.logoForest1 {
-    height: 200px;
-    top: 10%;
-    transform: translate(100%, -10%);
-   
-
-}
-
-.logoForest2 {
-    height: 300px;
-    top: 30%;
+    position: absolute;
+    z-index: -1;
+    top: 43%;
     transform: translate(12%, -30%);
-  
-    
 }
 
 
 .logoDog {
     position: absolute;
+    height: 55px;
     left: 0%;
     top: 47%;
     transform: translate(100%, -16%);
@@ -52,12 +38,24 @@
     
 }
 
-.preload h3 {
-    position: absolute;
-    top: 75%;
-    transform: translateY(-75%);
+.loadText {
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 20px;
+}
+
+.loadText h3
+{   position: relative;
+    top: 100%;
     font-size: 30px;
 }
+
+.loadText .loadAnime
+{
+    position: relative;
+    top: 100%;
+}
+
 
 @keyframes logoDog {
     from{
