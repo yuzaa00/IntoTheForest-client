@@ -9,8 +9,9 @@ import { BrowserRouter } from 'react-router-dom';
 import Reducer from './redux/reducers/index';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
+import rootReducer from './redux/reducers';
 
-const store = createStore(Reducer);
+const store = createStore(rootReducer);
 
 ReactDOM.render(
   <BrowserRouter>
