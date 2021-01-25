@@ -28,7 +28,7 @@ export default class Stage2Eventgame extends Phaser.Scene {
     this.registry.set('bird', data.bird)
     this.registry.set('squi', data.squi)
     this.registry.set('moleScore', 0)
-    this.registry.set('time', 5)
+    this.registry.set('time', 30)
   }
 
   public preload(): void {

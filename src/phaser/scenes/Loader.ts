@@ -13,6 +13,8 @@ export default class Loader extends Phaser.Scene { // resource load scene
     this.load.image('bird', 'images/character/bird.png')
     this.load.image('squi', 'images/character/squi.png')
     this.load.spritesheet('dog', 'images/character/dog2.png', { frameWidth: 500, frameHeight: 500 })
+    this.load.spritesheet('dog2', 'images/character/dog2.png', { frameWidth: 500, frameHeight: 500 })
+    this.load.spritesheet('dog3', 'images/character/dog2.png', { frameWidth: 500, frameHeight: 500 })
     // this.load.spritesheet('dog2', 'images/character/dog2-running-test.png', { frameWidth: 220, frameHeight: 220})
     
     //background load

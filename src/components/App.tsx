@@ -6,10 +6,12 @@ import Ready from './Ready/Ready'
 import Room from './Room/Room';
 import Game from './Game/Game';
 import Result from './Result/Result';
+import Test from './Test'
 
 function App() {
 
   return (
+    // <Test></Test>
     <Switch>
       <Route exact path='/' component={Welcome} /> 
       <Route path='/mode' component={ChoiceMode} /> 
@@ -18,7 +20,7 @@ function App() {
       <Route path='/game' component={Game} />
       <Route path='/result' component={Result} />
     </Switch>
-  );
+  )
 }
 
 export default App;

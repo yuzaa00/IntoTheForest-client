@@ -129,7 +129,7 @@ export default class Stage1 extends Phaser.Scene {
     this.subchas = this.physics.add.staticGroup()
     this.enemies = this.physics.add.staticGroup().setActive(true)
 
-    this.potion.create(29450, 200,'stagePotion',undefined,true,true).setScale(0.4)
+    this.potion.create(600, 200,'stagePotion',undefined,true,true).setScale(0.4)
 
     this.map = this.make.tilemap({ key: "map" })
 
