@@ -54,7 +54,7 @@ function CreateRoomForm({ onSubmit }) {
               required/>
             </div>
         </div>
-          <input type='submit' value='방 만들기' />
+        <input type='submit' value='방 만들기' className="create-button"/>
         {/* <input
           type='number'
           name='maxNum'
