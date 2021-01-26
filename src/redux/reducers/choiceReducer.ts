@@ -36,4 +36,5 @@ function choiceReducer (state: ChoiceReducerState = initialState, action: Choice
   }
 };
 
+
 export default choiceReducer;
