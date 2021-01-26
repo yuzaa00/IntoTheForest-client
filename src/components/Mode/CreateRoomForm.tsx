@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { roomSocket } from '../../utils/socket'
 import { useHistory } from 'react-router-dom'
+import './CreateRoom.css';
 
 interface roomData {
   roomCode: string
@@ -16,6 +17,10 @@ interface response {
 function CreateRoomForm() {
   const history = useHistory()
   const [createError, setCreateError] = useState('')
+
+
+
+function CreateRoomForm() {
   const [inputs, setInputs] = useState({
     roomCode: '',
     nickName: '',
@@ -45,45 +50,46 @@ function CreateRoomForm() {
   }
 
   const handleInputChange = (ev: { target: { value: string, name: string } }) => {
-    const { name, value } = ev.target
-    setInputs(prev => ({ ...prev, [name]: value }))
+    const { name, value } = ev.target;
+    setInputs(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleChangeNickname = (e: any) => {
+    console.log(e.target.value);
   }
+
   return (
-    <div>
-      <h2>멀티 모드 방</h2>
-      <h3>방의 최대 인원은 4명입니다.</h3>
+    <div className="create-room-canvas">
+      <div className="title">방 만들기</div>
+      <div className="subtitle">2인, 4인이 함께 게임을 즐겨보세요!</div>
       <form onSubmit={submitRoomData}>
-        <input
-          type='text'
-          name='roomCode'
-          placeholder='방 이름 입력'
-          minLength={2}
-          maxLength={6}
-          value={inputs.roomCode}
-          onChange={handleInputChange}
-          required
-        />
-          <input
-          type='text'
-          name='nickName'
-          placeholder='닉네임 입력'
-          minLength={2}
-          maxLength={6}
-          value={inputs.nickName}
-          onChange={handleInputChange}
-          required
-        />
-        <input
-          type='number'
-          name='maxNum'
-          min='2'
-          max='4'
-          step='2'
-          value={inputs.maxNum}
-          onChange={handleInputChange}
-          required
-        />
-        <input type='submit' value='방 만들기' />
+        <div className="people">
+          <div>2인</div>
+          <div>4인</div>
+        </div>
+
+        <div className="create-room-area">
+          <div className="create-room-content">
+            <div>방 코드 설정 <span>필수</span></div>
+            <input
+            type='text'
+            name='roomCode'
+            min='2'
+            max='6'
+            value={inputs.roomCode}
+            onChange={handleInputChange}
+            required
+          />
+          </div>
+           <div className="nickname-content">
+              <div>닉네임 <span>필수</span></div>
+              <input
+              type="text"
+              onChange={handleChangeNickname}
+              required/>
+            </div>
+        </div>
+        <input type='submit' value='방 만들기' className="create-button"/>
         {createError && <div style={{color: 'red'}}>{createError}</div>}
       </form>
     </div>
@@ -91,3 +97,4 @@ function CreateRoomForm() {
 }
 
 export default CreateRoomForm
+
