@@ -7,7 +7,7 @@ function CreateRoomForm({ onSubmit }) {
     maxNum: '2',
   });
 
-  const submitRoomData = ev => {
+  const submitRoomData = (ev: { preventDefault: () => void; }) => {
     ev.preventDefault();
     const { roomCode, maxNum } = inputs;
     onSubmit({ roomCode, maxNum: Number(maxNum) });
@@ -26,8 +26,8 @@ function CreateRoomForm({ onSubmit }) {
         <input
           type='text'
           name='roomCode'
-          min='2'
-          max='6'
+          minLength='2'
+          maxLength='6'
           value={inputs.roomCode}
           onChange={handleInputChange}
           required

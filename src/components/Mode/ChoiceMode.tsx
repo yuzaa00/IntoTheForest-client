@@ -8,6 +8,11 @@ import { roomSocket } from '../../utils/socket';
 import CreateRoomForm from './CreateRoomForm';
 import JoinRoomForm from './JoinRoomForm';
 
+interface roomData {
+  roomCode: string
+  maxNum: number
+}
+
 const ChoiceMode = () => {
 
   const [modeClick, setModeClick] = useState('');
@@ -34,24 +39,20 @@ const ChoiceMode = () => {
     setModeHover(text);
   }
 
-  const moveToRoom = (roomId: string) => {
+  const moveToRoom = (roomId?: string, error? : string) => {
+    if(!roomId) console.log(error)
     history.push(`rooms/${roomId}`)
   };
 
-
-  // joinRoom({ roomId, user }, cb) {
-  //   socket.emit('join room', { roomId, user }, cb);
-  // },
-
-  const joinRoom = (roomData: any) => {
+  const joinRoom = (roomData: roomData) => {
     roomSocket.joinRoom({ roomData }, (roomId: string) => moveToRoom(roomId))
   }
 
-  const createRoom = (roomData: any) => {
+  const createRoom = (roomData: roomData) => {
     roomSocket.createRoom({ roomData }, (roomId: string) => moveToRoom(roomId))
   }
   
-  const openModal = (modalComponents: null) => {
+  const openModal = (modalComponents: any) => {
     setmodalContent(modalComponents)
     setModalOpen(true)
   }

@@ -6,8 +6,7 @@ function JoinRoomForm({ onSubmit }) {
   const [nickInput, nickSetInput] = useState('')
 
   const submitRoomData = (ev: { preventDefault: () => void; }) => {
-    ev.preventDefault()
-    console.log(input)
+    ev.preventDefault();
     onSubmit({
       roomCode: input,
       nickName: nickInput
