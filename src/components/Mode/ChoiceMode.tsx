@@ -13,6 +13,11 @@ interface roomData {
   maxNum: number
 }
 
+interface response {
+  roomId?: string
+  error?: string
+}
+
 const ChoiceMode = () => {
 
   const [modeClick, setModeClick] = useState('');
@@ -39,17 +44,21 @@ const ChoiceMode = () => {
     setModeHover(text);
   }
 
-  const moveToRoom = (roomId?: string, error? : string) => {
-    if(!roomId) console.log(error)
-    history.push(`rooms/${roomId}`)
+  const moveToRoom = (response: response) => {
+    const { roomId, error } = response
+    if(!roomId) console.log('에러임', error) 
+    else {
+      console.log('정상임')
+      history.push(`rooms/${roomId}`)
+    } 
   };
 
   const joinRoom = (roomData: roomData) => {
-    roomSocket.joinRoom({ roomData }, (roomId: string) => moveToRoom(roomId))
+    roomSocket.joinRoom({ roomData }, (roomId: response) => moveToRoom(roomId))
   }
 
   const createRoom = (roomData: roomData) => {
-    roomSocket.createRoom({ roomData }, (roomId: string) => moveToRoom(roomId))
+    roomSocket.createRoom({ roomData }, (roomId: response) => moveToRoom(roomId))
   }
   
   const openModal = (modalComponents: any) => {

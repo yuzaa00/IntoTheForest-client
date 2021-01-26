@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-function JoinRoomForm({ onSubmit }) {
+interface Props {
+  onSubmit: (roomCode: object) => void
+}
+
+function JoinRoomForm( { onSubmit }: Props ) {
   const [input, setInput] = useState('')
   const [nickInput, nickSetInput] = useState('')
 
