@@ -14,13 +14,10 @@ interface response {
   error: string
 }
 
+
 function CreateRoomForm() {
   const history = useHistory()
   const [createError, setCreateError] = useState('')
-
-
-
-function CreateRoomForm() {
   const [inputs, setInputs] = useState({
     roomCode: '',
     nickName: '',
@@ -90,8 +87,9 @@ function CreateRoomForm() {
             </div>
         </div>
         <input type='submit' value='방 만들기' className="create-button"/>
-        {createError && <div style={{color: 'red'}}>{createError}</div>}
+       
       </form>
+      {createError && <div style={{color: 'red'}}>{createError}</div>}
     </div>
   )
 }
