@@ -58,53 +58,54 @@ const ChoiceMode = () => {
   }
 
   return (
-    <div className="game-size" onMouseOut={() => setModeHover('')}>
-      <div className="mode">
-        <div className="mode-solo">
-          <div className="mode-name">
-            솔로
-                            </div>
-          <button
-            onClick={() => history.push('/ready/story')}
-            onMouseOver={soloMode}
-            className="button-design">
-            혼자하기
-                                    </button>
-        </div>
-        <div className="mode-multi">
-          <div className="mode-name">멀티</div>
-          <button
-            onClick={() => openModal(<CreateRoomForm onSubmit={createRoom} />)}
-            onMouseOver={multiModeCreateRoom}
-            className="multi-create button-design"
-          >
-            방 생성
-                            </button>
-          <button
-            onClick={() => openModal(<JoinRoomForm onSubmit={joinRoom} />)}
-            onMouseOver={multiModeGoRoom}
-            className="multi-join button-design"
-          >
-            방 참가
-                            </button>
-        </div>
-      </div>
-      {isModalOpen &&
-          <Modal setModalOpen={setModalOpen}>{modalComponents}</Modal>
-      }
-      <div className="text">
-        {modeHover === null ?
-          <div className="choiceMode">모드를 선택하세요</div>
-          :
-          <div className="choiceMode">{modeHover}</div>
-        }
-        <Link to="/">
-          <div className="exit" onMouseOver={() => setModeHover("정말로 나가시겠습니까?")}>
-            나가기
-                            </div>
-        </Link>
-      </div>
-    </div>
+    // <div className="game-size" onMouseOut={() => setModeHover('')}>
+    //   <div className="mode">
+    //     <div className="mode-solo">
+    //       <div className="mode-name">
+    //         솔로
+    //                         </div>
+    //       <button
+    //         onClick={() => history.push('/ready/story')}
+    //         onMouseOver={soloMode}
+    //         className="button-design">
+    //         혼자하기
+    //                                 </button>
+    //     </div>
+    //     <div className="mode-multi">
+    //       <div className="mode-name">멀티</div>
+    //       <button
+    //         onClick={() => openModal(<CreateRoomForm onSubmit={createRoom} />)}
+    //         onMouseOver={multiModeCreateRoom}
+    //         className="multi-create button-design"
+    //       >
+    //         방 생성
+    //                         </button>
+    //       <button
+    //         onClick={() => openModal(<JoinRoomForm onSubmit={joinRoom} />)}
+    //         onMouseOver={multiModeGoRoom}
+    //         className="multi-join button-design"
+    //       >
+    //         방 참가
+    //                         </button>
+    //     </div>
+    //   </div>
+    //   {isModalOpen &&
+    //       <Modal setModalOpen={setModalOpen}>{modalComponents}</Modal>
+    //   }
+    //   <div className="text">
+    //     {modeHover === null ?
+    //       <div className="choiceMode">모드를 선택하세요</div>
+    //       :
+    //       <div className="choiceMode">{modeHover}</div>
+    //     }
+    //     <Link to="/">
+    //       <div className="exit" onMouseOver={() => setModeHover("정말로 나가시겠습니까?")}>
+    //         나가기
+    //                         </div>
+    //     </Link>
+    //   </div>
+    // </div>
+    <CreateRoomForm />
   )
 }
 
