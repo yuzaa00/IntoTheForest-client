@@ -71,8 +71,8 @@ function CreateRoomForm() {
             <input
             type='text'
             name='roomCode'
-            min='2'
-            max='6'
+            minLength={2}
+            maxLength={6}
             value={inputs.roomCode}
             onChange={handleInputChange}
             required
