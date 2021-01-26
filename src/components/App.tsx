@@ -6,17 +6,15 @@ import Ready from './Ready/Ready'
 import Room from './Room/Room';
 import Game from './Game/Game';
 import Result from './Result/Result';
-import Test from './Test'
 
 function App() {
 
   return (
-    // <Test></Test>
     <Switch>
       <Route exact path='/' component={Welcome} /> 
       <Route path='/mode' component={ChoiceMode} /> 
       <Route path='/ready' component={Ready} /> 
-      <Route path='/room' component={Room} />
+      <Route path='/rooms/:id' component={Room} />
       <Route path='/game' component={Game} />
       <Route path='/result' component={Result} />
     </Switch>
