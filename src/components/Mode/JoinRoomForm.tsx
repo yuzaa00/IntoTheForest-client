@@ -81,7 +81,7 @@ function JoinRoomForm() {
           onChange={handleInputNickChange}
         />
         <input type='submit' value='방 참여하기' />
-        {joinError && <div>{joinError}</div>}
+        {joinError && <div style={{color: 'red'}}>{joinError}</div>}
       </form>
     </div>
   )
