@@ -101,17 +101,17 @@ const roomSocket = {
   // },
 };
 
-// const chatSocket = {
-//   sendMessage({ newChat }) {
-//     socket.emit(EVENT.CHAT, { chat: newChat });
-//   },
-//   listenMessage(cb) {
-//     socket.on(EVENT.CHAT, cb);
-//   },
-//   cleanUpMessageListener() {
-//     socket.off(EVENT.CHAT);
-//   },
-// };
+const chatSocket = {
+  sendMessage({ newChat }) {
+    socket.emit('chat', { chat: newChat });
+  },
+  listenMessage(cb) {
+    socket.on('chat', cb);
+  },
+  cleanUpMessageListener() {
+    socket.off('chat');
+  },
+};
 
 // const peerSocket = {
 //   sendingSignal({ signal, receiver }) {
@@ -132,4 +132,4 @@ const roomSocket = {
 //   },
 // };
 
-export { roomSocket }
+export { roomSocket, chatSocket }
