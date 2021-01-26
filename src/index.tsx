@@ -1,25 +1,22 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-// import axios from 'axios';
-import './index.css';
-import App from './components/App';
-import reportWebVitals from './reportWebVitals';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './index.css'
+import App from './components/App'
+import reportWebVitals from './reportWebVitals'
+import { BrowserRouter } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import { createStore, applyMiddleware } from 'redux'
+import rootReducer from './redux/rootReducer'
+import { composeWithDevTools } from 'redux-devtools-extension';
+import logger from 'redux-logger';
 
-import { BrowserRouter } from 'react-router-dom';
-import Reducer from './redux/reducers/index';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import rootReducer from './redux/reducers';
-
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(logger)))
 
 ReactDOM.render(
   <BrowserRouter>
-  <React.StrictMode>
     <Provider store={store}>
       <App />
     </Provider>
-  </React.StrictMode>
   </BrowserRouter>,
   document.getElementById('root')
 );

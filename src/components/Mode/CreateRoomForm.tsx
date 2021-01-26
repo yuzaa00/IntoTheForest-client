@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { roomSocket } from '../../utils/socket'
 import { useHistory } from 'react-router-dom'
+import { useDispatch } from 'react-redux';
 import './CreateRoom.css';
 
 interface roomData {
@@ -16,6 +17,7 @@ interface response {
 
 
 function CreateRoomForm() {
+  const dispatch = useDispatch()
   const history = useHistory()
   const [createError, setCreateError] = useState('')
   const [inputs, setInputs] = useState({
@@ -31,6 +33,10 @@ function CreateRoomForm() {
       setCreateError(error)
     }
     else {
+      dispatch({
+        type: 'SAVE_ROOM_CODE',
+        value: inputs.roomCode
+      })
       history.push(`rooms/${roomId}`)
     } 
   }
