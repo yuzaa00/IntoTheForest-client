@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './CreateRoom.css';
 
-function CreateRoomForm({ onSubmit }) {
+function CreateRoomForm() {
   const [inputs, setInputs] = useState({
     roomCode: '',
     maxNum: '2',
   });
 
-  const submitRoomData = ev => {
+  const submitRoomData = (ev: { preventDefault: () => void; }) => {
     ev.preventDefault();
     const { roomCode, maxNum } = inputs;
     onSubmit({ roomCode, maxNum: Number(maxNum) });
@@ -55,23 +55,9 @@ function CreateRoomForm({ onSubmit }) {
             </div>
         </div>
         <input type='submit' value='방 만들기' className="create-button"/>
-        {/* <input
-          type='number'
-          name='maxNum'
-          min='2'
-          max='4'
-          step='2'
-          value={inputs.maxNum}
-          onChange={handleInputChange}
-          required
-        /> */}
       </form>
     </div>
   );
 }
 
-export default CreateRoomForm;
-
-CreateRoomForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-};
+export default CreateRoomForm
