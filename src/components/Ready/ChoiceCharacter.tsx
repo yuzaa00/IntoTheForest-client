@@ -1,5 +1,8 @@
 import React from 'react';
-import John from '../../images/character/john.png'
+import { useHistory } from "react-router-dom";
+
+import './ChoiceCharacter.css';
+import John from '../../images/character/siba.png'
 import Tom from '../../images/character/backgu.png'
 import Alex from '../../images/character/dosaDog.png'
 
@@ -12,55 +15,58 @@ type ChoiceCharacterProps {
 
 function ChoiceCharacter({ value, onSelect1, onSelect2, onSelect3 }:ChoiceCharacterProps) {
 
-    
+    let history = useHistory();
    
     const onGameDesc = () => {
-      //history
+      history.push('/ready/control');
      }
+  
     const onGameStart = () => {
-      {value}
-      //history.push
+      
+      history.push('/game');
     }
-    //  const onSelect3 = () => {
-        // setValue("포메라이안")
-    //  } 
+  
 
     return (
-      <div className="chaSelectBx">
-        <h1>{value}</h1>
-        <div>
-          <div onClick={onSelect1} className="box">
+      <div className="choiceCharacterScreen">
+        <div className="chaSelectWrapper">
+        <div className="chaSelectBx">
+          <div onClick={onSelect1} className="choiceCard">
             <div className="imgBx">
               <img src={John} alt='john' />
             </div>
             <div className="imgBxContent">
-             <h2>John{"\n"}<span>믹스견
-               </span></h2>
+             <h2>John</h2>
+             <h3>시바견</h3>
             </div>
           </div>
-          <div onClick={onSelect2} className="box">
+          <div onClick={onSelect2} className="choiceCard">
             <div className="imgBx">
             <img src={Tom} alt='tom' />
             </div>
             <div className="imgBxContent">
-             <h2>Tom{"\n"}<span>진돗개
-               </span></h2>
+             <h2>Tom</h2>
+             <h3>진돗개</h3>
             </div>
           </div>
-          <div onClick={onSelect3} className="box">
+          <div onClick={onSelect3} className="choiceCard">
             <div className="imgBx">
             <img src={Alex} alt='alex' />
             </div>
             <div className="imgBxContent">
-             <h2>Alex{"\n"}<span>도사견
-               </span></h2>
+             <h2>Alex</h2>
+             <h3>도사견</h3>
             </div>
           </div>
         </div>
-        <div>
-          <button onClick={onGameDesc}>"게임설명"</button>
-          <button onClick={onGameStart}>"GameStart"</button>
         </div>
+        <div className="chaSelectBtn">
+          <h1>My Choice: {value}</h1>
+      <button className="chaSelectBtn-desc" onClick={onGameDesc}>게임설명</button>
+      <button className="chaSelectBtn-startGame" onClick={onGameStart}>GameStart</button>
+       </div>
+        
+        
       </div>
     );
   }

@@ -1,13 +1,24 @@
+.choiceCharacterScreen {
+    width: 1200px;
+    height: 600px;
+    text-align: center;
+    padding: 0;
+    box-sizing: border-box;
+    margin: 0 auto;
+    background: url('../../../assets/images/background/nightDark.png') no-repeat;
+    background-size: 100%;
+    font-family: 'Y_Spotlight';
+}
+
 .chaSelectBx {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    min-height: 100vh;
-    background: #010615;
+    
 }
 
-.box {
+.choiceCard {
     position: relative;
     width: 300px;
     height: 300px;
@@ -17,14 +28,22 @@
     margin: 40px;
     background: #060C21;
     transition: 0.5s;
+    cursor: pointer;
 }
 
-.box:hover {
+
+
+.chaSelectWrapper .chaSelectBx  {
+    opacity: 0.99;
+}
+
+
+.choiceCard:hover {
     height: 400px;
 
 }
 
-.box .imgbx {
+.choiceCard .imgBx {
     position: absolute;
     top: 0;
     left: 0;
@@ -34,17 +53,17 @@
     box-sizing: border-box;
 }
 
-.box .imgbx img {
+.choiceCard .imgBx img {
     max-width: 100%;
     opacity: 0.1;
     transition: 0.5s;    
 }
 
-.box:hover .imgbx img {
+.choiceCard:hover .imgBx img {
     opacity: 1;
 }
 
-.box:before {
+.choiceCard::before {
     content: '';
     position: absolute;
     top: -2px;
@@ -55,7 +74,7 @@
     z-index: -1;
 }
 
-.box:after {
+.choiceCard::after {
     content: '';
     position: absolute;
     top: -2px;
@@ -67,24 +86,107 @@
     filter: blur(40px);
 }
 
-.box:before,
-.box:after {
-    background: linear-gradient(235deg,#89ff00,#010615,#00bcd4);
+.choiceCard::before,
+.choiceCard::after {
+    background-image: linear-gradient(235deg,#89ff00,#010615,#00bcd4);
 }
 
-.box:nth-child(2):before,
-.box:nth-child(2):after
+.choiceCard:nth-child(2)::before,
+.choiceCard:nth-child(2)::after
 {
-    background: linear-gradient(235deg,#ff005e,#010615,#fbff00);
+    background-image: linear-gradient(235deg,#ff005e,#010615,#fbff00);
 }
 
 
-.box:nth-child(3):before,
-.box:nth-child(3):after
+.choiceCard:nth-child(3)::before,
+.choiceCard:nth-child(3)::after
 {
-    background: linear-gradient(235deg,#772aff,#010615,#2196f3);
+    background-image: linear-gradient(235deg,#772aff,#010615,#2196f3);
 }
 
-.box .content {
+.choiceCard .imgBxContent {
+    position: absolute;
+    bottom: 0;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    height: 90px;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.choiceCard:hover .imgBxContent {
+    opacity: 1;
+}
+
+.choiceCard .imgBxContent h2 {
+    font-size: 20px;
+    color: #fff;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 1px;
+    margin-bottom: 0px;
+}
+
+.choiceCard .imgBxContent h3 {
+    font-size: 14;
+    color: #fff;
+    font-weight: 200;
+    line-height: 20px;
+    letter-spacing: 2px;
+}
+
+
+.chaSelectBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 30px;
+}
+
+.chaSelectBtn-desc,
+.chaSelectBtn-startGame{
+    cursor: pointer;
     position: relative;
+    display: inline-block;
+    padding: 12px 36px;
+    margin: 10px 0;
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 18px;
+    letter-spacing: 2px;
+    border-radius: 40px;
+    background: linear-gradient(90deg,#0162c8,#55e7fc);
+
+}
+
+.chaSelectBtn-desc:nth-child(2),
+.chaSelectBtn-startGame:nth-child(2){
+    background: linear-gradient(90deg,#755bea,#ff72c0);
+}
+
+
+.chaSelectBtn-desc:focus,
+.chaSelectBtn-startGame:focus {
+    outline: none;
+}
+.chaSelectBtn-desc:hover,
+.chaSelectBtn-startGame:hover {
+    background: #08293B;
+}
+
+.chaSelectBtn h1 {
+    font-size: 20px;
+    color: #fff;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 1px;
+    margin-right: 40px;
 }
