@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 interface Props {
-  onSubmit: (roomCode: object) => void
+  onSubmit: Function
 }
 
-function JoinRoomForm( { onSubmit }: Props ) {
+function JoinRoomForm( {onSubmit}: Props ) {
   const [input, setInput] = useState('')
   const [nickInput, nickSetInput] = useState('')
 
   const submitRoomData = (ev: { preventDefault: () => void; }) => {
-    ev.preventDefault();
+    ev.preventDefault()
     onSubmit({
       roomCode: input,
       nickName: nickInput
@@ -18,12 +18,12 @@ function JoinRoomForm( { onSubmit }: Props ) {
   };
 
   const handleInputCodeChange = (ev: { target: { value: string } }) => {
-    const { value } = ev.target;
+    const { value } = ev.target
     setInput(value)
   };
 
   const handleInputNickChange = (ev: { target: { value: string } }) => {
-    const { value } = ev.target;
+    const { value } = ev.target
     nickSetInput(value)
   };
 

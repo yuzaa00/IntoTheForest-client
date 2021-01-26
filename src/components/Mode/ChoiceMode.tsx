@@ -10,6 +10,7 @@ import JoinRoomForm from './JoinRoomForm';
 
 interface roomData {
   roomCode: string
+  nickName: string
   maxNum: number
 }
 
