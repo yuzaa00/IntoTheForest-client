@@ -1,4 +1,3 @@
-import Stage1 from 'src/phaser/scenes/Stage1'
 import { createAction, ActionType, createReducer } from 'typesafe-actions'
 
 const SAVE_ROOM_CODE = 'SAVE_ROOM_CODE'
