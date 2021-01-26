@@ -41,61 +41,61 @@ const StyledModal = styled.div`
   align-items: center;
   justify-content: center;
 
-  div {
-    width: 400px;
-    height: 260px;
-    padding: 18px;
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 38px;
-    background-color: ${({ theme }) => theme.purple};
-  }
+  // div {
+  //   width: 400px;
+  //   height: 260px;
+  //   padding: 18px;
+  //   margin-bottom: 20px;
+  //   display: flex;
+  //   flex-direction: column;
+  //   align-items: center;
+  //   justify-content: center;
+  //   border-radius: 38px;
+  //   background-color: ${({ theme }) => theme.purple};
+  // }
 
-  form {
-    text-align: center;
-  }
+  // form {
+  //   text-align: center;
+  // }
 
   h2 {
-    font-size: 24px;
+    font-size: 100px;
     margin-bottom: 18px;
     color: ${({ theme }) => theme.orange};
   }
 
-  h3 {
-    font-size: 16px;
-    margin-bottom: 32px;
-    color: ${({ theme }) => theme.orange};
-  }
+  // h3 {
+  //   font-size: 16px;
+  //   margin-bottom: 32px;
+  //   color: ${({ theme }) => theme.orange};
+  // }
 
-  input[type='text'],
-  input[type='number'],
-  input[type='url'],
-  input[type='email'] {
-    all: unset;
-    padding: 14px;
-    border-radius: 24px;
-    margin-right: 10px;
-    color: ${({ theme }) => theme.purple};
-    background-color: ${({ theme }) => theme.white};
-  }
+  // input[type='text'],
+  // input[type='number'],
+  // input[type='url'],
+  // input[type='email'] {
+  //   all: unset;
+  //   padding: 14px;
+  //   border-radius: 24px;
+  //   margin-right: 10px;
+  //   color: ${({ theme }) => theme.purple};
+  //   background-color: ${({ theme }) => theme.white};
+  // }
 
-  input[type='url'] {
-    width: 200px;
-  }
+  // input[type='url'] {
+  //   width: 200px;
+  // }
 
-  input[type='submit'] {
-    all: unset;
-    cursor: pointer;
-    padding: 14px 16px;
-    border-radius: 32px;
-    font-size: 14px;
-    font-weight: 700;
-    color: ${({ theme }) => theme.purple};
-    background-color: ${({ theme }) => theme.pink};
-  }
+  // input[type='submit'] {
+  //   all: unset;
+  //   cursor: pointer;
+  //   padding: 14px 16px;
+  //   border-radius: 32px;
+  //   font-size: 14px;
+  //   font-weight: 700;
+  //   color: ${({ theme }) => theme.purple};
+  //   background-color: ${({ theme }) => theme.pink};
+  // }
 `;
 
 export default Modal;
