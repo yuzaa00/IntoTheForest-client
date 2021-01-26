@@ -17,13 +17,13 @@ const theme = {
   green: '#44BE6E',
 };
 
-function Modal({ children, setModalOpen }) {
+function Modal({ children, setModalOpen }: any) {
   return (
     <StyledModal>
       {children}
-      <Button color={theme.lightGray} onClick={() => setModalOpen(false)}></Button>
+      <Button color={theme.lightGray} onClick={() => setModalOpen(false)}>
         <GrFormClose size='26px' />
-
+      </Button>
     </StyledModal>
   );
 }

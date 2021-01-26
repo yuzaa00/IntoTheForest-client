@@ -1,27 +1,55 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from 'react'
+import { roomSocket } from '../../utils/socket'
+import { useHistory } from 'react-router-dom'
 
-function JoinRoomForm({ onSubmit }) {
+interface joinRoom {
+  nickName: string
+  roomCode: string
+}
+
+interface response {
+  roomId: string
+  error: string
+}
+
+function JoinRoomForm() {
+  const history = useHistory()
   const [input, setInput] = useState('')
   const [nickInput, nickSetInput] = useState('')
+  const [joinError, setjoinError] = useState('')
+
+  const moveToRoom = (response: response) => {
+    const { roomId, error } = response
+    
+    if(!roomId) {
+      setjoinError(error)
+    }
+    else {
+      history.push(`rooms/${roomId}`)
+    } 
+  }
+
+  const joinRoom = (joinRoom: joinRoom) => {
+    roomSocket.joinRoom({ joinRoom }, (roomId: response) => moveToRoom(roomId))
+  }
 
   const submitRoomData = (ev: { preventDefault: () => void; }) => {
-    ev.preventDefault();
-    onSubmit({
+    ev.preventDefault()
+    joinRoom({
       roomCode: input,
       nickName: nickInput
     })
-  };
+  }
 
   const handleInputCodeChange = (ev: { target: { value: string } }) => {
-    const { value } = ev.target;
+    const { value } = ev.target
     setInput(value)
-  };
+  }
 
   const handleInputNickChange = (ev: { target: { value: string } }) => {
-    const { value } = ev.target;
+    const { value } = ev.target
     nickSetInput(value)
-  };
+  }
 
   return (
     <div>
@@ -31,8 +59,8 @@ function JoinRoomForm({ onSubmit }) {
         <input
           type='text'
           name='roomCode'
-          min="2" 
-          max="6"
+          minLength={2}
+          maxLength={6}
           required
           placeholder='방 이름을 넣어주세요'
           title='2~6자리의 방 이름을 넣어주세요'
@@ -44,8 +72,8 @@ function JoinRoomForm({ onSubmit }) {
       <input
           type='text'
           name='nickName'
-          min="2" 
-          max="6"
+          minLength={2}
+          maxLength={6}
           required
           placeholder='닉네임을 넣어주세요'
           title='2~6자리의 닉네임을 넣어주세요'
@@ -53,13 +81,10 @@ function JoinRoomForm({ onSubmit }) {
           onChange={handleInputNickChange}
         />
         <input type='submit' value='방 참여하기' />
+        {joinError && <div style={{color: 'red'}}>{joinError}</div>}
       </form>
     </div>
-  );
+  )
 }
 
-export default JoinRoomForm;
-
-JoinRoomForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-};
+export default JoinRoomForm

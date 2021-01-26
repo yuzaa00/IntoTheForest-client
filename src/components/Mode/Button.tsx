@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-function Button({ onClick, children, color }) {
+function Button({ onClick, children, color }: any) {
   return (<StyledButton color={color} onClick={onClick}>{children}</StyledButton>);
 }
 
