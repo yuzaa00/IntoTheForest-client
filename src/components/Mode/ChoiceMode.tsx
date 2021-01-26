@@ -1,4 +1,4 @@
-import React, { Component, useState, ReactElement, ReactNode, FC, ReactChild } from 'react';
+import React, { Component, useState, ReactElement, ReactNode, FC, ReactChild, useEffect } from 'react';
 import { Link, Route, Switch, useHistory } from 'react-router-dom';
 import './ChoiceMode.css';
 import Story from '../Ready/Story';
@@ -20,13 +20,19 @@ interface response {
 }
 
 const ChoiceMode = () => {
-  const [roomError, setRoomError] = useState('12')
+  const [roomError, setRoomError] = useState('')
   const [modeClick, setModeClick] = useState('')
   const [modeHover, setModeHover] = useState('')
   const [isModalOpen, setModalOpen] = useState(false)
   const [modalComponents, setmodalContent] = useState(null)
   const history = useHistory()
 
+  useEffect(() => {
+    if(roomError) {
+    openModal(<CreateRoomForm onSubmit={createRoom} roomError={roomError}/>)
+    }
+  }, [roomError])
+   
   const soloMode = () => {
     const text = '솔로 모드'
     setModeClick(text)
