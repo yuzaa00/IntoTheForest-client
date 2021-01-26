@@ -1,31 +1,55 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from 'react'
+import { roomSocket } from '../../utils/socket'
+import { useHistory } from 'react-router-dom'
 
-interface Props {
-  onSubmit: Function
+interface joinRoom {
+  nickName: string
+  roomCode: string
 }
 
-function JoinRoomForm( {onSubmit}: Props ) {
+interface response {
+  roomId: string
+  error: string
+}
+
+function JoinRoomForm() {
+  const history = useHistory()
   const [input, setInput] = useState('')
   const [nickInput, nickSetInput] = useState('')
+  const [joinError, setjoinError] = useState('')
+
+  const moveToRoom = (response: response) => {
+    const { roomId, error } = response
+    
+    if(!roomId) {
+      setjoinError(error)
+    }
+    else {
+      history.push(`rooms/${roomId}`)
+    } 
+  }
+
+  const joinRoom = (joinRoom: joinRoom) => {
+    roomSocket.joinRoom({ joinRoom }, (roomId: response) => moveToRoom(roomId))
+  }
 
   const submitRoomData = (ev: { preventDefault: () => void; }) => {
     ev.preventDefault()
-    onSubmit({
+    joinRoom({
       roomCode: input,
       nickName: nickInput
     })
-  };
+  }
 
   const handleInputCodeChange = (ev: { target: { value: string } }) => {
     const { value } = ev.target
     setInput(value)
-  };
+  }
 
   const handleInputNickChange = (ev: { target: { value: string } }) => {
     const { value } = ev.target
     nickSetInput(value)
-  };
+  }
 
   return (
     <div>
@@ -57,13 +81,10 @@ function JoinRoomForm( {onSubmit}: Props ) {
           onChange={handleInputNickChange}
         />
         <input type='submit' value='방 참여하기' />
+        {joinError && <div>{joinError}</div>}
       </form>
     </div>
-  );
+  )
 }
 
-export default JoinRoomForm;
-
-JoinRoomForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-};
+export default JoinRoomForm

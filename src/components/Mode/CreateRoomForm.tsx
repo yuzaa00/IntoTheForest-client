@@ -1,23 +1,47 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from 'react'
+import { roomSocket } from '../../utils/socket'
+import { useHistory } from 'react-router-dom'
 
-interface Props {
-  onSubmit: Function
-  roomError?: string
+interface roomData {
+  roomCode: string
+  nickName: string
+  maxNum: number
 }
 
-function CreateRoomForm({ onSubmit, roomError }: Props) {
-  console.log(roomError)
+interface response {
+  roomId: string
+  error: string
+}
+
+function CreateRoomForm() {
+  const history = useHistory()
+  const [createError, setCreateError] = useState('')
   const [inputs, setInputs] = useState({
     roomCode: '',
     nickName: '',
     maxNum: '2',
   })
+  
+  const moveToRoom = (response: response) => {
+    const { roomId, error } = response
+    
+    if(!roomId) {
+      setCreateError(error)
+    }
+    else {
+      history.push(`rooms/${roomId}`)
+    } 
+  }
+
+  const createRoom = (roomData: roomData) => {
+    roomSocket.createRoom({ roomData }, (roomId: response) => moveToRoom(roomId))
+  }
+
 
   const submitRoomData = (ev: { preventDefault: () => void; }) => {
     ev.preventDefault()
     const { roomCode, maxNum, nickName } = inputs
-    onSubmit({ roomCode, nickName, maxNum: Number(maxNum) })
+    createRoom({ roomCode, nickName, maxNum: Number(maxNum) })
   }
 
   const handleInputChange = (ev: { target: { value: string, name: string } }) => {
@@ -60,14 +84,10 @@ function CreateRoomForm({ onSubmit, roomError }: Props) {
           required
         />
         <input type='submit' value='방 만들기' />
-        {roomError && <div>{roomError}</div>}
+        {createError && <div style={{color: 'red'}}>{createError}</div>}
       </form>
     </div>
-  );
+  )
 }
 
-export default CreateRoomForm;
-
-CreateRoomForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-};
+export default CreateRoomForm

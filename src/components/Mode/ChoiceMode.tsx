@@ -8,31 +8,13 @@ import { roomSocket } from '../../utils/socket';
 import CreateRoomForm from './CreateRoomForm';
 import JoinRoomForm from './JoinRoomForm';
 
-interface roomData {
-  roomCode: string
-  nickName: string
-  maxNum: number
-}
-
-interface response {
-  roomId: string
-  error: string
-}
-
 const ChoiceMode = () => {
-  const [roomError, setRoomError] = useState('')
   const [modeClick, setModeClick] = useState('')
   const [modeHover, setModeHover] = useState('')
   const [isModalOpen, setModalOpen] = useState(false)
   const [modalComponents, setmodalContent] = useState(null)
   const history = useHistory()
 
-  useEffect(() => {
-    if(roomError) {
-    openModal(<CreateRoomForm onSubmit={createRoom} roomError={roomError}/>)
-    }
-  }, [roomError])
-   
   const soloMode = () => {
     const text = '솔로 모드'
     setModeClick(text)
@@ -51,28 +33,6 @@ const ChoiceMode = () => {
     setModeHover(text)
   }
 
-  const moveToRoom = (response: response) => {
-    const { roomId, error } = response
-    
-    if(!roomId) {
-      console.log('???', error, typeof error)
-      setRoomError(error)
-      console.log(2, roomError)
-    }
-    else {
-      console.log('정상임')
-      history.push(`rooms/${roomId}`)
-    } 
-  };
-
-  const joinRoom = (roomData: roomData) => {
-    roomSocket.joinRoom({ roomData }, (roomId: response) => moveToRoom(roomId))
-  }
-
-  const createRoom = (roomData: roomData) => {
-    roomSocket.createRoom({ roomData }, (roomId: response) => moveToRoom(roomId))
-  }
-  
   const openModal = (modalComponents: any) => {
     setmodalContent(modalComponents)
     setModalOpen(true)
@@ -95,14 +55,14 @@ const ChoiceMode = () => {
         <div className="mode-multi">
           <div className="mode-name">멀티</div>
           <button
-            onClick={() => openModal(<CreateRoomForm onSubmit={createRoom} roomError={roomError}/>)}
+            onClick={() => openModal(<CreateRoomForm />)}
             onMouseOver={multiModeCreateRoom}
             className="multi-create button-design"
           >
             방 생성
                             </button>
           <button
-            onClick={() => openModal(<JoinRoomForm onSubmit={joinRoom} />)}
+            onClick={() => openModal(<JoinRoomForm  />)}
             onMouseOver={multiModeGoRoom}
             className="multi-join button-design"
           >
@@ -129,4 +89,4 @@ const ChoiceMode = () => {
   )
 }
 
-export default ChoiceMode;
+export default ChoiceMode
