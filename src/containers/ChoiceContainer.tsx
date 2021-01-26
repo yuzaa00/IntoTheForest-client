@@ -1,8 +1,8 @@
 import React from 'react';
 import ChoiceCharacter from '../components/Ready/ChoiceCharacter';
-import { RootState } from '../redux/reducers';
-import { useSelector, useDispatch } from 'react-redux';
-import { select1, select2, select3 } from '../redux/reducers/choiceReducer';
+import { RootState } from '../redux/rootReducer'
+import { useSelector, useDispatch } from 'react-redux'
+import { select1, select2, select3 } from '../redux/game/choiceReducer'
 
 function ChoiceContainer() {
   const value = useSelector((state: RootState) => state.choiceReducer.value);

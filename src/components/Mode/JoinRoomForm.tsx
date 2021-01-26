@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { roomSocket } from '../../utils/socket'
 import { useHistory } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
 interface joinRoom {
   nickName: string
@@ -13,6 +14,7 @@ interface response {
 }
 
 function JoinRoomForm() {
+  const dispatch = useDispatch()
   const history = useHistory()
   const [input, setInput] = useState('')
   const [nickInput, nickSetInput] = useState('')
@@ -25,6 +27,10 @@ function JoinRoomForm() {
       setjoinError(error)
     }
     else {
+      dispatch({
+        type: 'SAVE_ROOM_CODE',
+        value: input
+      })
       history.push(`rooms/${roomId}`)
     } 
   }

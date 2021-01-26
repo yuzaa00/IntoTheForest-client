@@ -42,8 +42,23 @@ const roomSocket = {
     socket.emit('create room', roomData, cb)
   },
 
-  joinRoom({ joinRoom }, cb) {
-    socket.emit('join room', joinRoom, cb);
+  joinRoom({roomData}, cb) {
+    socket.emit('join room', roomData, cb);
+  },
+
+  userJoined(roomCode, cb) {
+    socket.emit('member joined', roomCode, cb)
+  },
+
+  // memberJoinedAlert() {
+  //   socket.on('member joined', roomCode)
+  // },
+
+  newUserJoined(cb) {
+    socket.on('new user', cb);
+  },
+  userLeaved(cb) {
+    socket.on('leave user', cb);
   },
   // updateRoomList() {
   //   socket.emit(EVENT.ROOM_LIST);
