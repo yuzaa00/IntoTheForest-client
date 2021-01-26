@@ -3,14 +3,16 @@ import PropTypes from 'prop-types';
 
 interface Props {
   onSubmit: Function
+  roomError?: string
 }
 
-function CreateRoomForm({ onSubmit }: Props) {
+function CreateRoomForm({ onSubmit, roomError }: Props) {
+  console.log(roomError)
   const [inputs, setInputs] = useState({
     roomCode: '',
     nickName: '',
     maxNum: '2',
-  });
+  })
 
   const submitRoomData = (ev: { preventDefault: () => void; }) => {
     ev.preventDefault()
@@ -31,8 +33,8 @@ function CreateRoomForm({ onSubmit }: Props) {
           type='text'
           name='roomCode'
           placeholder='방 이름 입력'
-          minLength='2'
-          maxLength='6'
+          minLength={2}
+          maxLength={6}
           value={inputs.roomCode}
           onChange={handleInputChange}
           required
@@ -41,8 +43,8 @@ function CreateRoomForm({ onSubmit }: Props) {
           type='text'
           name='nickName'
           placeholder='닉네임 입력'
-          minLength='2'
-          maxLength='6'
+          minLength={2}
+          maxLength={6}
           value={inputs.nickName}
           onChange={handleInputChange}
           required
@@ -58,6 +60,7 @@ function CreateRoomForm({ onSubmit }: Props) {
           required
         />
         <input type='submit' value='방 만들기' />
+        {roomError && <div>{roomError}</div>}
       </form>
     </div>
   );

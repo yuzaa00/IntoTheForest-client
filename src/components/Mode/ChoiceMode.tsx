@@ -15,39 +15,44 @@ interface roomData {
 }
 
 interface response {
-  roomId?: string
-  error?: string
+  roomId: string
+  error: string
 }
 
 const ChoiceMode = () => {
-
-  const [modeClick, setModeClick] = useState('');
-  const [modeHover, setModeHover] = useState('');
-  const [isModalOpen, setModalOpen] = useState(false);
-  const [modalComponents, setmodalContent] = useState(null);
-  const history = useHistory();
+  const [roomError, setRoomError] = useState('12')
+  const [modeClick, setModeClick] = useState('')
+  const [modeHover, setModeHover] = useState('')
+  const [isModalOpen, setModalOpen] = useState(false)
+  const [modalComponents, setmodalContent] = useState(null)
+  const history = useHistory()
 
   const soloMode = () => {
-    const text = '솔로 모드';
-    setModeClick(text);
-    setModeHover(text);
+    const text = '솔로 모드'
+    setModeClick(text)
+    setModeHover(text)
   }
 
   const multiModeCreateRoom = () => {
-    const text = '멀티 모드: 방 만들기';
-    setModeClick(text);
-    setModeHover(text);
+    const text = '멀티 모드: 방 만들기'
+    setModeClick(text)
+    setModeHover(text)
   }
 
   const multiModeGoRoom = () => {
-    const text = '멀티 모드: 방에 참가하기';
-    setModeClick(text);
-    setModeHover(text);
+    const text = '멀티 모드: 방에 참가하기'
+    setModeClick(text)
+    setModeHover(text)
   }
 
   const moveToRoom = (response: response) => {
     const { roomId, error } = response
-    if(!roomId) console.log('에러임', error) 
+    
+    if(!roomId) {
+      console.log('???', error, typeof error)
+      setRoomError(error)
+      console.log(2, roomError)
+    }
     else {
       console.log('정상임')
       history.push(`rooms/${roomId}`)
@@ -84,7 +89,7 @@ const ChoiceMode = () => {
         <div className="mode-multi">
           <div className="mode-name">멀티</div>
           <button
-            onClick={() => openModal(<CreateRoomForm onSubmit={createRoom} />)}
+            onClick={() => openModal(<CreateRoomForm onSubmit={createRoom} roomError={roomError}/>)}
             onMouseOver={multiModeCreateRoom}
             className="multi-create button-design"
           >

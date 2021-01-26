@@ -35,8 +35,8 @@ function JoinRoomForm( {onSubmit}: Props ) {
         <input
           type='text'
           name='roomCode'
-          min="2" 
-          max="6"
+          minLength={2}
+          maxLength={6}
           required
           placeholder='방 이름을 넣어주세요'
           title='2~6자리의 방 이름을 넣어주세요'
@@ -48,8 +48,8 @@ function JoinRoomForm( {onSubmit}: Props ) {
       <input
           type='text'
           name='nickName'
-          min="2" 
-          max="6"
+          minLength={2}
+          maxLength={6}
           required
           placeholder='닉네임을 넣어주세요'
           title='2~6자리의 닉네임을 넣어주세요'
