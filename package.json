@@ -56,6 +56,7 @@
     ]
   },
   "devDependencies": {
+    "@types/react-loader-spinner": "^3.1.3",
     "@types/react-redux": "^7.1.15",
     "@types/react-router-dom": "^5.1.7",
     "@types/redux-logger": "^3.0.8",

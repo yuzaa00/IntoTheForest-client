@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import { roomSocket } from '../../utils/socket'
 import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+import { joinRoom, response } from '../../utils/socket.type'
+import crypto from 'crypto'
+
 import './JoinRoom.css';
 
 interface joinRoom {
@@ -22,22 +25,27 @@ function JoinRoomForm({ setModalOpen }: boolean ) {
   const [joinError, setjoinError] = useState('')
 
   const moveToRoom = (response: response) => {
-    const { roomId, error } = response
-    
+    const { roomId, clientId, error } = response
     if(!roomId) {
       setjoinError(error)
     }
     else {
       dispatch({
-        type: 'SAVE_ROOM_CODE',
-        value: input
+        type: 'RENDER_ROOM',
+        roomId: roomId,
+        roomCode: input,
+        user: {
+          nickName: nickInput || crypto.randomBytes(3).toString("hex"),
+          socketId: clientId,
+          photoUrl: '../../images/card/card5.png'
+        }
       })
       history.push(`rooms/${roomId}`)
     } 
   }
 
   const joinRoom = (joinRoom: joinRoom) => {
-    roomSocket.joinRoom({ joinRoom }, (roomId: response) => moveToRoom(roomId))
+    roomSocket.joinRoom(joinRoom, (roomId: response) => moveToRoom(roomId))
   }
 
   const submitRoomData = (ev: { preventDefault: () => void; }) => {

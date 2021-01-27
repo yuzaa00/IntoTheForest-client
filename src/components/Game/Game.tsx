@@ -25,8 +25,8 @@ export default function Game({  }) {
 
   
     return (
-      <div>
-        <div id='game-container'>
+      <div >
+        <div style={{position: 'relative' , bottom: '-250px'}} id='game-container' >
         </div>
         <div id='game-container1'>
         </div>

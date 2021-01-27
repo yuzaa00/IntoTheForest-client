@@ -149,6 +149,10 @@ const StyledModal = styled.div`
     width: 80%;
     margin: 0 auto;
   }
+
+  .join-room-canvas .join-room-area {
+
+  }
   
   .create-room-canvas .create-room-area .create-room-content {
     width: 100%;

@@ -8,28 +8,28 @@ import { BsFillChatDotsFill } from 'react-icons/bs'
 import ChatRoom from './ChatRoom'
 import Button from '../Mode/Button'
 
-
-interface Chat {
-  chat: string
-}
-
 function Chat() {
   const dispatch = useDispatch()
   const [isChatRoomOpen, setIsChatRoomOpen] = useState(false)
+  const chatList = useSelector((state: RootState) => state.chatReducer.chatList, shallowEqual)
   const unreadCount = useSelector((state: RootState) => state.chatReducer.unreadCount)
-
+  
   useEffect(() => {
-    chatSocket.listenMessage(({ chat }: Chat) => dispatch({ type: 'ADD_CHAT', value: chat }))
+    console.log('Hi')
+    chatSocket.listenMessage(({ chat }: any) => {
+      console.log(3, chat.chat, typeof chat.chat)
+      dispatch({ type: 'ADD_CHAT', value: chat.chat })
+    })
 
     return () => {
       chatSocket.cleanUpMessageListener();
       dispatch({ type: 'RESET_CHAT'})
     }
-  }, [])
+  }, [chatList])
 
   useEffect(() => {
     if (isChatRoomOpen) return
-    const chatList = useSelector((state: RootState) => state.chatReducer.chatlist)
+    
     if (chatList.length) {
       dispatch({ type: 'INCREASE_UNREAD_COUNT'})
     }
@@ -37,7 +37,7 @@ function Chat() {
 
   useEffect(() => {
     dispatch({ type: 'RESET_UNREAD_COUNT'})
-  }, [isChatRoomOpen]);
+  }, [isChatRoomOpen])
 
   return (
     <>
@@ -45,9 +45,7 @@ function Chat() {
         <BsFillChatDotsFill size={28} />
         {!!unreadCount && <Badge>{unreadCount}</Badge>}
       </Button>
-      {isChatRoomOpen &&
-        <ChatRoom/>
-      }
+      {isChatRoomOpen && <ChatRoom onSubmit={newChat => chatSocket.sendMessage({ newChat })} />}
     </>
   );
 }
@@ -67,18 +65,4 @@ const Badge = styled.div`
   color: ${({ theme }) => theme.white};
 `;
 
-export default Chat;
-
-Chat.propTypes = {
-  user: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    photoUrl: PropTypes.string,
-  }).isRequired,
-  chatList: PropTypes.array.isRequired,
-  unreadCount: PropTypes.number.isRequired,
-  addChat: PropTypes.func.isRequired,
-  resetChat: PropTypes.func.isRequired,
-  increaseUnreadCount: PropTypes.func.isRequired,
-  resetUnreadCount: PropTypes.func.isRequired,
-};
+export default Chat
