@@ -57,14 +57,12 @@ const initialState: RoomState = {
 }
 
 const roomReducer = createReducer<RoomState, RoomAction>(initialState, {
-  [RENDER_ROOM]: (state: RoomState, action: any) => {
-    state.users.push(action.user)
-    return {
+  [RENDER_ROOM]: (state: RoomState, action: any) => ({
       ...state, 
       roomId: action.roomId, 
-      roomCode: action.roomCode
-    }
-  },
+      roomCode: action.roomCode,
+      users: [...state.users, action.user]
+  }),
   [ADD_USER]: (state: RoomState, action: any) => ({ ...state, users: [...state.users, action.user] }),
   [DELETE_USER]: (state: RoomState, action: any) => {
     const newUserList = state.users.filter(

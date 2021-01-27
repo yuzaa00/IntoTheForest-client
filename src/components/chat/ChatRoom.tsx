@@ -49,7 +49,7 @@ function ChatRoom({onSubmit}) {
   const checkMyMessage = (id: string) => {
     return id === user.socketId ? 'my-message' : 'friend-message';
   }
-
+  
   return (
     <Wrapper>
       <MessageList>

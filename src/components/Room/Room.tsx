@@ -99,6 +99,7 @@ function Room({ renderRoom }: RoomProps) {
       <KakaoProfileButton handleAccToken={handleAccToken} />
       <KakaoProfileDelete handleAccToken={handleAccToken} />
       <Chat />
+      {/* <Loading /> */}
     </>
   );
 }

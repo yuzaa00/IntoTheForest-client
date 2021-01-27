@@ -13,8 +13,9 @@ function CreateRoomForm() {
   const [inputs, setInputs] = useState({
     roomCode: '',
     nickName: '',
-    maxNum: '2',
+    maxNum: 2,
   })
+  console.log(inputs)
 
   const moveToRoom = (response: response) => {
     const { roomId, clientId, error } = response
@@ -28,7 +29,7 @@ function CreateRoomForm() {
         roomId: roomId,
         roomCode: inputs.roomCode,
         user: {
-          nickName: crypto.randomBytes(3).toString("hex"),
+          nickName: inputs.roomCode || crypto.randomBytes(3).toString("hex"),
           socketId: clientId,
           photoUrl: '../../images/card/card5.png'
         }
@@ -45,16 +46,17 @@ function CreateRoomForm() {
   const submitRoomData = (ev: { preventDefault: () => void; }) => {
     ev.preventDefault()
     const { roomCode, maxNum, nickName } = inputs
-    createRoom({ roomCode, nickName, maxNum: Number(maxNum) })
+    createRoom({ roomCode, nickName, maxNum: maxNum })
   }
 
   const handleInputChange = (ev: { target: { value: string, name: string } }) => {
-    const { name, value } = ev.target;
-    setInputs(prev => ({ ...prev, [name]: value }));
+    const { name, value } = ev.target
+    setInputs(prev => ({ ...prev, [name]: value }))
   };
 
-  const handleChangeNickname = (e: any) => {
-    console.log(e.target.value);
+  const handleChangeNickname = (ev: any) => {
+    const { name, value } = ev.target
+    setInputs(prev => ({ ...prev, [name]: value }))
   }
 
   return (
@@ -63,8 +65,8 @@ function CreateRoomForm() {
       <div className="subtitle">2인, 4인이 함께 게임을 즐겨보세요!</div>
       <form onSubmit={submitRoomData}>
         <div className="people">
-          <div>2인</div>
-          <div>4인</div>
+          <div onClick={() => setInputs(prev => ({ ...prev, maxNum: 2 }))}>2인</div>
+          <div onClick={() => setInputs(prev => ({ ...prev, maxNum: 4 }))}>4인</div>
         </div>
 
         <div className="create-room-area">
@@ -84,6 +86,10 @@ function CreateRoomForm() {
             <div>닉네임 <span>필수</span></div>
             <input
               type="text"
+              name='nickName'
+              minLength={2}
+              maxLength={6}
+              value={inputs.nickName}
               onChange={handleChangeNickname}
               required />
           </div>
