@@ -126,23 +126,23 @@ const chatSocket = {
   },
 };
 
-// const peerSocket = {
-//   sendingSignal({ signal, receiver }) {
-//     socket.emit(EVENT.SENDING_SIGNAL, { signal, receiver });
-//   },
-//   listenSendingSignal(cb) {
-//     socket.on(EVENT.SENDING_SIGNAL, cb);
-//   },
-//   returnSignal({ signal, receiver }) {
-//     socket.emit(EVENT.RETURNING_SIGNAL, { signal, receiver });
-//   },
-//   listenReturningSignal(cb) {
-//     socket.on(EVENT.RETURNING_SIGNAL, cb);
-//   },
-//   cleanUpPeerListener() {
-//     socket.off(EVENT.SENDING_SIGNAL);
-//     socket.off(EVENT.RETURNING_SIGNAL);
-//   },
-// };
+const peerSocket = {
+  sendingSignal({ signal, receiver }) {
+    socket.emit('sending signal', { signal, receiver });
+  },
+  listenSendingSignal(cb) {
+    socket.on('sending signal', cb);
+  },
+  returnSignal({ signal, receiver }) {
+    socket.emit('returning signal', { signal, receiver });
+  },
+  listenReturningSignal(cb) {
+    socket.on('returning signal', cb);
+  },
+  cleanUpPeerListener() {
+    socket.off('sending signal');
+    socket.off('returning signal');
+  },
+};
 
-export { roomSocket, chatSocket }
+export { roomSocket, chatSocket, peerSocket }
