@@ -44,6 +44,22 @@ function Room({ renderRoom }: RoomProps) {
         value: socketId
       })
     })
+    
+    roomSocket.onSetProfile((user: any) => {
+      console.log(user)
+      const editUser = Object.assign({}, { 
+        photoUrl: user.photoUrl,
+        nickName: user.nickName,
+        socketId: user.clientId
+      })
+
+      console.log(editUser)
+      
+      dispatch({
+        type: 'SET_PROFILE',
+        value: editUser
+      })
+    })
 
   }, [])
 
@@ -60,7 +76,17 @@ function Room({ renderRoom }: RoomProps) {
       window.Kakao.Auth.setAccessToken(accessToken);
       window.Kakao.API.request({
         url: '/v2/user/me',
-        success: (response: any) => console.log(response),
+        success: (res: any) => {
+          //dispatch(user url바꾸기),
+          const { nickname, thumbnail_image } = res.properties
+
+          const userData = {
+            photoUrl: thumbnail_image,
+            roomCode: roomCode,
+            nickName: nickname,
+          }
+          roomSocket.emitSetProfile( userData )
+          },
         fail: (error: any) => console.log(error)
       })
     }

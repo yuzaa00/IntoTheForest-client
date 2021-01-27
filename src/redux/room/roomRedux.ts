@@ -8,12 +8,14 @@ const DELETE_USER ='DELETE_USER'
 const UPDATE_ROOM_LOCKING_STATUS = 'UPDATE_ROOM_LOCKING_STATUS'
 const TURN_ON_FILTER = 'TURN_ON_FILTER'
 const TURN_OFF_FILTER = 'TURN_OFF_FILTER'
+const SET_PROFILE = 'SET_PROFILE'
 
 export const saveRoomCode = createAction(SAVE_ROOM_CODE)
 export const renderRoom = createAction(RENDER_ROOM)
 // export const destroyRoom = createAction(DESTROY_ROOM)
 export const addUser = createAction(ADD_USER)
 export const deleteUser = createAction(DELETE_USER)
+export const setProfile = createAction(SET_PROFILE)
 // export const updateRoomLockingStatus = createAction(UPDATE_ROOM_LOCKING_STATUS)
 // export const turnOnFilter = createAction(TURN_ON_FILTER)
 // export const turnOffFilter = createAction(TURN_OFF_FILTER)
@@ -24,6 +26,7 @@ const actions = {
   // destroyRoom, 
   addUser,
   deleteUser, 
+  setProfile,
   // updateRoomLockingStatus, 
   // turnOnFilter, 
   // turnOffFilter 
@@ -71,7 +74,18 @@ const roomReducer = createReducer<RoomState, RoomAction>(initialState, {
       ...state,
       users: newUserList
     }
+  },
+  [SET_PROFILE]: (state: RoomState, action: any) => {
+    let index = 0;
+    state.users.forEach((user, idx) => {
+      if(user.socketId === action.value.socketId) index = idx })
+    state.users[index] = action.value
+
+    return {
+      ...state
+    }
   }
+  
 })
 
 export default roomReducer
