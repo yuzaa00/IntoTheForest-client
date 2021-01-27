@@ -1,5 +1,5 @@
 import io from 'socket.io-client';
-
+import * as types from './socket.type' 
 const socket = io('http://localhost:4000', {transports: ['websocket']})
 
 export const getMySocketId = () => socket.id;
@@ -38,16 +38,20 @@ export const getMySocketId = () => socket.id;
 // };
 
 const roomSocket = {
-  createRoom({ roomData }, cb) {
+  createRoom(roomData : types.roomData, cb: Function) {
     socket.emit('create room', roomData, cb)
   },
 
-  joinRoom({roomData}, cb) {
-    socket.emit('join room', roomData, cb);
+  joinRoom(joinRoom: types.joinRoom, cb: Function) {
+    socket.emit('join room', joinRoom, cb);
   },
 
-  userJoined(roomCode, cb) {
-    socket.emit('member joined', roomCode, cb)
+  userJoined(roomCode: types.roomCode) {
+    socket.emit('user joined', roomCode)
+  },
+
+  userJoinedOn(cb: Function) {
+    socket.on('user joined', cb)
   },
 
   // memberJoinedAlert() {
@@ -103,10 +107,10 @@ const roomSocket = {
 
 const chatSocket = {
   sendMessage({ newChat }) {
-    socket.emit('chat', { chat: newChat });
+    socket.emit('chat', newChat)
   },
-  listenMessage(cb) {
-    socket.on('chat', cb);
+  listenMessage(callback: Function) {
+    socket.on('chat', callback)
   },
   cleanUpMessageListener() {
     socket.off('chat');

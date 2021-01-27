@@ -37,25 +37,31 @@ interface Action {
 
 interface usersItem {
   socketId: string
-  value: boolean
+  photoUrl: string
+  nickName: string
 }
 
 interface RoomState  {
   roomCode: string
-  room: any
+  roomId: string
   users: usersItem[]
 }
 
 const initialState: RoomState = {
   roomCode: '',
-  room: null,
+  roomId: '',
   users: []
 }
 
-
 const roomReducer = createReducer<RoomState, RoomAction>(initialState, {
-  [SAVE_ROOM_CODE]: (state: RoomState, action: any) => ({ ...state, roomCode: action.value }),
-  [RENDER_ROOM]: (state: RoomState, action: any) => ({ ...state, room: action.value }),
+  [RENDER_ROOM]: (state: RoomState, action: any) => {
+    state.users.push(action.user)
+    return {
+      ...state, 
+      roomId: action.roomId, 
+      roomCode: action.roomCode
+    }
+  },
   [ADD_USER]: (state: RoomState, action: any) => ({ ...state, users: [...state.users, action.user] }),
   [DELETE_USER]: (state: RoomState, action: any) => {
     const newUserList = state.users.filter(
@@ -69,7 +75,7 @@ const roomReducer = createReducer<RoomState, RoomAction>(initialState, {
 })
 
 export default roomReducer
-
+// [SAVE_ROOM_CODE]: (state: RoomState, action: any) => ({ ...state, roomCode: action.value }),
   // [RENDER_ROOM]: (state, { payload: { key, value } }) => ({ ...key }), // 액션을 참조 할 필요 없으면 파라미터로 state 만 받아와도 됩니다
   // [DESTROY_ROOM]: state => ({ count: state.count - 1 }),
   // [ADD_MEMBER]: (state, action) => ({ count: state.count + action.payload }),
