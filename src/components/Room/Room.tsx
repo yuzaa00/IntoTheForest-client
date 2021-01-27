@@ -85,6 +85,7 @@ function Room({ renderRoom }: RoomProps) {
             roomCode: roomCode,
             nickName: nickname,
           }
+          console.log('log', userData)
           roomSocket.emitSetProfile( userData )
           },
         fail: (error: any) => console.log(error)

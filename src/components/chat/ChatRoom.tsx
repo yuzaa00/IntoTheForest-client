@@ -37,7 +37,7 @@ function ChatRoom({onSubmit}) {
         photoUrl: user.photoUrl,
         content: trimmedInput,
         date: time,
-        userId: user.socketId,
+        socketId: user.socketId,
       },
       roomCode: roomCode
     }
@@ -57,7 +57,7 @@ function ChatRoom({onSubmit}) {
           chatList.map((chat, idx) => (
             <ChatCell key={idx} className={checkMyMessage(chat.socketId)}>
               <Profile>
-                <img src="../../images/card/card5.png" />
+                <img src={chat.photoUrl || "../../images/card/card5.png" } />
                 <div>{chat.nickName}</div>
               </Profile>
               <span>{chat.content}</span>
@@ -83,7 +83,7 @@ const Wrapper = styled.div`
   z-index: 25;
   background-color: ${({ theme }) => theme.darkPurple};
   width: 400px;
-  height: 400px;
+  height: 1000px;
   position: fixed;
   right: 100px;
   bottom: 100px;
@@ -93,7 +93,7 @@ const Wrapper = styled.div`
 
 const MessageList = styled.div`
   width: 100%;
-  height: 320px;
+  height: 900px;
   padding-top: 20px;
   overflow-y: auto;
 

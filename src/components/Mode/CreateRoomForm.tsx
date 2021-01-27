@@ -29,7 +29,7 @@ function CreateRoomForm() {
         roomId: roomId,
         roomCode: inputs.roomCode,
         user: {
-          nickName: inputs.roomCode || crypto.randomBytes(3).toString("hex"),
+          nickName: inputs.nickName || crypto.randomBytes(3).toString("hex"),
           socketId: clientId,
           photoUrl: '../../images/card/card5.png'
         }

@@ -1,6 +1,6 @@
 import io from 'socket.io-client';
 import * as types from './socket.type' 
-const socket = io('https://elb.intotheforest4.space', {transports: ['websocket']})
+const socket = io('http://localhost:4000', {transports: ['websocket']})
 
 export const getMySocketId = () => socket.id;
 
@@ -56,7 +56,7 @@ const roomSocket = {
 
   emitSetProfile(userData) {
     socket.emit('set profile', userData)
-  }
+  },
   
   onSetProfile(cb) {
     socket.on('set profile', cb)
