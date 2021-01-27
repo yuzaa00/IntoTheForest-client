@@ -1,8 +1,10 @@
-import React, { useCallback, useState, useEffect, useRef } from 'react';
+import React, { useCallback, useState, useEffect, useRef } from 'react'
 import { useHistory } from 'react-router-dom';
-import { useSelector, useDispatch, shallowEqual } from 'react-redux';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 import { RootState } from '../../redux/rootReducer'
 import { roomSocket } from '../../utils/socket'
+import Loading from '../Ready/Loading'
+import Chat from '../chat/Chat'
 
 import KakaoProfileButton from './KakaoProfileButton'
 import KakaoProfileDelete from './KakaoProfileDelete'
@@ -23,18 +25,13 @@ function Room({ renderRoom }: RoomProps) {
   // 카카오 프로필 불러오기 - 시작
   useEffect(() => {
     console.log('?', roomCode)
-    roomSocket.userJoined({roomCode: roomCode}, async ({ roomId, error }) => { //socket emit
-      console.log(roomId, error)
-      dispatch({
-        type: 'RENDER_ROOM',
-        value: roomId
-      })
-    })
+    roomSocket.userJoined(roomCode)
 
     roomSocket.newUserJoined(({ newUser }) => dispatch({ // socket on
       type: 'ADD_USER',
       value: newUser
     }))
+
     roomSocket.userLeaved(({ socketId }) => { // socket on
       delete usersRef.current[socketId];
       setUsers(users => {
@@ -75,6 +72,7 @@ function Room({ renderRoom }: RoomProps) {
       <div>멀티 유저 대기실</div>
       <KakaoProfileButton handleAccToken={handleAccToken} />
       <KakaoProfileDelete handleAccToken={handleAccToken} />
+      <Chat />
     </>
   );
 }
