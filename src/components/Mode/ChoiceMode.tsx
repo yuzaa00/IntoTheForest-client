@@ -55,7 +55,7 @@ const ChoiceMode = () => {
         <div className="mode-multi">
           <div className="mode-name">멀티</div>
           <button
-            onClick={() => openModal(<CreateRoomForm />)}
+            onClick={() => openModal(<CreateRoomForm setModalOpen={setModalOpen}/>)}
             onMouseOver={multiModeCreateRoom}
             className="multi-create button-design"
           >
@@ -74,7 +74,7 @@ const ChoiceMode = () => {
           <Modal setModalOpen={setModalOpen}>{modalComponents}</Modal>
       }
       <div className="text">
-        {modeHover === null ?
+        {modeHover === '' ?
           <div className="choiceMode">모드를 선택하세요</div>
           :
           <div className="choiceMode">{modeHover}</div>
@@ -86,6 +86,7 @@ const ChoiceMode = () => {
         </Link>
       </div>
     </div>
+          // <Modal setModalOpen={setModalOpen}><CreateRoomForm /></Modal>
   )
 }
 
