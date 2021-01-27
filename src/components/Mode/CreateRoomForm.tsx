@@ -87,14 +87,6 @@ function CreateRoomForm(setModalOpen){
               value={inputs.roomCode}
               onChange={handleRoomcodeChange}/>
             </div>
-            <div className="create-nickname-content">
-                <div className="main-text">닉네임 {createError && <span>필수</span>}</div>
-                <input
-                type="text"
-                minLength={2}
-                maxLength={6}
-                onChange={handleChangeNickname}/>
-              </div>
           </div>
           <div className="nickname-content">
             <div>닉네임 <span>필수</span></div>
@@ -107,7 +99,6 @@ function CreateRoomForm(setModalOpen){
               onChange={handleChangeNickname}
               required />
           </div>
-        <input type='submit' value='방 만들기' className="create-button" />
       {createError && <div className="error-msg">{createError}</div>}
       <div className="button-area"></div>
       <input type='submit' value='방 만들기' className="create-button" />
