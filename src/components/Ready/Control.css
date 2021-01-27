@@ -121,3 +121,14 @@ li {
 .control-canvas .button-area .start:hover {
   background: #E60304;
 }
+
+.control-canvas .button-area .backCharacter {
+  background: #233F4E;
+  margin-left: 30px;
+  padding: 1.5% 3%;
+  border-radius: 200px;
+}
+
+.control-canvas .button-area .backCharacter:hover {
+  background: #08293B;
+}
