@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { roomSocket } from '../../utils/socket'
 import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
-import './CreateRoom.css';
+// import './CreateRoom.css';
 
 interface roomData {
   roomCode: string
@@ -46,7 +46,8 @@ function CreateRoomForm({ setModalOpen }: boolean ) {
     roomSocket.createRoom({ roomData }, (roomId: response) => moveToRoom(roomId))
   }
 
-  const submitRoomData = (ev: { preventDefault: () => void; }) => {
+  const submitRoomData = (ev: { preventDefault: () => void }, e) => {
+    console.log(e.target.value);
     ev.preventDefault()
     const { roomCode, maxNum, nickName } = inputs
     createRoom({ roomCode, nickName, maxNum: Number(maxNum) })
@@ -70,7 +71,7 @@ function CreateRoomForm({ setModalOpen }: boolean ) {
     <div>
       <div className="create-room-canvas">
         <div className="title">방 생성</div>
-        <div className="subtitle">2인, 4인이 함께 게임을 즐겨보세요!</div>
+        <div className="subtitle">최소 2명부터 최대 4명까지 함께 게임을 즐길 수 있어요!</div>
 
         <form onSubmit={submitRoomData}>
 
@@ -84,11 +85,9 @@ function CreateRoomForm({ setModalOpen }: boolean ) {
             </div>}
 
             {member === 4? 
-            <div className="highlight">
-              <div onClick={()=>setMember(4)}>
+              <div onClick={()=>setMember(4)} className="highlight">
                 4인
               </div>
-            </div>
             : <div onClick={()=>setMember(4)}>
               4인
             </div>}
@@ -105,7 +104,7 @@ function CreateRoomForm({ setModalOpen }: boolean ) {
               value={inputs.roomCode}
               onChange={handleRoomcodeChange}/>
             </div>
-            <div className="nickname-content">
+            <div className="create-nickname-content">
                 <div className="main-text">닉네임 {createError && <span>필수</span>}</div>
                 <input
                 type="text"
