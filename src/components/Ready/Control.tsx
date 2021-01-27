@@ -58,7 +58,12 @@ function Control() {
                 GAME START
               </button>
             </Link>
-          </div>
+            <Link to="/ready/character">
+              <button className="backCharacter control-button">
+                뒤로가기
+              </button>
+            </Link>
+         </div>
       </div>
     )
 }
