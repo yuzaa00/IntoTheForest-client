@@ -33,13 +33,15 @@ function Modal({ children }: any) {
 
 const StyledModal = styled.div`
   width: 100%;
-  height: 600px;
+  height: 100vh;
   position: fixed;
   top: 0;
   left: 0;
   color: white;
   text-align: center;
   font-family: 'Y_Spotlight';
+  background: rgba(0, 0, 0, 0.7);
+  padding: 2%;
 
   input {
     text-align: center;
@@ -49,20 +51,21 @@ const StyledModal = styled.div`
     outline: none;
   }
 
-  .create-room-canvas {
-    width: 1200px;
-    height: 600px;
-    background: rgba(0, 0, 0, 0.7);
+  .create-room-canvas, .join-room-canvas {
+    width: 80%;
+    height: 90vh;
     margin: 0 auto;
+    text-align: center;
     padding: 25px 0;
     box-sizing: border-box;
+    position: relative;
   }
 
   .create-room-canvas input {
     width: 97%;
     height: 30px;
     display: inline-block;
-    border-radius: 25px;
+    border-radius: 20px;
   }
 
   .create-room-canvas .title {
@@ -73,19 +76,28 @@ const StyledModal = styled.div`
   }
   
   .create-room-canvas .subtitle {
-    width: inherit;
+    width:100%;
     height: 20px;
-    margin: 5px 0 30px;
+    margin: 1% 0 5%;
+    text-align: center;
   }
   
   .create-room-canvas form {
     width: 80%;
+    height: 40%;
     margin: 10px auto 0;
+  }
+
+  .join-room-canvas .join-form {
+    width: 100%;
+    height: 80%;
+    box-sizing: border-box;
+    background: red;
   }
   
   .create-room-canvas .people {
     width: 100%;
-    height: 170px;
+    height: 100%;
     line-height: 170px;
     display: flex;
     margin-bottom: 30px;
@@ -103,6 +115,7 @@ const StyledModal = styled.div`
     font-weight: bold;
     box-shadow: 2px 2px 10px 5px rgba(0, 0, 0, .8);
     border-radius: 50px;
+    padding-top: 8%;
     cursor: pointer;
   }
   
@@ -121,9 +134,13 @@ const StyledModal = styled.div`
   
   .create-room-canvas .create-room-area {
     width: 100%;
-    height: 150px;
+    height: 60%;
     display: flex;
     box-sizing: border-box;
+  }
+
+  .join-room-canvas .join-room-area {
+
   }
   
   .create-room-canvas .create-room-area .create-room-content {
@@ -133,8 +150,12 @@ const StyledModal = styled.div`
   .create-room-canvas .main-text {
     font-size: 30px;
   }
+
+  .join-room-canvas .join-room-area .join-room-content {
+
+  }
   
-  .create-room-canvas .create-room-area .nickname-content {
+  .join-room-canvas .join-room-area .join-nickname-content { 
     width: 100%;
     height: 100px;
     /* margin-bottom: 20px; */
@@ -144,7 +165,7 @@ const StyledModal = styled.div`
   .button-area button {
     width: 120px;
     height: 70px;
-    border-radius: 40px;
+    border-radius: 30px;
     color: white;
     font-family: 'Y_Spotlight';
     font-size: 20px;
@@ -152,10 +173,11 @@ const StyledModal = styled.div`
   }
 
   .create-room-canvas .create-button {
-    width: 800px;
+    width: 100%;
+    height: 100px;
     background-color: ${({ theme }) => theme.gray};
     color: #222;
-    margin-right: 30px;
+    margin-right: 5%;
   }
 
   .create-room-canvas .create-button:hover {
@@ -163,6 +185,9 @@ const StyledModal = styled.div`
   }
 
   .create-room-canvas .button-area button {
+    position: fixed;
+    bottom: 1%;
+    right: 1%;
     background-color: red;
   }
 

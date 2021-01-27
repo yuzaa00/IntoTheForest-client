@@ -34,14 +34,14 @@ function Story () {
                         <div className="only-hidden">
                             <div className="storytelling">
                                 <div className="storytelling-start">
-                                    {!showText && textArr1.map(item => <div key={item}>{item}</div>)}
+                                    {!showText && textArr1.map((item, key) => <div key={key}>{item}</div>)}
                                 </div>
                                 {showText && (
                                     <div className="storytelling-restart">
-                                        {textArr1.map(item => <div key={item}>{item}</div>)} {/* 첫 번째 텍스트 */}
+                                        {textArr1.map((item, idx) => <div key={idx}>{item}</div>)} {/* 첫 번째 텍스트 */}
                                         <br/>
                                         <br/>
-                                        {textArr2.map(item => <div key={item}>{item}</div>)}  {/* 두 번째 텍스트 */}
+                                        {textArr2.map((item, idx) => <div key={idx}>{item}</div>)}  {/* 두 번째 텍스트 */}
                                     </div>
                                 )}
                             </div>
