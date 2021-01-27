@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { roomSocket } from '../../utils/socket'
 import { useHistory } from 'react-router-dom'
+import { useDispatch } from 'react-redux';
+import './CreateRoom.css';
 
 interface roomData {
   roomCode: string
@@ -15,7 +17,8 @@ interface response {
 
 
 function CreateRoomForm({ setModalOpen }: boolean ) {
-  const history = useHistory();
+  const dispatch = useDispatch()
+  const history = useHistory()
   const [createError, setCreateError] = useState('')
   const [inputs, setInputs] = useState({
     roomCode: '',
@@ -31,6 +34,10 @@ function CreateRoomForm({ setModalOpen }: boolean ) {
       setCreateError(error)
     }
     else {
+      dispatch({
+        type: 'SAVE_ROOM_CODE',
+        value: inputs.roomCode
+      })
       history.push(`rooms/${roomId}`)
     } 
   }

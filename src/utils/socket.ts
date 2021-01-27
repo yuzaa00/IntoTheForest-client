@@ -42,8 +42,23 @@ const roomSocket = {
     socket.emit('create room', roomData, cb)
   },
 
-  joinRoom({ joinRoom }, cb) {
-    socket.emit('join room', joinRoom, cb);
+  joinRoom({roomData}, cb) {
+    socket.emit('join room', roomData, cb);
+  },
+
+  userJoined(roomCode, cb) {
+    socket.emit('member joined', roomCode, cb)
+  },
+
+  // memberJoinedAlert() {
+  //   socket.on('member joined', roomCode)
+  // },
+
+  newUserJoined(cb) {
+    socket.on('new user', cb);
+  },
+  userLeaved(cb) {
+    socket.on('leave user', cb);
   },
   // updateRoomList() {
   //   socket.emit(EVENT.ROOM_LIST);
@@ -86,17 +101,17 @@ const roomSocket = {
   // },
 };
 
-// const chatSocket = {
-//   sendMessage({ newChat }) {
-//     socket.emit(EVENT.CHAT, { chat: newChat });
-//   },
-//   listenMessage(cb) {
-//     socket.on(EVENT.CHAT, cb);
-//   },
-//   cleanUpMessageListener() {
-//     socket.off(EVENT.CHAT);
-//   },
-// };
+const chatSocket = {
+  sendMessage({ newChat }) {
+    socket.emit('chat', { chat: newChat });
+  },
+  listenMessage(cb) {
+    socket.on('chat', cb);
+  },
+  cleanUpMessageListener() {
+    socket.off('chat');
+  },
+};
 
 // const peerSocket = {
 //   sendingSignal({ signal, receiver }) {
@@ -117,4 +132,4 @@ const roomSocket = {
 //   },
 // };
 
-export { roomSocket }
+export { roomSocket, chatSocket }
