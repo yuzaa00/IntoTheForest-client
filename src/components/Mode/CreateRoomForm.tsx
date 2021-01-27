@@ -5,21 +5,18 @@ import { useDispatch } from 'react-redux'
 import { roomData, response } from '../../utils/socket.type'
 import crypto from 'crypto'
 import './CreateRoom.css';
-
-function CreateRoomForm() {
+function CreateRoomForm(setModalOpen){
   const dispatch = useDispatch()
   const history = useHistory()
   const [createError, setCreateError] = useState('')
+  const [user, setUser] = useState(0);
   const [inputs, setInputs] = useState({
     roomCode: '',
     nickName: '',
     maxNum: 2,
   })
-  console.log(inputs)
-
   const moveToRoom = (response: response) => {
     const { roomId, clientId, error } = response
-
     if (!roomId) {
       setCreateError(error)
     }
@@ -37,38 +34,48 @@ function CreateRoomForm() {
       history.push(`rooms/${roomId}`)
     }
   }
-
   const createRoom = (roomData: roomData) => {
     roomSocket.createRoom(roomData, (roomId: response) => moveToRoom(roomId))
   }
-
-
   const submitRoomData = (ev: { preventDefault: () => void; }) => {
     ev.preventDefault()
     const { roomCode, maxNum, nickName } = inputs
     createRoom({ roomCode, nickName, maxNum: maxNum })
   }
-
-  const handleInputChange = (ev: { target: { value: string, name: string } }) => {
+  const handleRoomcodeChange = (ev: { target: { value: string, name: string } }) => {
     const { name, value } = ev.target
     setInputs(prev => ({ ...prev, [name]: value }))
   };
-
-  const handleChangeNickname = (ev: any) => {
+  const handleChangeNickname = (ev: { target: { value: string, name: string } }) => {
     const { name, value } = ev.target
     setInputs(prev => ({ ...prev, [name]: value }))
   }
-
+  const closeModal = () => {
+    setModalOpen(false)
+    history.push('/mode')
+  }
   return (
-    <div className="create-room-canvas">
-      <div className="title">방 만들기</div>
-      <div className="subtitle">2인, 4인이 함께 게임을 즐겨보세요!</div>
-      <form onSubmit={submitRoomData}>
-        <div className="people">
-          <div onClick={() => setInputs(prev => ({ ...prev, maxNum: 2 }))}>2인</div>
-          <div onClick={() => setInputs(prev => ({ ...prev, maxNum: 4 }))}>4인</div>
-        </div>
-
+    <div>
+      <div className="create-room-canvas">
+        <div className="title">방 생성</div>
+        <div className="subtitle">최소 2명부터 최대 4명까지 함께 게임을 즐길 수 있어요!</div>
+        <form onSubmit={submitRoomData}>
+          <div className="people">
+            {user === 2?
+            <div onClick={()=>setUser(2)} className="highlight">
+              2인
+            </div>
+            : <div onClick={()=>setUser(2)}>
+              2인
+            </div>}
+            {user === 4? 
+              <div onClick={()=>setUser(4)} className="highlight">
+                4인
+              </div>
+            : <div onClick={()=>setUser(4)}>
+              4인
+            </div>}
+          </div>
         <div className="create-room-area">
           <div className="create-room-content">
             <div>방 코드 설정 <span>필수</span></div>
@@ -78,9 +85,16 @@ function CreateRoomForm() {
               minLength={2}
               maxLength={6}
               value={inputs.roomCode}
-              onChange={handleInputChange}
-              required
-            />
+              onChange={handleRoomcodeChange}/>
+            </div>
+            <div className="create-nickname-content">
+                <div className="main-text">닉네임 {createError && <span>필수</span>}</div>
+                <input
+                type="text"
+                minLength={2}
+                maxLength={6}
+                onChange={handleChangeNickname}/>
+              </div>
           </div>
           <div className="nickname-content">
             <div>닉네임 <span>필수</span></div>
@@ -93,14 +107,14 @@ function CreateRoomForm() {
               onChange={handleChangeNickname}
               required />
           </div>
-        </div>
         <input type='submit' value='방 만들기' className="create-button" />
-
+      {createError && <div className="error-msg">{createError}</div>}
+      <div className="button-area"></div>
+      <input type='submit' value='방 만들기' className="create-button" />
+      <button onClick={closeModal}>닫기</button>
       </form>
-      {createError && <div style={{ color: 'red' }}>{createError}</div>}
+      </div>
     </div>
   )
 }
-
 export default CreateRoomForm
-

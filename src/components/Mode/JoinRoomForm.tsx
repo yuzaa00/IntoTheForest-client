@@ -4,7 +4,18 @@ import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { joinRoom, response } from '../../utils/socket.type'
 import crypto from 'crypto'
-// import './JoinRoom.css';
+
+import './JoinRoom.css';
+
+interface joinRoom {
+  nickName: string
+  roomCode: string
+}
+
+interface response {
+  roomId: string
+  error: string
+}
 
 function JoinRoomForm({ setModalOpen }: boolean ) {
   const dispatch = useDispatch()
@@ -100,7 +111,7 @@ function JoinRoomForm({ setModalOpen }: boolean ) {
           </div>
 
           <div className="button-area">
-            <input type='submit' value='방 참여하기' className="create-button" />
+            <input type='submit' value='방 참여하기' className="join-button" />
             <button onClick={closeModal}>닫기</button>
           </div> 
 

@@ -61,14 +61,20 @@ const StyledModal = styled.div`
     position: relative;
   }
 
-  .create-room-canvas input {
+  .join-room-canvas {
+    margin-top: 10%;
+  }
+
+  .create-room-canvas input,
+  .join-room-canvas input {
     width: 97%;
     height: 30px;
     display: inline-block;
     border-radius: 20px;
   }
 
-  .create-room-canvas .title {
+  .create-room-canvas .title,
+  .join-room-canvas .title {
     width: 100%;
     font-family: 'BMDOHYEON';
     font-weight: bold;
@@ -92,7 +98,6 @@ const StyledModal = styled.div`
     width: 100%;
     height: 80%;
     box-sizing: border-box;
-    background: red;
   }
   
   .create-room-canvas .people {
@@ -134,9 +139,15 @@ const StyledModal = styled.div`
   
   .create-room-canvas .create-room-area {
     width: 100%;
-    height: 60%;
+    height: 25%;
     display: flex;
     box-sizing: border-box;
+    margin-top: 2%;
+  }
+
+  .join-room-canvas .join-room-area {
+    width: 80%;
+    margin: 0 auto;
   }
 
   .join-room-canvas .join-room-area {
@@ -147,22 +158,28 @@ const StyledModal = styled.div`
     width: 100%;
   }
 
-  .create-room-canvas .main-text {
+  .main-text {
     font-size: 30px;
   }
 
-  .join-room-canvas .join-room-area .join-room-content {
-
+  .join-room-canvas .join-room-area .join-room-content,
+  .join-room-canvas .join-room-area .join-nickname-content {
+    width: 50%;
+    margin: 5% auto;
   }
   
-  .join-room-canvas .join-room-area .join-nickname-content { 
+  .create-room-canvas .create-room-area .create-nickname-content { 
     width: 100%;
     height: 100px;
-    /* margin-bottom: 20px; */
+  }
+
+  .join-room-canvas .button-area {
+    margin: 0;
   }
   
   .create-room-canvas .create-button,
-  .button-area button {
+  .button-area button,
+  .join-room-canvas .join-button {
     width: 120px;
     height: 70px;
     border-radius: 30px;
@@ -172,7 +189,8 @@ const StyledModal = styled.div`
     cursor: pointer;
   }
 
-  .create-room-canvas .create-button {
+  .create-room-canvas .create-button, 
+  .join-room-canvas .join-button {
     width: 100%;
     height: 100px;
     background-color: ${({ theme }) => theme.gray};
@@ -180,18 +198,24 @@ const StyledModal = styled.div`
     margin-right: 5%;
   }
 
-  .create-room-canvas .create-button:hover {
+  .join-room-canvas .join-button {
+    width: 50%;
+    margin: 0 auto;
+  }
+
+  .create-button:hover,
+  .join-button:hover {
     background-color: ${({ theme }) => theme.grayHover};
   }
 
-  .create-room-canvas .button-area button {
+  .button-area button {
     position: fixed;
     bottom: 1%;
     right: 1%;
     background-color: red;
   }
 
-  .create-room-canvas .button-area button:hover {
+  .button-area button:hover {
     background-color: ${({ theme }) => theme.redHover};
   }
   
@@ -201,17 +225,17 @@ const StyledModal = styled.div`
     font-size: 15px;
   }
   
-  .create-room-canvas .create-room-area input {
+  .create-room-canvas .create-room-area input,
+  .join-room-canvas .join-room-area input {
     margin-top: 20px;
     padding: 12px 0;
     font-family: 'Y_Spotlight';
   }
 
-  .create-room-canvas .error-msg {
+  .error-msg {
     color: red;
     margin-bottom: 20px;
   }
-
 
   // input[type='email'] {
   //   all: unset;

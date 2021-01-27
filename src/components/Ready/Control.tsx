@@ -5,11 +5,12 @@ import './Control.css';
 function Control() {
 
     const controlDescription = [
-        { name: '점수 획득 아이템', data: ['뼈다귀'], img: '../../images/object/bone.png' },
-        { name: '몬스터', data: ['뱀', '멧돼지', '늑대'], img: '../../images/character/all-monster.png' },
-        { name: '장애물(체력 감소)', data: ['독버섯'], img: '../../images/object/mushroom.png' },
-        { name: '서브캐', data: ['서브캐 증가'], img: '../../images/character/subcharacters.png' },
-        { name: '포션', data: ['블루 포션 (체력 소폭 증가)', '레드 포션 (체력 대폭 증가)', '스테이지 포션 (스테이지 전환)'], img: '../../images/object/all-potion.png' },
+        { name: '점수 획득 아이템', data: ['뼈다귀'], img: '../../images/bone.png' },
+        { name: '몬스터', data: ['뱀', '멧돼지', '늑대'], img: '../../images/all-monster.png' },
+        { name: '장애물(체력 감소)', data: ['독버섯'], img: '../../images/mushroom.png' },
+        { name: '서브캐', data: ['서브캐 증가'], img: '../../images/subcharacters.png' },
+        { name: '포션', data: ['블루 포션 (체력 소폭 증가)', '레드 포션 (체력 증가)', '스테이지 포션 (체력 대폭 증가)'], img: '../../images/all-potion.png' },
+        { name: '푯말', data: ['다음 스테이지 넘어가기'], img: '../../images/signExit.png' },
     ];
 
     const [controlModal, setControlModal] = useState<boolean>(false);
