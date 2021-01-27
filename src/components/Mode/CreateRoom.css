@@ -3,19 +3,20 @@ input {
 }
 
 .create-room-canvas {
-  background: rgba(0, 0, 0, 0.8);
+  /* background: rgba(0, 0, 0, 0.3); */
   position: fixed;
   left: 0;
   top: 0;
-  height: 100%;
-  width: 100%;
+  height: 600px;
+  width: 1200px;
   /* display: flex; */
   /* flex-direction: column;
   align-items: center; */
   justify-content: center;
   color: white;
-  text-align: center;
+  margin: 0 auto;
   font-family: 'Y_Spotlight';
+  box-sizing: border-box;
 }
 
 .create-room-canvas input {
@@ -58,6 +59,10 @@ input {
   display: flex;
   margin-bottom: 20px;
   border: 1px solid purple;
+}
+
+.create-room-canvas .people .highlight {
+  border: 1px solid yellow;
 }
 
 .create-room-canvas .people div {
