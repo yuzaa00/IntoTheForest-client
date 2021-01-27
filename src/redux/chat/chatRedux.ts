@@ -1,17 +1,18 @@
+import { stat } from 'fs';
 import Stage1 from 'src/phaser/scenes/Stage1';
 import { createAction, ActionType, createReducer } from 'typesafe-actions'
 
 const ADD_CHAT = 'ADD_CHAT';
 const RESET_CHAT = 'RESET_CHAT';
 const INCREASE_UNREAD_COUNT = 'INCREASE_UNREAD_COUNT';
-const RESET_UNREAD_COUNT ='RESET_UNREAD_COUNT';
+const RESET_UNREAD_COUNT = 'RESET_UNREAD_COUNT';
 
 export const addChat = createAction(ADD_CHAT)
 export const resetChat = createAction(RESET_CHAT)
 export const increaseUnreadCount = createAction(INCREASE_UNREAD_COUNT)
 export const resetUnreadCount = createAction(RESET_UNREAD_COUNT)
 
-const actions= {
+const actions = {
   addChat,
   resetChat,
   increaseUnreadCount,
@@ -33,7 +34,7 @@ interface chatItem {
   date: string
 }
 
-interface ChatState  {
+interface ChatState {
   chatList: chatItem[]
   unreadCount: number
 }
@@ -51,8 +52,8 @@ const chatReducer = createReducer<ChatState, ChatAction>(initialState, {
     }
   },
   [RESET_CHAT]: () => ({ initialState }),
-  [INCREASE_UNREAD_COUNT]: (state: ChatState) => ({...state, unreadCount: state.unreadCount + 1}),
-  [RESET_UNREAD_COUNT]: (state: ChatState) => ({...state, unreadCount: 0}),
+  [INCREASE_UNREAD_COUNT]: (state: ChatState) => ({ ...state, unreadCount: state.unreadCount + 1 }),
+  [RESET_UNREAD_COUNT]: (state: ChatState) => ({ ...state, unreadCount: 0 }),
 })
 
 export default chatReducer
