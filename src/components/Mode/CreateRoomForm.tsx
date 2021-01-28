@@ -42,9 +42,16 @@ function CreateRoomForm({setModalOpen}: any){
     roomSocket.createRoom(roomData, (roomId: response) => moveToRoom(roomId))
   }
   const submitRoomData = (ev: { preventDefault: () => void; }) => {
-    ev.preventDefault()
-    const { roomCode, nickName } = inputs
-    createRoom({ roomCode, nickName, maxNum: users })
+    console.log(users)
+    if(users === 0) {
+      setCreateError('방을 선택해주세요')
+      return
+    }
+    else {
+      ev.preventDefault()
+      const { roomCode, nickName } = inputs
+      createRoom({ roomCode, nickName, maxNum: users })
+    }
   }
   const handleRoomcodeChange = (ev: { target: { value: string, name: string } }) => {
     const { name, value } = ev.target
@@ -63,7 +70,7 @@ function CreateRoomForm({setModalOpen}: any){
       <div className="create-room-canvas">
         <div className="title">방 생성</div>
         <div className="subtitle">최소 2명부터 최대 4명까지 함께 게임을 즐길 수 있어요!</div>
-        <form onSubmit={submitRoomData}>
+        <form target='iframe'>
           <div className="people">
             {users === 2?
             <div onClick={()=>setUser(2)} className="highlight">
@@ -103,12 +110,14 @@ function CreateRoomForm({setModalOpen}: any){
               onChange={handleChangeNickname}
               required />
           </div>
+          <br></br>
       {createError && <div className="error-msg">{createError}</div>}
       <div className="button-area"></div>
-      <input type='submit' value='방 만들기' className="create-button" />
+      <input type='submit' value='방 만들기' className="create-button" onClick={submitRoomData} />
       <button onClick={closeModal}>닫기</button>
       </form>
       </div>
+      <iframe src="#" name="iframe" style={{"width":"1px", "height":"1px", "border":0, "visibility":"hidden"}}></iframe>
     </div>
   )
 }
