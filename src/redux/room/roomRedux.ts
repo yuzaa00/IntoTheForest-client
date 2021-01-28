@@ -1,3 +1,5 @@
+import { useStore } from 'react-redux'
+import { roomSocket } from 'src/utils/socket'
 import { createAction, ActionType, createReducer } from 'typesafe-actions'
 
 const SAVE_ROOM_CODE = 'SAVE_ROOM_CODE'
@@ -51,6 +53,7 @@ interface RoomState  {
   roomCode: string
   roomId: string
   users: usersItem[]
+  currentUser: usersItem
   game: boolean
   gameData: any
 }
@@ -58,6 +61,11 @@ interface RoomState  {
 const initialState: RoomState = {
   roomCode: '',
   roomId: '',
+  currentUser: {
+    nickName: '',
+    socketId: '',
+    photoUrl: ''
+  },
   users: [],
   game: false,
   gameData: {}
@@ -68,14 +76,21 @@ const roomReducer = createReducer<RoomState, RoomAction>(initialState, {
       ...state, 
       roomId: action.roomId, 
       roomCode: action.roomCode,
+      currentUser: action.currentUser,
       users: [...state.users, action.user]
   }),
   // [ADD_USER]: (state: RoomState, action: any) => ({ ...state, users: [...state.users, action.user] }),
   [ADD_USER]: (state: RoomState, action: any) => {
     console.log('action', action)
-    state.users.push(action.value)
+    const idx = action.value.findIndex((user: any) => user.socketId === state.currentUser.socketId)
+    let newArr = [
+      state.currentUser,
+      ...action.value.slice(0, idx),
+      ...action.value.slice(idx + 1)
+    ]
     return {
-      ...state
+      ...state,
+      users: newArr
     }
   },
   [DELETE_USER]: (state: RoomState, action: any) => {

@@ -28,6 +28,11 @@ function CreateRoomForm({setModalOpen}: any){
           nickName: inputs.nickName || crypto.randomBytes(3).toString("hex"),
           socketId: clientId,
           photoUrl: '../../images/card/card5.png'
+        },
+        currentUser: {
+          nickName: inputs.nickName || crypto.randomBytes(3).toString("hex"),
+          socketId: clientId,
+          photoUrl: '../../images/card/card5.png'
         }
       })
       history.push(`rooms/${roomId}`)

@@ -7,7 +7,7 @@ import crypto from 'crypto'
 
 import './JoinRoom.css';
 
-function JoinRoomForm({ setModalOpen }: boolean ) {
+function JoinRoomForm({ setModalOpen }: any ) {
   const dispatch = useDispatch()
   const history = useHistory()
   const [input, setInput] = useState('')
@@ -25,6 +25,11 @@ function JoinRoomForm({ setModalOpen }: boolean ) {
         roomId: roomId,
         roomCode: input,
         user: {
+          nickName: nickInput || crypto.randomBytes(3).toString("hex"),
+          socketId: clientId,
+          photoUrl: '../../images/card/card5.png'
+        },
+        currentUser: {
           nickName: nickInput || crypto.randomBytes(3).toString("hex"),
           socketId: clientId,
           photoUrl: '../../images/card/card5.png'

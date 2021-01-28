@@ -9,12 +9,21 @@ import Chat from '../chat/Chat'
 import Video, { StyledVideo } from './video'
 import * as controlStream from '../../utils/controlStream'
 import Peer from 'simple-peer'
+import { store } from '../../index'
 
 import KakaoProfileButton from './KakaoProfileButton'
 import KakaoProfileDelete from './KakaoProfileDelete'
 
 interface RoomProps {
   renderRoom: Function
+}
+
+interface user {
+
+  nickName: string
+  socketId: string
+  photoUrl: string
+
 }
 
 function Room({ renderRoom }: RoomProps) {
@@ -37,23 +46,16 @@ function Room({ renderRoom }: RoomProps) {
   useEffect(() => {
     console.log('RoomCode : ', roomCode)
     roomSocket.userJoined(roomCode)
-    roomSocket.userJoinedOn(async (user: any) => {
-      console.log('44', user)
-      if (userList[0].socketId !== user.clientId) {
+    roomSocket.userJoinedOn(async ({ userList, clientId }: any) => {
         dispatch({ // socket on
-          type: 'ADD_USER',
-          value: user
-        })
-      }
+        type: 'ADD_USER',
+        value: userList
+      })
       try {
-        const video = myVideoRef.current
         const stream = await controlStream.init()
         myVideoRef.current.srcObject = stream
-        console.log(2)
         setIsStreaming(true)
-        console.log(22)
       } catch (error) {
-        console.log(error)
         setError(error.message)
       }
     })
@@ -100,9 +102,10 @@ function Room({ renderRoom }: RoomProps) {
         console.log(peer)
 
         peer.on('signal', signal => {
+          console.log(88)
           peerSocket.sendingSignal({ signal, receiver: user })
         })
-
+        console.log('123')
         peersRef.current[user.socketId] = peer
         setPeers(prev => ({ ...prev, [user.socketId]: peer }))
       }
@@ -132,7 +135,7 @@ function Room({ renderRoom }: RoomProps) {
     return () => {
       peerSocket.cleanUpPeerListener();
     };
-  }, [isStreaming]);
+  }, [userList]);
 
   useEffect(() => {
     getProfile()
@@ -173,22 +176,22 @@ function Room({ renderRoom }: RoomProps) {
       <Chat />
       {userList.map((user, idx) => (
         <div>
-         {user.socketId === userList[0].socketId ?
-          <StyledVideo
-            ref={myVideoRef}
-            autoPlay
-            playsInline
-            muted
-          />
-          :
-          <Video
-            peer={peers[user.socketId]}
-          />
-        }
-        <h3>{user.nickName}</h3>
-      </div>
+          {user.socketId === userList[0].socketId ?
+            <StyledVideo
+              ref={myVideoRef}
+              autoPlay
+              playsInline
+              muted
+            />
+            :
+            <Video
+              peer={peers[user.socketId]}
+            />
+          }
+          <h3>{user.nickName}</h3>
+        </div>
       ))}
-     
+
     </>
   );
 }
