@@ -90,7 +90,7 @@ function Room({ renderRoom }: RoomProps) {
 
   useEffect(() => {
     if (!isStreaming) return
-
+    
     userList.forEach((user, idx) => {
       if (idx !== 0) {
         const peer = new Peer({
@@ -103,7 +103,7 @@ function Room({ renderRoom }: RoomProps) {
 
         peer.on('signal', signal => {
           console.log(88)
-          peerSocket.sendingSignal({ signal, receiver: user })
+          peerSocket.sendingSignal({ signal, receiver: user, roomCode: roomCode })
         })
         console.log('123')
         peersRef.current[user.socketId] = peer
@@ -120,7 +120,7 @@ function Room({ renderRoom }: RoomProps) {
       peer.signal(signal)
 
       peer.on('signal', signal => {
-        peerSocket.returnSignal({ signal, receiver: initiator });
+        peerSocket.returnSignal({ signal, receiver: initiator, roomCode: roomCode });
       });
 
       peersRef.current[initiator.socketId] = peer
@@ -135,7 +135,7 @@ function Room({ renderRoom }: RoomProps) {
     return () => {
       peerSocket.cleanUpPeerListener();
     };
-  }, [userList]);
+  }, [isStreaming]);
 
   useEffect(() => {
     getProfile()
