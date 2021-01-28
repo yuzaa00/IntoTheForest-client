@@ -9,6 +9,7 @@ const UPDATE_ROOM_LOCKING_STATUS = 'UPDATE_ROOM_LOCKING_STATUS'
 const TURN_ON_FILTER = 'TURN_ON_FILTER'
 const TURN_OFF_FILTER = 'TURN_OFF_FILTER'
 const SET_PROFILE = 'SET_PROFILE'
+const GAME_DESTROY = 'GAME_DESTROY'
 
 export const saveRoomCode = createAction(SAVE_ROOM_CODE)
 export const renderRoom = createAction(RENDER_ROOM)
@@ -16,6 +17,7 @@ export const renderRoom = createAction(RENDER_ROOM)
 export const addUser = createAction(ADD_USER)
 export const deleteUser = createAction(DELETE_USER)
 export const setProfile = createAction(SET_PROFILE)
+export const gameDestroy = createAction(GAME_DESTROY)
 // export const updateRoomLockingStatus = createAction(UPDATE_ROOM_LOCKING_STATUS)
 // export const turnOnFilter = createAction(TURN_ON_FILTER)
 // export const turnOffFilter = createAction(TURN_OFF_FILTER)
@@ -27,6 +29,7 @@ const actions = {
   addUser,
   deleteUser, 
   setProfile,
+  gameDestroy,
   // updateRoomLockingStatus, 
   // turnOnFilter, 
   // turnOffFilter 
@@ -48,12 +51,16 @@ interface RoomState  {
   roomCode: string
   roomId: string
   users: usersItem[]
+  game: boolean
+  gameData: any
 }
 
 const initialState: RoomState = {
   roomCode: '',
   roomId: '',
-  users: []
+  users: [],
+  game: false,
+  gameData: {}
 }
 
 const roomReducer = createReducer<RoomState, RoomAction>(initialState, {
@@ -63,7 +70,14 @@ const roomReducer = createReducer<RoomState, RoomAction>(initialState, {
       roomCode: action.roomCode,
       users: [...state.users, action.user]
   }),
-  [ADD_USER]: (state: RoomState, action: any) => ({ ...state, users: [...state.users, action.user] }),
+  // [ADD_USER]: (state: RoomState, action: any) => ({ ...state, users: [...state.users, action.user] }),
+  [ADD_USER]: (state: RoomState, action: any) => {
+    console.log('action', action)
+    state.users.push(action.value)
+    return {
+      ...state
+    }
+  },
   [DELETE_USER]: (state: RoomState, action: any) => {
     const newUserList = state.users.filter(
       user => user.socketId !== action.socketId,
@@ -84,6 +98,14 @@ const roomReducer = createReducer<RoomState, RoomAction>(initialState, {
     //     ...state.users.slice(index + 1), // everything after current post
     //  ]
     } 
+  },
+  [GAME_DESTROY]: (state: RoomState, action: any) => {
+    console.log(action)
+    state.game = true
+    state.gameData = action.value
+    return {
+      ...state
+    }
   }
 })
 
