@@ -96,8 +96,8 @@ const peerSocket = {
   listenSendingSignal(cb) {
     socket.on('sending signal', cb);
   },
-  returnSignal({ signal, receiver }) {
-    socket.emit('returning signal', { signal, receiver });
+  returnSignal({ signal, receiver, roomCode }) {
+    socket.emit('returning signal', { signal, receiver, roomCode });
   },
   listenReturningSignal(cb) {
     socket.on('returning signal', cb);
