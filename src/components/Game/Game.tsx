@@ -17,28 +17,10 @@ export default function Game() {
   console.log(gameDestroy)
 
   useEffect(() => {
-    const newGame = new Phaser.Game(Object.assign(config, { parent: 'game-container' , width: width / 2 }))
+    const newGame = new Phaser.Game(Object.assign(config))
     // const newGame1 = new Phaser.Game(Object.assign(config, { parent: 'game-container' + 1, width: width / 2 })) // 추후에 props로 추가 로딩
     // const newGame2 = new Phaser.Game(Object.assign(config, { parent: 'game-container' + 2, width: width / 2 }))
     // const newGame3 = new Phaser.Game(Object.assign(config, { parent: 'game-container' + 3, width: width / 2 }))
-
-    navigator.mediaDevices.getUserMedia({
-      video: true,
-      audio: true
-  }).then(async function(stream) {
-      let recorder = RecordRTC(stream, {
-          type: 'video'
-      });
-      recorder.startRecording();
-  
-      const sleep = m => new Promise(r => setTimeout(r, m));
-      await sleep(3000);
-  
-      recorder.stopRecording(function() {
-          let blob = recorder.getBlob();
-          invokeSaveAsDialog(blob, 'video.webm');
-      });
-  });
 
     if (gameDestroy) {
       newGame.destroy(true)
@@ -60,15 +42,6 @@ export default function Game() {
 
   return (
     <div >
-      <div>
-        <span id='game-container' />
-        <span id='game-container1' />
-      </div>
-      <div>
-        <span id='game-container2' />
-        <span id='game-container3' />
-      </div>
-
     </div>
   );
 }

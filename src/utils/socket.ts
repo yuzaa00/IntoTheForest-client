@@ -90,8 +90,8 @@ const chatSocket = {
 };
 
 const peerSocket = {
-  sendingSignal({ signal, receiver }) {
-    socket.emit('sending signal', { signal, receiver });
+  sendingSignal({ signal, receiver, roomCode }) {
+    socket.emit('sending signal', { signal, receiver, roomCode });
   },
   listenSendingSignal(cb) {
     socket.on('sending signal', cb);

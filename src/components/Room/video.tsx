@@ -8,7 +8,7 @@ function Video({ peer }) {
   useEffect(() => {
     if (!peer) return;
 
-    peer.on('stream', stream => {
+    peer.on('stream', (stream:HTMLVideoElement) => {
       ref.current.srcObject = stream;
     });
   }, [peer]);
