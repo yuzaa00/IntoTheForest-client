@@ -34,8 +34,8 @@ const ChoiceMode = () => {
   }
 
   const openModal = (modalComponents: any) => {
-    setmodalContent(modalComponents)
     setModalOpen(true)
+    setmodalContent(modalComponents)
   }
 
   return (
