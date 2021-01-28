@@ -7,16 +7,6 @@ import crypto from 'crypto'
 
 import './JoinRoom.css';
 
-interface joinRoom {
-  nickName: string
-  roomCode: string
-}
-
-interface response {
-  roomId: string
-  error: string
-}
-
 function JoinRoomForm({ setModalOpen }: boolean ) {
   const dispatch = useDispatch()
   const history = useHistory()

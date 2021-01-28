@@ -5,15 +5,14 @@ import { useDispatch } from 'react-redux'
 import { roomData, response } from '../../utils/socket.type'
 import crypto from 'crypto'
 import './CreateRoom.css';
-function CreateRoomForm(setModalOpen){
+function CreateRoomForm({setModalOpen}: any){
   const dispatch = useDispatch()
   const history = useHistory()
   const [createError, setCreateError] = useState('')
-  const [user, setUser] = useState(0);
+  const [users, setUser] = useState(0);
   const [inputs, setInputs] = useState({
     roomCode: '',
-    nickName: '',
-    maxNum: 2,
+    nickName: ''
   })
   const moveToRoom = (response: response) => {
     const { roomId, clientId, error } = response
@@ -39,8 +38,8 @@ function CreateRoomForm(setModalOpen){
   }
   const submitRoomData = (ev: { preventDefault: () => void; }) => {
     ev.preventDefault()
-    const { roomCode, maxNum, nickName } = inputs
-    createRoom({ roomCode, nickName, maxNum: maxNum })
+    const { roomCode, nickName } = inputs
+    createRoom({ roomCode, nickName, maxNum: users })
   }
   const handleRoomcodeChange = (ev: { target: { value: string, name: string } }) => {
     const { name, value } = ev.target
@@ -61,14 +60,14 @@ function CreateRoomForm(setModalOpen){
         <div className="subtitle">최소 2명부터 최대 4명까지 함께 게임을 즐길 수 있어요!</div>
         <form onSubmit={submitRoomData}>
           <div className="people">
-            {user === 2?
+            {users === 2?
             <div onClick={()=>setUser(2)} className="highlight">
               2인
             </div>
             : <div onClick={()=>setUser(2)}>
               2인
             </div>}
-            {user === 4? 
+            {users === 4? 
               <div onClick={()=>setUser(4)} className="highlight">
                 4인
               </div>
