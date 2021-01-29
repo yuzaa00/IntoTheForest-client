@@ -4,39 +4,6 @@ const socket = io('http://localhost:4000', {transports: ['websocket']})
 
 export const getMySocketId = () => socket.id;
 
-// const gameSocket = {
-//   startGame(data) {
-//     socket.emit(EVENT.START_GAME, data);
-//   },
-//   sendGameStatus(status) {
-//     socket.emit(EVENT.PROCEED_GAME, status);
-//   },
-//   sendNextTurn(next) {
-//     socket.emit(EVENT.TURN_CHANGE, next);
-//   },
-//   sendResetGame(roomId) {
-//     socket.emit(EVENT.RESET_GAME, roomId);
-//   },
-//   listenInitailizingGame(cb) {
-//     socket.on(EVENT.INIT_GAME, cb);
-//   },
-//   listenProceedGame(cb) {
-//     socket.on(EVENT.PROCEED_GAME, cb);
-//   },
-//   listenTurnChange(cb) {
-//     socket.on(EVENT.TURN_CHANGE, cb);
-//   },
-//   listenResetGame(cb) {
-//     socket.on(EVENT.RESET_GAME, cb);
-//   },
-//   cleanUpGameListener() {
-//     socket.off(EVENT.INIT_GAME);
-//     socket.off(EVENT.PROCEED_GAME);
-//     socket.off(EVENT.TURN_CHANGE);
-//     socket.off(EVENT.RESET_GAME);
-//   },
-// };
-
 const roomSocket = {
   createRoom(roomData : types.roomData, cb: Function) {
     socket.emit('create room', roomData, cb)
@@ -46,7 +13,7 @@ const roomSocket = {
     socket.emit('join room', joinRoom, cb);
   },
 
-  userJoined(roomCode: types.roomCode) {
+  userJoined(roomCode: string) {
     socket.emit('user joined', roomCode)
   },
 
@@ -60,16 +27,12 @@ const roomSocket = {
   
   onSetProfile(cb) {
     socket.on('set profile', cb)
-  }
+  },
   
-
-  // memberJoinedAlert() {
-  //   socket.on('member joined', roomCode)
-  // },
-
   newUserJoined(cb) {
     socket.on('new user', cb);
   },
+
   userLeaved(cb) {
     socket.on('leave user', cb);
   },
@@ -127,14 +90,14 @@ const chatSocket = {
 };
 
 const peerSocket = {
-  sendingSignal({ signal, receiver }) {
-    socket.emit('sending signal', { signal, receiver });
+  sendingSignal({ signal, receiver, roomCode }) {
+    socket.emit('sending signal', { signal, receiver, roomCode });
   },
   listenSendingSignal(cb) {
     socket.on('sending signal', cb);
   },
-  returnSignal({ signal, receiver }) {
-    socket.emit('returning signal', { signal, receiver });
+  returnSignal({ signal, receiver, roomCode }) {
+    socket.emit('returning signal', { signal, receiver, roomCode });
   },
   listenReturningSignal(cb) {
     socket.on('returning signal', cb);

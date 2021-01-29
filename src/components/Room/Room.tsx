@@ -2,16 +2,28 @@ import React, { useCallback, useState, useEffect, useRef } from 'react'
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 import { RootState } from '../../redux/rootReducer'
-import { roomSocket, peerSocket} from '../../utils/socket'
+import { roomSocket, peerSocket } from '../../utils/socket'
+import { toast } from 'react-toastify'
 import Loading from '../Ready/Loading'
 import Chat from '../chat/Chat'
-import * as controlStream from '../../utils/controlStream';
+import Video, { StyledVideo } from './video'
+import * as controlStream from '../../utils/controlStream'
+import Peer from 'simple-peer'
+import { store } from '../../index'
 
 import KakaoProfileButton from './KakaoProfileButton'
 import KakaoProfileDelete from './KakaoProfileDelete'
 
 interface RoomProps {
   renderRoom: Function
+}
+
+interface user {
+
+  nickName: string
+  socketId: string
+  photoUrl: string
+
 }
 
 function Room({ renderRoom }: RoomProps) {
@@ -23,8 +35,8 @@ function Room({ renderRoom }: RoomProps) {
   const [isStreaming, setIsStreaming] = useState(false);
   const [error, setError] = useState('');
   const [peers, setPeers] = useState({});
-  const peersRef = useRef({});
-  const myVideoRef = useRef();
+  const peersRef = useRef<any>({})
+  const myVideoRef = useRef<any>()
 
   const history = useHistory()
   const roomCode = useSelector((state: RootState) => state.roomReducer.roomCode)
@@ -32,13 +44,21 @@ function Room({ renderRoom }: RoomProps) {
 
   // 카카오 프로필 불러오기 - 시작
   useEffect(() => {
-    console.log('?', roomCode)
+    console.log('RoomCode : ', roomCode)
     roomSocket.userJoined(roomCode)
-
-    roomSocket.newUserJoined(({ newUser }) => dispatch({ // socket on
-      type: 'ADD_USER',
-      value: newUser
-    }))
+    roomSocket.userJoinedOn(async ({ userList, clientId }: any) => {
+        dispatch({ // socket on
+        type: 'ADD_USER',
+        value: userList
+      })
+      try {
+        const stream = await controlStream.init()
+        myVideoRef.current.srcObject = stream
+        setIsStreaming(true)
+      } catch (error) {
+        setError(error.message)
+      }
+    })
 
     roomSocket.userLeaved(({ socketId }) => { // socket on
       delete usersRef.current[socketId];
@@ -52,28 +72,25 @@ function Room({ renderRoom }: RoomProps) {
         value: socketId
       })
     })
-    
+
     roomSocket.onSetProfile((user: any) => {
       console.log(user)
-      const editUser = Object.assign({}, { 
+      const editUser = Object.assign({}, {
         photoUrl: user.photoUrl,
         nickName: user.nickName,
         socketId: user.clientId
       })
-
       console.log(editUser)
-      
       dispatch({
         type: 'SET_PROFILE',
         value: editUser
       })
     })
-
   }, [])
 
   useEffect(() => {
-    if (!isStreaming) return;
-
+    if (!isStreaming) return
+    
     userList.forEach((user, idx) => {
       if (idx !== 0) {
         const peer = new Peer({
@@ -81,15 +98,18 @@ function Room({ renderRoom }: RoomProps) {
           trickle: false,
           stream: controlStream.get(),
         });
-  
+
+        console.log(peer)
+
         peer.on('signal', signal => {
-          peerSocket.sendingSignal({ signal, receiver: user })
+          console.log(88)
+          peerSocket.sendingSignal({ signal, receiver: user, roomCode: roomCode })
         })
-  
-        peersRef.current[member.socketId] = peer
-        setPeers(prev => ({ ...prev, [member.socketId]: peer }))
-      }     
-    }, useEffect) 
+        console.log('123')
+        peersRef.current[user.socketId] = peer
+        setPeers(prev => ({ ...prev, [user.socketId]: peer }))
+      }
+    })
 
     peerSocket.listenSendingSignal(({ initiator, signal }) => {
       const peer = new Peer({
@@ -97,13 +117,13 @@ function Room({ renderRoom }: RoomProps) {
         trickle: false,
         stream: controlStream.get(),
       });
-      peer.signal(signal);
+      peer.signal(signal)
 
       peer.on('signal', signal => {
-        peerSocket.returnSignal({ signal, receiver: initiator });
+        peerSocket.returnSignal({ signal, receiver: initiator, roomCode: roomCode });
       });
 
-      peersRef.current[initiator.socketId] = peer;
+      peersRef.current[initiator.socketId] = peer
       setPeers(prev => ({ ...prev, [initiator.socketId]: peer }));
     });
 
@@ -140,8 +160,8 @@ function Room({ renderRoom }: RoomProps) {
             nickName: nickname,
           }
           console.log('log', userData)
-          roomSocket.emitSetProfile( userData )
-          },
+          roomSocket.emitSetProfile(userData)
+        },
         fail: (error: any) => console.log(error)
       })
     }
@@ -154,7 +174,24 @@ function Room({ renderRoom }: RoomProps) {
       <KakaoProfileButton handleAccToken={handleAccToken} />
       <KakaoProfileDelete handleAccToken={handleAccToken} />
       <Chat />
-      {/* <Loading /> */}
+      {userList.map((user, idx) => (
+        <div>
+          {user.socketId === userList[0].socketId ?
+            <StyledVideo
+              ref={myVideoRef}
+              autoPlay
+              playsInline
+              muted
+            />
+            :
+            <Video
+              peer={peers[user.socketId]}
+            />
+          }
+          <h3>{user.nickName}</h3>
+        </div>
+      ))}
+
     </>
   );
 }

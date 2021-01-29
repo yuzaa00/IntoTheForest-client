@@ -4,19 +4,18 @@ import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { roomData, response } from '../../utils/socket.type'
 import crypto from 'crypto'
-
-function CreateRoomForm({setModalOpen}: boolean ){
-  const dispatch = useDispatch();
-  const history = useHistory();
-  const [createError, setCreateError] = useState('');
-  const [user, setUser] = useState(0);
+import './CreateRoom.css';
+function CreateRoomForm({setModalOpen}: any){
+  
+  const dispatch = useDispatch()
+  const history = useHistory()
+  const [createError, setCreateError] = useState('')
+  const [user, setUser] = useState(2);
+  console.log(user)
   const [inputs, setInputs] = useState({
     roomCode: '',
-    nickName: '',
-    maxNum: 2,
-  });
-  // const [returnError, setReturnError] = useState('');
-
+    nickName: ''
+  })
   const moveToRoom = (response: response) => {
     const { roomId, clientId, error } = response
     console.log('moveToRoom', roomId, clientId, error);
@@ -32,6 +31,11 @@ function CreateRoomForm({setModalOpen}: boolean ){
           nickName: inputs.nickName || crypto.randomBytes(3).toString("hex"),
           socketId: clientId,
           photoUrl: '../../images/card/card5.png'
+        },
+        currentUser: {
+          nickName: inputs.nickName || crypto.randomBytes(3).toString("hex"),
+          socketId: clientId,
+          photoUrl: '../../images/card/card5.png'
         }
       })
       history.push(`rooms/${roomId}`)
@@ -43,19 +47,8 @@ function CreateRoomForm({setModalOpen}: boolean ){
   }
   const submitRoomData = (ev: { preventDefault: () => void; }) => {
     ev.preventDefault()
-    const { roomCode, maxNum, nickName } = inputs
-
-    // if(roomCode.length < 2 && nickName.length < 2) {
-    //   setReturnError('모든 입력 값을 두 글자 이상 여섯 글자 이하로 입력하세요!');
-    // }
-    // else if(roomCode.length < 2) {
-    //   setReturnError('방 코드를 두 글자 이상 여섯 글자 이하로 입력하세요!');
-    // } else if(nickName.length < 2) {
-    //   setReturnError('닉네임을 두 글자 이상 여섯 글자 이하로 입력하세요!');
-    // } else {
-    //   setReturnError('');
-    // }
-    createRoom({ roomCode, nickName, maxNum: maxNum })
+    const { roomCode, nickName } = inputs
+    createRoom({ roomCode, nickName, maxNum: user })
   }
   const handleRoomcodeChange = (ev: { target: { value: string, name: string } }) => {
     const { name, value } = ev.target
