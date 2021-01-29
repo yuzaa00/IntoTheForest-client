@@ -10,14 +10,12 @@ function CreateRoomForm({setModalOpen}: any){
   const history = useHistory()
   const [createError, setCreateError] = useState('')
   const [user, setUser] = useState(2);
-  
   const [inputs, setInputs] = useState({
     roomCode: '',
     nickName: ''
   })
   const moveToRoom = (response: response) => {
     const { roomId, clientId, error } = response
-    
     if (!roomId) {
       setCreateError(error)
     }
@@ -46,7 +44,6 @@ function CreateRoomForm({setModalOpen}: any){
   }
   const createRoom = (roomData: roomData ) => {
     roomSocket.createRoom(roomData, (roomId: response) => moveToRoom(roomId))
-    console.log('createRoom', roomData);
   }
   const submitRoomData = (ev: { preventDefault: () => void; }) => {
     ev.preventDefault()
@@ -73,10 +70,10 @@ function CreateRoomForm({setModalOpen}: any){
         <form onSubmit={submitRoomData}>
           {user === 0 && <div className="error-msg">입장 가능한 인원 수를 선택하세요!</div>}
           <div className="people">
-            <div onClick={()=>setUser(2)} className={user === 2 && "highlight"}>
+            <div onClick={()=>setUser(2)} className={user === 2? "highlight" : "nonHighlight"}>
               2인
             </div>
-            <div onClick={()=>setUser(4)} className={user === 4 && "highlight"}>
+            <div onClick={()=>setUser(4)} className={user === 4? "highlight" : "nonHighlight"}>
               4인
             </div>
           </div>
@@ -91,6 +88,7 @@ function CreateRoomForm({setModalOpen}: any){
               maxLength={6}
               required
               value={inputs.roomCode}
+              placeholder='방 이름을 입력하세요'
               onChange={handleRoomcodeChange}/>
             </div>
           </div>
@@ -103,12 +101,12 @@ function CreateRoomForm({setModalOpen}: any){
               maxLength={6}
               required
               value={inputs.nickName}
+              placeholder='닉네임을 입력하세요'
               onChange={handleChangeNickname}
               />
           </div>
           <div className="error-area">
             {createError && <div className="error-msg">{createError}</div>}
-            {/* {returnError  && <div className="error-msg">{returnError}</div>} */}
           </div>
 
       <div className="button-area">
