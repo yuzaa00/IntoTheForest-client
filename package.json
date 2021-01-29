@@ -71,7 +71,10 @@
     "url-loader": "^4.1.1"
   },
   "staticFiles": {
-    "staticPath": ["assets","src/images"],
+    "staticPath": [
+      "assets",
+      "src/images"
+    ],
     "watcherGlob": "**"
   },
   "parcelCleanPaths": [
