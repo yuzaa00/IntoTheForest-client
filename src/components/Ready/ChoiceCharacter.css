@@ -31,6 +31,18 @@
     cursor: pointer;
 }
 
+.clickChoiceCard {
+    position: relative;
+    width: 300px;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
 
 
 .chaSelectWrapper .chaSelectBx  {
@@ -52,6 +64,15 @@
     padding: 10px;
     box-sizing: border-box;
 }
+.clickChoiceCard .imgBx {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
 
 .choiceCard .imgBx img {
     max-width: 100%;
@@ -63,6 +84,14 @@
     opacity: 1;
 }
 
+.clickChoiceCard .imgBx img {
+    max-width: 100%;
+    opacity: 1;
+    transition: 0.5s;    
+}
+
+
+.clickChoiceCard::before,
 .choiceCard::before {
     content: '';
     position: absolute;
@@ -74,6 +103,8 @@
     z-index: -1;
 }
 
+
+.clickChoiceCard::after,
 .choiceCard::after {
     content: '';
     position: absolute;
@@ -86,22 +117,40 @@
     filter: blur(40px);
 }
 
+
 .choiceCard::before,
 .choiceCard::after {
-    background-image: linear-gradient(235deg,#89ff00,#010615,#00bcd4);
+    background: linear-gradient(235deg,#89ff00,#010615,#00bcd4);
+}
+
+.clickChoiceCard::before,
+.clickChoiceCard::after {
+    background: linear-gradient(235deg,#89ff00,#010615,#00bcd4);
 }
 
 .choiceCard:nth-child(2)::before,
 .choiceCard:nth-child(2)::after
 {
-    background-image: linear-gradient(235deg,#ff005e,#010615,#fbff00);
+    background: linear-gradient(235deg,#ff005e,#010615,#fbff00);
+}
+
+.clickChoiceCard:nth-child(2)::before,
+.clickChoiceCard:nth-child(2)::after
+{
+    background: linear-gradient(235deg,#ff005e,#010615,#fbff00);
 }
 
 
 .choiceCard:nth-child(3)::before,
 .choiceCard:nth-child(3)::after
 {
-    background-image: linear-gradient(235deg,#772aff,#010615,#2196f3);
+    background: linear-gradient(235deg,#772aff,#010615,#2196f3);
+}
+
+.clickChoiceCard:nth-child(3)::before,
+.clickChoiceCard:nth-child(3)::after
+{
+    background: linear-gradient(235deg,#772aff,#010615,#2196f3);
 }
 
 .choiceCard .imgBxContent {
@@ -120,10 +169,29 @@
     transition: 0.5s;
 }
 
+.clickChoiceCard .imgBxContent {
+    position: absolute;
+    bottom: 0;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    height: 90px;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transition: 0.5s;
+    opacity: 1;
+}
+
 .choiceCard:hover .imgBxContent {
     opacity: 1;
 }
 
+
+
+.clickChoiceCard .imgBxContent h2,
 .choiceCard .imgBxContent h2 {
     font-size: 20px;
     color: #fff;
@@ -133,6 +201,7 @@
     margin-bottom: 0px;
 }
 
+.clickChoiceCard .imgBxContent h3,
 .choiceCard .imgBxContent h3 {
     font-size: 14;
     color: #fff;
@@ -164,7 +233,7 @@
     letter-spacing: 2px;
     border-radius: 40px;
     background: linear-gradient(90deg,#0162c8,#55e7fc);
-
+    font-family: 'Y_Spotlight';
 }
 
 .chaSelectBtn-desc:nth-child(2),

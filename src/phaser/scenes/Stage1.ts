@@ -1,6 +1,7 @@
 import { SETTING } from '../../GameSetting/index'
 import Phaser, { Scene } from 'phaser'
 import HealthBar from '../helper/healthBar'
+import { store } from '../../index'
 
 export default class Stage1 extends Phaser.Scene {
   private player!: any
@@ -433,6 +434,14 @@ export default class Stage1 extends Phaser.Scene {
     this.signLayer.removeTileAt(tile.x, tile.y)
     if (tile.index !== -1) {
       this.game.sound.stopAll()
+      store.dispatch({
+        type: 'GAME_DESTROY',
+        score: this.registry.values.score,
+        life: this.registry.values.life, 
+        stage: 2,
+        bird: this.birdArr.length,
+        squi: this.squiArr.length,
+      })
       this.scene.start('StageResult', {
         score: this.registry.values.score + 10000,
         life: this.registry.values.life, 
