@@ -32,8 +32,6 @@ function ChoiceCharacter({ value, onSelect1, onSelect2, onSelect3 }:ChoiceCharac
   
     const onGameStart = () => {
       setGameOn(true)
-      dispatch({type: 'GAME_DESTROY'}) 
-      // history.push('/game');
     }
 
     return (
