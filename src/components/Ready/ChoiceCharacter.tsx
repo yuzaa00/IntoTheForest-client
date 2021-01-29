@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState  }from 'react';
 import { useHistory } from "react-router-dom";
 
 import './ChoiceCharacter.css';
@@ -15,6 +15,9 @@ type ChoiceCharacterProps {
 
 function ChoiceCharacter({ value, onSelect1, onSelect2, onSelect3 }:ChoiceCharacterProps) {
 
+    const [ toggleClass, setToggleClass] = useState<number>(0);
+    const [ errorMessage, setErrorMessage] = useState<String>("");
+
     let history = useHistory();
    
     const onGameDesc = () => {
@@ -22,16 +25,22 @@ function ChoiceCharacter({ value, onSelect1, onSelect2, onSelect3 }:ChoiceCharac
      }
   
     const onGameStart = () => {
-      
-      history.push('/game');
+      if (toggleClass > 0) {
+        history.push('/game');
+      } else {
+        setErrorMessage("캐릭터를 선택하세요")
+      }
     }
-  
 
     return (
       <div className="choiceCharacterScreen">
         <div className="chaSelectWrapper">
         <div className="chaSelectBx">
-          <div onClick={onSelect1} className="choiceCard">
+          <div onClick={() => { 
+            onSelect1()
+            setToggleClass(1)
+            setErrorMessage("")
+           } } className = {toggleClass === 1 ? 'clickChoiceCard' : 'choiceCard'} >
             <div className="imgBx">
               <img src={John} alt='john' />
             </div>
@@ -40,7 +49,11 @@ function ChoiceCharacter({ value, onSelect1, onSelect2, onSelect3 }:ChoiceCharac
              <h3>시바견</h3>
             </div>
           </div>
-          <div onClick={onSelect2} className="choiceCard">
+          <div onClick={() => { 
+            onSelect2()
+            setToggleClass(2)
+            setErrorMessage("")
+           } } className = {toggleClass === 2 ? 'clickChoiceCard' : 'choiceCard'} >
             <div className="imgBx">
             <img src={Tom} alt='tom' />
             </div>
@@ -49,7 +62,11 @@ function ChoiceCharacter({ value, onSelect1, onSelect2, onSelect3 }:ChoiceCharac
              <h3>진돗개</h3>
             </div>
           </div>
-          <div onClick={onSelect3} className="choiceCard">
+          <div onClick={() => { 
+            onSelect3()
+            setToggleClass(3)
+            setErrorMessage("")
+           } } className = {toggleClass === 3 ? 'clickChoiceCard' : 'choiceCard'} >
             <div className="imgBx">
             <img src={Alex} alt='alex' />
             </div>
@@ -61,12 +78,11 @@ function ChoiceCharacter({ value, onSelect1, onSelect2, onSelect3 }:ChoiceCharac
         </div>
         </div>
         <div className="chaSelectBtn">
-          <h1>My Choice: {value}</h1>
+          <h1>{value}</h1>
+          {errorMessage && <h1>{errorMessage}</h1> } 
       <button className="chaSelectBtn-desc" onClick={onGameDesc}>게임설명</button>
       <button className="chaSelectBtn-startGame" onClick={onGameStart}>GameStart</button>
        </div>
-        
-        
       </div>
     );
   }

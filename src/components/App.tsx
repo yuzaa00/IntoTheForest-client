@@ -8,6 +8,7 @@ import Ready from './Ready/Ready'
 import Room from './Room/Room';
 import Game from './Game/Game';
 import Result from './Result/Result';
+import SingleResult from '../components/Result/SingleResult'
 
 function App() {
   const dispatch = useDispatch()
@@ -27,6 +28,7 @@ function App() {
       <Route path='/rooms/:id' component={Room} />
       <Route path='/game' component={Game} />
       <Route path='/result' component={Result} />
+      <Route path='/SingleResult' component={SingleResult} />
     </Switch>
   )
 }
