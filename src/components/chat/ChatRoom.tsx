@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import format from 'date-fns/format'
 
-function ChatRoom({onSubmit}) {
+function ChatRoom({onSubmit}: any) {
   const [input, setInput] = useState('')
   const messageRef = useRef<HTMLUListElement>()
   console.time('d')

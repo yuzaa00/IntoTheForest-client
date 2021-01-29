@@ -1,4 +1,4 @@
-import React, { useState  }from 'react';
+import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
 
 import './ChoiceCharacter.css';
@@ -6,7 +6,10 @@ import John from '../../images/siba.png'
 import Tom from '../../images/backgu.png'
 import Alex from '../../images/dosaDog.png'
 
-type ChoiceCharacterProps {
+import Game from '../Game/Game'
+import { useDispatch } from 'react-redux';
+
+type ChoiceCharacterProps = {
     value: string;
     onSelect1: () => void;
     onSelect2: () => void;
@@ -14,6 +17,9 @@ type ChoiceCharacterProps {
   }
 
 function ChoiceCharacter({ value, onSelect1, onSelect2, onSelect3 }:ChoiceCharacterProps) {
+    const dispatch = useDispatch()
+
+    const [gameOn, setGameOn] = useState(false)
 
     const [ toggleClass, setToggleClass] = useState<number>(0);
     const [ errorMessage, setErrorMessage] = useState<String>("");
@@ -25,11 +31,9 @@ function ChoiceCharacter({ value, onSelect1, onSelect2, onSelect3 }:ChoiceCharac
      }
   
     const onGameStart = () => {
-      if (toggleClass > 0) {
-        history.push('/game');
-      } else {
-        setErrorMessage("캐릭터를 선택하세요")
-      }
+      setGameOn(true)
+      dispatch({type: 'GAME_DESTROY'}) 
+      // history.push('/game');
     }
 
     return (
@@ -82,6 +86,7 @@ function ChoiceCharacter({ value, onSelect1, onSelect2, onSelect3 }:ChoiceCharac
           {errorMessage && <h1>{errorMessage}</h1> } 
       <button className="chaSelectBtn-desc" onClick={onGameDesc}>게임설명</button>
       <button className="chaSelectBtn-startGame" onClick={onGameStart}>GameStart</button>
+      {gameOn && <Game />}
        </div>
       </div>
     );

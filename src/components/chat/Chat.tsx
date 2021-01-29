@@ -45,7 +45,7 @@ function Chat() {
         <BsFillChatDotsFill size={28} />
         {!!unreadCount && <Badge>{unreadCount}</Badge>}
       </Button>
-      {isChatRoomOpen && <ChatRoom onSubmit={newChat => chatSocket.sendMessage({ newChat })} />}
+      {isChatRoomOpen && <ChatRoom onSubmit={(newChat: any) => chatSocket.sendMessage({ newChat })} />}
     </>
   );
 }

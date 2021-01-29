@@ -21,6 +21,8 @@ function App() {
   }, [])
 
    return (
+     <div>
+       {/* <Game /> */}
     <Switch>
       <Route exact path='/' component={Welcome} /> 
       <Route path='/mode' component={ChoiceMode} /> 
@@ -30,6 +32,8 @@ function App() {
       <Route path='/result' component={Result} />
       <Route path='/SingleResult' component={SingleResult} />
     </Switch>
+     </div>
+
   )
 }
 

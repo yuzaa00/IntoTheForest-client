@@ -9,81 +9,90 @@ export default class Loader extends Phaser.Scene { // resource load scene
 
   preload(): void {
     //character load
-    this.load.image('logo', 'images/character/logo.png')
-    this.load.image('bird', 'images/character/bird.png')
-    this.load.image('squi', 'images/character/squi.png')
-    this.load.spritesheet('dog', 'images/character/dog2.png', { frameWidth: 500, frameHeight: 500 })
-    this.load.spritesheet('dog2', 'images/character/dog2.png', { frameWidth: 500, frameHeight: 500 })
-    this.load.spritesheet('dog3', 'images/character/dog2.png', { frameWidth: 500, frameHeight: 500 })
-    // this.load.spritesheet('dog2', 'images/character/dog2-running-test.png', { frameWidth: 220, frameHeight: 220})
+    console.log(4)
+    this.load.image('logo', 'http://localhost:4000/logo.png')
+    this.load.image('bird', 'http://localhost:4000/bird.png')
+    this.load.image('squi', 'http://localhost:4000/squi.png')
+    this.load.spritesheet('dog', 'http://localhost:4000/dog2.png', { frameWidth: 500, frameHeight: 500 })
+    // this.load.spritesheet('dog2', 'http://localhost:4000/dog2.png', { frameWidth: 500, frameHeight: 500 })
+    // this.load.spritesheet('dog3', 'http://localhost:4000/dog2.png', { frameWidth: 500, frameHeight: 500 })
+    
+    // this.load.spritesheet('dog2', 'http://localhost:4000/dog2-running-test.png', { frameWidth: 220, frameHeight: 220})
     
     //background load
-    this.load.image('stage1', 'images/background/stage1.png')
-    this.load.image('stage2', 'images/background/stage2.png')
-    this.load.image('stage3', 'images/background/stage3.png')
-    this.load.image('groundDark', 'images/background/groundDark.png')
-    this.load.image('gameOver', 'images/background/gameover.png')
-    this.load.image('way', 'images/background/way.png')
-    this.load.image('cave', 'images/background/forestCave.png')
-    this.load.image('pause', 'images/background/pause.png')
-    this.load.image('jump', 'images/background/jump.png')
+    this.load.image('stage1', 'http://localhost:4000/stage1.png')
+    this.load.image('stage2', 'http://localhost:4000/stage2.png')
+    this.load.image('stage3', 'http://localhost:4000/stage3.png')
+    this.load.image('groundDark', 'http://localhost:4000/groundDark.png')
+    this.load.image('gameOver', 'http://localhost:4000/gameover.png')
+    this.load.image('way', 'http://localhost:4000/way.png')
+    this.load.image('cave', 'http://localhost:4000/forestCave.png')
+    this.load.image('pause', 'http://localhost:4000/pause.png')
+    this.load.image('jump', 'http://localhost:4000/jump.png')
 
     //object load
-    this.load.image("bone", 'images/object/bone.png')
-    this.load.image("potion", 'images/object/potion.png')
-    this.load.image("orangePotion", 'images/object/bluepotion.png')
-    this.load.image("stagePotion", 'images/object/stagepotion.png')
-    this.load.image("subBird", 'images/object/subBird.png')
-    this.load.image("subSqui", 'images/object/subSqui.png')
-    this.load.image("mushroom", 'images/object/mushroom.png')
-    this.load.image("bund", 'images/object/bund.png')
-    this.load.image("bund2", 'images/object/bund2.png')
-    this.load.image("signExit", 'images/object/signExit.png')
+    this.load.image("bone", 'http://localhost:4000/bone.png')
+    this.load.image("potion", 'http://localhost:4000/potion.png')
+    this.load.image("orangePotion", 'http://localhost:4000/bluepotion.png')
+    this.load.image("stagePotion", 'http://localhost:4000/stagepotion.png')
+    this.load.image("subBird", 'http://localhost:4000/subBird.png')
+    this.load.image("subSqui", 'http://localhost:4000/subSqui.png')
+    this.load.image("mushroom", 'http://localhost:4000/mushroom.png')
+    this.load.image("bund", 'http://localhost:4000/bund.png')
+    this.load.image("bund2", 'http://localhost:4000/bund2.png')
+    this.load.image("signExit", 'http://localhost:4000/signExit.png')
     
     //bonus game
-    this.load.image('molebg', 'images/mole/bg.png')
-    this.load.image('moleBG', 'images/mole/molebg.png')
-    this.load.image('mole', 'images/mole/mole.png')
-    this.load.image('card1.png', 'images/card/card1.png') // 곰
-    this.load.image('card2.png', 'images/card/card2.png') // 치와와
-    this.load.image('card3.png', 'images/card/card3.png') // 늑대
-    this.load.image('card4.png', 'images/card/card4.png') // 멧돼지
-    this.load.image('card5.png', 'images/card/card5.png') // 갱얼쥐
-    this.load.image('card6.png', 'images/card/card6.png') // 뱀뱀
-    this.load.image('card7.png', 'images/card/card7.png') // 다람쥐
-    this.load.image('card8.png', 'images/card/card8.png') // 아기새
-    this.load.image('front.png', 'images/card/front.png')
-    this.load.image('back.png', 'images/card/back.png')
-    this.load.image('cardbg','images/card/cardbg.png')
+    this.load.image('molebg', 'http://localhost:4000/bg.png')
+    this.load.image('moleBG', 'http://localhost:4000/molebg.png')
+    this.load.image('mole', 'http://localhost:4000/mole.png')
+    this.load.image('card1.png', 'http://localhost:4000/card1.png') // 곰
+    this.load.image('card2.png', 'http://localhost:4000/card2.png') // 치와와
+    this.load.image('card3.png', 'http://localhost:4000/card3.png') // 늑대
+    this.load.image('card4.png', 'http://localhost:4000/card4.png') // 멧돼지
+    this.load.image('card5.png', 'http://localhost:4000/card5.png') // 갱얼쥐
+    this.load.image('card6.png', 'http://localhost:4000/card6.png') // 뱀뱀
+    this.load.image('card7.png', 'http://localhost:4000/card7.png') // 다람쥐
+    this.load.image('card8.png', 'http://localhost:4000/card8.png') // 아기새
+    this.load.image('front.png', 'http://localhost:4000/front.png')
+    this.load.image('back.png', 'http://localhost:4000/back.png')
+    this.load.image('cardbg','http://localhost:4000/cardbg.png')
     
     // tiled map, font
-    this.load.tilemapTiledJSON("map", 'map/stage1_map.json')
-    this.load.tilemapTiledJSON("map2", 'map/stage2_map.json')
-    this.load.tilemapTiledJSON("map3", 'map/stage3_map.json')
-    this.load.bitmapFont('font', 'font/font.png', 'font/font.fnt')
+    this.load.tilemapTiledJSON("map", 'http://localhost:4000/stage1_map.json')
+    this.load.tilemapTiledJSON("map2", 'http://localhost:4000/stage2_map.json')
+    this.load.tilemapTiledJSON("map3", 'http://localhost:4000/stage3_map.json')
+    this.load.bitmapFont('font', 'http://localhost:4000/font.png', 'http://localhost:4000/font.fnt')
 
     //audio load
-    this.load.audio('stage1_1bgm', 'sound/bgm/stage1-1.mp3')
-    this.load.audio('stage1-2_bgm', 'sound/bgm/stage1-2.mp3')
-    this.load.audio('stage2-1_bgm', 'sound/bgm/stage2-1.mp3')
-    this.load.audio('stage2-2_bgm', 'sound/bgm/stage2-2.mp3')
-    this.load.audio('stage3_bgm', 'sound/bgm/stage3.mp3')
+    this.load.audio('stage1_1bgm', 'http://localhost:4000/stage1-1.mp3')
+    this.load.audio('stage1-2_bgm', 'http://localhost:4000/stage1-2.mp3')
+    this.load.audio('stage2-1_bgm', 'http://localhost:4000/stage2-1.mp3')
+    this.load.audio('stage2-2_bgm', 'http://localhost:4000/stage2-2.mp3')
+    this.load.audio('stage3_bgm', 'http://localhost:4000/stage3.mp3')
     
     // effect
-    this.load.audio('wolfEcho', 'sound/effect/wolf.mp3')
-    this.load.audio('boarEcho', 'sound/effect/boar.mp3')
-    this.load.audio('snakeEcho', 'sound/effect/snake.mp3')
-    this.load.audio('dogEcho', 'sound/effect/dogBite.mp3')
-    this.load.audio('heat', 'sound/effect/jab.mp3')
-    this.load.audio('coin', 'sound/effect/coin.wav')
-    this.load.audio('get', 'sound/effect/get.mp3')
-    this.load.audio('heal', 'sound/effect/heal.mp3')
+    this.load.audio('wolfEcho', 'http://localhost:4000/wolf.mp3')
+    this.load.audio('boarEcho', 'http://localhost:4000/boar.mp3')
+    this.load.audio('snakeEcho', 'http://localhost:4000/snake.mp3')
+    this.load.audio('dogEcho', 'http://localhost:4000/dogBite.mp3')
+    this.load.audio('heat', 'http://localhost:4000/jab.mp3')
+    this.load.audio('coin', 'http://localhost:4000/coin.wav')
+    this.load.audio('get', 'http://localhost:4000/get.mp3')
+    this.load.audio('heal', 'http://localhost:4000/heal.mp3')
     
     //particles
-    this.load.atlas('particles', 'particles/explosion.png', 'particles/explosion.json')
+    console.log(5)
+    this.load.atlas('particles', 'http://localhost:4000/explosion.png', 'http://localhost:4000/explosion.json')
+    console.log(6)
+  }
+
+  create ():void {
+    
   }
   
   update ():void {
+   
     this.scene.start('Stage1') // 첫 스테이지 선택
   }
 }

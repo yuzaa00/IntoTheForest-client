@@ -1,9 +1,9 @@
-export const enum SETTING {
+export enum SETTING {
     WIDTH = 1200,
     HEIGHT = 600,
 }
   
-export const enum TEXTURE {
+export enum TEXTURE {
     BG = 'background',
     SKY = 'sky',
     DOG_1 = 'dog',
