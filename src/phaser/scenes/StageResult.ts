@@ -1,4 +1,5 @@
 import Phaser, { Scene } from 'phaser'
+import { store } from '../../index'
 
 export default class StageResult extends Phaser.Scene {
   private player!: any
@@ -7,6 +8,7 @@ export default class StageResult extends Phaser.Scene {
   private startButton!: any
   private worldTimer: any
   private mainStage: Array<string> = ['Stage1Event', 'Stage2Event', 'StageEndcredits']
+  private multiStage: Array<string> = ['Stage1', 'Stage2', 'Stage3']
   private num: number = 0
   private scoreText: any
   private lifeText: any
@@ -91,22 +93,16 @@ export default class StageResult extends Phaser.Scene {
       })
       .setOrigin(0.5)
     this.startButton.setInteractive()
-    this.startButton.on(
-      'pointerdown',
-      () => {
-        this.scene.start(this.mainStage[this.registry.values.stage], {
-          score: this.registry.values.score,
-          life: this.registry.values.life,
-          stage: this.registry.values.stage,
-          bird: this.registry.values.bird,
-          squi: this.registry.values.squi
-        })
-      },
-      this
-    )
   }
 
   public create(): void {
+    this.time.addEvent({ // 게임에서 시간 이벤트 등록, 1초당 콜백 호출 (콜백내용은 초당 체력 감소)
+      delay: 4000,
+      callback: this.nextStage,
+      callbackScope: this,
+      loop: false,
+    })
+
     console.log(5000 / (this.registry.values.score / 111))
     this.worldTimer = this.time.addEvent({ // 게임에서 시간 이벤트 등록, 1초당 콜백 호출 (콜백내용은 초당 체력 감소)
       delay: 5000 / (this.registry.values.score / 111),
@@ -164,6 +160,27 @@ export default class StageResult extends Phaser.Scene {
     }
   }
 
-
-
+  private nextStage(): void {
+    const mode = store.getState().gameReducer.mode
+    console.log('-----------', mode)
+    if (mode === 'M2' || mode === 'M4') {
+      this.game.sound.stopAll()
+      this.scene.start(this.multiStage[this.registry.values.stage + 1], {
+        score: this.registry.values.score,
+        life: this.registry.values.life,
+        stage: this.registry.values.stage,
+        bird: this.registry.values.bird,
+        squi: this.registry.values.squi
+      })
+    }
+    else {
+      this.scene.start(this.mainStage[this.registry.values.stage], {
+        score: this.registry.values.score,
+        life: this.registry.values.life,
+        stage: this.registry.values.stage,
+        bird: this.registry.values.bird,
+        squi: this.registry.values.squi
+      })
+    }
+  }
 }

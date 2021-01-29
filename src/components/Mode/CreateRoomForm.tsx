@@ -10,14 +10,14 @@ function CreateRoomForm({setModalOpen}: any){
   const history = useHistory()
   const [createError, setCreateError] = useState('')
   const [user, setUser] = useState(2);
-  console.log(user)
+  
   const [inputs, setInputs] = useState({
     roomCode: '',
     nickName: ''
   })
   const moveToRoom = (response: response) => {
     const { roomId, clientId, error } = response
-    console.log('moveToRoom', roomId, clientId, error);
+    
     if (!roomId) {
       setCreateError(error)
     }
@@ -36,6 +36,10 @@ function CreateRoomForm({setModalOpen}: any){
           socketId: clientId,
           photoUrl: '../../images/card/card5.png'
         }
+      })
+      dispatch({
+        type: 'SET_MULTI_MODE',
+        value: 'M' + user  // 'M2' or 'M4'
       })
       history.push(`rooms/${roomId}`)
     }

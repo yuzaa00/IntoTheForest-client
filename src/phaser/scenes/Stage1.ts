@@ -2,6 +2,7 @@ import { SETTING } from '../../GameSetting/index'
 import Phaser, { Scene } from 'phaser'
 import HealthBar from '../helper/healthBar'
 import { store } from '../../index'
+import { gameSocket } from '../../utils/socket'
 
 export default class Stage1 extends Phaser.Scene {
   private player!: any
@@ -45,6 +46,8 @@ export default class Stage1 extends Phaser.Scene {
   private invincibility!: ReturnType<typeof setTimeout>
   private reInvincibility!: ReturnType<typeof setTimeout>
   private particles!: Phaser.GameObjects.Particles.ParticleEmitterManager
+
+  private socketId!: string
 
   constructor() {
     super('Stage1')
@@ -91,6 +94,27 @@ export default class Stage1 extends Phaser.Scene {
   }
 
   public create(): void {
+    if (store.getState().gameReducer.multi === 0) {
+      this.socketId = store.getState().roomReducer.users[0].socketId
+    }
+
+    store.dispatch({
+      type: 'MUTE_MULTI_GAME' // 게임1이 로딩끝나고 게임2를 넘어가는 중간시점 redux.multi 1 // 게임2는 여기서 2가됨
+    })
+
+    if (store.getState().gameReducer.multi > 1) {
+      this.socketId = store.getState().roomReducer.users[store.getState().gameReducer.multi - 1].socketId
+      this.game.sound.mute = true
+      this.input.enabled = false
+    }
+
+    if (store.getState().gameReducer.multi === 4) {
+      this.socketId = store.getState().roomReducer.users[3].socketId
+      store.dispatch({
+        type: 'MUTE_MULTI_GAME_RESET'
+      })
+    }
+
     this.hp = new HealthBar(this, 270, 19)  // 체력바 인스턴스 생성
     this.game.input.addPointer() // 마우스 포인터
 
@@ -98,7 +122,6 @@ export default class Stage1 extends Phaser.Scene {
       loop: true,
       volume: 0.3
     }) // 노래 재생하기
-
 
     this.physics.world.setBounds(0, 0, 30000, 600)
 
@@ -125,12 +148,12 @@ export default class Stage1 extends Phaser.Scene {
       .setScrollFactor(0)
       .setOrigin(0)
       .setDepth(0)
-    
+
     this.potion = this.physics.add.staticGroup()
     this.subchas = this.physics.add.staticGroup()
     this.enemies = this.physics.add.staticGroup().setActive(true)
 
-    this.potion.create(600, 200,'stagePotion',undefined,true,true).setScale(0.4)
+    this.potion.create(600, 200, 'stagePotion', undefined, true, true).setScale(0.4)
 
     this.map = this.make.tilemap({ key: "map" })
 
@@ -193,7 +216,7 @@ export default class Stage1 extends Phaser.Scene {
     })
 
     this.player = this.physics.add
-      .sprite(28500, 400, this.registry.values.char) // 플레이어 생성 이동
+      .sprite(650, 400, this.registry.values.char) // 플레이어 생성 이동
       .setScale(0.25)
       .setDepth(3)
 
@@ -261,6 +284,21 @@ export default class Stage1 extends Phaser.Scene {
       }, this)
 
     let didJump = Phaser.Input.Keyboard.JustDown(this.spaceBar) // 스페이스바 입력 감지
+    const mode = store.getState().gameReducer.mode // ''
+    const roomCode = store.getState().roomReducer.roomCode
+
+    if (mode) {
+      console.log(this.socketId)
+      gameSocket.sendInput(roomCode, store.getState().roomReducer.users[0].socketId) //0번째 점프하면 서버로 1전송
+    }
+    else {}
+    //얘도 1
+    gameSocket.getInput((clientId: string) => {
+      console.log('첫번째: ', this.socketId === clientId, '두번째 :', this.socketId !== store.getState().roomReducer.users[0].socketId)
+      if(this.socketId === clientId && this.socketId !== store.getState().roomReducer.users[0].socketId) {
+        this.socketJump()
+      }
+    }) //this.socketId 1,2,3,4
 
     if (didJump) {
       if (this.player.body.onFloor()) { // 점프 로직
@@ -290,11 +328,11 @@ export default class Stage1 extends Phaser.Scene {
   private worldTime(): void {  // 타이머 콜백함수, 초당 체력 감소
     this.registry.values.score += 10
     this.scoreText.setText(`SCORE ${this.registry.values.score > 0 && this.registry.values.score < 10
-        ? '0000' : this.registry.values.score > 0 && this.registry.values.score < 100
-          ? '000' : this.registry.values.score >= 100 && this.registry.values.score < 1000
-            ? '00' : this.registry.values.score >= 1000 && this.registry.values.score < 10000
-              ? '0' : this.registry.values.score >= 10000
-                ? '' : null}${this.registry.values.score}`)
+      ? '0000' : this.registry.values.score > 0 && this.registry.values.score < 100
+        ? '000' : this.registry.values.score >= 100 && this.registry.values.score < 1000
+          ? '00' : this.registry.values.score >= 1000 && this.registry.values.score < 10000
+            ? '0' : this.registry.values.score >= 10000
+              ? '' : null}${this.registry.values.score}`)
     this.registry.values.life -= 100
     this.lifeText.setText(`LIFE ${this.registry.values.life}`)
     this.hp.decrease(1)
@@ -320,9 +358,9 @@ export default class Stage1 extends Phaser.Scene {
         let monster = this.physics.add.image(this.player.x + 1000, 540, 'card6.png')
         this.physics.world.enableBody(monster, 0)
         monster.setVelocityX(-350)
-        .setScale(1.2)
-        .setDepth(3)
-        .body.setAllowGravity(false)
+          .setScale(1.2)
+          .setDepth(3)
+          .body.setAllowGravity(false)
         this.enemyCollider = this.physics.add.collider(this.player, monster, this.hurt, undefined, this)
         this.enemies.add(monster)
       }, 2000)
@@ -338,11 +376,11 @@ export default class Stage1 extends Phaser.Scene {
       this.sound.add('coin', { volume: 0.2 }).play()
       this.registry.values.score += 10
       this.scoreText.setText(`SCORE ${this.registry.values.score > 0 && this.registry.values.score < 10
-          ? '0000' : this.registry.values.score > 0 && this.registry.values.score < 100
-            ? '000' : this.registry.values.score >= 100 && this.registry.values.score < 1000
-              ? '00' : this.registry.values.score >= 1000 && this.registry.values.score < 10000
-                ? '0' : this.registry.values.score >= 10000
-                  ? '' : null}${this.registry.values.score}`)
+        ? '0000' : this.registry.values.score > 0 && this.registry.values.score < 100
+          ? '000' : this.registry.values.score >= 100 && this.registry.values.score < 1000
+            ? '00' : this.registry.values.score >= 1000 && this.registry.values.score < 10000
+              ? '0' : this.registry.values.score >= 10000
+                ? '' : null}${this.registry.values.score}`)
     }
   }
 
@@ -395,11 +433,11 @@ export default class Stage1 extends Phaser.Scene {
   collectStagePotion(player: any, object: any): void {
     this.potion.remove(object, true)
     this.sound.add('heal', { volume: 3 }).play()
-      this.hp.decrease(-15)
-      this.registry.values.life + 1500 >= 10000 ? this.registry.values.life = 10000 : this.registry.values.life += 1500
-      this.lifeText.setText(`LIFE ${this.registry.values.life}`)
-      this.moveHp.setText(`${Math.floor(this.registry.values.life / 100)}%`)
-      this.moveHp.x += 75
+    this.hp.decrease(-15)
+    this.registry.values.life + 1500 >= 10000 ? this.registry.values.life = 10000 : this.registry.values.life += 1500
+    this.lifeText.setText(`LIFE ${this.registry.values.life}`)
+    this.moveHp.setText(`${Math.floor(this.registry.values.life / 100)}%`)
+    this.moveHp.x += 75
   }
 
   collectMush(player: any, tile: any): void { // 오브젝트 간 충돌 이벤트
@@ -410,7 +448,7 @@ export default class Stage1 extends Phaser.Scene {
       this.lifeText.setText(`LIFE ${this.registry.values.life}`)
       this.moveHp.setText(`${Math.floor(this.registry.values.life / 100)}%`)
       this.moveHp.x -= 15
-      let time = this.time.addEvent({ 
+      let time = this.time.addEvent({
         delay: 200,
         callback: () => this.player.tint = 0xff00ff,
         callbackScope: this,
@@ -434,17 +472,9 @@ export default class Stage1 extends Phaser.Scene {
     this.signLayer.removeTileAt(tile.x, tile.y)
     if (tile.index !== -1) {
       this.game.sound.stopAll()
-      store.dispatch({
-        type: 'GAME_DESTROY',
-        score: this.registry.values.score,
-        life: this.registry.values.life, 
-        stage: 2,
-        bird: this.birdArr.length,
-        squi: this.squiArr.length,
-      })
       this.scene.start('StageResult', {
         score: this.registry.values.score + 10000,
-        life: this.registry.values.life, 
+        life: this.registry.values.life,
         stage: 2,
         bird: this.birdArr.length,
         squi: this.squiArr.length,
@@ -515,10 +545,14 @@ export default class Stage1 extends Phaser.Scene {
     this.sound.add('get', { volume: 1 }).play()
     this.registry.values.score += 500
     this.scoreText.setText(`SCORE ${this.registry.values.score > 0 && this.registry.values.score < 10
-        ? '0000' : this.registry.values.score > 0 && this.registry.values.score < 100
-          ? '000' : this.registry.values.score >= 100 && this.registry.values.score < 1000
-            ? '00' : this.registry.values.score >= 1000 && this.registry.values.score < 10000
-              ? '0' : this.registry.values.score >= 10000
-                ? '' : null}${this.registry.values.score}`)
+      ? '0000' : this.registry.values.score > 0 && this.registry.values.score < 100
+        ? '000' : this.registry.values.score >= 100 && this.registry.values.score < 1000
+          ? '00' : this.registry.values.score >= 1000 && this.registry.values.score < 10000
+            ? '0' : this.registry.values.score >= 10000
+              ? '' : null}${this.registry.values.score}`)
+  }
+
+  private socketJump(): void {
+    this.player.body.setVelocityY(-850)
   }
 } 

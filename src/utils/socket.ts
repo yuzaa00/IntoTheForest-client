@@ -91,6 +91,15 @@ const chatSocket = {
   },
 };
 
+const gameSocket = {
+  sendInput(roomCode: string, socketId: String) {
+    socket.emit('space down', { roomCode, socketId })
+  },
+  getInput(callback: Function) {
+    socket.on('space down', callback)
+  },
+}
+
 const peerSocket = {
   sendingSignal({ signal, receiver, roomCode }) {
     socket.emit('sending signal', { signal, receiver, roomCode });
@@ -110,4 +119,4 @@ const peerSocket = {
   },
 };
 
-export { roomSocket, chatSocket, peerSocket }
+export { roomSocket, chatSocket, peerSocket, gameSocket }
