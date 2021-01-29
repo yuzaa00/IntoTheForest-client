@@ -15,9 +15,9 @@ export default function Game({ }) {
 
   useEffect(() => {
     const newGame = new Phaser.Game(Object.assign(config, { parent: 'game-container' + 11 }))
-    const newGame1 = new Phaser.Game(Object.assign(config, { parent: 'game-container' + 21 })) // 추후에 props로 추가 로딩
-    const newGame2 = new Phaser.Game(Object.assign(config, { parent: 'game-container' + 31 }))
-    const newGame3 = new Phaser.Game(Object.assign(config, { parent: 'game-container' + 41 }))
+    // const newGame1 = new Phaser.Game(Object.assign(config, { parent: 'game-container' + 21 })) // 추후에 props로 추가 로딩
+    // const newGame2 = new Phaser.Game(Object.assign(config, { parent: 'game-container' + 31 }))
+    // const newGame3 = new Phaser.Game(Object.assign(config, { parent: 'game-container' + 41 }))
 
     if (gameDestroy) {
       newGame.destroy(true)//게임삭제와 

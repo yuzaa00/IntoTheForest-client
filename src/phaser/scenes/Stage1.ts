@@ -94,26 +94,26 @@ export default class Stage1 extends Phaser.Scene {
   }
 
   public create(): void {
-    if (store.getState().gameReducer.multi === 0) {
-      this.socketId = store.getState().roomReducer.users[0].socketId
-    }
+    // if (store.getState().gameReducer.multi === 0) {
+    //   this.socketId = store.getState().roomReducer.users[0].socketId
+    // }
 
-    store.dispatch({
-      type: 'MUTE_MULTI_GAME' // 게임1이 로딩끝나고 게임2를 넘어가는 중간시점 redux.multi 1 // 게임2는 여기서 2가됨
-    })
+    // store.dispatch({
+    //   type: 'MUTE_MULTI_GAME' // 게임1이 로딩끝나고 게임2를 넘어가는 중간시점 redux.multi 1 // 게임2는 여기서 2가됨
+    // })
 
-    if (store.getState().gameReducer.multi > 1) {
-      this.socketId = store.getState().roomReducer.users[store.getState().gameReducer.multi - 1].socketId
-      this.game.sound.mute = true
-      this.input.enabled = false
-    }
+    // if (store.getState().gameReducer.multi > 1) {
+    //   this.socketId = store.getState().roomReducer.users[store.getState().gameReducer.multi - 1].socketId
+    //   this.game.sound.mute = true
+    //   this.input.enabled = false
+    // }
 
-    if (store.getState().gameReducer.multi === 4) {
-      this.socketId = store.getState().roomReducer.users[3].socketId
-      store.dispatch({
-        type: 'MUTE_MULTI_GAME_RESET'
-      })
-    }
+    // if (store.getState().gameReducer.multi === 4) {
+    //   this.socketId = store.getState().roomReducer.users[3].socketId
+    //   store.dispatch({
+    //     type: 'MUTE_MULTI_GAME_RESET'
+    //   })
+    // }
 
     this.hp = new HealthBar(this, 270, 19)  // 체력바 인스턴스 생성
     this.game.input.addPointer() // 마우스 포인터
@@ -216,7 +216,7 @@ export default class Stage1 extends Phaser.Scene {
     })
 
     this.player = this.physics.add
-      .sprite(650, 400, this.registry.values.char) // 플레이어 생성 이동
+      .sprite(29650, 400, this.registry.values.char) // 플레이어 생성 이동
       .setScale(0.25)
       .setDepth(3)
 
@@ -472,9 +472,17 @@ export default class Stage1 extends Phaser.Scene {
     this.signLayer.removeTileAt(tile.x, tile.y)
     if (tile.index !== -1) {
       this.game.sound.stopAll()
+      store.dispatch({
+        type: 'GAME_DESTROY',
+        score: this.registry.values.score,
+        life: this.registry.values.life, 
+        stage: 2,
+        bird: this.birdArr.length,
+        squi: this.squiArr.length,
+      })
       this.scene.start('StageResult', {
         score: this.registry.values.score + 10000,
-        life: this.registry.values.life,
+        life: this.registry.values.life, 
         stage: 2,
         bird: this.birdArr.length,
         squi: this.squiArr.length,

@@ -8,7 +8,7 @@ function SingleResult() {
     const history = useHistory();
 
     const gameDataFinal = useSelector((state: RootState) => state.singleReducer.gameData, shallowEqual)
-    console.log(gameDataFinal)
+    console.log('1', gameDataFinal)
 
     const [posts, setPosts] = useState([])
 
@@ -26,19 +26,12 @@ function SingleResult() {
             console.log(err)
         })
     }, [] )
-
-    let obj = {
-        ...gameDataFinal,
-        subcha: gameDataFinal.bird + gameDataFinal.squi   
-
-    }
     
-    delete gameDataFinal.bird
-    delete gameDataFinal.squi
-
-
-   
-         
+    let obj = {
+        score: gameDataFinal.score,
+        stage: gameDataFinal.stage,
+        subcha: gameDataFinal.bird ? gameDataFinal.bird : 0 + gameDataFinal.squi ? gameDataFinal.squi : 0
+    }
         const [customerRankUp, setCustomerRankUp] = useState(
             { nickname: ''}
         );
@@ -50,7 +43,7 @@ function SingleResult() {
         const handleRankUp = async (e) => {
             e.preventDefault()
             let newGameDataFinal = Object.assign({},customerRankUp, obj);
-            console.log(newGameDataFinal)
+            console.log('5', newGameDataFinal)
             await axios.post('http://localhost:4000/rank/reg', newGameDataFinal)
               .then((response) => {
                 console.log(response)
@@ -69,8 +62,8 @@ function SingleResult() {
     return (
       <div>
           <ul>
-              {posts.map(post => (
-                <li key={post.id}> {post.nickname}{post.score}{post.stage}{post.subcha}</li> 
+              {posts.map((post, idx) => (
+                <li key={idx}> {post.nickname}{post.score}{post.stage}{post.subcha}</li> 
                ))}
            </ul>
 
