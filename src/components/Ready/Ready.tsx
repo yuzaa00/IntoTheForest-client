@@ -1,7 +1,7 @@
 import React, { useState, useEffect }from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
-
+import SingleResult from '../Result/SingleResult';
 import Loading from './Loading';
 import Story from './Story'
 import ChoiceContainer from '../../containers/ChoiceContainer';

@@ -1,6 +1,7 @@
 import { SETTING } from '../../GameSetting/index'
 import Phaser, { Scene } from 'phaser'
 import HealthBar from '../helper/healthBar'
+import { store } from '../../index'
 
 export default class Stage3 extends Phaser.Scene {
   private player!: any

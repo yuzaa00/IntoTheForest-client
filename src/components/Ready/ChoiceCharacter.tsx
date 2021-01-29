@@ -21,6 +21,9 @@ function ChoiceCharacter({ value, onSelect1, onSelect2, onSelect3 }:ChoiceCharac
 
     const [gameOn, setGameOn] = useState(false)
 
+    const [ toggleClass, setToggleClass] = useState<number>(0);
+    const [ errorMessage, setErrorMessage] = useState<String>("");
+
     let history = useHistory();
    
     const onGameDesc = () => {
@@ -32,13 +35,16 @@ function ChoiceCharacter({ value, onSelect1, onSelect2, onSelect3 }:ChoiceCharac
       dispatch({type: 'GAME_DESTROY'}) 
       // history.push('/game');
     }
-  
 
     return (
       <div className="choiceCharacterScreen">
         <div className="chaSelectWrapper">
         <div className="chaSelectBx">
-          <div onClick={onSelect1} className="choiceCard">
+          <div onClick={() => { 
+            onSelect1()
+            setToggleClass(1)
+            setErrorMessage("")
+           } } className = {toggleClass === 1 ? 'clickChoiceCard' : 'choiceCard'} >
             <div className="imgBx">
               <img src={John} alt='john' />
             </div>
@@ -47,7 +53,11 @@ function ChoiceCharacter({ value, onSelect1, onSelect2, onSelect3 }:ChoiceCharac
              <h3>시바견</h3>
             </div>
           </div>
-          <div onClick={onSelect2} className="choiceCard">
+          <div onClick={() => { 
+            onSelect2()
+            setToggleClass(2)
+            setErrorMessage("")
+           } } className = {toggleClass === 2 ? 'clickChoiceCard' : 'choiceCard'} >
             <div className="imgBx">
             <img src={Tom} alt='tom' />
             </div>
@@ -56,7 +66,11 @@ function ChoiceCharacter({ value, onSelect1, onSelect2, onSelect3 }:ChoiceCharac
              <h3>진돗개</h3>
             </div>
           </div>
-          <div onClick={onSelect3} className="choiceCard">
+          <div onClick={() => { 
+            onSelect3()
+            setToggleClass(3)
+            setErrorMessage("")
+           } } className = {toggleClass === 3 ? 'clickChoiceCard' : 'choiceCard'} >
             <div className="imgBx">
             <img src={Alex} alt='alex' />
             </div>
@@ -68,13 +82,12 @@ function ChoiceCharacter({ value, onSelect1, onSelect2, onSelect3 }:ChoiceCharac
         </div>
         </div>
         <div className="chaSelectBtn">
-          <h1>My Choice: {value}</h1>
+          <h1>{value}</h1>
+          {errorMessage && <h1>{errorMessage}</h1> } 
       <button className="chaSelectBtn-desc" onClick={onGameDesc}>게임설명</button>
       <button className="chaSelectBtn-startGame" onClick={onGameStart}>GameStart</button>
       {gameOn && <Game />}
        </div>
-        
-        
       </div>
     );
   }

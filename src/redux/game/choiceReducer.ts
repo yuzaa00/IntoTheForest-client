@@ -26,11 +26,11 @@ const initialState: ChoiceReducerState = {
 function choiceReducer (state: ChoiceReducerState = initialState, action: ChoiceReducerAction):ChoiceReducerState {
   switch (action.type) {
     case SELECT1:
-      return {value: "멍멍이"};
+      return {value: "시바견"};
     case SELECT2:
-      return {value: "치와와"};
+      return {value: "진돗개"};
     case SELECT3:
-      return {value: "포메라니안"};
+      return {value: "도사견"};
     default:
       return state;
   }

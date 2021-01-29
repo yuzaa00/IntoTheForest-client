@@ -1,13 +1,15 @@
 import { combineReducers } from 'redux';
 import { StateType } from 'typesafe-actions';
-import choiceReducer from './game/choiceReducer'
-import roomReducer from './room/roomRedux'
+import choiceReducer from '../redux/game/choiceReducer'
+import roomReducer from '../redux/room/roomRedux'
+import singleReducer from '../redux/result/singleReducer'
 import gameReducer from './game/gameReducer'
 import chatReducer from './chat/chatRedux'
 
 const rootReducer = combineReducers({
     choiceReducer,
     roomReducer,
+    singleReducer
     chatReducer,
     gameReducer
 });
