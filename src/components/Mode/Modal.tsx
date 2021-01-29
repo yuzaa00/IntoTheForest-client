@@ -119,7 +119,7 @@ const StyledModal = styled.div`
     font-weight: bold;
     box-shadow: 2px 2px 5px 7px rgba(0, 0, 0, .6);
     border-radius: 50px;
-    padding: 10% 0;
+    padding: 8% 0;
     cursor: pointer;
   }
   
@@ -148,10 +148,6 @@ const StyledModal = styled.div`
     width: 80%;
     margin: 0 auto;
   }
-
-  .join-room-canvas .join-room-area {
-
-  }
   
   .create-room-canvas .create-room-area .create-room-content {
     width: 100%;
@@ -172,9 +168,9 @@ const StyledModal = styled.div`
     height: 100px;
   }
 
-  // .join-room-canvas .button-area {
-  //   margin: 0;
-  // }
+  .join-room-canvas .button-area {
+    margin: 0;
+  }
   
   .create-room-canvas .create-button,
   .button-area button,
@@ -184,7 +180,6 @@ const StyledModal = styled.div`
     border-radius: 30px;
     color: white;
     font-family: 'Y_Spotlight';
-
     cursor: pointer;
   }
 
@@ -194,13 +189,12 @@ const StyledModal = styled.div`
 
   .create-room-canvas .create-button, 
   .join-room-canvas .join-button {
-    width: 100%;
+    width: 50%;
     height: 100px;
     background-color: ${({ theme }) => theme.gray};
     color: #222;
     font-family: 'BMDOHYEON';
     font-size: 30px;
-    margin-right: 5%;
   }
 
   .join-room-canvas .join-button {
