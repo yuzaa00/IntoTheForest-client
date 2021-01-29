@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { roomData, response } from '../../utils/socket.type'
 import crypto from 'crypto'
-import './CreateRoom.css';
 function CreateRoomForm({setModalOpen}: any){
   
   const dispatch = useDispatch()
