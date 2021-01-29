@@ -63,7 +63,6 @@ function JoinRoomForm({ setModalOpen }: any ) {
 
   const closeModal = () => {
     setModalOpen(false);
-    history.push('/mode');
   }
 
   return (

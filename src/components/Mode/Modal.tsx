@@ -51,14 +51,17 @@ const StyledModal = styled.div`
     outline: none;
   }
 
-  .create-room-canvas, .join-room-canvas {
+  .create-room-canvas {
     width: 80%;
-    height: 90vh;
     margin: 0 auto;
     text-align: center;
     padding: 25px 0;
     box-sizing: border-box;
     position: relative;
+  }
+
+  .create-room-canvas {
+    height: 90vh;
   }
 
   .join-room-canvas {
@@ -83,15 +86,13 @@ const StyledModal = styled.div`
   
   .create-room-canvas .subtitle {
     width:100%;
-    height: 20px;
-    margin: 1% 0 5%;
+    margin: 1% 0 2%;
     text-align: center;
   }
   
   .create-room-canvas form {
     width: 80%;
-    height: 40%;
-    margin: 10px auto 0;
+    margin: 1% auto 0;
   }
 
   .join-room-canvas .join-form {
@@ -102,15 +103,13 @@ const StyledModal = styled.div`
   
   .create-room-canvas .people {
     width: 100%;
-    height: 100%;
-    line-height: 170px;
     display: flex;
     margin-bottom: 30px;
   }
 
   .create-room-canvas .people .highlight {
-  box-shadow: #FC0 5px 0 20px;
-}
+    box-shadow: #FC0 5px 0 20px;
+  }
   
   .create-room-canvas .people div {
     width: 48%;
@@ -118,9 +117,9 @@ const StyledModal = styled.div`
     font-family: 'BMDOHYEON';
     font-size: 50px;
     font-weight: bold;
-    box-shadow: 2px 2px 10px 5px rgba(0, 0, 0, .8);
+    box-shadow: 2px 2px 5px 7px rgba(0, 0, 0, .6);
     border-radius: 50px;
-    padding-top: 8%;
+    padding: 10% 0;
     cursor: pointer;
   }
   
@@ -142,7 +141,7 @@ const StyledModal = styled.div`
     height: 25%;
     display: flex;
     box-sizing: border-box;
-    margin-top: 2%;
+    margin: 2% 0;
   }
 
   .join-room-canvas .join-room-area {
@@ -173,9 +172,9 @@ const StyledModal = styled.div`
     height: 100px;
   }
 
-  .join-room-canvas .button-area {
-    margin: 0;
-  }
+  // .join-room-canvas .button-area {
+  //   margin: 0;
+  // }
   
   .create-room-canvas .create-button,
   .button-area button,
@@ -185,8 +184,12 @@ const StyledModal = styled.div`
     border-radius: 30px;
     color: white;
     font-family: 'Y_Spotlight';
-    font-size: 20px;
+
     cursor: pointer;
+  }
+
+  .create-room-canvas .create-button {
+    margin-top: 5%;
   }
 
   .create-room-canvas .create-button, 
@@ -195,6 +198,8 @@ const StyledModal = styled.div`
     height: 100px;
     background-color: ${({ theme }) => theme.gray};
     color: #222;
+    font-family: 'BMDOHYEON';
+    font-size: 30px;
     margin-right: 5%;
   }
 
@@ -208,11 +213,12 @@ const StyledModal = styled.div`
     background-color: ${({ theme }) => theme.grayHover};
   }
 
-  .button-area button {
+.button-area button {
     position: fixed;
     bottom: 1%;
     right: 1%;
     background-color: red;
+    font-size: 20px;
   }
 
   .button-area button:hover {
@@ -225,8 +231,8 @@ const StyledModal = styled.div`
     font-size: 15px;
   }
   
-  .create-room-canvas .create-room-area input,
-  .join-room-canvas .join-room-area input {
+  .create-room-canvas input,
+  .join-room-canvas input {
     margin-top: 20px;
     padding: 12px 0;
     font-family: 'Y_Spotlight';
