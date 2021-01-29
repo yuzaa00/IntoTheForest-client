@@ -1,4 +1,5 @@
 import Card from '../helper/card'
+import { store } from '../../index'
 
 export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토리 줍기 미니게임
   private lifeText!: Phaser.GameObjects.BitmapText
@@ -43,6 +44,23 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
   }
 
   public create(): void {
+
+    store.dispatch({
+      type: 'MUTE_MULTI_GAME'
+    })
+    
+    if(store.getState().gameReducer.multi > 1) {
+      this.game.sound.mute = true
+      this.input.enabled = false
+    }
+
+    if(store.getState().gameReducer.multi === 4) {
+      store.dispatch({
+        type: 'MUTE_MULTI_GAME_RESET'
+      })
+    }
+
+    this.input.enabled = false
     this.add.image(0, 0, 'cardbg').setOrigin(0, 0).setDepth(0)
     this.lifeText = this.add // 라이프 텍스트 생성
       .bitmapText(30, 30, 'font', `남은 시간 ${this.registry.values.time}`)

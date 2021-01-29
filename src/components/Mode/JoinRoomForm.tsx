@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { joinRoom, response } from '../../utils/socket.type'
 import crypto from 'crypto'
-
 import './JoinRoom.css';
 
 function JoinRoomForm({ setModalOpen }: any ) {
@@ -34,6 +33,11 @@ function JoinRoomForm({ setModalOpen }: any ) {
           socketId: clientId,
           photoUrl: '../../images/card/card5.png'
         }
+      })
+      history.push(`rooms/${roomId}`)
+      dispatch({
+        type: 'SET_MULTI_MODE',
+        value: 'M4'   // 'M2' or 'M4'
       })
       history.push(`rooms/${roomId}`)
     } 

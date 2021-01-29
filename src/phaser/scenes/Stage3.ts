@@ -47,6 +47,8 @@ export default class Stage3 extends Phaser.Scene {
   private reInvincibility!: ReturnType<typeof setTimeout>
   private particles!: Phaser.GameObjects.Particles.ParticleEmitterManager
 
+  private socketId!: string
+
   constructor() {
     super('Stage3')
   }
@@ -93,6 +95,23 @@ export default class Stage3 extends Phaser.Scene {
   }
 
   public create(): void {
+    store.dispatch({
+      type: 'MUTE_MULTI_GAME'
+    })
+    
+    if(store.getState().gameReducer.multi > 1) {
+      this.socketId = store.getState().roomReducer.users[store.getState().gameReducer.multi - 2].socketId
+      this.game.sound.mute = true
+      this.input.enabled = false
+    }
+
+    if(store.getState().gameReducer.multi === 4) {
+      this.socketId = store.getState().roomReducer.users[3].socketId
+      store.dispatch({
+        type: 'MUTE_MULTI_GAME_RESET'
+      })
+    }
+
     this.hp = new HealthBar(this, 270, 19) // 체력바 인스턴스 생성
     this.hp.set(this.registry.values.life / 100)
     

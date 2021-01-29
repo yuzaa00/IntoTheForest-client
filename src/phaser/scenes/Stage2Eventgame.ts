@@ -1,3 +1,5 @@
+import { store } from '../../index'
+
 type MyArray<T> = T[]
 
 export default class Stage2Eventgame extends Phaser.Scene {
@@ -42,6 +44,21 @@ export default class Stage2Eventgame extends Phaser.Scene {
   }
 
   public create(): void {
+    store.dispatch({
+      type: 'MUTE_MULTI_GAME'
+    })
+    
+    if(store.getState().gameReducer.multi > 1) {
+      this.game.sound.mute = true
+      this.input.enabled = false
+    }
+
+    if(store.getState().gameReducer.multi === 4) {
+      store.dispatch({
+        type: 'MUTE_MULTI_GAME_RESET'
+      })
+    }
+
     this.enemies = this.physics.add.group()
 
     this.lifeText = this.add // 라이프 텍스트 생성

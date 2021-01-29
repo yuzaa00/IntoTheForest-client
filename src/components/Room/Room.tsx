@@ -62,7 +62,7 @@ function Room({ renderRoom }: RoomProps) {
       }
     })
 
-    roomSocket.userLeaved(({ socketId }: number) => { // socket on
+    roomSocket.userLeaved(({ socketId }: any) => { // socket on
       delete usersRef.current[socketId]
       setUsers(users => {
         const { [socketId]: targetPeer, ...restPeers } = users
