@@ -43,15 +43,18 @@ function Room({ renderRoom }: RoomProps) {
   const history = useHistory()
   const roomCode = useSelector((state: RootState) => state.roomReducer.roomCode)
   const userList = useSelector((state: RootState) => state.roomReducer.users, shallowEqual)
+  const mySocketId = useSelector((state: RootState) => state.roomReducer.mySocketId, shallowEqual)
 
-  // 카카오 프로필 불러오기 - 시작
   useEffect(() => {
-    console.log('RoomCode : ', roomCode)
     roomSocket.userJoined(roomCode)
     roomSocket.userJoinedOn(async ({ userList, clientId }: any) => {
         dispatch({ // socket on
         type: 'ADD_USER',
         value: userList
+      })
+      dispatch({ // socket on
+        type: 'ADD_MY_SOCKET_ID',
+        value: clientId
       })
       try {
         const stream = await controlStream.init()
@@ -61,13 +64,12 @@ function Room({ renderRoom }: RoomProps) {
         setError(error.message)
       }
     })
-
-    roomSocket.userLeaved(({ socketId }: number) => { // socket on
-      delete usersRef.current[socketId]
-      setUsers(users => {
-        const { [socketId]: targetPeer, ...restPeers } = users
-        if (targetPeer) targetPeer.destroy()
-        return restPeers
+    
+    roomSocket.listenUserLeaved(({ socketId }) => { // socket on
+      delete peersRef.current[socketId]
+      setPeers(peers => {
+        delete peers[socketId]
+        return peers        
       })
       dispatch({
         type: 'DELETE_USER',
@@ -76,38 +78,39 @@ function Room({ renderRoom }: RoomProps) {
     })
 
     roomSocket.onSetProfile((user: any) => {
-      console.log(user)
       const editUser = Object.assign({}, {
         photoUrl: user.photoUrl,
         nickName: user.nickName,
         socketId: user.clientId
       })
-      console.log(editUser)
       dispatch({
         type: 'SET_PROFILE',
         value: editUser
       })
     })
+
+    return () => {
+      roomSocket.leaveRoom(roomCode);
+      roomSocket.cleanUpRoomListener();
+      setIsStreaming(false)
+       
+      controlStream.remove();
+    };
   }, [])
 
   useEffect(() => {
     if (!isStreaming) return
     
     userList.forEach((user, idx) => {
-      if (idx !== 0) {
+      if (mySocketId !== user.socketId) {
         const peer = new Peer({
           initiator: true,
           trickle: false,
           stream: controlStream.get(),
         });
-
-        console.log(peer)
-
         peer.on('signal', signal => {
-          console.log(88)
           peerSocket.sendingSignal({ signal, receiver: user, roomCode: roomCode })
         })
-        console.log('123')
         peersRef.current[user.socketId] = peer
         setPeers(prev => ({ ...prev, [user.socketId]: peer }))
       }
@@ -161,14 +164,12 @@ function Room({ renderRoom }: RoomProps) {
             roomCode: roomCode,
             nickName: nickname,
           }
-          console.log('log', userData)
           roomSocket.emitSetProfile(userData)
         },
         fail: (error: any) => console.log(error)
       })
     }
   }
-  //- 끝
 
   return (
     <>
@@ -178,7 +179,7 @@ function Room({ renderRoom }: RoomProps) {
       <ChoiceCharacter />
       <Chat />
       {userList.map((user, idx) => (
-        <div>
+        <div key={idx}>
           {user.socketId === userList[0].socketId ?
             <StyledVideo
               ref={myVideoRef}

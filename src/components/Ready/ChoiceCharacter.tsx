@@ -34,7 +34,7 @@ function ChoiceCharacter({ value, onSelect1, onSelect2, onSelect3 }:ChoiceCharac
       setGameOn(true)
     }
 
-    return (
+    return gameOn ? <div><Game /></div> : (
       <div className="choiceCharacterScreen">
         <div className="chaSelectWrapper">
         <div className="chaSelectBx">
@@ -84,7 +84,6 @@ function ChoiceCharacter({ value, onSelect1, onSelect2, onSelect3 }:ChoiceCharac
           {errorMessage && <h1>{errorMessage}</h1> } 
       <button className="chaSelectBtn-desc" onClick={onGameDesc}>게임설명</button>
       <button className="chaSelectBtn-startGame" onClick={onGameStart}>GameStart</button>
-      {gameOn && <Game />}
        </div>
       </div>
     );

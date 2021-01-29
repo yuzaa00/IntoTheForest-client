@@ -27,10 +27,10 @@ export const config: Phaser.Types.Core.GameConfig = {
   width: SETTING.WIDTH,
   height: SETTING.HEIGHT,
   parent: 'game-container',
-  scale: {
-    mode: Phaser.Scale.FIT,
-    autoCenter: Phaser.Scale.CENTER_BOTH
-  },
+  // scale: {
+  //   mode: Phaser.Scale.FIT,
+  //   autoCenter: Phaser.Scale.CENTER_BOTH
+  // },
   physics: {
     matter: {
       "plugins.wrap": true

@@ -12,6 +12,7 @@ const TURN_ON_FILTER = 'TURN_ON_FILTER'
 const TURN_OFF_FILTER = 'TURN_OFF_FILTER'
 const SET_PROFILE = 'SET_PROFILE'
 const GAME_DESTROY = 'GAME_DESTROY'
+const ADD_MY_SOCKET_ID = 'ADD_MY_SOCKET_ID'
 
 export const saveRoomCode = createAction(SAVE_ROOM_CODE)
 export const renderRoom = createAction(RENDER_ROOM)
@@ -20,6 +21,7 @@ export const addUser = createAction(ADD_USER)
 export const deleteUser = createAction(DELETE_USER)
 export const setProfile = createAction(SET_PROFILE)
 export const gameDestroy = createAction(GAME_DESTROY)
+export const addMySocketID = createAction(ADD_MY_SOCKET_ID)
 // export const updateRoomLockingStatus = createAction(UPDATE_ROOM_LOCKING_STATUS)
 // export const turnOnFilter = createAction(TURN_ON_FILTER)
 // export const turnOffFilter = createAction(TURN_OFF_FILTER)
@@ -32,6 +34,7 @@ const actions = {
   deleteUser, 
   setProfile,
   gameDestroy,
+  addMySocketID,
   // updateRoomLockingStatus, 
   // turnOnFilter, 
   // turnOffFilter 
@@ -56,6 +59,7 @@ interface RoomState  {
   currentUser: usersItem
   game: boolean
   gameData: any
+  mySocketId: string
 }
 
 const initialState: RoomState = {
@@ -68,7 +72,8 @@ const initialState: RoomState = {
   },
   users: [],
   game: false,
-  gameData: {}
+  gameData: {},
+  mySocketId: ''
 }
 
 const roomReducer = createReducer<RoomState, RoomAction>(initialState, {
@@ -95,10 +100,10 @@ const roomReducer = createReducer<RoomState, RoomAction>(initialState, {
   },
   [DELETE_USER]: (state: RoomState, action: any) => {
     const newUserList = state.users.filter(
-      user => user.socketId !== action.socketId,
+      (user) => user.socketId !== action.value,
     )
+
     return {
-      ...state,
       users: newUserList
     }
   },
@@ -121,6 +126,9 @@ const roomReducer = createReducer<RoomState, RoomAction>(initialState, {
     return {
       ...state
     }
+  },
+  [ADD_MY_SOCKET_ID]: (state: RoomState, action: any) => {
+    return { ...state, mySocketId: action.value }
   }
 })
 

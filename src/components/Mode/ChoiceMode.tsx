@@ -2,7 +2,6 @@ import React, { Component, useState, ReactElement, ReactNode, FC, ReactChild, us
 import { Link, Route, Switch, useHistory } from 'react-router-dom';
 import './ChoiceMode.css';
 import Story from '../Ready/Story';
-import { JsxChild, JsxElement } from 'typescript';
 import Modal from './Modal'
 import { roomSocket } from '../../utils/socket';
 import CreateRoomForm from './CreateRoomForm';
@@ -34,8 +33,8 @@ const ChoiceMode = () => {
   }
 
   const openModal = (modalComponents: any) => {
-    setModalOpen(true)
     setmodalContent(modalComponents)
+    setModalOpen(true)
   }
 
   return (

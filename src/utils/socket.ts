@@ -36,15 +36,17 @@ const roomSocket = {
   userLeaved(cb) {
     socket.on('leave user', cb);
   },
+
   // updateRoomList() {
   //   socket.emit(EVENT.ROOM_LIST);
   // },
   // joinRoom({ roomId, user }, cb) {
   //   socket.emit(EVENT.JOIN_ROOM, { roomId, user }, cb);
   // },
-  // leaveRoom({ roomId }) {
-  //   socket.emit(EVENT.LEAVE_ROOM, { roomId });
-  // },
+
+  leaveRoom( roomCode: any ) {
+    socket.emit('leave room', roomCode);
+  },
   // updateRoomLockingStatus({ roomId, isLocked }) {
   //   socket.emit(EVENT.LOCKING_STATUS, { roomId, isLocked });
   // },
@@ -54,9 +56,9 @@ const roomSocket = {
   // listenMemberJoined(cb) {
   //   socket.on(EVENT.MEMBER_JOINED, cb);
   // },
-  // listenMemberLeaved(cb) {
-  //   socket.on(EVENT.MEMBER_LEAVED, cb);
-  // },
+  listenUserLeaved(cb) {
+    socket.on('user leaved', cb);
+  },
   // listenUpdateRoomLockingStatus(cb) {
   //   socket.on(EVENT.LOCKING_STATUS, cb);
   // },
@@ -69,12 +71,12 @@ const roomSocket = {
   // cleanUpLobbyListener() {
   //   socket.off(EVENT.ROOM_LIST);
   // },
-  // cleanUpRoomListener() {
-  //   socket.off(EVENT.MEMBER_JOINED);
-  //   socket.off(EVENT.MEMBER_LEAVED);
-  //   socket.off(EVENT.LOCKING_STATUS);
-  //   socket.off(EVENT.VIDEO_FILTER);
-  // },
+  cleanUpRoomListener() {
+    socket.off('user joined');
+    socket.off('user leaved');
+    // socket.off(EVENT.LOCKING_STATUS);
+    // socket.off(EVENT.VIDEO_FILTER);
+  },
 };
 
 const chatSocket = {
@@ -88,6 +90,15 @@ const chatSocket = {
     socket.off('chat');
   },
 };
+
+const gameSocket = {
+  sendInput(roomCode: string, socketId: String) {
+    socket.emit('space down', { roomCode, socketId })
+  },
+  getInput(callback: Function) {
+    socket.on('space down', callback)
+  },
+}
 
 const peerSocket = {
   sendingSignal({ signal, receiver, roomCode }) {
@@ -108,4 +119,4 @@ const peerSocket = {
   },
 };
 
-export { roomSocket, chatSocket, peerSocket }
+export { roomSocket, chatSocket, peerSocket, gameSocket }

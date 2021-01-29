@@ -35,6 +35,10 @@ function CreateRoomForm({setModalOpen}: any){
           photoUrl: '../../images/card/card5.png'
         }
       })
+      dispatch({
+        type: 'SET_MULTI_MODE',
+        value: 'M' + user  // 'M2' or 'M4'
+      })
       history.push(`rooms/${roomId}`)
     }
   }
