@@ -14,34 +14,51 @@ function SingleResult() {
 
     useEffect(() => {
         axios
-        .get('http://localhost:4000/rank/load')//시크릿코드 쉘터 shelter
+        .get('http://localhost:4000/rank/load',//시크릿코드 쉘터 shelter
+        {
+            headers: {"secretCode": "shelter"}
+        })
         .then(res => {
-            console.log(res)
+            console.log(res.data)
             setPosts(res.data)
         })
         .catch(err => {
             console.log(err)
         })
     }, [] )
-//...gameDataFinal
+
+    let obj = {
+        ...gameDataFinal,
+        subcha: gameDataFinal.bird + gameDataFinal.squi   
+
+    }
+    
+    delete gameDataFinal.bird
+    delete gameDataFinal.squi
+
+
+   
+         
         const [customerRankUp, setCustomerRankUp] = useState(
-            { nickname: '', score: 0, stage: 0, subcha: 0}
+            { nickname: ''}
         );
     
         const handleChange = (event) => {
             setCustomerRankUp({...customerRankUp, [event.target.name]: event.target.value})
         }
     
-        const handleRankUp = (e) => {
+        const handleRankUp = async (e) => {
             e.preventDefault()
-            axios.post('http://localhost:4000/rank/reg', customerRankUp)
+            let newGameDataFinal = Object.assign({},customerRankUp, obj);
+            console.log(newGameDataFinal)
+            await axios.post('http://localhost:4000/rank/reg', newGameDataFinal)
               .then((response) => {
-                //console.log(response)
+                console.log(response)
                 if (response.status === 201) {
                     alert('🙇랭크등록에 성공하셨습니다!🙏')
                 }
             }).then(() => {
-                history.push('/');//
+                //history.push('/');
             })
               .catch(function (error) {
                   console.log(error)
@@ -53,16 +70,16 @@ function SingleResult() {
       <div>
           <ul>
               {posts.map(post => (
-                  <li key={post.id}>{post.nickname}{post.score}{post.life}{post.stage}{post.bird}{post.squi}</li>
-              ))}
-          </ul>
+                <li key={post.id}> {post.nickname}{post.score}{post.stage}{post.subcha}</li> 
+               ))}
+           </ul>
 
           <div className="newNickName">
   <form className='nameNickNew' onSubmit={handleRankUp}>
       <h5 className="rankUpNickname">Rank Up With Nickname</h5>                        
       <div className="rank-input-field">
           <label htmlFor="nickname">Nickname</label>
-          <input type="text" name="nickname" value={customerRankUp.nickname} onChange={handleChange} required />
+          <input type="text" name="nickname" value={customerRankUp.nickname} onChange={handleChange}/>
       </div>
       <div className="rank-input-field"> 
           <button className="btnRankUp" type="submit">Rank Up</button>
