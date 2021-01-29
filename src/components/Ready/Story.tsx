@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Story.css';
+import Game from '../Game/Game'
 function Story() {
   const [showMoreButton, setShowMoreButton] = useState<boolean>(false);
   const [showSkipButton, setShowSkipButton] = useState<boolean>(false);
@@ -48,6 +49,7 @@ function Story() {
         {showMoreButton && <button className="more story-button" onClick={moreStory}>더보기</button>}
         {showSkipButton && <Link to="/ready/character"><button className="skip story-button">SKIP</button></Link>}
       </div>
+      <Game />
     </div>
   )
 }

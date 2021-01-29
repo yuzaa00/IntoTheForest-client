@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
 
 import './ChoiceCharacter.css';
@@ -6,7 +6,10 @@ import John from '../../images/siba.png'
 import Tom from '../../images/backgu.png'
 import Alex from '../../images/dosaDog.png'
 
-type ChoiceCharacterProps {
+import Game from '../Game/Game'
+import { useDispatch } from 'react-redux';
+
+type ChoiceCharacterProps = {
     value: string;
     onSelect1: () => void;
     onSelect2: () => void;
@@ -14,6 +17,9 @@ type ChoiceCharacterProps {
   }
 
 function ChoiceCharacter({ value, onSelect1, onSelect2, onSelect3 }:ChoiceCharacterProps) {
+    const dispatch = useDispatch()
+
+    const [gameOn, setGameOn] = useState(false)
 
     let history = useHistory();
    
@@ -22,8 +28,9 @@ function ChoiceCharacter({ value, onSelect1, onSelect2, onSelect3 }:ChoiceCharac
      }
   
     const onGameStart = () => {
-      
-      history.push('/game');
+      setGameOn(true)
+      dispatch({type: 'GAME_DESTROY'}) 
+      // history.push('/game');
     }
   
 
@@ -64,6 +71,7 @@ function ChoiceCharacter({ value, onSelect1, onSelect2, onSelect3 }:ChoiceCharac
           <h1>My Choice: {value}</h1>
       <button className="chaSelectBtn-desc" onClick={onGameDesc}>게임설명</button>
       <button className="chaSelectBtn-startGame" onClick={onGameStart}>GameStart</button>
+      {gameOn && <Game />}
        </div>
         
         

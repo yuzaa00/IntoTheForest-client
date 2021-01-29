@@ -7,7 +7,7 @@ import crypto from 'crypto'
 
 import './JoinRoom.css';
 
-function JoinRoomForm({ setModalOpen }: any) {
+function JoinRoomForm({ setModalOpen }: any ) {
   const dispatch = useDispatch()
   const history = useHistory()
   const [input, setInput] = useState('')
@@ -16,7 +16,7 @@ function JoinRoomForm({ setModalOpen }: any) {
 
   const moveToRoom = (response: response) => {
     const { roomId, clientId, error } = response
-    if (!roomId) {
+    if(!roomId) {
       setjoinError(error)
     }
     else {
@@ -36,7 +36,7 @@ function JoinRoomForm({ setModalOpen }: any) {
         }
       })
       history.push(`rooms/${roomId}`)
-    }
+    } 
   }
 
   const joinRoom = (joinRoom: joinRoom) => {
@@ -68,27 +68,31 @@ function JoinRoomForm({ setModalOpen }: any) {
 
   return (
     <div>
-      <div className="join-room-canvas">
-        <div className="title">방 참가하기</div>
-        <form onSubmit={submitRoomData} className="join-form">
-          <div className="join-room-area">
-            <div className="join-room-content">
-              <div className="main-text">방 이름</div>
-              <input
-                type='text'
-                name='roomCode'
-                minLength={2}
-                maxLength={6}
-                required
-                placeholder='방 이름을 입력하세요'
-                title='2~6자리의 방 이름을 입력하세요'
-                value={input}
-                onChange={handleInputCodeChange}
-              />
-            </div>
-            <div className="join-nickname-content">
-              <div className="main-text">닉네임 입력</div>
-              <input
+    <div className="join-room-canvas">
+      <div className="title">방 참가하기</div>
+
+      <form onSubmit={submitRoomData} className="join-form">
+
+        <div className="join-room-area">
+
+          <div className="join-room-content">
+            <div className="main-text">방 이름</div>
+            <input
+            type='text'
+            name='roomCode'
+            minLength={2}
+            maxLength={6}
+            required
+            placeholder='방 이름을 입력하세요'
+            title='2~6자리의 방 이름을 입력하세요'
+            value={input}
+            onChange={handleInputCodeChange}
+          />
+          </div>
+
+          <div className="join-nickname-content">
+            <div className="main-text">닉네임 입력</div>
+            <input
                 type='text'
                 name='nickName'
                 minLength={2}
@@ -99,15 +103,17 @@ function JoinRoomForm({ setModalOpen }: any) {
                 value={nickInput}
                 onChange={handleInputNickChange}
               />
-            </div>
-            <div className="button-area">
-              <button type='submit' value='방 참여하기' className="join-button" />
-              <button onClick={closeModal}>닫기</button>
-            </div>
-            {joinError && <div style={{ color: 'red' }}>{joinError}</div>}
           </div>
-        </form>
-      </div>
+
+          <div className="button-area">
+            <input type='submit' value='방 참여하기' className="join-button" />
+            <button onClick={closeModal}>닫기</button>
+          </div> 
+
+          {joinError && <div style={{color: 'red'}}>{joinError}</div>}
+        </div>
+      </form>
+    </div>
     </div>
   )
 }

@@ -11,6 +11,8 @@ import * as controlStream from '../../utils/controlStream'
 import Peer from 'simple-peer'
 import { store } from '../../index'
 
+import Game from '../Game/Game'
+import ChoiceCharacter from '../../components/Ready/ChoiceCharacter'
 import KakaoProfileButton from './KakaoProfileButton'
 import KakaoProfileDelete from './KakaoProfileDelete'
 
@@ -60,8 +62,8 @@ function Room({ renderRoom }: RoomProps) {
       }
     })
 
-    roomSocket.userLeaved(({ socketId }) => { // socket on
-      delete usersRef.current[socketId];
+    roomSocket.userLeaved(({ socketId }: number) => { // socket on
+      delete usersRef.current[socketId]
       setUsers(users => {
         const { [socketId]: targetPeer, ...restPeers } = users
         if (targetPeer) targetPeer.destroy()
@@ -173,6 +175,7 @@ function Room({ renderRoom }: RoomProps) {
       <div>멀티 유저 대기실</div>
       <KakaoProfileButton handleAccToken={handleAccToken} />
       <KakaoProfileDelete handleAccToken={handleAccToken} />
+      <ChoiceCharacter />
       <Chat />
       {userList.map((user, idx) => (
         <div>

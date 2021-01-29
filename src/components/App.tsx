@@ -20,6 +20,8 @@ function App() {
   }, [])
 
    return (
+     <div>
+       {/* <Game /> */}
     <Switch>
       <Route exact path='/' component={Welcome} /> 
       <Route path='/mode' component={ChoiceMode} /> 
@@ -28,6 +30,8 @@ function App() {
       <Route path='/game' component={Game} />
       <Route path='/result' component={Result} />
     </Switch>
+     </div>
+
   )
 }
 
