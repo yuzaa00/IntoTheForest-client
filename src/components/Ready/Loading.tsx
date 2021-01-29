@@ -4,8 +4,8 @@ import Loader from 'react-loader-spinner'
 
 import './Loading.css';
 
-import logoDog from '../../images/loading/logodog.png'
-import logoForest from '../../images/loading/logoForest.png'
+import logoDog from '../../images/logodog.png'
+import logoForest from '../../images/logoForest.png'
 
 
 function Loading () {

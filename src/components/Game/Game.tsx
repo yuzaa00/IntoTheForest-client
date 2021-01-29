@@ -3,6 +3,8 @@ import { Link, useHistory } from 'react-router-dom';
 import { useSelector, shallowEqual } from 'react-redux';
 import { RootState } from '../../redux/rootReducer' 
 import { config } from '../../phaser/index'
+import { store } from '../../index'
+import  RecordRTC, { invokeSaveAsDialog }  from 'recordrtc'
 
 // import { GameProgress } from '~/types/game.type';
 // import { selectGame } from '~/store/gameSlice';

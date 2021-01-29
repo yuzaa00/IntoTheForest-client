@@ -1,4 +1,6 @@
 import { Switch, Route } from 'react-router-dom';
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 
 import Welcome from './Welcome/Welcome' //랜딩페이지
 import ChoiceMode from './Mode/ChoiceMode'; 
@@ -9,8 +11,16 @@ import Result from './Result/Result';
 import SingleResult from '../components/Result/SingleResult'
 
 function App() {
+  const dispatch = useDispatch()
 
-  return (
+  useEffect(() => {
+    dispatch({
+      type: 'SAVE_CLIENT_WIDTH',
+      value: document.body.clientWidth
+    })
+  }, [])
+
+   return (
     <Switch>
       <Route exact path='/' component={Welcome} /> 
       <Route path='/mode' component={ChoiceMode} /> 

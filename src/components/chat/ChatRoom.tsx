@@ -6,23 +6,25 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import format from 'date-fns/format'
 
-function ChatRoom() {
+function ChatRoom({onSubmit}) {
   const [input, setInput] = useState('')
-  const messageRef = useRef()
-  const chatList = useSelector((state: RootState) => state.chatReducer.chatlist)
-
+  const messageRef = useRef<HTMLUListElement>()
+  console.time('d')
+  const chatList = useSelector((state: RootState) => state.chatReducer.chatList,shallowEqual)
+  const roomCode = useSelector((state: RootState) => state.roomReducer.roomCode,shallowEqual)
+  const user = useSelector((state: RootState) => state.roomReducer.users[0],shallowEqual)
+  console.timeEnd('d')
   useEffect(() => {
-    messageRef.current.scrollTop = messageRef.current.scrollHeight
+    // messageRef.current!.scrollTop = messageRef.current!.scrollHeight
   }, [chatList])
 
-  const handleInputChange = ev => {
-    const { value } = ev.target;
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target
+    setInput(value)
+  }
 
-    setInput(value);
-  };
-
-  const handleMessageSubmit = ev => {
-    ev.preventDefault();
+  const handleMessageSubmit = (e: React.FormEvent<EventTarget>) => {
+    e.preventDefault();
 
     const trimmedInput = input.trim()
 
@@ -30,29 +32,33 @@ function ChatRoom() {
 
     const time = format(new Date(), 'HH:mm')
     const newChat = {
-      author: user.name,
-      photoUrl: user.photoUrl,
-      content: trimmedInput,
-      date: time,
-      userId: user._id,
-    };
-    chatSocket.sendMessage({newChat})
+      chat: {
+        nickName: user.nickName,
+        photoUrl: user.photoUrl,
+        content: trimmedInput,
+        date: time,
+        socketId: user.socketId,
+      },
+      roomCode: roomCode
+    }
+    console.log(newChat, input, trimmedInput)
+    onSubmit(newChat)
     setInput('')
-  };
+  }
 
-  const checkMyMessage = id => {
-    return id === user._id ? 'my-message' : 'friend-message';
-  };
-
+  const checkMyMessage = (id: string) => {
+    return id === user.socketId ? 'my-message' : 'friend-message';
+  }
+  
   return (
     <Wrapper>
-      <MessageList ref={messageRef}>
+      <MessageList>
         {chatList &&
           chatList.map((chat, idx) => (
-            <ChatCell key={idx} className={checkMyMessage(chat.userId)}>
+            <ChatCell key={idx} className={checkMyMessage(chat.socketId)}>
               <Profile>
-                <img src={chat.photoUrl} />
-                <div>{chat.author}</div>
+                <img src={chat.photoUrl || "../../images/card/card5.png" } />
+                <div>{chat.nickName}</div>
               </Profile>
               <span>{chat.content}</span>
               <span>{chat.date}</span>
@@ -77,7 +83,7 @@ const Wrapper = styled.div`
   z-index: 25;
   background-color: ${({ theme }) => theme.darkPurple};
   width: 400px;
-  height: 400px;
+  height: 1000px;
   position: fixed;
   right: 100px;
   bottom: 100px;
@@ -87,7 +93,7 @@ const Wrapper = styled.div`
 
 const MessageList = styled.div`
   width: 100%;
-  height: 320px;
+  height: 900px;
   padding-top: 20px;
   overflow-y: auto;
 
@@ -157,14 +163,4 @@ const Profile = styled.div`
   color: ${({ theme }) => theme.white};
 `;
 
-export default ChatRoom;
-
-ChatRoom.propTypes = {
-  user: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    photoUrl: PropTypes.string,
-  }).isRequired,
-  chatList: PropTypes.array,
-  onSubmit: PropTypes.func.isRequired,
-};
+export default ChatRoom

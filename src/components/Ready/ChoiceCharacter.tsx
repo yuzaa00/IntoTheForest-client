@@ -2,9 +2,9 @@ import React, { useState  }from 'react';
 import { useHistory } from "react-router-dom";
 
 import './ChoiceCharacter.css';
-import John from '../../images/character/siba.png'
-import Tom from '../../images/character/backgu.png'
-import Alex from '../../images/character/dosaDog.png'
+import John from '../../images/siba.png'
+import Tom from '../../images/backgu.png'
+import Alex from '../../images/dosaDog.png'
 
 type ChoiceCharacterProps {
     value: string;

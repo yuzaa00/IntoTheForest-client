@@ -1,62 +1,38 @@
 import io from 'socket.io-client';
-
+import * as types from './socket.type' 
 const socket = io('http://localhost:4000', {transports: ['websocket']})
 
 export const getMySocketId = () => socket.id;
 
-// const gameSocket = {
-//   startGame(data) {
-//     socket.emit(EVENT.START_GAME, data);
-//   },
-//   sendGameStatus(status) {
-//     socket.emit(EVENT.PROCEED_GAME, status);
-//   },
-//   sendNextTurn(next) {
-//     socket.emit(EVENT.TURN_CHANGE, next);
-//   },
-//   sendResetGame(roomId) {
-//     socket.emit(EVENT.RESET_GAME, roomId);
-//   },
-//   listenInitailizingGame(cb) {
-//     socket.on(EVENT.INIT_GAME, cb);
-//   },
-//   listenProceedGame(cb) {
-//     socket.on(EVENT.PROCEED_GAME, cb);
-//   },
-//   listenTurnChange(cb) {
-//     socket.on(EVENT.TURN_CHANGE, cb);
-//   },
-//   listenResetGame(cb) {
-//     socket.on(EVENT.RESET_GAME, cb);
-//   },
-//   cleanUpGameListener() {
-//     socket.off(EVENT.INIT_GAME);
-//     socket.off(EVENT.PROCEED_GAME);
-//     socket.off(EVENT.TURN_CHANGE);
-//     socket.off(EVENT.RESET_GAME);
-//   },
-// };
-
 const roomSocket = {
-  createRoom({ roomData }, cb) {
+  createRoom(roomData : types.roomData, cb: Function) {
     socket.emit('create room', roomData, cb)
   },
 
-  joinRoom({roomData}, cb) {
-    socket.emit('join room', roomData, cb);
+  joinRoom(joinRoom: types.joinRoom, cb: Function) {
+    socket.emit('join room', joinRoom, cb);
   },
 
-  userJoined(roomCode, cb) {
-    socket.emit('member joined', roomCode, cb)
+  userJoined(roomCode: string) {
+    socket.emit('user joined', roomCode)
   },
 
-  // memberJoinedAlert() {
-  //   socket.on('member joined', roomCode)
-  // },
+  userJoinedOn(cb: Function) {
+    socket.on('user joined', cb)
+  },
 
+  emitSetProfile(userData) {
+    socket.emit('set profile', userData)
+  },
+  
+  onSetProfile(cb) {
+    socket.on('set profile', cb)
+  },
+  
   newUserJoined(cb) {
     socket.on('new user', cb);
   },
+
   userLeaved(cb) {
     socket.on('leave user', cb);
   },
@@ -103,33 +79,33 @@ const roomSocket = {
 
 const chatSocket = {
   sendMessage({ newChat }) {
-    socket.emit('chat', { chat: newChat });
+    socket.emit('chat', newChat)
   },
-  listenMessage(cb) {
-    socket.on('chat', cb);
+  listenMessage(callback: Function) {
+    socket.on('chat', callback)
   },
   cleanUpMessageListener() {
     socket.off('chat');
   },
 };
 
-// const peerSocket = {
-//   sendingSignal({ signal, receiver }) {
-//     socket.emit(EVENT.SENDING_SIGNAL, { signal, receiver });
-//   },
-//   listenSendingSignal(cb) {
-//     socket.on(EVENT.SENDING_SIGNAL, cb);
-//   },
-//   returnSignal({ signal, receiver }) {
-//     socket.emit(EVENT.RETURNING_SIGNAL, { signal, receiver });
-//   },
-//   listenReturningSignal(cb) {
-//     socket.on(EVENT.RETURNING_SIGNAL, cb);
-//   },
-//   cleanUpPeerListener() {
-//     socket.off(EVENT.SENDING_SIGNAL);
-//     socket.off(EVENT.RETURNING_SIGNAL);
-//   },
-// };
+const peerSocket = {
+  sendingSignal({ signal, receiver, roomCode }) {
+    socket.emit('sending signal', { signal, receiver, roomCode });
+  },
+  listenSendingSignal(cb) {
+    socket.on('sending signal', cb);
+  },
+  returnSignal({ signal, receiver, roomCode }) {
+    socket.emit('returning signal', { signal, receiver, roomCode });
+  },
+  listenReturningSignal(cb) {
+    socket.on('returning signal', cb);
+  },
+  cleanUpPeerListener() {
+    socket.off('sending signal');
+    socket.off('returning signal');
+  },
+};
 
-export { roomSocket, chatSocket }
+export { roomSocket, chatSocket, peerSocket }

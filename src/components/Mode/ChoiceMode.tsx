@@ -34,8 +34,8 @@ const ChoiceMode = () => {
   }
 
   const openModal = (modalComponents: any) => {
-    setmodalContent(modalComponents)
     setModalOpen(true)
+    setmodalContent(modalComponents)
   }
 
   return (
@@ -62,7 +62,7 @@ const ChoiceMode = () => {
             방 생성
                             </button>
           <button
-            onClick={() => openModal(<JoinRoomForm  />)}
+            onClick={() => openModal(<JoinRoomForm setModalOpen={setModalOpen} />)}
             onMouseOver={multiModeGoRoom}
             className="multi-join button-design"
           >
