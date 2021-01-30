@@ -2,10 +2,11 @@ import { useEffect } from 'react'
 
 type ProfileProps = {
   handleAccToken: (accessToken: string) => void
+  deleteKakao: () => void
 }
 
-const KakaoProfileDelete: any = ( { handleAccToken }: ProfileProps ) => {
-
+const KakaoProfileDelete: any = ( { handleAccToken, deleteKakao }: ProfileProps ) => {
+  
   const deleteProfile = async () => {
     if(window.Kakao) {
       const kakao = window.Kakao
@@ -20,6 +21,7 @@ const KakaoProfileDelete: any = ( { handleAccToken }: ProfileProps ) => {
       })
 
       handleAccToken('')
+      deleteKakao()
     }
   }
   

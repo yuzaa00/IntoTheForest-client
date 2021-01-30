@@ -5,16 +5,17 @@ import { RootState } from '../../redux/rootReducer'
 import KakaoProfileButton from './KakaoProfileButton';
 import KakaoProfileDelete from './KakaoProfileDelete'
 import styled from 'styled-components';
+import './EditProfile.css'
 
 declare global {
   interface Window { Kakao: any; }
 }
 
 function EditProfile({ setModalOpen }: any) {
-  console.log(1)
   const [nickInput, nickSetInput] = useState('')
   const userProfile = useSelector((state: RootState) => state.roomReducer.users[0], shallowEqual)
   const roomCode = useSelector((state: RootState) => state.roomReducer.roomCode)
+  const [kakao, setKakao] = useState(true)
   const dispatch = useDispatch()
   const [accessToken, setAccessToken] = useState<string>('');
 
@@ -32,7 +33,6 @@ function EditProfile({ setModalOpen }: any) {
   }
 
   roomSocket.onSetProfile((user: any) => {
-    console.log('?', user)
     const editUser = Object.assign({}, {
       photoUrl: user.photoUrl,
       nickName: user.nickName,
@@ -74,52 +74,81 @@ function EditProfile({ setModalOpen }: any) {
             nickName: nickname,
           }
           roomSocket.emitSetProfile(userData)
+          setKakao(false)
         },
         fail: (error: any) => console.log(error)
       })
+      
     }
+  }
+
+  const deleteKakao = () => {
+    setKakao(true)
   }
 
   return (
     <Wrapper>
-    <Margin>
-        <div className="now">프로필 설정하기</div>
-              <div className="text">닉네임 입력</div>
-              <input
+      <Margin>
+        <div className='EPcontainer'>프로필 설정하기</div>
+          <form onSubmit={submitRoomData}>
+            <div className='EPinput'>
+              <div className='EPnickname'>닉네임</div>
+              <input 
+                className='EPNickInput'
                 type='text'
                 name='nickName'
                 minLength={2}
                 maxLength={6}
                 required
                 placeholder='닉네임을 입력하세요'
-                title='2~6자리의 닉네임을 입력하세요'
                 value={nickInput}
                 onChange={handleInputNickChange}
               />
-              <input type='submit' value='프로필바꾸기' />
+            </div>
+            <div className="EPsubmit">
+              <input type='submit' value='프로필바꾸기' className='NickSubmit' />
+              {kakao ? 
+              <KakaoProfileButton handleAccToken={handleAccToken} /> :
+              <KakaoProfileDelete handleAccToken={handleAccToken} deleteKakao={deleteKakao} /> }
               <button onClick={closeModal}>닫기</button>
-        <KakaoProfileButton handleAccToken={handleAccToken} />
-        <KakaoProfileDelete handleAccToken={handleAccToken} />
-    </Margin>
+            </div>
+            </form>
+      </Margin>
     </Wrapper>
   )
 }
 const Wrapper = styled.div`
   z-index: 25;
   height: 30%;
-  width: 21.3%;
-  position: fixed;
-  right: 39%;
-  bottom: 60%;
+  width: 20%;
+  position: absolute;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  right: 40%;
+  bottom: 58%;
   border-radius: 24px;
   overflow: hidden;
-  background: linear-gradient( 
-    168deg
-     ,#f8f6ff,#25a1ff);
+  background: #00bcd3;
 `;
 
 const Margin = styled.div`
   margin: 20px;
+  justify-content: center;
+  align-items: center;
+`
+const KakaoProfileButton = styled.div`
+  margin: 10px;
+  color: white;
+  border:  1px white
+  font-family: 'BMDOHYEON';
+  font-size: 45px;
+`
+const KakaoProfileDelete = styled.div`
+  margin: 10px;
+  color: white;
+  font-family: 'BMDOHYEON';
+  font-size: 45px;
 `
 
 export default EditProfile

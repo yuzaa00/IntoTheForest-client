@@ -51,18 +51,31 @@ function Chat() {
 }
 
 const Badge = styled.div`
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  font-size: 12px;
-  background-color: red};
-  color: white};
+width: 20px;
+height: 20px;
+position: absolute;
+top: 15px;
+right: 27px;
+display: -webkit-box;
+display: -webkit-flex;
+display: -ms-flexbox;
+display: flex;
+-webkit-box-pack: center;
+-webkit-justify-content: center;
+-ms-flex-pack: center;
+justify-content: center;
+-webkit-align-items: center;
+-webkit-box-align: center;
+-ms-flex-align: center;
+align-items: center;
+border-radius: 50%;
+font-size: 17px;
+background-color: red;
+color: white;
+padding-left: 4px;
+padding-top: 4px;
+padding-right: 4px;
+padding-bottom: 4px;
 `;
 
 export default Chat
