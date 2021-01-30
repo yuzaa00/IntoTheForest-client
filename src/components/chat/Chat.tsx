@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { chatSocket } from '../../utils/socket'
 import { RootState } from '../../redux/rootReducer'
-import { BsFillChatDotsFill } from 'react-icons/bs'
+import { BsFillChatFill } from 'react-icons/bs'
 import ChatRoom from './ChatRoom'
 import Button from '../Mode/Button'
 
@@ -42,7 +42,7 @@ function Chat() {
   return (
     <>
       <Button onClick={() => setIsChatRoomOpen(!isChatRoomOpen)}>
-        <BsFillChatDotsFill size={50} color='yellow' />
+        <BsFillChatFill size={65} color='yellow' />
         {!!unreadCount && <Badge>{unreadCount}</Badge>}
       </Button>
       {isChatRoomOpen && <ChatRoom onSubmit={(newChat: any) => chatSocket.sendMessage({ newChat })} />}

@@ -83,10 +83,10 @@ const Wrapper = styled.div`
   z-index: 25;
   background-color: darkPurple};
   width: 400px;
-  height: 1000px;
+  height: 750px;
   position: fixed;
-  right: 100px;
-  bottom: 100px;
+  right: 40px;
+  bottom: 120px;
   border-radius: 24px;
   overflow: hidden;
   background: linear-gradient(
@@ -96,7 +96,7 @@ const Wrapper = styled.div`
 
 const MessageList = styled.div`
   width: 100%;
-  height: 900px;
+  height: 650px;
   padding-top: 20px;
   overflow-y: auto;
 

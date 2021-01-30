@@ -111,6 +111,7 @@ const roomReducer = createReducer<RoomState, RoomAction>(initialState, {
     const index = state.users.findIndex(user => user.socketId === action.value.socketId)
     return {
       ...state, 
+      currentUser : action.value,
       users: state.users.map((user, idx) => idx === index? action.value : user)
     //   users: [
     //     ...state.users.slice(0, index), // everything before current post
