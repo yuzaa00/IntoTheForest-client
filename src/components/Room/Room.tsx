@@ -7,8 +7,7 @@ import { roomSocket, peerSocket } from '../../utils/socket'
 import { ToastContainer, toast } from 'react-toastify'
 import styled from 'styled-components';
 import 'react-toastify/dist/ReactToastify.css'
-import Loading from '../Ready/Loading'
-import Chat from '../chat/Chat'
+
 import Video, { StyledVideo } from './video'
 import * as controlStream from '../../utils/controlStream'
 import Peer from 'simple-peer'
@@ -16,37 +15,38 @@ import { store } from '../../index'
 
 import Game from '../Game/Game'
 import UtilityBox from './UtilityBox'
-
 import ChoiceCharacter from '../../components/Ready/ChoiceCharacter'
+import Loading from '../Ready/Loading'
+import Chat from '../chat/Chat'
 
 interface RoomProps {
   renderRoom: Function
 }
 
 interface user {
-
   nickName: string
   socketId: string
   photoUrl: string
+}
 
+interface userList {
+  userList: user[]
+  clientId: string
 }
 
 function Room({ renderRoom }: RoomProps) {
-  useBeforeunload(() => {"새로고침시 방을 나가게 됩니다"})
+  useBeforeunload(() => { "새로고침시 방을 나가게 됩니다" })
   const dispatch = useDispatch()
-  const usersRef = useRef({})
-  const [users, setUsers] = useState({});
-
   const [isStreaming, setIsStreaming] = useState(false);
   const [error, setError] = useState('');
   const [peers, setPeers] = useState({});
   const peersRef = useRef<any>({})
   const myVideoRef = useRef<any>()
-
-  const history = useHistory()
   const roomCode = useSelector((state: RootState) => state.roomReducer.roomCode)
   const userList = useSelector((state: RootState) => state.roomReducer.users, shallowEqual)
   const mySocketId = useSelector((state: RootState) => state.roomReducer.mySocketId, shallowEqual)
+  const isVideo = useSelector((state: RootState) => state.roomReducer.isVideo, shallowEqual)
+  const userPhotoUrl = useSelector((state: RootState) => state.roomReducer.currentUser.photoUrl, shallowEqual)
 
   useEffect(() => {
     toast.info('🦄 방에 입장하셨습니다.', {
@@ -57,11 +57,13 @@ function Room({ renderRoom }: RoomProps) {
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      });
+    });
 
     roomSocket.userJoined(roomCode)
-    roomSocket.userJoinedOn(async ({ userList, clientId }: any) => {
-        toast.success(`🦄 ${userList[store.getState().roomReducer.users.length].nickName} 님이 입장하셨습니다!`, {
+    roomSocket.userJoinedOn(async ({ userList, clientId }: userList) => {
+      if (store.getState().roomReducer.currentUser.socketId !== clientId) {
+        const user = userList.filter((user: user) => user.socketId === clientId)
+        toast.success(`🦄 ${user[0].nickName} 님이 입장하셨습니다!`, {
           position: "bottom-left",
           autoClose: 3000,
           hideProgressBar: false,
@@ -69,8 +71,9 @@ function Room({ renderRoom }: RoomProps) {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          });
-        dispatch({ // socket on
+        });
+      }
+      dispatch({ // socket on
         type: 'ADD_USER',
         value: userList
       })
@@ -85,14 +88,14 @@ function Room({ renderRoom }: RoomProps) {
       } catch (error) {
         setError(error.message)
       }
-      
+
     })
-    
+
     roomSocket.listenUserLeaved(({ socketId }) => { // socket on
       delete peersRef.current[socketId]
       setPeers(peers => {
         delete peers[socketId]
-        return peers        
+        return peers
       })
       dispatch({
         type: 'DELETE_USER',
@@ -106,7 +109,7 @@ function Room({ renderRoom }: RoomProps) {
         pauseOnHover: false,
         draggable: true,
         progress: undefined,
-        });
+      });
     })
 
     return () => {
@@ -120,7 +123,7 @@ function Room({ renderRoom }: RoomProps) {
 
   useEffect(() => {
     if (!isStreaming) return
-    
+
     userList.forEach((user, idx) => {
       if (mySocketId !== user.socketId) {
         const peer = new Peer({
@@ -168,25 +171,24 @@ function Room({ renderRoom }: RoomProps) {
       <ToastContainer />
       <Chat />
       <UserVideoList>
-      {userList.map((user, idx) => (
-       <UserVideoListMap key={idx}>
-          {user.socketId === userList[0].socketId ?
-            <StyledVideo
-              ref={myVideoRef}
-              autoPlay
-              playsInline
-              muted
-            />
-            :
-            <Video
-              peer={peers[user.socketId]}
-            />
-          }
-          <h3>{user.nickName}</h3>
-        </UserVideoListMap>
-      ))}
+        {userList.map((user, idx) => (
+          <UserVideoListMap key={idx}>
+           {user.socketId === userList[0].socketId ?
+              <StyledVideo
+                ref={myVideoRef}
+                autoPlay
+                playsInline
+                muted
+              />
+              :
+              <Video
+                peer={peers[user.socketId]}
+              />
+            }
+            <h3>{user.nickName}</h3>
+          </UserVideoListMap>
+        ))}
       </UserVideoList>
-      
     </Container>
   );
 }
@@ -211,7 +213,7 @@ const Container = styled.div`
   }
 `;
 
-const UserVideoList= styled.div`
+const UserVideoList = styled.div`
 width: 60vw;
 height: 45vw;
 display: flex;
@@ -255,39 +257,5 @@ img.explosion {
   mix-blend-mode: screen;
 }
 `;
-
-const userListSet = styled.div`
-
-`;
-
-const userBlock = styled.div`
-  position: relative;
-  margin: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-
-  h3 {
-    margin-top: 24px;
-    font-size: 18px;
-    color: ${({ theme }) => theme.orange};
-  }
-
-  img {
-    z-index: 20;
-    position: absolute;
-    top: -94px;
-    left: -2px;
-    width: 129%;
-  }
-
-  img.explosion {
-    left: -36px;
-    mix-blend-mode: screen;
-  }
-`;
-
 
 export default Room

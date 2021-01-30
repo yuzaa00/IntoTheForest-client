@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React, { useEffect, useRef } from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
 function Video({ peer }) {
   const ref = useRef<any>();
@@ -13,7 +13,7 @@ function Video({ peer }) {
     });
   }, [peer]);
 
-  return (<StyledVideo ref={ref} autoPlay playsInline />);
+  return (<StyledVideo ref={ref} autoPlay playsInline />)
 }
 
 export const StyledVideo = styled.video`

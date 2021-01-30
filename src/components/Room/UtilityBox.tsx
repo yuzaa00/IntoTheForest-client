@@ -1,29 +1,15 @@
-import React, { useCallback, useState } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { useHistory } from 'react-router-dom';
-
-import { roomSocket } from '../../utils/socket';
-import * as controlStream from '../../utils/controlStream';
-
-import { IoIosExit } from 'react-icons/io';
-import { BsLockFill, BsUnlockFill } from 'react-icons/bs';
-import {
-  FaVideo,
-  FaVideoSlash,
-  FaVolumeMute,
-  FaVolumeUp,
-} from 'react-icons/fa';
-import { CgProfile } from "react-icons/cg";
-import Modal from '../Mode/Modal'
-
-import Button from '../Mode/Button';
-import { relative } from 'path';
-
+import React, { useCallback, useState } from 'react'
+import { useSelector, useDispatch, shallowEqual } from 'react-redux'
+import styled from 'styled-components'
+import * as controlStream from '../../utils/controlStream'
+import { IoIosExit } from 'react-icons/io'
+import { FaVideo, FaVideoSlash, FaVolumeMute, FaVolumeUp } from 'react-icons/fa'
+import { CgProfile } from "react-icons/cg"
+import Button from '../Mode/Button'
 import EditProfile from './EditProfile'
 
 function UtilityBox() {
-  const history = useHistory();
+  const disPatch = useDispatch()
   const [streamOptions, setStreamOptions] = useState({
     audio: true,
     video: true,
@@ -45,9 +31,15 @@ function UtilityBox() {
     if (streamOptions.video) {
       controlStream.videoOption.off();
       setStreamOptions(prev => ({ ...prev, video: false }));
+      disPatch({
+        type: 'TURN_ON_FILTER'
+      })
     } else {
       controlStream.videoOption.on();
       setStreamOptions(prev => ({ ...prev, video: true }));
+      disPatch({
+        type: 'TURN_OFF_FILTER'
+      })
     }
   }, [streamOptions]);
 
@@ -58,11 +50,12 @@ function UtilityBox() {
   }
 
   return (
+    <>
     <Wrapper>
       <div>
-      <Button onClick={() => openModal(<EditProfile setModalOpen={setModalOpen}/>)}>
+      <Button color='deepskyblue' onClick={() => setModalOpen(!isModalOpen)}>
           <CgProfile
-            size={42}
+            size={34}
             color={'black'}
             />
         </Button>
@@ -70,35 +63,31 @@ function UtilityBox() {
           color={streamOptions.audio ? 'limegreen' : 'lightGray'}
           onClick={handleAudioTrack}>
           {streamOptions.audio ?
-            <FaVolumeUp size={24} />
+            <FaVolumeUp size={34} />
             :
-            <FaVolumeMute size={24} />
+            <FaVolumeMute size={34} />
           }
         </Button>
         <Button
           color={streamOptions.video ? 'red' : 'lightGray'}
           onClick={handleVideoTrack}>
           {streamOptions.video ?
-            <FaVideo size={24} style={{
+            <FaVideo size={34} style={{
               'position': 'relative',
               'top': '2px',
               'left': '1px' }} />
             :
-            <FaVideoSlash size={24} />
+            <FaVideoSlash size={34} />
           }
         </Button>
-
-
         <IoIosExit
-            size={42}
-            
+            size={60}
             color={'black'}
           />
       </div>
-      {isModalOpen &&
-          <Modal setModalOpen={setModalOpen}>{modalComponents}</Modal>
-      }
     </Wrapper>
+    {isModalOpen && <EditProfile setModalOpen={setModalOpen}/>}
+    </>
   );
 }
 

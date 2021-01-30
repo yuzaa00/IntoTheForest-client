@@ -22,9 +22,10 @@ export const deleteUser = createAction(DELETE_USER)
 export const setProfile = createAction(SET_PROFILE)
 export const gameDestroy = createAction(GAME_DESTROY)
 export const addMySocketID = createAction(ADD_MY_SOCKET_ID)
+export const turnOnFilter = createAction(TURN_ON_FILTER)
+export const turnOffFilter = createAction(TURN_OFF_FILTER)
 // export const updateRoomLockingStatus = createAction(UPDATE_ROOM_LOCKING_STATUS)
-// export const turnOnFilter = createAction(TURN_ON_FILTER)
-// export const turnOffFilter = createAction(TURN_OFF_FILTER)
+
 
 const actions = { 
   saveRoomCode,
@@ -36,8 +37,8 @@ const actions = {
   gameDestroy,
   addMySocketID,
   // updateRoomLockingStatus, 
-  // turnOnFilter, 
-  // turnOffFilter 
+  turnOnFilter, 
+  turnOffFilter 
 } // 모든 액션 생성함수들을 actions 객체에 넣습니다
 type RoomAction = ActionType<typeof actions> // ActionType 를 사용하여 모든 액션 객체들의 타입을 준비해줄 수 있습니다
 
@@ -60,6 +61,7 @@ interface RoomState  {
   game: boolean
   gameData: any
   mySocketId: string
+  isVideo: boolean
 }
 
 const initialState: RoomState = {
@@ -73,7 +75,8 @@ const initialState: RoomState = {
   users: [],
   game: false,
   gameData: {},
-  mySocketId: ''
+  mySocketId: '',
+  isVideo: true
 }
 
 const roomReducer = createReducer<RoomState, RoomAction>(initialState, {
@@ -130,6 +133,18 @@ const roomReducer = createReducer<RoomState, RoomAction>(initialState, {
   },
   [ADD_MY_SOCKET_ID]: (state: RoomState, action: any) => {
     return { ...state, mySocketId: action.value }
+  },
+  [TURN_ON_FILTER]: (state: RoomState) => {
+    return {
+      ...state,
+      isVideo: false
+    }
+  },
+  [TURN_OFF_FILTER]: (state: RoomState) => {
+    return {
+      ...state,
+      isVideo: true
+    }
   }
 })
 

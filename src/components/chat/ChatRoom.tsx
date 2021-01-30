@@ -89,9 +89,9 @@ const Wrapper = styled.div`
   bottom: 120px;
   border-radius: 24px;
   overflow: hidden;
-  background: linear-gradient(
-    283deg
-     ,#f8f6ff,#ffbae0);
+  background: linear-gradient( 
+    168deg
+     ,#f8f6ff,#25a1ff);
 `;
 
 const MessageList = styled.div`
