@@ -1,4 +1,4 @@
-.start_button {
+.ready_button {
   width: 230px;
   position: absolute;
   top: 44%;
@@ -16,10 +16,74 @@
   color: aliceblue;
 }
 
-.start_button {
+.ready_button {
   background: repeating-linear-gradient(
     45deg, #54d440, #54d440 5px, #52cc3f 5px, #52cc3f 10px);
     box-shadow: 0 6px 0 #348628, 0 8px 1px 1px rgb(0 0 0 / 30%), 0 10px 0 5px #2a6d20, 0 12px 0 5px #39822e, 0 15px 0 5px #1d4c16, 0 15px 1px 6px rgb(0 0 0 / 30%);
     border-bottom: 3px solid rgba(40, 117, 29, 0.5);
     text-shadow: 2px 2px 1px #348628, -2px 2px 1px #348628, 2px -2px 1px #348628, -2px -2px 1px #348628, 0px 2px 1px #348628, 0px -2px 1px #348628, 0px 4px 1px #1d4c16, 2px 4px 1px #1d4c16, -2px 4px 1px #1d4c16;
+}
+
+.start_button {
+  width: 230px;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  margin-left: -115px;
+  text-align: center;
+  padding: 2% 2.5%;
+  background: orange;
+  box-shadow: 10px 10px 10px 10px rgb(0, 0, 0, .5);
+  border-radius: 100%;
+  font-family: 'Y_Spotlight';
+  font-size: 2.5rem;
+  font-weight: bold;
+  animation: move-button-start 2s infinite;
+  box-sizing: border-box;
+}
+
+@keyframes move-button-start {
+  0% {
+    background: repeating-linear-gradient( 45deg, #f14f6f, #f14f6f 5px, #e0637c 5px, #e0637c 10px);
+    box-shadow: 0 16px 0 #DC143C, 0 18px 11px 11px rgba(0,0,0,.3), 0 20px 0 15px #6d2020, 0 22px 0 15px #822e2e, 0 25px 0 15px #74211e, 0 25px 11px 16px rgba(0,0,0,.3);
+    border-bottom: 3px solid rgba(117, 29, 29, 0.5);
+    text-shadow: 2px 2px 1px #DC143C, -2px 2px 1px #DC143C, 2px -2px 1px #DC143C, -2px -2px 1px #DC143C, 0px 2px 1px #DC143C, 0px -2px 1px #DC143C, 0px 4px 1px #74211e, 2px 4px 1px #74211e, -2px 4px 1px #74211e;
+  }
+
+  50% {
+    top:61%;
+    box-shadow: 0 18px 0 #DC143C, 0 20px 15px 15px rgba(0,0,0,.3), 0 22px 0 19px #6d2020, 0 24px 0 19px #822e2e, 0 27px 0 19px #74211e, 0 27px 15px 20px rgba(0,0,0,.3);
+  }
+
+  100% {
+    background: repeating-linear-gradient( 45deg, #f14f6f, #f14f6f 5px, #e0637c 5px, #e0637c 10px);
+    box-shadow: 0 16px 0 #DC143C, 0 18px 11px 11px rgba(0,0,0,.3), 0 20px 0 15px #6d2020, 0 22px 0 15px #822e2e, 0 25px 0 15px #74211e, 0 25px 11px 16px rgba(0,0,0,.3);
+    border-bottom: 3px solid rgba(117, 29, 29, 0.5);
+    text-shadow: 2px 2px 1px #DC143C, -2px 2px 1px #DC143C, 2px -2px 1px #DC143C, -2px -2px 1px #DC143C, 0px 2px 1px #DC143C, 0px -2px 1px #DC143C, 0px 4px 1px #74211e, 2px 4px 1px #74211e, -2px 4px 1px #74211e;
+  }
+}
+
+@keyframes opacity-effects {
+  0% {
+    opacity: 0.7;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.7;
+  }
+}
+
+.start_button {
+  background: repeating-linear-gradient( 45deg, #54d440, #54d440 5px, #52cc3f 5px, #52cc3f 10px);
+   box-shadow: 0 6px 0 #348628, 0 8px 1px 1px rgba(0,0,0,.3), 0 10px 0 5px #2a6d20, 0 12px 0 5px #39822e, 0 15px 0 5px #1d4c16, 0 15px 1px 6px rgba(0,0,0,.3);
+   border-bottom: 3px solid rgba(40, 117, 29, 0.5);
+   text-shadow: 2px 2px 1px #348628, -2px 2px 1px #348628, 2px -2px 1px #348628, -2px -2px 1px #348628, 0px 2px 1px #348628, 0px -2px 1px #348628, 0px 4px 1px #1d4c16, 2px 4px 1px #1d4c16, -2px 4px 1px #1d4c16;
+}
+.start_button:hover {
+ top:61%;
+ box-shadow: 0 4px 0 #348628, 0 6px 1px 1px rgba(0,0,0,.3), 0 8px 0 5px #2a6d20, 0 10px 0 5px #39822e, 0 13px 0 5px #1d4c16, 0 13px 1px 6px rgba(0,0,0,.3);
 }
