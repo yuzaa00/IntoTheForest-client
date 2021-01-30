@@ -216,7 +216,7 @@ export default class Stage1 extends Phaser.Scene {
     })
 
     this.player = this.physics.add
-      .sprite(29650, 400, this.registry.values.char) // 플레이어 생성 이동
+      .sprite(20000, 400, this.registry.values.char) // 플레이어 생성 이동
       .setScale(0.25)
       .setDepth(3)
 
