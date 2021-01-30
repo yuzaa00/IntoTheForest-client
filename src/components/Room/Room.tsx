@@ -16,10 +16,8 @@ import { store } from '../../index'
 
 import Game from '../Game/Game'
 import UtilityBox from './UtilityBox'
-import ChoiceCharacter from '../../components/Ready/ChoiceCharacter'
-import KakaoProfileButton from './KakaoProfileButton'
-import KakaoProfileDelete from './KakaoProfileDelete'
 
+import ChoiceCharacter from '../../components/Ready/ChoiceCharacter'
 
 interface RoomProps {
   renderRoom: Function
@@ -38,7 +36,6 @@ function Room({ renderRoom }: RoomProps) {
   const dispatch = useDispatch()
   const usersRef = useRef({})
   const [users, setUsers] = useState({});
-  const [accessToken, setAccessToken] = useState<string>('')
 
   const [isStreaming, setIsStreaming] = useState(false);
   const [error, setError] = useState('');
@@ -53,8 +50,8 @@ function Room({ renderRoom }: RoomProps) {
 
   useEffect(() => {
     toast.info('🦄 방에 입장하셨습니다.', {
-      position: "top-right",
-      autoClose: 3500,
+      position: "bottom-left",
+      autoClose: 3000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -64,6 +61,15 @@ function Room({ renderRoom }: RoomProps) {
 
     roomSocket.userJoined(roomCode)
     roomSocket.userJoinedOn(async ({ userList, clientId }: any) => {
+        toast.success(`🦄 ${userList[store.getState().roomReducer.users.length].nickName} 님이 입장하셨습니다!`, {
+          position: "bottom-left",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          });
         dispatch({ // socket on
         type: 'ADD_USER',
         value: userList
@@ -93,27 +99,14 @@ function Room({ renderRoom }: RoomProps) {
         value: socketId
       })
       toast.error(`🦄 ${store.getState().roomReducer.users.filter(user => user.socketId === socketId)[0].nickName} 님이 떠나셨습니다.`, {
-        position: "bottom-center",
-        autoClose: 5000,
+        position: "bottom-left",
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: false,
         draggable: true,
         progress: undefined,
         });
-    })
-
-    roomSocket.onSetProfile((user: any) => {
-      console.log('?', user)
-      const editUser = Object.assign({}, {
-        photoUrl: user.photoUrl,
-        nickName: user.nickName,
-        socketId: user.socketId
-      })
-      dispatch({
-        type: 'SET_PROFILE',
-        value: editUser
-      })
     })
 
     return () => {
@@ -169,42 +162,10 @@ function Room({ renderRoom }: RoomProps) {
     };
   }, [isStreaming]);
 
-  useEffect(() => {
-    getProfile()
-  }, [accessToken]);
-
-  const handleAccToken = (accessToken: string) => {
-    setAccessToken(accessToken);
-  }
-
-  const getProfile = () => {
-    if (accessToken) {
-      window.Kakao.Auth.setAccessToken(accessToken);
-      window.Kakao.API.request({
-        url: '/v2/user/me',
-        success: (res: any) => {
-          //dispatch(user url바꾸기),
-          const { nickname, thumbnail_image } = res.properties
-
-          const userData = {
-            photoUrl: thumbnail_image,
-            roomCode: roomCode,
-            nickName: nickname,
-          }
-          roomSocket.emitSetProfile(userData)
-        },
-        fail: (error: any) => console.log(error)
-      })
-    }
-  }
-
   return (
     <Container>
-      <div>멀티 유저 대기실</div>
+      <UtilityBox />
       <ToastContainer />
-      <KakaoProfileButton handleAccToken={handleAccToken} />
-      <KakaoProfileDelete handleAccToken={handleAccToken} />
-      {/* <ChoiceCharacter /> */}
       <Chat />
       <UserVideoList>
       {userList.map((user, idx) => (
@@ -225,7 +186,7 @@ function Room({ renderRoom }: RoomProps) {
         </UserVideoListMap>
       ))}
       </UserVideoList>
-      <UtilityBox />
+      
     </Container>
   );
 }
@@ -235,8 +196,8 @@ const Container = styled.div`
   width: 100vw;
   height: 100vh;
   position: relative;
-  background: linear-gradient(90deg
-    ,#755BEA,#FF72C0);
+  background: linear-gradient(76deg
+    ,#00BCD4,#77EDAC);
 
   & > button {
     z-index: 999;
@@ -244,14 +205,15 @@ const Container = styled.div`
     height: 36px;
     padding: 12px;
     position: fixed;
-    bottom: 24px;
-    right: 100px;
+    bottom: 50px;
+    right: 60px;
     text-align: center;
   }
 `;
 
 const UserVideoList= styled.div`
-width: 80vw;
+width: 60vw;
+height: 45vw;
 display: flex;
 flex-wrap: wrap;
 justify-content: center;
@@ -263,9 +225,11 @@ overflow-y: scroll;
 }
 `;
 
+// h3 : 영상 하단 닉네임 
 const UserVideoListMap = styled.div`
-position: relative;
 margin: 20px;
+margin-top: 0px;
+margin-bottom: 0px;
 display: flex;
 flex-direction: column;
 justify-content: center;
@@ -274,8 +238,8 @@ position: relative;
 
 h3 {
   margin-top: 24px;
-  font-size: 18px;
-  color: ${({ theme }) => theme.orange};
+  font-size: 20px;
+  color: white;
 }
 
 img {

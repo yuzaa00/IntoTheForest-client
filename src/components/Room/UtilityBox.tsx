@@ -14,9 +14,13 @@ import {
   FaVolumeMute,
   FaVolumeUp,
 } from 'react-icons/fa';
+import { CgProfile } from "react-icons/cg";
+import Modal from '../Mode/Modal'
 
 import Button from '../Mode/Button';
+import { relative } from 'path';
 
+import EditProfile from './EditProfile'
 
 function UtilityBox() {
   const history = useHistory();
@@ -24,6 +28,8 @@ function UtilityBox() {
     audio: true,
     video: true,
   })
+  const [isModalOpen, setModalOpen] = useState(false)
+  const [modalComponents, setmodalContent] = useState(null)
 
   const handleAudioTrack = useCallback(() => {
     if (streamOptions.audio) {
@@ -45,11 +51,23 @@ function UtilityBox() {
     }
   }, [streamOptions]);
 
+  
+  const openModal = (modalComponents: any) => {
+    setmodalContent(modalComponents)
+    setModalOpen(true)
+  }
+
   return (
     <Wrapper>
       <div>
+      <Button onClick={() => openModal(<EditProfile setModalOpen={setModalOpen}/>)}>
+          <CgProfile
+            size={42}
+            color={'black'}
+            />
+        </Button>
         <Button
-          color={streamOptions.audio ? 'deepskyblue' : 'lightGray'}
+          color={streamOptions.audio ? 'limegreen' : 'lightGray'}
           onClick={handleAudioTrack}>
           {streamOptions.audio ?
             <FaVolumeUp size={24} />
@@ -58,21 +76,28 @@ function UtilityBox() {
           }
         </Button>
         <Button
-          color={streamOptions.video ? 'deeppink' : 'lightGray'}
+          color={streamOptions.video ? 'red' : 'lightGray'}
           onClick={handleVideoTrack}>
           {streamOptions.video ?
-            <FaVideo size={24} />
+            <FaVideo size={24} style={{
+              'position': 'relative',
+              'top': '2px',
+              'left': '1px' }} />
             :
             <FaVideoSlash size={24} />
           }
         </Button>
+
+
         <IoIosExit
-          onClick={() => history.push('/mode')}
-          size={42}
-          cursor='pointer'
-          color={'black'}
-        />
+            size={42}
+            
+            color={'black'}
+          />
       </div>
+      {isModalOpen &&
+          <Modal setModalOpen={setModalOpen}>{modalComponents}</Modal>
+      }
     </Wrapper>
   );
 }
@@ -80,10 +105,9 @@ function UtilityBox() {
 const Wrapper = styled.div`
   z-index: 15;
   width: 100%;
-  height: 80px;
-  position: fixed;
+  height: 160px;
   left: 0px;
-  bottom: 0px;
+  bottom: 89%;
   border-radius: 18px;
   display: flex;
   justify-content: center;
@@ -95,7 +119,7 @@ const Wrapper = styled.div`
     padding: 10px 24px;
     border-radius: 20px;
     margin-bottom: 24px;
-    background-color: #e4e4e4}
+    background-color: white}
   }
 
   button:not(:last-child) {
