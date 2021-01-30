@@ -16,10 +16,8 @@
   font-weight: bold;
   color: white;
   text-shadow: 5px 5px 8px white;
-  /* text-shadow: 3px 3px 5px #e78700, -3px 3px 5px #e78700, 3px -3px 5px #e78700, -3px -3px 5px #e78700, 1px 3px 5px #e78700, 1px -3px 5px #e78700, 1px 5px 5px #c96100, 3px 5px 5px #c96100, -3px 5px 5px #c96100; */
   text-shadow: 3px 3px 5px #348628, -3px 3px 5px #348628, 3px -3px 5px #348628, -3px -3px 5px #348628, 1px 3px 5px #348628, 1px -3px 5px #348628, 1px 5px 5px #1d4c16, 3px 5px 5px #1d4c16, -3px 5px 5px #1d4c16;
   letter-spacing: 10px;
-  /* opacity: 0.8; */
   animation: opacity-effect 0.7s ease-in-out infinite;
 }
 
@@ -41,24 +39,8 @@
   box-sizing: border-box;
 }
 
-/* .game-button {
-  background: repeating-linear-gradient( 45deg, #ffc800, #ffc800 5px, #ffc200 5px, #ffc200 10px);
-  box-shadow: 0 16px 0 #b76113, 0 18px 11px 11px rgba(0,0,0,.3), 0 20px 0 15px #75421f, 0 22px 0 15px #8a542b, 0 25px 0 15px #593116, 0 25px 11px 16px rgba(0,0,0,.3);
-  border-bottom: 13px solid rgba(205, 102, 0, 0.5);
-  text-shadow: 2px 2px 1px #e78700, -2px 2px 1px #e78700, 2px -2px 1px #e78700, -2px -2px 1px #e78700, 0px 2px 1px #e78700, 0px -2px 1px #e78700, 0px 4px 1px #c96100, 2px 4px 1px #c96100, -2px 4px 1px  #c96100;
-}
-.game-button:hover {
-  top: 56%;
-  box-shadow: 0 18px 0 #b76113, 0 20px 15px 15px rgba(0,0,0,.3), 0 22px 0 19px #75421f, 0 24px 0 19px #8a542b, 0 27px 0 19px #593116, 0 27px 15px 20px rgba(0,0,0,.3);
-} */
-
 @keyframes move-button {
   0% {
-    /* background: repeating-linear-gradient( 45deg, #ffc800, #ffc800 5px, #ffc200 5px, #ffc200 10px);
-    box-shadow: 0 16px 0 #b76113, 0 18px 11px 11px rgba(0,0,0,.3), 0 20px 0 15px #75421f, 0 22px 0 15px #8a542b, 0 25px 0 15px #593116, 0 25px 11px 16px rgba(0,0,0,.3);
-    border-bottom: 13px solid rgba(205, 102, 0, 0.5);
-    text-shadow: 2px 2px 1px #e78700, -2px 2px 1px #e78700, 2px -2px 1px #e78700, -2px -2px 1px #e78700, 0px 2px 1px #e78700, 0px -2px 1px #e78700, 0px 4px 1px #c96100, 2px 4px 1px #c96100, -2px 4px 1px  #c96100; */
-
     background: repeating-linear-gradient( 45deg, #54d440, #54d440 5px, #52cc3f 5px, #52cc3f 10px);
     box-shadow: 0 16px 0 #348628, 0 18px 11px 11px rgba(0,0,0,.3), 0 20px 0 15px #2a6d20, 0 22px 0 15px #39822e, 0 25px 0 15px #1d4c16, 0 25px 11px 16px rgba(0,0,0,.3);
     border-bottom: 3px solid rgba(40, 117, 29, 0.5);
@@ -66,19 +48,11 @@
   }
 
   50% {
-    /* top: 61%;
-    box-shadow: 0 18px 0 #b76113, 0 20px 15px 15px rgba(0,0,0,.3), 0 22px 0 19px #75421f, 0 24px 0 19px #8a542b, 0 27px 0 19px #593116, 0 27px 15px 20px rgba(0,0,0,.3); */
-    
     top:61%;
     box-shadow: 0 18px 0 #348628, 0 20px 15px 15px rgba(0,0,0,.3), 0 22px 0 19px #2a6d20, 0 24px 0 19px #39822e, 0 27px 0 19px #1d4c16, 0 27px 15px 20px rgba(0,0,0,.3);
   }
 
   100% {
-    /* background: repeating-linear-gradient( 45deg, #ffc800, #ffc800 5px, #ffc200 5px, #ffc200 10px);
-    box-shadow: 0 16px 0 #b76113, 0 18px 11px 11px rgba(0,0,0,.3), 0 20px 0 15px #75421f, 0 22px 0 15px #8a542b, 0 25px 0 15px #593116, 0 25px 11px 16px rgba(0,0,0,.3);
-    border-bottom: 13px solid rgba(205, 102, 0, 0.5);
-    text-shadow: 2px 2px 1px #e78700, -2px 2px 1px #e78700, 2px -2px 1px #e78700, -2px -2px 1px #e78700, 0px 2px 1px #e78700, 0px -2px 1px #e78700, 0px 4px 1px #c96100, 2px 4px 1px #c96100, -2px 4px 1px  #c96100; */
-
     background: repeating-linear-gradient( 45deg, #54d440, #54d440 5px, #52cc3f 5px, #52cc3f 10px);
     box-shadow: 0 16px 0 #348628, 0 18px 11px 11px rgba(0,0,0,.3), 0 20px 0 15px #2a6d20, 0 22px 0 15px #39822e, 0 25px 0 15px #1d4c16, 0 25px 11px 16px rgba(0,0,0,.3);
     border-bottom: 3px solid rgba(40, 117, 29, 0.5);
