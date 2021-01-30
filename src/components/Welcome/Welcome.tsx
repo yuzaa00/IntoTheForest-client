@@ -39,12 +39,6 @@ function Welcome() {
         <Link to="/mode" className="game-button">
           GAME START
         </Link>
-        {/* <Link to='/mode'>
-          Start
-        </Link>
-        <Link to='/game'>
-          Game Start!!!
-        </Link> */}
         {/* <KakaoShareButton/>
         <KakaoProfileButton handleAccToken={handleAccToken} />
         <KakaoProfileDelete handleAccToken={handleAccToken} /> */}
