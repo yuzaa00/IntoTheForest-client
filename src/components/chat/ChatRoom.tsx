@@ -8,14 +8,14 @@ import format from 'date-fns/format'
 
 function ChatRoom({onSubmit}: any) {
   const [input, setInput] = useState('')
-  const messageRef = useRef<HTMLUListElement>()
+  const messageRef = useRef<any>()
   console.time('d')
   const chatList = useSelector((state: RootState) => state.chatReducer.chatList,shallowEqual)
   const roomCode = useSelector((state: RootState) => state.roomReducer.roomCode,shallowEqual)
   const user = useSelector((state: RootState) => state.roomReducer.users[0],shallowEqual)
   console.timeEnd('d')
   useEffect(() => {
-    // messageRef.current!.scrollTop = messageRef.current!.scrollHeight
+    messageRef.current!.scrollTop = messageRef.current!.scrollHeight
   }, [chatList])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,7 +52,7 @@ function ChatRoom({onSubmit}: any) {
   
   return (
     <Wrapper>
-      <MessageList>
+      <MessageList ref={messageRef}>
         {chatList &&
           chatList.map((chat, idx) => (
             <ChatCell key={idx} className={checkMyMessage(chat.socketId)}>
@@ -81,7 +81,7 @@ function ChatRoom({onSubmit}: any) {
 
 const Wrapper = styled.div`
   z-index: 25;
-  background-color: ${({ theme }) => theme.darkPurple};
+  background-color: darkPurple};
   width: 400px;
   height: 1000px;
   position: fixed;
@@ -89,6 +89,9 @@ const Wrapper = styled.div`
   bottom: 100px;
   border-radius: 24px;
   overflow: hidden;
+  background: linear-gradient(
+    283deg
+     ,#f8f6ff,#ffbae0);
 `;
 
 const MessageList = styled.div`
@@ -103,9 +106,9 @@ const MessageList = styled.div`
 `;
 
 const MessageForm = styled.form`
-  background-color: blue;
+  background-color: yellow;
   width: 100%;
-  height: 60px;
+  height: 80px;
   display: flex;
 
   input {
@@ -141,7 +144,7 @@ const ChatCell = styled.div`
   }
 
   span:nth-child(2) {
-    background-color: ${({ theme }) => theme.orange};
+    background-color: #fffddf91;
     padding: 10px;
     margin-right: 6px;
     border-radius: 20px;
@@ -160,7 +163,7 @@ const Profile = styled.div`
   align-items: center;
   padding: 3px 10px;
   font-size: 14px;
-  color: ${({ theme }) => theme.white};
+  color: white};
 `;
 
 export default ChatRoom

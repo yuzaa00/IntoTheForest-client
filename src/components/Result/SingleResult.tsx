@@ -8,8 +8,6 @@ function SingleResult() {
     const history = useHistory();
 
     const gameDataFinal = useSelector((state: RootState) => state.singleReducer.gameData, shallowEqual)
-    console.log('1', gameDataFinal)
-
     const [posts, setPosts] = useState([])
 
     useEffect(() => {

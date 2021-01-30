@@ -23,7 +23,7 @@ function Chat() {
 
     return () => {
       chatSocket.cleanUpMessageListener();
-      dispatch({ type: 'RESET_CHAT'})
+      // dispatch({ type: 'RESET_CHAT'})
     }
   }, [chatList])
 
@@ -42,7 +42,7 @@ function Chat() {
   return (
     <>
       <Button onClick={() => setIsChatRoomOpen(!isChatRoomOpen)}>
-        <BsFillChatDotsFill size={28} />
+        <BsFillChatDotsFill size={50} color='yellow' />
         {!!unreadCount && <Badge>{unreadCount}</Badge>}
       </Button>
       {isChatRoomOpen && <ChatRoom onSubmit={(newChat: any) => chatSocket.sendMessage({ newChat })} />}
@@ -61,8 +61,8 @@ const Badge = styled.div`
   align-items: center;
   border-radius: 50%;
   font-size: 12px;
-  background-color: ${({ theme }) => theme.red};
-  color: ${({ theme }) => theme.white};
+  background-color: red};
+  color: white};
 `;
 
 export default Chat

@@ -1,5 +1,3 @@
-import { stat } from 'fs';
-import Stage1 from 'src/phaser/scenes/Stage1';
 import { createAction, ActionType, createReducer } from 'typesafe-actions'
 
 const ADD_CHAT = 'ADD_CHAT';
@@ -35,7 +33,7 @@ interface chatItem {
 }
 
 interface ChatState {
-  chatList: chatItem[]
+  chatList: any
   unreadCount: number
 }
 
@@ -45,13 +43,15 @@ const initialState: ChatState = {
 }
 
 const chatReducer = createReducer<ChatState, ChatAction>(initialState, {
-  [ADD_CHAT]: (state: ChatState, action: Action) => {
-    state.chatList.push(action.value)
-    return {
-      ...state
-    }
-  },
-  [RESET_CHAT]: () => ({ initialState }),
+  [ADD_CHAT]: (state: ChatState, action: Action) => ({...state,
+      chatList: [ ...state.chatList, action.value ]})
+    // state.chatList.push(action.value)
+
+  ,
+  [RESET_CHAT]: () => ({
+    chatList: [],
+    unreadCount: 0
+  }),
   [INCREASE_UNREAD_COUNT]: (state: ChatState) => ({ ...state, unreadCount: state.unreadCount + 1 }),
   [RESET_UNREAD_COUNT]: (state: ChatState) => ({ ...state, unreadCount: 0 }),
 })
