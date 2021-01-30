@@ -1,4 +1,5 @@
 import React, { useState }from 'react';
+import './Kakaobutton.css'
 
 type ProfileProps = {
   handleAccToken: (accessToken: string) => void
@@ -22,8 +23,8 @@ const KakaoProfileButton = ( { handleAccToken }: ProfileProps ) => {
   }
 
   return (
-    <div>
-      <button onClick={createProfile}>
+    <div className='loadkakaoprofile'>
+      <button className='loadkprofile' onClick={createProfile}>
         카카오 프로필 가져오기
       </button>
     </div>

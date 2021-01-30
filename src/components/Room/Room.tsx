@@ -38,9 +38,10 @@ interface userList {
 function Room({ renderRoom }: RoomProps) {
   // useBeforeunload((event) => event.preventDefault());
   const dispatch = useDispatch()
-  const [isStreaming, setIsStreaming] = useState(false);
-  const [error, setError] = useState('');
-  const [peers, setPeers] = useState({});
+  const [isStreaming, setIsStreaming] = useState(false)
+  const [isStart, setIsStart] = useState(false)
+  const [error, setError] = useState('')
+  const [peers, setPeers] = useState({})
   const peersRef = useRef<any>({})
   const myVideoRef = useRef<any>()
   const roomCode = useSelector((state: RootState) => state.roomReducer.roomCode)
@@ -89,7 +90,6 @@ function Room({ renderRoom }: RoomProps) {
       } catch (error) {
         setError(error.message)
       }
-
     })
 
     roomSocket.listenUserLeaved(({ socketId }) => { // socket on
@@ -163,10 +163,15 @@ function Room({ renderRoom }: RoomProps) {
     return () => {
       peerSocket.cleanUpPeerListener();
     };
-  }, [isStreaming]);
+  }, [isStreaming])
+
+  function handleIsStart () {
+    setIsStart(true)
+  }
 
   return (
     <Container>
+      {isStart && <ChoiceCharacter />}
       <UtilityBox />
       <ToastContainer />
       <Chat />
@@ -189,7 +194,7 @@ function Room({ renderRoom }: RoomProps) {
           </UserVideoListMap>
         ))}
       </UserVideoList>
-      <Start></Start>
+      <Start callback={handleIsStart} />
     </Container>
   );
 }

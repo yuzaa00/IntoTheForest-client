@@ -110,7 +110,7 @@ function EditProfile({ setModalOpen }: any) {
               {kakao ? 
               <KakaoProfileButton handleAccToken={handleAccToken} /> :
               <KakaoProfileDelete handleAccToken={handleAccToken} deleteKakao={deleteKakao} /> }
-              <button onClick={closeModal}>닫기</button>
+              <button className='NickSubmit' onClick={closeModal}>닫기</button>
             </div>
             </form>
       </Margin>
@@ -118,6 +118,7 @@ function EditProfile({ setModalOpen }: any) {
   )
 }
 const Wrapper = styled.div`
+  
   z-index: 25;
   height: 30%;
   width: 20%;
@@ -129,26 +130,58 @@ const Wrapper = styled.div`
   bottom: 58%;
   border-radius: 24px;
   overflow: hidden;
-  background: #00bcd3;
+  background: #77EDAC;
 `;
 
 const Margin = styled.div`
   margin: 20px;
   justify-content: center;
   align-items: center;
-`
-const KakaoProfileButton = styled.div`
-  margin: 10px;
-  color: white;
-  border:  1px white
   font-family: 'BMDOHYEON';
-  font-size: 45px;
-`
-const KakaoProfileDelete = styled.div`
-  margin: 10px;
+  font-size: 30px;
   color: white;
-  font-family: 'BMDOHYEON';
-  font-size: 45px;
+
+  .EPcontainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    margin: 10px;
+
+  }
+  .EPinput {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  .EPsumbmit {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    align-content: center;
+  }
+  .EPnickname {
+    font-size: 20px;
+    margine: 10px;
+    padding: 10px;
+  }
+  .EPNickInput {
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  .NickSubmit {
+    background-color: white;
+    border-radius: 15px;
+    font-family: 'BMDOHYEON';
+    font-size: 15px;
+    color: #77EDAC;
+    margin: 10px;
+    padding: 10px;
+  }
+  
 `
+
 
 export default EditProfile

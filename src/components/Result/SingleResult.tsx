@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { useTable } from 'react-table';
 import axios from "axios";
 import './SingleResult.css';
-import family from '../../images/family.png'
+// import family from '../../images/family.png'
 
 const Styles = styled.div`
   padding: 1rem;
@@ -19,7 +19,7 @@ const Styles = styled.div`
     tr {
       :last-child {
         td {
-          border-bottom: 0;
+          border-bottom: 0.5px solid gray;
         }
       }
     }
@@ -27,9 +27,9 @@ const Styles = styled.div`
     th,
     td {
       margin: 0;
-      padding: 0.5rem;
-      border-bottom: 0px solid black;
-      border-right: px solid black;
+      padding: 0.5rem 0.8rem;
+      border-bottom: 0.5px solid gray;
+      border-right: 0px solid black;
 
       :last-child {
         border-right: 0;
@@ -153,28 +153,19 @@ function SingleResult() {
           columns: [
 
             {
-              Header: "",
-              id: "row",
-              maxWidth: 50,
-              filterable: false,
-              Cell: (row) => {
-                  return <div>{row.index}</div>;
-              }
-          },
-            {
-              Header: 'Nickname',
+              Header: '닉네임',
               accessor: 'nickname',
             },
             {
-              Header: 'Score',
+              Header: '스코어',
               accessor: 'score',
             },
             {
-              Header: 'Stage',
+              Header: '스테이지',
               accessor: 'stage',
             },
             {
-              Header: 'Subcha',
+              Header: '서브캐릭터',
               accessor: 'subcha',
             },
           ],
@@ -190,8 +181,6 @@ function SingleResult() {
     return !rankOn ? (
       <div className="singleResultScreen">
         <div className="imageResultLayout">
-         <div className="gameClearMessage">GAME CLEAR !!</div> 
-         <img className="family" src={family} alt='family' />
         </div>
         <div className="singleResultLayout">
          <div className="singleRankTables">
@@ -201,11 +190,13 @@ function SingleResult() {
          </div>
           
          <div className="newNickName">
-          <form className='nameNickNew' onSubmit={handleRankUp}>
-          <h5 className="rankUpNickname">Rank Up With Nickname</h5>                        
+         <h5 className="rankUpNickname">닉네임을 등록하세요!</h5>
+          <form className='nameNickNew' onSubmit={handleRankUp}>  
           <div className="rank-input-field">
           <input className="input-nickName" type="text" placeholder="닉네임을 정해주세요" name="nickname" value={customerRankUp.nickname} onChange={handleChange}/>
+          <div className="rank-input-field">
           <button className="btnRankUp" type="submit">Rank Up</button>
+          </div>
           </div>
           </form>
          </div>
@@ -214,8 +205,8 @@ function SingleResult() {
     ):(
       <div className="singleResultScreen">
         <div className="imageResultLayout">
-        <div className="gameClearMessage">GAME CLEAR !!</div> 
-        <img className="family" src={family} alt='family' />
+        {/* <div className="gameClearMessage">GAME CLEAR !!</div>  */}
+        {/* <img className="family" src={family} alt='family' /> */}
         </div>
         <div className="singleResultLayout">
         <div className="singleRankTables">

@@ -44,3 +44,5 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+button, .NickSubmit, .EPNickInput {border:0 none; background-color:transparent; cursor:pointer;} 

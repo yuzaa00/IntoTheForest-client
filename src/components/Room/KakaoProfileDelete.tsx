@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import './Kakaobutton.css'
 
 type ProfileProps = {
   handleAccToken: (accessToken: string) => void
@@ -27,7 +28,7 @@ const KakaoProfileDelete: any = ( { handleAccToken, deleteKakao }: ProfileProps 
   
   return (
     <div>
-      <button onClick={deleteProfile}>
+      <button className='loadkprofile' onClick={deleteProfile}>
         카카오 연결 해지하기
       </button>
     </div>

@@ -39,6 +39,10 @@ function CreateRoomForm({setModalOpen}: any){
         type: 'SET_MULTI_MODE',
         value: 'M' + user  // 'M2' or 'M4'
       })
+      dispatch({
+        type: 'SAVE_HOST_ID',
+        value: clientId
+      })
       history.push(`rooms/${roomId}`)
     }
   }

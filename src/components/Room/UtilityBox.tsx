@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react'
 import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 import styled from 'styled-components'
 import * as controlStream from '../../utils/controlStream'
-import { IoIosExit } from 'react-icons/io'
+import { ImExit } from "react-icons/im";
 import { FaVideo, FaVideoSlash, FaVolumeMute, FaVolumeUp } from 'react-icons/fa'
 import { CgProfile } from "react-icons/cg"
 import Button from '../Mode/Button'
@@ -80,10 +80,19 @@ function UtilityBox() {
             <FaVideoSlash size={34} />
           }
         </Button>
-        <IoIosExit
-            size={60}
+        <span style={{
+          bottom: '-4px',
+          right: '-6px',
+          position: 'relative' 
+          }}>
+        <ImExit
+            size={50}
             color={'black'}
+            cursor={'pointer'}
+            onClick={() => window.open('/mode', '_self')}
           />
+          </span>
+
       </div>
     </Wrapper>
     {isModalOpen && <EditProfile setModalOpen={setModalOpen}/>}

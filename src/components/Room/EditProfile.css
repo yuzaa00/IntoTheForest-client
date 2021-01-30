@@ -1,12 +1,12 @@
 button, .NickSubmit {border:0 none; background-color:transparent; cursor:pointer;} 
-
+/* 
 .EPcontainer {
   display: flex;
   flex-direction: column;
   align-items: center;
   font-size: large;
   color: white;
-}
+} */
 
 .EPinput {
   display: flex;

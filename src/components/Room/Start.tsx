@@ -5,29 +5,33 @@ import { RootState } from '../../redux/rootReducer'
 import styled from 'styled-components'
 import { roomSocket, peerSocket } from '../../utils/socket'
 import { store } from '../../index'
+import './Start.css'
 
 interface listen {
   socketId: string
   start: string
 }
 
-function Start () {
+function Start ({ callback }: any) {
+  const [ toggle, setToggle ] = useState(false)
   const disPatch = useDispatch()
   const roomCode = useSelector((state: RootState) => state.roomReducer.roomCode)
   
   roomSocket.listenStart(({socketId, start}: listen) => {
-    console.log('start는 받았는데 나는 ', store.getState().roomReducer.mySocketId === socketId, '임')
-    if(store.getState().roomReducer.mySocketId === socketId) {
-      disPatch({
-        type: ''
-      })
+    console.log('socketId :', socketId, 'start :', start, 'isHost : ', store.getState().roomReducer.isHost)
+    console.log('start는 받았는데 나는 ', store.getState().roomReducer.isHost === socketId, '임')
+    if(store.getState().roomReducer.isHost === socketId) {
+      setToggle(true)
+      callback()
     }
   })
 
   return (
-    <Circle onClick={() => roomSocket.sendReady(roomCode)}>
-      Ready
-    </Circle>
+    <div className="start_button" onClick={() => {
+      roomSocket.sendReady(roomCode)
+    }}>
+      {toggle ? 'Start' : 'Ready'}
+    </div>
   )
 
 }
