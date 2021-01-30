@@ -52,7 +52,8 @@ const StyledModal = styled.div`
   }
 
   .create-room-canvas {
-    width: 80%;
+    width: 60%;
+    height: 90vh;
     margin: 0 auto;
     text-align: center;
     padding: 25px 0;
@@ -60,17 +61,13 @@ const StyledModal = styled.div`
     position: relative;
   }
 
-  .create-room-canvas {
-    height: 90vh;
-  }
-
   .join-room-canvas {
-    margin-top: 10%;
+    margin-top: 4%;
   }
 
   .create-room-canvas input,
   .join-room-canvas input {
-    width: 97%;
+    width: 50%;
     height: 30px;
     display: inline-block;
     border-radius: 20px;
@@ -86,7 +83,7 @@ const StyledModal = styled.div`
   
   .create-room-canvas .subtitle {
     width:100%;
-    margin: 1% 0 2%;
+    margin: 1% 0.2% 3%;
     text-align: center;
   }
   
@@ -102,9 +99,9 @@ const StyledModal = styled.div`
   }
   
   .create-room-canvas .people {
-    width: 100%;
+    width: 70%;
     display: flex;
-    margin-bottom: 30px;
+    margin: 0 auto 30px;
   }
 
   .create-room-canvas .people .highlight {
@@ -117,9 +114,9 @@ const StyledModal = styled.div`
     font-family: 'BMDOHYEON';
     font-size: 50px;
     font-weight: bold;
-    box-shadow: 2px 2px 5px 7px rgba(0, 0, 0, .6);
+    box-shadow: 2px 2px 5px 7px rgba(0, 0, 0, .4);
     border-radius: 50px;
-    padding: 8% 0;
+    padding: 10% 0;
     cursor: pointer;
   }
   
@@ -146,7 +143,7 @@ const StyledModal = styled.div`
 
   .join-room-canvas .join-room-area {
     width: 80%;
-    margin: 0 auto;
+    margin: 5% auto 0;
   }
   
   .create-room-canvas .create-room-area .create-room-content {
@@ -160,16 +157,16 @@ const StyledModal = styled.div`
   .join-room-canvas .join-room-area .join-room-content,
   .join-room-canvas .join-room-area .join-nickname-content {
     width: 50%;
-    margin: 5% auto;
+    margin: 2% auto 0;
   }
   
   .create-room-canvas .create-room-area .create-nickname-content { 
     width: 100%;
     height: 100px;
   }
-
+  
   .join-room-canvas .button-area {
-    margin: 0;
+    margin: 5% auto 0;
   }
   
   .create-room-canvas .create-button,
@@ -183,13 +180,9 @@ const StyledModal = styled.div`
     cursor: pointer;
   }
 
-  .create-room-canvas .create-button {
-    margin-top: 5%;
-  }
-
   .create-room-canvas .create-button, 
   .join-room-canvas .join-button {
-    width: 50%;
+    width: 300px;
     height: 100px;
     background-color: ${({ theme }) => theme.gray};
     color: #222;
@@ -197,8 +190,11 @@ const StyledModal = styled.div`
     font-size: 30px;
   }
 
+  .create-room-canvas .create-button {
+    margin-top: 5%;
+  }
+
   .join-room-canvas .join-button {
-    width: 50%;
     margin: 0 auto;
   }
 
@@ -227,6 +223,7 @@ const StyledModal = styled.div`
   
   .create-room-canvas input,
   .join-room-canvas input {
+    width: 340px;
     margin-top: 20px;
     padding: 12px 0;
     font-family: 'Y_Spotlight';
