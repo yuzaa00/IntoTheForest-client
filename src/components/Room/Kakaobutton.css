@@ -7,3 +7,8 @@
   margin: 10px;
   padding: 10px;
 }
+
+.loadkprofile:hover {
+  background-color: #00BCD4;
+  color: white;
+}

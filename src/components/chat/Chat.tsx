@@ -11,11 +11,12 @@ import Button from '../Mode/Button'
 function Chat() {
   const dispatch = useDispatch()
   const [isChatRoomOpen, setIsChatRoomOpen] = useState(false)
+  const [background, setBackground] = useState(false)
   const chatList = useSelector((state: RootState) => state.chatReducer.chatList, shallowEqual)
   const unreadCount = useSelector((state: RootState) => state.chatReducer.unreadCount)
   
+
   useEffect(() => {
-    console.log('Hi')
     chatSocket.listenMessage(({ chat }: any) => {
       console.log(3, chat.chat, typeof chat.chat)
       dispatch({ type: 'ADD_CHAT', value: chat.chat })
@@ -41,8 +42,10 @@ function Chat() {
 
   return (
     <>
-      <Button onClick={() => setIsChatRoomOpen(!isChatRoomOpen)}>
-        <BsFillChatFill size={65} color='yellow' />
+      <Button onClick={() => {
+        setIsChatRoomOpen(!isChatRoomOpen)
+        setBackground(!background)}}>
+        <BsFillChatFill size={65} color={background ? 'gold' : 'yellow'} />
         {!!unreadCount && <Badge>{unreadCount}</Badge>}
       </Button>
       {isChatRoomOpen && <ChatRoom onSubmit={(newChat: any) => chatSocket.sendMessage({ newChat })} />}

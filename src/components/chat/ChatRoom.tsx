@@ -81,7 +81,7 @@ function ChatRoom({onSubmit}: any) {
 
 const Wrapper = styled.div`
   z-index: 25;
-  background-color: darkPurple};
+  background-color: darkPurple;
   width: 400px;
   height: 750px;
   position: fixed;
@@ -89,15 +89,13 @@ const Wrapper = styled.div`
   bottom: 120px;
   border-radius: 24px;
   overflow: hidden;
-  background: linear-gradient( 
-    168deg
-     ,#f8f6ff,#25a1ff);
+  background: white;
 `;
 
 const MessageList = styled.div`
   width: 100%;
   height: 650px;
-  padding-top: 20px;
+  padding-top: 10px;
   overflow-y: auto;
 
   &::-webkit-scrollbar {
@@ -106,9 +104,9 @@ const MessageList = styled.div`
 `;
 
 const MessageForm = styled.form`
-  background-color: yellow;
+  background-color: gold;
   width: 100%;
-  height: 80px;
+  height: 90px;
   display: flex;
 
   input {
@@ -118,14 +116,17 @@ const MessageForm = styled.form`
   input[type='text'] {
     width: 70%;
     padding: 0px 20px;
-    background-color: ${({ theme }) => theme.white};
+    background-color: 
   }
 
   input[type='submit'] {
     cursor: pointer;
     width: 30%;
     text-align: center;
-    background-color: ${({ theme }) => theme.orange};
+    background-color: white;
+    margin: 25px 10px;
+    border-radius: 24px;
+    font-family: 'Y_Spotlight';
   }
 `;
 
@@ -144,10 +145,10 @@ const ChatCell = styled.div`
   }
 
   span:nth-child(2) {
-    background-color: #fffddf91;
+    background-color: gold;
     padding: 10px;
     margin-right: 6px;
-    border-radius: 20px;
+    border-radius: 10px;
   }
 
   span:nth-child(3) {

@@ -78,7 +78,6 @@ function EditProfile({ setModalOpen }: any) {
         },
         fail: (error: any) => console.log(error)
       })
-      
     }
   }
 
@@ -88,7 +87,7 @@ function EditProfile({ setModalOpen }: any) {
 
   return (
     <Wrapper>
-      <Margin>
+      <Margin >
         <div className='EPcontainer'>프로필 설정하기</div>
           <form onSubmit={submitRoomData}>
             <div className='EPinput'>
@@ -105,13 +104,14 @@ function EditProfile({ setModalOpen }: any) {
                 onChange={handleInputNickChange}
               />
             </div>
-            <div className="EPsubmit">
+            <div className='EPsubmit'>
               <input type='submit' value='프로필바꾸기' className='NickSubmit' />
               {kakao ? 
               <KakaoProfileButton handleAccToken={handleAccToken} /> :
               <KakaoProfileDelete handleAccToken={handleAccToken} deleteKakao={deleteKakao} /> }
-              <button className='NickSubmit' onClick={closeModal}>닫기</button>
             </div>
+              <button className='NickSubmit' onClick={closeModal}>닫기</button>
+            
             </form>
       </Margin>
     </Wrapper>
@@ -120,14 +120,14 @@ function EditProfile({ setModalOpen }: any) {
 const Wrapper = styled.div`
   
   z-index: 25;
-  height: 30%;
+  height: 40%;
   width: 20%;
   position: absolute;
   display:flex;
   align-items: center;
   justify-content: center;
   right: 40%;
-  bottom: 58%;
+  bottom: 45%;
   border-radius: 24px;
   overflow: hidden;
   background: #77EDAC;
@@ -140,6 +140,7 @@ const Margin = styled.div`
   font-family: 'BMDOHYEON';
   font-size: 30px;
   color: white;
+  text-align: center;
 
   .EPcontainer {
     display: flex;
@@ -147,19 +148,17 @@ const Margin = styled.div`
     align-items: center;
     padding: 10px;
     margin: 10px;
-
+    margin-bottom: 20px;
   }
   .EPinput {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    padding-bottom: 15px;
   }
   .EPsumbmit {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: stretch;
-    align-content: center;
+    display:flex;
+    flex-direction: row;
   }
   .EPnickname {
     font-size: 20px;
@@ -179,6 +178,10 @@ const Margin = styled.div`
     color: #77EDAC;
     margin: 10px;
     padding: 10px;
+  }
+  .NickSubmit:hover {
+    background-color: #00BCD4;
+    color: white;
   }
   
 `

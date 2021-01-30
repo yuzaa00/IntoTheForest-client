@@ -9,6 +9,7 @@ import './SingleResult.css';
 // import family from '../../images/family.png'
 
 const Styles = styled.div`
+  background-color: linear-gradient(235deg, #77EDAC, #00BCD4);
   padding: 1rem;
 
   table {
@@ -190,13 +191,11 @@ function SingleResult() {
          </div>
           
          <div className="newNickName">
-         <h5 className="rankUpNickname">닉네임을 등록하세요!</h5>
-          <form className='nameNickNew' onSubmit={handleRankUp}>  
+          <form className='nameNickNew' onSubmit={handleRankUp}>
+          <h5 className="rankUpNickname">Rank Up With Nickname</h5>                        
           <div className="rank-input-field">
           <input className="input-nickName" type="text" placeholder="닉네임을 정해주세요" name="nickname" value={customerRankUp.nickname} onChange={handleChange}/>
-          <div className="rank-input-field">
           <button className="btnRankUp" type="submit">Rank Up</button>
-          </div>
           </div>
           </form>
          </div>
