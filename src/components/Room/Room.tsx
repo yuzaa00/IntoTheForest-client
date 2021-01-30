@@ -50,6 +50,20 @@ function Room({ renderRoom }: RoomProps) {
   const isVideo = useSelector((state: RootState) => state.roomReducer.isVideo, shallowEqual)
   const userPhotoUrl = useSelector((state: RootState) => state.roomReducer.currentUser.photoUrl, shallowEqual)
 
+  let UserVideoList = styled.div`
+width: ${store.getState().roomReducer.isGameStart ? 0 : 60}vw;
+height: ${store.getState().roomReducer.isGameStart ? 0 : 25}vw;
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+align-items: center;
+overflow-y: scroll;
+
+&::-webkit-scrollbar {
+  display: none;
+}
+`;
+
   useEffect(() => {
     toast.info('🦄 방에 입장하셨습니다.', {
       position: "bottom-left",
@@ -165,38 +179,54 @@ function Room({ renderRoom }: RoomProps) {
     };
   }, [isStreaming])
 
-  function handleIsStart () {
+  function handleIsStart() {
     setIsStart(true)
+    dispatch({
+      type: 'IS_GAME_START'
+    })
   }
+
+//   let UserVideoList = styled.div` width: 60vw;
+// height: 45vw;
+// display: flex;
+// flex-wrap: wrap;
+// justify-content: center;
+// align-items: center;
+// overflow-y: scroll;
+
+// &::-webkit-scrollbar {
+//   display: none;
+// }`;
 
   return (
     <Container>
-      {isStart && <ChoiceCharacter />}
       <UtilityBox />
       <ToastContainer />
+      {isStart && <ChoiceCharacter />}
       <Chat />
-      <UserVideoList>
-        {userList.map((user, idx) => (
-          <UserVideoListMap key={idx}>
-           {user.socketId === userList[0].socketId ?
-              <StyledVideo
-                ref={myVideoRef}
-                autoPlay
-                playsInline
-                muted
-              />
-              :
-              <Video
-                peer={peers[user.socketId]}
-              />
-            }
-            <h3>{user.nickName}</h3>
-          </UserVideoListMap>
-        ))}
-      </UserVideoList>
-      <Start callback={handleIsStart} />
+        <UserVideoList>
+          {userList.map((user, idx) => (
+            <UserVideoListMap key={idx}>
+              {user.socketId === userList[0].socketId ?
+                <StyledVideo
+                  ref={myVideoRef}
+                  autoPlay
+                  playsInline
+                  muted
+                />
+                :
+                <Video
+                  peer={peers[user.socketId]}
+                />
+              }
+              <h3>{user.nickName}</h3>
+            </UserVideoListMap>
+          ))}
+        </UserVideoList>
+      {!isStart && <Start callback={handleIsStart} />}
     </Container>
   );
+  
 }
 
 
@@ -219,19 +249,6 @@ const Container = styled.div`
   }
 `;
 
-const UserVideoList = styled.div`
-width: 60vw;
-height: 45vw;
-display: flex;
-flex-wrap: wrap;
-justify-content: center;
-align-items: center;
-overflow-y: scroll;
-
-&::-webkit-scrollbar {
-  display: none;
-}
-`;
 
 // h3 : 영상 하단 닉네임 
 const UserVideoListMap = styled.div`

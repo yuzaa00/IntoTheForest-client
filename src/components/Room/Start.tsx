@@ -14,6 +14,7 @@ interface listen {
 
 function Start ({ callback }: any) {
   const [ toggle, setToggle ] = useState(false)
+  const [ isReady, setIsReady ] = useState(false)
   const disPatch = useDispatch()
   const roomCode = useSelector((state: RootState) => state.roomReducer.roomCode)
   
@@ -22,15 +23,26 @@ function Start ({ callback }: any) {
     console.log('start는 받았는데 나는 ', store.getState().roomReducer.isHost === socketId, '임')
     if(store.getState().roomReducer.isHost === socketId) {
       setToggle(true)
-      callback()
     }
   })
 
-  return (
+  return !toggle ? 
+  (
+  <>
     <div className="start_button" onClick={() => {
-      roomSocket.sendReady(roomCode)
+      callback()
     }}>
-      {toggle ? 'Start' : 'Ready'}
+      Game 
+      Start
+    </div>
+  </>
+  )
+   :  (
+    <div className="ready_button" onClick={() => {
+      if(!isReady) roomSocket.sendReady(roomCode)
+      setIsReady(true)
+    }}>
+      Ready
     </div>
   )
 

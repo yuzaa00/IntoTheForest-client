@@ -14,7 +14,7 @@
     "date-fns": "^2.16.1",
     "phaser": "^3.51.0",
     "prop-types": "^15.7.2",
-    "react": "^16.14.0",
+    "react": "^17.0.1",
     "react-beforeunload": "^2.4.0",
     "react-dom": "^16.14.0",
     "react-icons": "^4.1.0",
