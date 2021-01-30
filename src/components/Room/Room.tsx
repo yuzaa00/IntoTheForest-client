@@ -20,6 +20,8 @@ import Loading from '../Ready/Loading'
 import Chat from '../chat/Chat'
 import Start from './Start'
 
+import './Room.css'
+
 interface RoomProps {
   renderRoom: Function
 }
@@ -42,6 +44,7 @@ function Room({ renderRoom }: RoomProps) {
   const [isStart, setIsStart] = useState(false)
   const [error, setError] = useState('')
   const [peers, setPeers] = useState({})
+  const [test, setTest] = useState(false)
   const peersRef = useRef<any>({})
   const myVideoRef = useRef<any>()
   const roomCode = useSelector((state: RootState) => state.roomReducer.roomCode)
@@ -49,20 +52,7 @@ function Room({ renderRoom }: RoomProps) {
   const mySocketId = useSelector((state: RootState) => state.roomReducer.mySocketId, shallowEqual)
   const isVideo = useSelector((state: RootState) => state.roomReducer.isVideo, shallowEqual)
   const userPhotoUrl = useSelector((state: RootState) => state.roomReducer.currentUser.photoUrl, shallowEqual)
-
-  let UserVideoList = styled.div`
-width: ${store.getState().roomReducer.isGameStart ? 0 : 60}vw;
-height: ${store.getState().roomReducer.isGameStart ? 0 : 25}vw;
-display: flex;
-flex-wrap: wrap;
-justify-content: center;
-align-items: center;
-overflow-y: scroll;
-
-&::-webkit-scrollbar {
-  display: none;
-}
-`;
+  const dataAWS = store.getState().roomReducer.isGameStart
 
   useEffect(() => {
     toast.info('🦄 방에 입장하셨습니다.', {
@@ -186,17 +176,7 @@ overflow-y: scroll;
     })
   }
 
-//   let UserVideoList = styled.div` width: 60vw;
-// height: 45vw;
-// display: flex;
-// flex-wrap: wrap;
-// justify-content: center;
-// align-items: center;
-// overflow-y: scroll;
 
-// &::-webkit-scrollbar {
-//   display: none;
-// }`;
 
   return (
     <Container>
@@ -204,7 +184,8 @@ overflow-y: scroll;
       <ToastContainer />
       {isStart && <ChoiceCharacter />}
       <Chat />
-        <UserVideoList>
+      
+        <div className={isStart ? 'room_video_game_start' : 'room_video'}>
           {userList.map((user, idx) => (
             <UserVideoListMap key={idx}>
               {user.socketId === userList[0].socketId ?
@@ -222,7 +203,7 @@ overflow-y: scroll;
               <h3>{user.nickName}</h3>
             </UserVideoListMap>
           ))}
-        </UserVideoList>
+        </div>
       {!isStart && <Start callback={handleIsStart} />}
     </Container>
   );
@@ -248,6 +229,7 @@ const Container = styled.div`
     text-align: center;
   }
 `;
+
 
 
 // h3 : 영상 하단 닉네임 
