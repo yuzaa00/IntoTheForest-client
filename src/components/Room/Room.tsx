@@ -18,6 +18,7 @@ import UtilityBox from './UtilityBox'
 import ChoiceCharacter from '../../components/Ready/ChoiceCharacter'
 import Loading from '../Ready/Loading'
 import Chat from '../chat/Chat'
+import Start from './Start'
 
 interface RoomProps {
   renderRoom: Function
@@ -35,7 +36,7 @@ interface userList {
 }
 
 function Room({ renderRoom }: RoomProps) {
-  useBeforeunload(() => { "새로고침시 방을 나가게 됩니다" })
+  // useBeforeunload((event) => event.preventDefault());
   const dispatch = useDispatch()
   const [isStreaming, setIsStreaming] = useState(false);
   const [error, setError] = useState('');
@@ -117,7 +118,6 @@ function Room({ renderRoom }: RoomProps) {
       roomSocket.cleanUpRoomListener();
       setIsStreaming(false)
       controlStream.remove();
-      console.log(5)
     };
   }, [])
 
@@ -189,6 +189,7 @@ function Room({ renderRoom }: RoomProps) {
           </UserVideoListMap>
         ))}
       </UserVideoList>
+      <Start></Start>
     </Container>
   );
 }

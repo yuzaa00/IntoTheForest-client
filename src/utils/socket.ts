@@ -37,46 +37,27 @@ const roomSocket = {
     socket.on('leave user', cb);
   },
 
-  // updateRoomList() {
-  //   socket.emit(EVENT.ROOM_LIST);
-  // },
-  // joinRoom({ roomId, user }, cb) {
-  //   socket.emit(EVENT.JOIN_ROOM, { roomId, user }, cb);
-  // },
 
   leaveRoom( roomCode: any ) {
     socket.emit('leave room', roomCode);
   },
-  // updateRoomLockingStatus({ roomId, isLocked }) {
-  //   socket.emit(EVENT.LOCKING_STATUS, { roomId, isLocked });
-  // },
-  // listenUpdateRoomList(cb) {
-  //   socket.on(EVENT.ROOM_LIST, cb);
-  // },
-  // listenMemberJoined(cb) {
-  //   socket.on(EVENT.MEMBER_JOINED, cb);
-  // },
+
   listenUserLeaved(cb) {
     socket.on('user leaved', cb);
   },
-  // listenUpdateRoomLockingStatus(cb) {
-  //   socket.on(EVENT.LOCKING_STATUS, cb);
-  // },
-  // renderFilter({ roomId, isFilterOn, filter }) {
-  //   socket.emit(EVENT.VIDEO_FILTER, { roomId, isFilterOn, filter });
-  // },
-  // listenRenderFilter(cb) {
-  //   socket.on(EVENT.VIDEO_FILTER, cb);
-  // },
-  // cleanUpLobbyListener() {
-  //   socket.off(EVENT.ROOM_LIST);
-  // },
+
   cleanUpRoomListener() {
     socket.off('user joined');
     socket.off('user leaved');
     // socket.off(EVENT.LOCKING_STATUS);
     // socket.off(EVENT.VIDEO_FILTER);
   },
+  sendReady( roomCode: string) {
+    socket.emit('send ready', roomCode)
+  },
+  listenStart( callback: Function ) {
+    socket.on('send ready', callback)
+  }
 };
 
 const chatSocket = {
