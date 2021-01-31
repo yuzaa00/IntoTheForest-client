@@ -33,17 +33,17 @@ function Start ({ callback }: any) {
       roomSocket.sendStart(roomCode)
       callback()
     }}>
-      Game 
-      Start
+      GAME
+      START
     </div>
   </>
   )
    :  (
-    <div className="ready_button" onClick={() => {
+    <div className={isReady? "ready_button_clicked":"ready_button"} onClick={() => {
       if(!isReady) roomSocket.sendReady(roomCode)
-      setIsReady(true)
+      setIsReady(!isReady)
     }}>
-      Ready
+      READY
     </div>
   )
 
