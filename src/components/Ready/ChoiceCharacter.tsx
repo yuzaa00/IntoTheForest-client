@@ -84,7 +84,7 @@ function ChoiceCharacter() {
         </div>
         </div>
         <div className="chaSelectBtn">
-          <h1>{store.getState().choice.char}</h1>
+          <h1>{store.getState().choice.char === 'dog' ? '시바견' : store.getState().choice.char === 'dog2' ? '진돗개' : store.getState().choice.char === 'dog3' ? '도사견' : null}</h1>
           {errorMessage && <h1>{errorMessage}</h1> }
       <button className="chaSelectBtn-desc" onClick={onGameDesc}>게임설명</button>
       <button className="chaSelectBtn-startGame" onClick={onGameStart}>GameStart</button>
