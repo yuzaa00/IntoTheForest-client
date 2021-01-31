@@ -40,6 +40,7 @@ interface userList {
 function Room({ renderRoom }: RoomProps) {
   // useBeforeunload((event) => event.preventDefault());
   const dispatch = useDispatch()
+  const [scoreList, setScoreList] = useState([])
   const [isStreaming, setIsStreaming] = useState(false)
   const [isStart, setIsStart] = useState(false)
   const [error, setError] = useState('')
@@ -119,6 +120,8 @@ function Room({ renderRoom }: RoomProps) {
     })
     
     roomSocket.listenGameStart(handleIsStart)
+
+    roomSocket.listenResult(handleIsStart)
 
     return () => {
       roomSocket.leaveRoom(roomCode);

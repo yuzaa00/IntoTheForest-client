@@ -9,11 +9,16 @@ export default class Loader extends Phaser.Scene {
   }
 
   preload(): void {
-
   }
 
   create(): void {
-    this.add.image(300, 0, 'forestLogo').setOrigin(0, 0).setScale(1.2)
+    this.add.graphics()
+      .fillStyle(0xffffff) 
+      .fillRect(0, 0, 1200, 600)
+      .setDepth(0)
+      
+    this.add.image(300, 0, 'forestLogo').setOrigin(0, 0).setScale(1.2).setDepth(1)
+    
     this.loader = new preloadBar(this, 315, 520)
 
     this.time.addEvent({
@@ -25,7 +30,7 @@ export default class Loader extends Phaser.Scene {
             delay: 1400,
             callback: () => {
               this.scene.stop()
-              this.scene.start('Stage1')
+              this.scene.start('StageResult')
             },
             callbackScope: this,
             loop: false

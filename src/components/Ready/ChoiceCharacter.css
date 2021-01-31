@@ -12,6 +12,9 @@
 .GCbox {
   text-align : center;
 }
+.GCbox {
+    text-align : center;
+}
 
 .chaSelectBx {
   display: flex;

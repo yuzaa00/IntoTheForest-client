@@ -1,5 +1,5 @@
-import React, { useState, useEffect }from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState  }from 'react';
+import { useSelector } from 'react-redux';
 import { roomSocket } from '../../utils/socket'
 import KakaoShareButton from './KakaoShareButton'
 
@@ -21,6 +21,7 @@ function Result() {
         <span className='MRcontent' style={{ right: `${idx + 20 * idx}px`}}>서브 캐릭터: {user.gameResult.squi + user.gameResult.bird}</span>
       </div>
     ))}
+    <KakaoShareButton/ >
   </div>
   )
 }

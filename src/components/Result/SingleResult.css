@@ -58,6 +58,7 @@
     outline: 0;
     height: 48px;
     text-align: center;
+    box-shadow: 2px 2px 2px 5px rgba(0, 0, 0, .2);
 }
 
 .choiceModeBack {
@@ -80,6 +81,7 @@
     font-family: 'Y_Spotlight';
     border: 0;
     outline: 0;
+    box-shadow: 2px 2px 2px 5px rgba(0, 0, 0, .2);
 }
 
 .btnChoiceBacK:focus,
@@ -109,4 +111,5 @@
     font-family: 'Y_Spotlight';
     border: 0;
     outline: 0;
+
 }
