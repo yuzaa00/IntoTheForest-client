@@ -9,6 +9,9 @@
     background-size: 100%;
     font-family: 'Y_Spotlight';
 }
+.GCbox {
+    text-align : center;
+}
 
 .chaSelectBx {
     display: flex;

@@ -40,6 +40,7 @@ interface userList {
 function Room({ renderRoom }: RoomProps) {
   // useBeforeunload((event) => event.preventDefault());
   const dispatch = useDispatch()
+  const [scoreList, setScoreList] = useState([])
   const [isStreaming, setIsStreaming] = useState(false)
   const [isStart, setIsStart] = useState(false)
   const [error, setError] = useState('')
@@ -117,6 +118,8 @@ function Room({ renderRoom }: RoomProps) {
       });
     })
 
+    roomSocket.listenResult(handleIsStart)
+
     return () => {
       roomSocket.leaveRoom(roomCode);
       roomSocket.cleanUpRoomListener();
@@ -169,11 +172,15 @@ function Room({ renderRoom }: RoomProps) {
     };
   }, [isStreaming])
 
-  function handleIsStart() {
-    setIsStart(true)
+  function handleIsStart(res: any) {
+    console.log('나는 on 콜백이얌')
+    setIsStart(!isStart)
     dispatch({
       type: 'IS_GAME_START'
     })
+    if(res) {
+      setScoreList(res)
+    }
   }
 
   return (

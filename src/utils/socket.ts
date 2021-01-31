@@ -70,8 +70,7 @@ const roomSocket = {
   },
   listenResult(callback: Function) {
     socket.on('send result', callback)
-  }
-
+  },
 };
 
 const chatSocket = {

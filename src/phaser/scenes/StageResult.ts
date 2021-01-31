@@ -22,10 +22,10 @@ export default class StageResult extends Phaser.Scene {
   public init(data: any): void {
     this.registry.set('score', data.score || 30000) // 이전 scene에서 올라온 데이터 등록
     this.registry.set('life', data.life || 10000)
-    this.registry.set('stage', data.stage - 2 || 0)
-    this.registry.set('bird', data.bird || 0)
-    this.registry.set('squi', data.squi || 0)
-    this.registry.set('char', data.char || 0)
+    this.registry.set('stage', data.stage - 2 || 2)
+    this.registry.set('bird', data.bird || 1)
+    this.registry.set('squi', data.squi || 1)
+    this.registry.set('char', data.char || 'dog')
   }
 
   public preload(): void {
@@ -41,43 +41,33 @@ export default class StageResult extends Phaser.Scene {
     this.player.anims.play('right', true)
     this.addNum = Math.floor(this.registry.values.life / 1000 / 2)
 
-    this.popup = this.add.graphics()
-    this.popup.lineStyle(1, 0x2a275c)
-    this.popup.fillStyle(0x00ff00, 0.6) // 배경색
-    this.popup.strokeRect(225, 25, 750, 550)
-    this.popup.fillRect(225, 25, 750, 550)
     //start button square
-    this.button = this.add.graphics()
-    this.button.lineStyle(1, 0x2a275c)
-    this.button.fillStyle(0xf6d304, 0.5)
-    this.button.strokeRect(525, 465, 150, 50)
-    this.button.fillRect(525, 465, 150, 50)
+    this.add.graphics()
+      .fillStyle(0xffffff)
+      .fillRoundedRect(500, 480, 180, 60, 20)
+
 
     this.add
-      .text(600, 83, "결과 화면", {
-        color: '#bfff00',
-        fontSize: '40px',
+      .text(600, 83, "⚡스테이지 통과⚡️", {
+        color: '#ffffff',
+        fontSize: '45px',
         fontStyle: 'bold',
       })
       .setOrigin(0.5)
 
     this.lifeText = this.add
-      .text(750, 200, '', {
-        color: '#CED4D6',
-        fontSize: '30px',
+      .text(800, 250, '', {
+        color: '#fbff00',
+        fontSize: '35px',
         fontStyle: 'bold',
         align: 'center',
       })
       .setOrigin(0.5)
 
     this.scoreText = this.add
-      .text(
-        750,
-        300,
-        `Score ${this.num} 점`,
-        {
-          color: '#CED4D6',
-          fontSize: '30px',
+      .text(800, 350, '', {
+          color: '#fbff00',
+          fontSize: '35px',
           fontStyle: 'bold',
           align: 'center',
           wordWrap: { width: 480, useAdvancedWrap: true },
@@ -86,9 +76,9 @@ export default class StageResult extends Phaser.Scene {
       .setOrigin(0.5)
 
     this.startButton = this.add
-      .text(600, 490, 'Start', {
-        color: '#2A275C',
-        fontSize: '30px',
+      .text(590, 515, '다음으로', {
+        color: '#000000',
+        fontSize: '35px',
         fontStyle: 'bold',
       })
       .setOrigin(0.5)
@@ -96,12 +86,12 @@ export default class StageResult extends Phaser.Scene {
   }
 
   public create(): void {
-    this.time.addEvent({ // 게임에서 시간 이벤트 등록, 1초당 콜백 호출 (콜백내용은 초당 체력 감소)
-      delay: 4000,
-      callback: this.nextStage,
-      callbackScope: this,
-      loop: false,
-    })
+    // this.time.addEvent({ // 게임에서 시간 이벤트 등록, 1초당 콜백 호출 (콜백내용은 초당 체력 감소)
+    //   delay: 4000,
+    //   callback: this.nextStage,
+    //   callbackScope: this,
+    //   loop: false,
+    // })
 
     console.log(5000 / (this.registry.values.score / 111))
     this.worldTimer = this.time.addEvent({ // 게임에서 시간 이벤트 등록, 1초당 콜백 호출 (콜백내용은 초당 체력 감소)
@@ -117,16 +107,16 @@ export default class StageResult extends Phaser.Scene {
 
     if (this.registry.values.life > this.num) {
       this.num += this.addNum
-      this.lifeText.setText(`Life ${this.num} HP`)
+      this.lifeText.setText(`라이프 ${this.num} 점`)
       this.num += this.addNum * 10
-      this.lifeText.setText(`Life ${this.num} HP`)
+      this.lifeText.setText(`라이프 ${this.num} 점`)
       this.num += this.addNum * 30
-      this.lifeText.setText(`Life ${this.num} HP`)
+      this.lifeText.setText(`라이프 ${this.num} 점`)
     }
 
     else if (this.registry.values.life < this.num) {
       this.num = this.registry.values.life
-      this.lifeText.setText(`Life ${this.num} HP`)
+      this.lifeText.setText(`라이프 ${this.num} 점`)
     }
 
     else if (this.registry.values.life === this.num) {
@@ -145,15 +135,15 @@ export default class StageResult extends Phaser.Scene {
   private scorePlus(): void {
     if (this.registry.values.score > this.num) {
       this.num += this.addNum
-      this.scoreText.setText(`Score ${this.num} 점`)
+      this.scoreText.setText(`스코어 ${this.num} 점`)
       this.num += this.addNum * 10
-      this.scoreText.setText(`Score ${this.num} 점`)
+      this.scoreText.setText(`스코어 ${this.num} 점`)
       this.num += this.addNum * 100
-      this.scoreText.setText(`Score ${this.num} 점`)
+      this.scoreText.setText(`스코어 ${this.num} 점`)
     }
     else if (this.registry.values.score < this.num) {
       this.num = this.registry.values.score
-      this.scoreText.setText(`Score ${this.num} 점`)
+      this.scoreText.setText(`스코어 ${this.num} 점`)
     }
     else if (this.registry.values.score === this.num) {
 
