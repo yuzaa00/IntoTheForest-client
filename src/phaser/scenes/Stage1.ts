@@ -53,11 +53,11 @@ export default class Stage1 extends Phaser.Scene {
     super('Stage1')
   }
 
-  public init(): void { // 내부에서 사용할 데이터 초기화 설정
+  public init(data: any): void { // 내부에서 사용할 데이터 초기화 설정
     this.registry.set('score', 0)
     this.registry.set('life', 10000)
     this.registry.set('stage', 1)
-    this.registry.set('char', 'dog') //const state = store.getState())
+    this.registry.set('char', data.char) //const state = store.getState())
   }
 
   public preload(): void {
@@ -123,7 +123,7 @@ export default class Stage1 extends Phaser.Scene {
       volume: 0.3
     }) // 노래 재생하기
 
-    this.physics.world.setBounds(0, 0, 30000, 600)
+    this.physics.world.setBounds(0, 0, 100000, 600)
 
     this.lifeText = this.add // 라이프 텍스트 생성
       .bitmapText(23, 17, 'font', `LIFE ${this.registry.values.life}`)
@@ -188,7 +188,7 @@ export default class Stage1 extends Phaser.Scene {
     this.orangePotionLayer = this.map.createLayer('potionLayer2', orangePotionTiles, 0, 0)
     this.orangePotionLayer.setTileIndexCallback(4, this.collectOrangePotion, this).setDepth(1)
 
-    this.ground = this.add.tileSprite(0, 622, 30000, 100, 'way').setScrollFactor(0)
+    this.ground = this.add.tileSprite(0, 622, 100000, 100, 'way').setScrollFactor(0)
 
     this.time.addEvent({ // 게임에서 시간 이벤트 등록, 1초당 콜백 호출 (콜백내용은 초당 체력 감소)
       delay: 1000,
@@ -214,9 +214,11 @@ export default class Stage1 extends Phaser.Scene {
       callbackScope: this,
       loop: true,
     })
+    
 
+    const py = store.getState().choice.char
     this.player = this.physics.add
-      .sprite(650, 400, this.registry.values.char) // 플레이어 생성 이동
+      .sprite(650, 400, py) // 플레이어 생성 이동
       .setScale(0.25)
       .setDepth(3)
 
@@ -229,17 +231,17 @@ export default class Stage1 extends Phaser.Scene {
 
     this.anims.create({ // 플레이어 기본 프레임 4번
       key: 'turn',
-      frames: [{ key: 'dog', frame: 0 }],
+      frames: [{ key: py, frame: 0 }],
       frameRate: 10
     })
 
     this.anims.create({ // 플레이어 오른쪽 동작시 5번 ~ 8번 프레임 8fps로 재생
       key: 'right',
-      frames: this.anims.generateFrameNumbers('dog', { start: 1, end: 8 }),
+      frames: this.anims.generateFrameNumbers(py, { start: 1, end: 8 }),
       frameRate: 10,
       repeat: -1
     })
-
+  
     this.physics.add.collider(this.player, this.bundLayer) // 첫번째인자와 두번째 인자간의 충돌 관련
     this.physics.add.collider(this.subchas, this.ground)
     this.physics.add.collider(this.enemies, this.ground)

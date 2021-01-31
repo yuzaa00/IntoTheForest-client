@@ -108,9 +108,37 @@
     font-family: 'Y_Spotlight';
     border: 0;
     outline: 0;
-    
+}
+
+.btnAgainStart1:focus {
+  outline: none;
+}
+.btnAgainStart1:hover {
+  background: linear-gradient(90deg,#755bea,#ff72c0);
+}
+
+.btnAgainStart1 {
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  padding: 12px 36px;
+  margin: 10px 0;
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 18px;
+  letter-spacing: 2px;
+  border-radius: 40px;
+  background: linear-gradient(90deg,#0162c8,#55e7fc);
+  font-family: 'Y_Spotlight';
+  border: 0;
+  outline: 0;
+  position: absolute;
+  top: 84px;
+  right: 24px;
 
 }
+
 
 .ending-screen .againStartBack .btnAgainStart {
 

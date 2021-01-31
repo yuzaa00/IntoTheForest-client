@@ -59,6 +59,7 @@ export default class Stage2 extends Phaser.Scene {
     this.registry.set('stage', data.stage || 2)
     this.registry.set('bird', data.bird || 0)
     this.registry.set('squi', data.squi || 0)
+    this.registry.set('char', data.char)
   }
 
   public preload(): void {
@@ -183,14 +184,14 @@ export default class Stage2 extends Phaser.Scene {
     let bundTiles = this.map.addTilesetImage('bund')
     this.bundLayer = this.map.createLayer('bundLayer', bundTiles, 0, 0).setCollisionBetween(1, 50)
 
-    let bundTiles2 = this.map.addTilesetImage('bund2')
-    this.bundLayer2 = this.map.createLayer('bundLayer2', bundTiles2, 0, 0).setCollisionBetween(1, 50)
+    // let bundTiles2 = this.map.addTilesetImage('bund2')
+    // this.bundLayer2 = this.map.createLayer('bundLayer2', bundTiles2, 0, 0).setCollisionBetween(1, 50)
 
     let orangePotionTiles = this.map.addTilesetImage('orangePotion')
     this.orangePotionLayer = this.map.createLayer('potionLayer2', orangePotionTiles, 0, 0)
     this.orangePotionLayer.setTileIndexCallback(4, this.collectOrangePotion, this).setDepth(1)
 
-    this.ground = this.add.tileSprite(0, 622, 30000, 100, 'way').setScrollFactor(0)
+    this.ground = this.add.tileSprite(0, 622, 100000, 100, 'way').setScrollFactor(0)
 
     this.time.addEvent({ // 게임에서 시간 이벤트 등록, 1초당 콜백 호출 (콜백내용은 초당 체력 감소)
       delay: 1000,
@@ -217,8 +218,9 @@ export default class Stage2 extends Phaser.Scene {
       loop: true,
     })
 
+    const py = store.getState().choice.char
     this.player = this.physics.add
-      .sprite(600, 200, this.registry.values.char) // 플레이어 생성 이동
+      .sprite(600, 200, py) // 플레이어 생성 이동
       .setScale(0.25)
       .setDepth(3)
 
@@ -242,9 +244,9 @@ export default class Stage2 extends Phaser.Scene {
       repeat: -1
     })
 
-    this.physics.add.collider(this.player, this.ground) // 첫번째인자와 두번째 인자간의 충돌 관련
+     // 첫번째인자와 두번째 인자간의 충돌 관련
     this.physics.add.collider(this.player, this.bundLayer) 
-    this.physics.add.collider(this.player, this.bundLayer2)
+    // this.physics.add.collider(this.player, this.bundLayer2)
     this.physics.add.collider(this.subchas, this.ground)
     this.physics.add.collider(this.enemies, this.ground)
     this.physics.add.collider(this.player, this.enemies, this.hurt, undefined, this)

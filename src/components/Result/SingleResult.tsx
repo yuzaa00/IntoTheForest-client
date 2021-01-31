@@ -89,7 +89,7 @@ function SingleResult() {
 
     useEffect(() => {
         axios
-        .get('http://localhost:4000/rank/load',//시크릿코드 쉘터 shelter
+        .get('https://elb.intotheforest.space/rank/load',//시크릿코드 쉘터 shelter
         {
             headers: {"secretCode": "shelter"}
         })
@@ -103,7 +103,7 @@ function SingleResult() {
     
     let obj = {
         score: gameDataFinal.score,
-        stage: gameDataFinal.stage,
+        stage: gameDataFinal.stage + 1,
         subcha: gameDataFinal.bird ? gameDataFinal.bird : 0 + gameDataFinal.squi ? gameDataFinal.squi : 0
     }
         const [customerRankUp, setCustomerRankUp] = useState(
@@ -119,7 +119,7 @@ function SingleResult() {
 
             let newGameDataFinal = Object.assign({},customerRankUp, obj);
             console.log('5', newGameDataFinal)
-            await axios.post('http://localhost:4000/rank/reg', newGameDataFinal)
+            await axios.post('https://elb.intotheforest.space/rank/reg', newGameDataFinal)
               .then((response) => {
                 if (response.status === 201) {
                     alert('🙇랭크등록에 성공하셨습니다!🙏')
@@ -128,7 +128,7 @@ function SingleResult() {
                 setRankOn(true)
 
                 axios
-                  .get('http://localhost:4000/rank/load',//시크릿코드 쉘터 shelter
+                  .get('https://elb.intotheforest.space/rank/load',//시크릿코드 쉘터 shelter
                   {
                       headers: {"secretCode": "shelter"}
                   })

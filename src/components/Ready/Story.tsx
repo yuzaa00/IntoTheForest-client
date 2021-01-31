@@ -5,6 +5,7 @@ import { useSelector, shallowEqual } from 'react-redux';
 import { RootState } from '../../redux/rootReducer'
 import Game from '../Game/Game'
 import ChoiceCharacter from './ChoiceCharacter'
+import { store } from '../../index'
 
 
 function Story() {
@@ -26,6 +27,10 @@ function Story() {
   const gameMode = useSelector((state: RootState) => state.gameReducer.mode, shallowEqual)
 
   useEffect((): void => {
+    if(!gameMode) {
+      document.body.style.zoom = 1.5
+    }
+    
     setTimeout((): void => {
       setShowMoreButton(true);
       setShowSkipButton(true);
@@ -41,6 +46,9 @@ function Story() {
     if(gameMode) {
       setIsMulti(true)
     } else {
+      console.log('1',document.body.style.zoom)
+      document.body.style.zoom = 1.5
+      console.log('1',document.body.style.zoom)
       history.push('/ready/character')
     }
   }

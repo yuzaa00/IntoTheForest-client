@@ -164,18 +164,31 @@ export default class StageResult extends Phaser.Scene {
 
   private nextStage(): void {
     const mode = store.getState().gameReducer.mode
-    console.log('-----------', mode)
-    if (mode === 'M2' || mode === 'M4') {
-      this.game.sound.stopAll()
-      this.scene.start(this.multiStage[this.registry.values.stage + 1], {
-        score: this.registry.values.score,
-        life: this.registry.values.life,
-        stage: this.registry.values.stage,
-        bird: this.registry.values.bird,
-        squi: this.registry.values.squi
+
+    if(this.registry.values.stage === 2) {
+      store.dispatch({
+        type: 'GAME_DESTROY',
+        score: this.registry.values.score || 0,
+        life: this.registry.values.life || 0, 
+        stage: this.registry.values.stage || 1,
+        bird: this.registry.values.bird || 0,
+        squi: this.registry.values.squi || 0,
       })
     }
-    else {
+    
+
+
+    // if (mode === 'M2' || mode === 'M4') {
+    //   this.game.sound.stopAll()
+    //   this.scene.start(this.multiStage[this.registry.values.stage + 1], {
+    //     score: this.registry.values.score,
+    //     life: this.registry.values.life,
+    //     stage: this.registry.values.stage,
+    //     bird: this.registry.values.bird,
+    //     squi: this.registry.values.squi
+    //   })
+    // }
+   
       this.scene.start(this.mainStage[this.registry.values.stage], {
         score: this.registry.values.score,
         life: this.registry.values.life,
@@ -183,6 +196,6 @@ export default class StageResult extends Phaser.Scene {
         bird: this.registry.values.bird,
         squi: this.registry.values.squi
       })
-    }
+    
   }
 }

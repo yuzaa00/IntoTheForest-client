@@ -61,17 +61,15 @@ https://www.mewpot.com</li>
         <h2>마지막으로</h2>
         <p>코드스테이츠 임직원 여러분께 감사합니다.</p>
 
-        
-        
-
+      
        </div>
       </div>
       <div className="againStartBack">
           <button className="btnAgainStart" onClick={onAgainStartBack}>다시하기</button>
         </div> 
-      
-        
-
+        <div>
+        <button className="btnAgainStart1" onClick={() => history.push('/SingleResult')}>랭킹으로</button>
+        </div>
     </div>
   );
 }

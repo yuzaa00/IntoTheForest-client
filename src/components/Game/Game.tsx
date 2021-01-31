@@ -48,7 +48,7 @@ export default function Game({ }) {
       } else {
         newGame.destroy(true)//게임삭제와 
         //동시에 게임 데이터도 스토어에 저장.,다음 컴포넌트로 이동
-        // history.push('/SingleResult')
+        history.push('/Ending')
       }
     }
 

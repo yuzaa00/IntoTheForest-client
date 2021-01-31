@@ -54,11 +54,12 @@ export default class Stage3 extends Phaser.Scene {
   }
 
   public init(data: any) {
-    this.registry.set('score', data.score) // 이전 scene에서 올라온 데이터 등록
-    this.registry.set('life', data.life)
-    this.registry.set('stage', data.stage)
-    this.registry.set('bird', data.bird)
-    this.registry.set('squi', data.squi)
+    this.registry.set('score', data.score || 11) // 이전 scene에서 올라온 데이터 등록
+    this.registry.set('life', data.life || 10000)
+    this.registry.set('stage', data.stage || 4)
+    this.registry.set('bird', data.bird || 1)
+    this.registry.set('squi', data.squi || 1)
+    this.registry.set('char', data.char)
   }
 
   public preload(): void {
@@ -95,22 +96,22 @@ export default class Stage3 extends Phaser.Scene {
   }
 
   public create(): void {
-    store.dispatch({
-      type: 'MUTE_MULTI_GAME'
-    })
+    // store.dispatch({
+    //   type: 'MUTE_MULTI_GAME'
+    // })
     
-    if(store.getState().gameReducer.multi > 1) {
-      this.socketId = store.getState().roomReducer.users[store.getState().gameReducer.multi - 2].socketId
-      this.game.sound.mute = true
-      this.input.enabled = false
-    }
+    // if(store.getState().gameReducer.multi > 1) {
+    //   this.socketId = store.getState().roomReducer.users[store.getState().gameReducer.multi - 2].socketId
+    //   this.game.sound.mute = true
+    //   this.input.enabled = false
+    // }
 
-    if(store.getState().gameReducer.multi === 4) {
-      this.socketId = store.getState().roomReducer.users[3].socketId
-      store.dispatch({
-        type: 'MUTE_MULTI_GAME_RESET'
-      })
-    }
+    // if(store.getState().gameReducer.multi === 4) {
+    //   this.socketId = store.getState().roomReducer.users[3].socketId
+    //   store.dispatch({
+    //     type: 'MUTE_MULTI_GAME_RESET'
+    //   })
+    // }
 
     this.hp = new HealthBar(this, 270, 19) // 체력바 인스턴스 생성
     this.hp.set(this.registry.values.life / 100)
@@ -190,7 +191,7 @@ export default class Stage3 extends Phaser.Scene {
     this.orangePotionLayer = this.map.createLayer('potionLayer2', orangePotionTiles, 0, 0)
     this.orangePotionLayer.setTileIndexCallback(4, this.collectOrangePotion, this).setDepth(1)
 
-    this.ground = this.add.tileSprite(0, 622, 30000, 100, 'way').setScrollFactor(0)
+    this.ground = this.add.tileSprite(0, 622, 100000, 100, 'way').setScrollFactor(0)
 
     this.time.addEvent({ // 게임에서 시간 이벤트 등록, 1초당 콜백 호출 (콜백내용은 초당 체력 감소)
       delay: 1000,
@@ -217,8 +218,9 @@ export default class Stage3 extends Phaser.Scene {
       loop: true,
     })
 
+    const py = store.getState().choice.char
     this.player = this.physics.add
-      .sprite(600, 400, this.registry.values.char) // 플레이어 생성 이동
+      .sprite(650, 400, py) // 플레이어 생성 이동
       .setScale(0.25)
       .setDepth(3)
 
@@ -237,11 +239,12 @@ export default class Stage3 extends Phaser.Scene {
 
     this.anims.create({ // 플레이어 오른쪽 동작시 5번 ~ 8번 프레임 8fps로 재생
       key: 'right',
-      frames: this.anims.generateFrameNumbers('dog', { start: 1, end: 8 }),
+      frames: this.anims.generateFrameNumbers(py, { start: 1, end: 8 }),
       frameRate: 10,
       repeat: -1
     })
-
+ 
+    this.physics.add.collider(this.player, this.ground)
     this.physics.add.collider(this.player, this.bundLayer) // 첫번째인자와 두번째 인자간의 충돌 관련
     this.physics.add.collider(this.player, this.bundLayer2)
     this.physics.add.collider(this.subchas, this.ground)

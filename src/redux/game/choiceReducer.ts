@@ -21,9 +21,9 @@ const initialState: selChar = {
 }
 
 const choice = createReducer<selChar, selectAction>(initialState, {
-  [SELECT_CHAR_1]: (state: selChar) => ({ ...state, char: '시바견' }),
-  [SELECT_CHAR_2]: (state: selChar) => ({ ...state, char: '진돗개' }),
-  [SELECT_CHAR_3]: (state: selChar) => ({ ...state, char: '도사견' })
+  [SELECT_CHAR_1]: (state: selChar) => ({ ...state, char: 'dog' }),
+  [SELECT_CHAR_2]: (state: selChar) => ({ ...state, char: 'dog2' }),
+  [SELECT_CHAR_3]: (state: selChar) => ({ ...state, char: 'dog3' })
 })
 
 export default choice

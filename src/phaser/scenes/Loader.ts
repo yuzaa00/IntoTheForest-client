@@ -1,5 +1,5 @@
 import preloadBar from "../helper/preloadBar"
-
+import { store } from '../../index'
 
 export default class Loader extends Phaser.Scene {
   private loader!: preloadBar
@@ -12,6 +12,8 @@ export default class Loader extends Phaser.Scene {
   }
 
   create(): void {
+    const char = store.getState().choice.char
+
     this.add.graphics()
       .fillStyle(0xffffff) 
       .fillRect(0, 0, 1200, 600)
@@ -30,7 +32,7 @@ export default class Loader extends Phaser.Scene {
             delay: 1400,
             callback: () => {
               this.scene.stop()
-              this.scene.start('Stage1')
+              this.scene.start('Stage3', { char: char })
             },
             callbackScope: this,
             loop: false

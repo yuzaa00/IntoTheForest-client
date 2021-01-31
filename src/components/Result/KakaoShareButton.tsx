@@ -75,7 +75,7 @@ const KakaoShareButton = () => {
 
   return (
   <div className='ksc'>
-    <img src='http://localhost:4000/kakao.png' style={{width: '30px', height: '30px'}}/>
+    <img src='https://elb.intotheforest.space/kakao.png' style={{width: '30px', height: '30px'}}/>
     <button id="kakao-link-btn">카카오로 공유하기</button>
   </div>
   )};
