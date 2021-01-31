@@ -36,7 +36,7 @@ export default class Stage1 extends Phaser.Scene {
 
   private birdArr: Array<Phaser.GameObjects.Image> = []
   private squiArr: Array<Phaser.GameObjects.Image> = []
-  private enemiesTimer: Array<number> = [4, 4, 5, 5, 6, 6, 7, 7, 8, 8]
+  private enemiesTimer: Array<number> = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1] // [4, 4, 5, 5, 6, 6, 7, 7, 8, 8]
 
   private pauseGame: boolean = false
   private isDoubleJump: boolean = false
@@ -55,7 +55,7 @@ export default class Stage1 extends Phaser.Scene {
 
   public init(): void { // 내부에서 사용할 데이터 초기화 설정
     this.registry.set('score', 0)
-    this.registry.set('life', 9900)
+    this.registry.set('life', 1000)
     this.registry.set('stage', 1)
     this.registry.set('char', 'dog') //const state = store.getState())
   }
@@ -216,7 +216,7 @@ export default class Stage1 extends Phaser.Scene {
     })
 
     this.player = this.physics.add
-      .sprite(20000, 400, this.registry.values.char) // 플레이어 생성 이동
+      .sprite(650, 400, this.registry.values.char) // 플레이어 생성 이동
       .setScale(0.25)
       .setDepth(3)
 

@@ -1,18 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import Loader from 'react-loader-spinner'
 
 import './Loading.css';
-
+import Story from './Story'
 import logoDog from '../../images/logodog.png'
 import logoForest from '../../images/logoForest.png'
 
 
 function Loading () {
-  return (
+  const [isStory, setIsStory] = useState(false)
+  const [goStory, setGoStory] = useState(false)
+  
+  useEffect(() => {
+    setTimeout(() => {
+      setIsStory(true)
+    },2500)
+    if(isStory) {
+      setTimeout(() => {
+        setGoStory(true)
+      }, 1000)
+    }
+  })
+
+  return goStory ? <Story /> 
+  : (
       <div className="loadingScreen">
       <div className="preload">
-      <img className="logoDog" src={logoDog} alt='logoDog' />
+      <img className={isStory ? 'logoDogStop' : 'logoDog'} src={logoDog} alt='logoDog' />
       <div className= "loadText">
       <h3>Loading on the Game</h3>
       <div className= "loadAnime">
@@ -21,12 +36,10 @@ function Loading () {
          color="#658261"
          height={100}
          width={100}
-         timeout={7000} //3 secs
+         z-index={1}
       />
       </div>
       </div>
-      {/* img className="logoForest2" src={logoForest} alt='logoForest2' /> */}
-      {/* <img className="logoForest1" src={logoForest} alt='logoForest1' /> */}
       <img className="logoForest" src={logoForest} alt='logoForest' />
       </div>
       </div>

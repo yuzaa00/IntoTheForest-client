@@ -38,7 +38,7 @@ export default class preloadBar {
     this.bar.clear()
 
     this.bar.fillStyle(0x000000)
-    this.bar.fillRect(this.x, this.y, 570, 50)
+    this.bar.fillRect(this.x, this.y, 570, 25)
 
     this.bar.fillStyle(0xffffff)
 
@@ -66,13 +66,16 @@ export default class preloadBar {
     else if (this.value < 80) {
       this.bar.fillStyle(0x1fdd41)
     }
+    else if (this.value < 90) {
+      this.bar.fillStyle(0x2afc4d)
+    }
     else {
-      this.bar.fillStyle(0x1fdd41)
+      this.bar.fillStyle(0x56ff72)
     }
   
     let length = Math.floor(this.p * this.value)
 
-    this.bar.fillRect(this.x + 2, this.y + 2, length, 46)
+    this.bar.fillRect(this.x + 2, this.y + 2, length, 21)
     this.bar.setDepth(8).setScrollFactor(0)
   }
 

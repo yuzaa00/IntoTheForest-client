@@ -27,7 +27,7 @@ function LoadingRoom() {
 
 const Wrap = styled.div`
   width: 100%;
-  height: 52vw;
+  height: 60vw;
   display: flex;
   justify-content: center;
   align-items: center;

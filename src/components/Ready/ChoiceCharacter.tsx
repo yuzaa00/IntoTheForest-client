@@ -27,7 +27,7 @@ function ChoiceCharacter() {
       setGameOn(true)
     }
 
-    return gameOn ? <div><Game /></div> : gameInfo ? <Control /> : (
+    return gameOn ? <div className='GCbox' ><Game /></div> : gameInfo ? <Control /> : (
       <div className="choiceCharacterScreen">
         <div className="chaSelectWrapper">
         <div className="chaSelectBx">
