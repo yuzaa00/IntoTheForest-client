@@ -1,89 +1,89 @@
 a {
-    width: 10%;
-    text-decoration: none;
-    color: white;
+  width: 10%;
+  text-decoration: none;
+  color: white;
 }
 
 /* button으로 스타일 적용 시 다른 컴포넌트에서도 적용되어 클래스 네임 적용해서 처리 */
 /******** Button-Common ********/
 
 .button-design {
-    width: 85%;
-    height: 120px;
-    line-height: 120px;
-    /* padding: 50px 0; */
-    border-radius: 60px;
-    border: none;
-    box-shadow: 2px 2px 10px 5px rgba(0, 0, 0, .5);
-    background: #0294FE;
-    color: white;
-    font-family: 'BMDOHYEON';
-    cursor: pointer;
+  width: 85%;
+  height: 120px;
+  line-height: 120px;
+  /* padding: 50px 0; */
+  border-radius: 60px;
+  border: none;
+  box-shadow: 2px 2px 10px 5px rgba(0, 0, 0, .5);
+  background: #0294FE;
+  color: white;
+  font-family: 'BMDOHYEON';
+  cursor: pointer;
 }
 
 .button-design:focus {
-    outline: none;
+  outline: none;
 }
 
 .button-design:hover {
-    color: rgba(0, 0, 0, .5);
+  color: rgba(0, 0, 0, .5);
 }
 
 /*******************************/
 
 
 .game-size {
-    width: 100%;
-    height: 100vh;
-    color: white;
-    background: url('../../../assets/images/background/morning2.jpg') no-repeat;
-    /* background: url('../../assets/images/background/sunset.png') no-repeat; */
-    background-size: 100%;
-    font-family: 'BMDOHYEON';
-    margin: 0 auto;
-    padding-top: 2%;
-    text-align: center;
-    box-sizing: border-box;
+  width: 100%;
+  height: 100vh;
+  color: white;
+  background: url('../../../assets/images/background/morning2.jpg') no-repeat;
+  /* background: url('../../assets/images/background/sunset.png') no-repeat; */
+  background-size: 100%;
+  font-family: 'BMDOHYEON';
+  margin: 0 auto;
+  padding-top: 2%;
+  text-align: center;
+  box-sizing: border-box;
 }
 
 .game-size .mode {
-    width: 90%;
-    height: 85%;
-    display: flex;
-    margin: 0 auto;
-    box-sizing: border-box;
+  width: 90%;
+  height: 85%;
+  display: flex;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 /* mode-solo, mode-multi 두 컴포넌트의 모드 이름 */
 .game-size .mode .mode-name {
-    padding: 3% 0;
+  padding: 3% 0;
 }
 
 
 /******** solo-mode ********/
 
 .game-size .mode .mode-solo {
-    width: 50%;
-    height: 95%;
-    /* margin: 20px 20px 0 20px; */
-    border-radius: 60px;
-    font-size: 40px;
-    /* box-sizing: border-box; */
-    background: rgba(255, 255, 255, 0.3);
-    box-shadow: 2px 2px 2px 5px rgba(0, 0, 0, .2);
-    margin-right: 5%;
+  width: 50%;
+  height: 95%;
+  /* margin: 20px 20px 0 20px; */
+  border-radius: 60px;
+  font-size: 40px;
+  /* box-sizing: border-box; */
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 2px 2px 2px 5px rgba(0, 0, 0, .2);
+  margin-right: 5%;
 }
 
 
 /* 혼자하기 버튼 */
 .game-size .mode .mode-solo button {
-    height: 80%;
-    font-size: 50px;
-    border-radius: 70px;
+  height: 80%;
+  font-size: 50px;
+  border-radius: 70px;
 }
 
 .game-size .mode .mode-solo button:hover {
-    background: #028CFE;
+  background: #028CFE;
 }
 
 /***************************/
@@ -92,41 +92,41 @@ a {
 /******** multi-mode ********/
 
 .game-size .mode .mode-multi {
-    width: 50%;
-    height: 95%;
-    /* margin: 20px 20px 0 20px; */
-    border-radius: 60px;
-    font-size: 40px;
-    box-sizing: border-box;
-    background: rgba(255, 255, 255, 0.3);
-    box-shadow: 2px 2px 2px 5px rgba(0, 0, 0, .2);
+  width: 50%;
+  height: 95%;
+  /* margin: 20px 20px 0 20px; */
+  border-radius: 60px;
+  font-size: 40px;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 2px 2px 2px 5px rgba(0, 0, 0, .2);
 }
 
 /* 생성 버튼 */
 .game-size .mode .mode-multi .multi-create {
-    width: 85%;
-    height: 38%;
-    /* padding: 2% 0; */
-    margin-bottom: 20px;
-    font-size: 50px;
-    background: #FF7B12;
+  width: 85%;
+  height: 38%;
+  /* padding: 2% 0; */
+  margin-bottom: 20px;
+  font-size: 50px;
+  background: #FF7B12;
 }
 
 .game-size .mode .mode-multi .multi-create:hover {
-    background: #FF6E12;
+  background: #FF6E12;
 }
 
 /* 참가 버튼 */
 .game-size .mode .mode-multi .multi-join {
-    width: 85%;
-    height: 38%;
-    /* padding: 2px 0; */
-    font-size: 50px;
-    background: #1AC8BE;
+  width: 85%;
+  height: 38%;
+  /* padding: 2px 0; */
+  font-size: 50px;
+  background: #1AC8BE;
 }
 
 .game-size .mode .mode-multi .multi-join:hover {
-    background: #1ABCBE;
+  background: #1ABCBE;
 }
 
 /****************************/
@@ -135,38 +135,38 @@ a {
 /*********** text ***********/
 
 .game-size .text {
-    width: 95%;
-    display: flex;
-    margin: 0 auto;
-    padding: 0.6% 0;
-    font-weight: bold;
-    font-family: 'PFStardust';
-    font-size: 1.2rem;
+  width: 95%;
+  display: flex;
+  margin: 0 auto;
+  padding: 0.6% 0;
+  font-weight: bold;
+  font-family: 'PFStardust';
+  font-size: 1.2rem;
 }
 
 .game-size .text .choiceMode {
-    width: 85%;
-    background: rgba(255, 255, 255, .3);
-    color: black;
-    box-shadow: 2px 2px 2px 5px rgba(0, 0, 0, .2);
-    margin: 0 2% 0 2%;
-    padding: 0.5%;
-    border-radius: 30px;
+  width: 85%;
+  background: rgba(255, 255, 255, .3);
+  color: black;
+  box-shadow: 2px 2px 2px 5px rgba(0, 0, 0, .2);
+  margin: 0 2% 0 2%;
+  padding: 0.5%;
+  border-radius: 30px;
 }
 
 .game-size .text .exit {
-    width: 90%;
-    background: red;
-    padding: 5% 0;
-    border-radius: 30px;
-    /* display: block; */
-    box-shadow: 2px 2px 2px 5px rgba(0, 0, 0, .2);
-    cursor: pointer;
+  width: 90%;
+  background: red;
+  padding: 5% 0;
+  border-radius: 30px;
+  /* display: block; */
+  box-shadow: 2px 2px 2px 5px rgba(0, 0, 0, .2);
+  cursor: pointer;
 }
 
 .game-size .text .exit:hover {
-    background: #E60304;
-    color: black;
+  background: #E60304;
+  color: black;
 }
 
 /****************************/

@@ -1,12 +1,12 @@
 .loadingScreen {
-    width: 1200px;
-    height: 600px;
-    text-align: center;
-    margin: 0 auto;
-    padding: 0;
-    box-sizing: border-box;
+  width: 1200px;
+  height: 600px;
+  text-align: center;
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
 }
-  
+
 .preload {
     width: 1200px;
     height: 600px;
@@ -45,21 +45,21 @@
 }
 
 .loadText {
-    display: grid;
-    grid-template-columns: auto auto;
-    column-gap: 20px;
+  display: grid;
+  grid-template-columns: auto auto;
+  column-gap: 20px;
 }
 
 .loadText h3
 {   position: relative;
-    top: 100%;
-    font-size: 30px;
+  top: 100%;
+  font-size: 30px;
 }
 
 .loadText .loadAnime
 {
-    position: relative;
-    top: 100%;
+  position: relative;
+  top: 100%;
 }
 
 

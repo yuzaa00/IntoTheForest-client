@@ -71,6 +71,15 @@ const roomSocket = {
   listenResult(callback: Function) {
     socket.on('send result', callback)
   },
+
+  sendStart(roomCode: string) {
+    socket.emit('game start', roomCode)
+  },
+
+  listenGameStart(callback: Function) {
+    socket.on('game start', callback)
+  },
+
 };
 
 const chatSocket = {

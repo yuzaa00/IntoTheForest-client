@@ -1,264 +1,267 @@
 .choiceCharacterScreen {
-    width: 1200px;
-    height: 600px;
-    text-align: center;
-    padding: 0;
-    box-sizing: border-box;
-    margin: 0 auto;
-    background: url('../../../assets/images/background/nightDark.png') no-repeat;
-    background-size: 100%;
-    font-family: 'Y_Spotlight';
+  width: 1200px;
+  height: 600px;
+  text-align: center;
+  padding: 0;
+  box-sizing: border-box;
+  margin: 0 auto;
+  background: url('../../../assets/images/background/nightDark.png') no-repeat;
+  background-size: 100%;
+  font-family: 'Y_Spotlight';
+}
+.GCbox {
+  text-align : center;
 }
 .GCbox {
     text-align : center;
 }
 
 .chaSelectBx {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  
 }
 
 .choiceCard {
-    position: relative;
-    width: 300px;
-    height: 300px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 40px;
-    background: #060C21;
-    transition: 0.5s;
-    cursor: pointer;
+  position: relative;
+  width: 300px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40px;
+  background: #060C21;
+  transition: 0.5s;
+  cursor: pointer;
 }
 
 .clickChoiceCard {
-    position: relative;
-    width: 300px;
-    height: 400px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 40px;
-    transition: 0.5s;
-    cursor: pointer;
+  position: relative;
+  width: 300px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40px;
+  transition: 0.5s;
+  cursor: pointer;
 }
 
 
 
 .chaSelectWrapper .chaSelectBx  {
-    opacity: 0.99;
+  opacity: 0.99;
 }
 
 
 .choiceCard:hover {
-    height: 400px;
+  height: 400px;
 
 }
 
 .choiceCard .imgBx {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    padding: 10px;
-    box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  box-sizing: border-box;
 }
 .clickChoiceCard .imgBx {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    padding: 10px;
-    box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
 .choiceCard .imgBx img {
-    max-width: 100%;
-    opacity: 0.1;
-    transition: 0.5s;    
+  max-width: 100%;
+  opacity: 0.1;
+  transition: 0.5s;    
 }
 
 .choiceCard:hover .imgBx img {
-    opacity: 1;
+  opacity: 1;
 }
 
 .clickChoiceCard .imgBx img {
-    max-width: 100%;
-    opacity: 1;
-    transition: 0.5s;    
+  max-width: 100%;
+  opacity: 1;
+  transition: 0.5s;    
 }
 
 
 .clickChoiceCard::before,
 .choiceCard::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: #fff;
-    z-index: -1;
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: #fff;
+  z-index: -1;
 }
 
 
 .clickChoiceCard::after,
 .choiceCard::after {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: #fff;
-    z-index: -2;
-    filter: blur(40px);
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: #fff;
+  z-index: -2;
+  filter: blur(40px);
 }
 
 
 .choiceCard::before,
 .choiceCard::after {
-    background: linear-gradient(235deg,#89ff00,#010615,#00bcd4);
+  background: linear-gradient(235deg,#89ff00,#010615,#00bcd4);
 }
 
 .clickChoiceCard::before,
 .clickChoiceCard::after {
-    background: linear-gradient(235deg,#89ff00,#010615,#00bcd4);
+  background: linear-gradient(235deg,#89ff00,#010615,#00bcd4);
 }
 
 .choiceCard:nth-child(2)::before,
 .choiceCard:nth-child(2)::after
 {
-    background: linear-gradient(235deg,#ff005e,#010615,#fbff00);
+  background: linear-gradient(235deg,#ff005e,#010615,#fbff00);
 }
 
 .clickChoiceCard:nth-child(2)::before,
 .clickChoiceCard:nth-child(2)::after
 {
-    background: linear-gradient(235deg,#ff005e,#010615,#fbff00);
+  background: linear-gradient(235deg,#ff005e,#010615,#fbff00);
 }
 
 
 .choiceCard:nth-child(3)::before,
 .choiceCard:nth-child(3)::after
 {
-    background: linear-gradient(235deg,#772aff,#010615,#2196f3);
+  background: linear-gradient(235deg,#772aff,#010615,#2196f3);
 }
 
 .clickChoiceCard:nth-child(3)::before,
 .clickChoiceCard:nth-child(3)::after
 {
-    background: linear-gradient(235deg,#772aff,#010615,#2196f3);
+  background: linear-gradient(235deg,#772aff,#010615,#2196f3);
 }
 
 .choiceCard .imgBxContent {
-    position: absolute;
-    bottom: 0;
-    left: 10px;
-    right: 10px;
-    bottom: 10px;
-    height: 90px;
-    background: rgba(0, 0, 0, 0.4);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    opacity: 0;
-    transition: 0.5s;
+  position: absolute;
+  bottom: 0;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  height: 90px;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  opacity: 0;
+  transition: 0.5s;
 }
 
 .clickChoiceCard .imgBxContent {
-    position: absolute;
-    bottom: 0;
-    left: 10px;
-    right: 10px;
-    bottom: 10px;
-    height: 90px;
-    background: rgba(0, 0, 0, 0.4);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    transition: 0.5s;
-    opacity: 1;
+  position: absolute;
+  bottom: 0;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  height: 90px;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition: 0.5s;
+  opacity: 1;
 }
 
 .choiceCard:hover .imgBxContent {
-    opacity: 1;
+  opacity: 1;
 }
 
 
 
 .clickChoiceCard .imgBxContent h2,
 .choiceCard .imgBxContent h2 {
-    font-size: 20px;
-    color: #fff;
-    font-weight: 500;
-    line-height: 20px;
-    letter-spacing: 1px;
-    margin-bottom: 0px;
+  font-size: 20px;
+  color: #fff;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 1px;
+  margin-bottom: 0px;
 }
 
 .clickChoiceCard .imgBxContent h3,
 .choiceCard .imgBxContent h3 {
-    font-size: 14;
-    color: #fff;
-    font-weight: 200;
-    line-height: 20px;
-    letter-spacing: 2px;
+  font-size: 14;
+  color: #fff;
+  font-weight: 200;
+  line-height: 20px;
+  letter-spacing: 2px;
 }
 
 
 .chaSelectBtn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    gap: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 30px;
 }
 
 .chaSelectBtn-desc,
 .chaSelectBtn-startGame{
-    cursor: pointer;
-    position: relative;
-    display: inline-block;
-    padding: 12px 36px;
-    margin: 10px 0;
-    color: #fff;
-    text-decoration: none;
-    text-transform: uppercase;
-    font-size: 18px;
-    letter-spacing: 2px;
-    border-radius: 40px;
-    background: linear-gradient(90deg,#0162c8,#55e7fc);
-    font-family: 'Y_Spotlight';
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  padding: 12px 36px;
+  margin: 10px 0;
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 18px;
+  letter-spacing: 2px;
+  border-radius: 40px;
+  background: linear-gradient(90deg,#0162c8,#55e7fc);
+  font-family: 'Y_Spotlight';
 }
 
 .chaSelectBtn-desc:nth-child(2),
 .chaSelectBtn-startGame:nth-child(2){
-    background: linear-gradient(90deg,#755bea,#ff72c0);
+  background: linear-gradient(90deg,#755bea,#ff72c0);
 }
 
 
 .chaSelectBtn-desc:focus,
 .chaSelectBtn-startGame:focus {
-    outline: none;
+  outline: none;
 }
 .chaSelectBtn-desc:hover,
 .chaSelectBtn-startGame:hover {
-    background: #08293B;
+  background: #08293B;
 }
 
 .chaSelectBtn h1 {
-    font-size: 20px;
-    color: #fff;
-    font-weight: 500;
-    line-height: 20px;
-    letter-spacing: 1px;
-    margin-right: 40px;
+  font-size: 20px;
+  color: #fff;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 1px;
+  margin-right: 40px;
 }

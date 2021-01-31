@@ -15,6 +15,7 @@ const ADD_MY_SOCKET_ID = 'ADD_MY_SOCKET_ID'
 const SAVE_HOST_ID = 'SAVE_HOST_ID'
 const IS_GAME_START = 'IS_GAME_START'
 const IS_GAME_OVER = 'IS_GAME_OVER'
+const OPEN_MULTI_RESULT = 'OPEN_MULTI_RESULT'
 
 export const saveRoomCode = createAction(SAVE_ROOM_CODE)
 export const renderRoom = createAction(RENDER_ROOM)
@@ -28,6 +29,7 @@ export const turnOffFilter = createAction(TURN_OFF_FILTER)
 export const saveHostId = createAction(SAVE_HOST_ID)
 export const isGameStart = createAction(IS_GAME_START)
 export const isGameOver = createAction(IS_GAME_OVER)
+export const openMultiResult = createAction(OPEN_MULTI_RESULT)
 // export const updateRoomLockingStatus = createAction(UPDATE_ROOM_LOCKING_STATUS)
 
 
@@ -45,7 +47,7 @@ const actions = {
   saveHostId,
   isGameStart,
   isGameOver,
-
+  openMultiResult,
 } // 모든 액션 생성함수들을 actions 객체에 넣습니다
 type RoomAction = ActionType<typeof actions> // ActionType 를 사용하여 모든 액션 객체들의 타입을 준비해줄 수 있습니다
 
@@ -72,6 +74,7 @@ interface RoomState  {
   isHost: string
   isGameStart: boolean
   isGameOver: boolean
+  openResult: boolean
 }
 
 const initialState: RoomState = {
@@ -89,7 +92,8 @@ const initialState: RoomState = {
   isVideo: true,
   isHost: '',
   isGameStart: false,
-  isGameOver: false
+  isGameOver: false,
+  openResult: false
 }
 
 const roomReducer = createReducer<RoomState, RoomAction>(initialState, {
@@ -162,6 +166,12 @@ const roomReducer = createReducer<RoomState, RoomAction>(initialState, {
     return {
       ...state,
       isGameStart: !state.isGameStart
+    }
+  },
+  [OPEN_MULTI_RESULT]: (state: RoomState) => {
+    return {
+      ...state,
+      openResult: !state.openResult
     }
   }
 })

@@ -1,81 +1,29 @@
-import React, { useState, useEffect  }from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState  }from 'react';
+import { useSelector } from 'react-redux';
 import { roomSocket } from '../../utils/socket'
 import KakaoShareButton from './KakaoShareButton'
 
-declare global {
-  interface Window { Kakao: any;}
-}
-
 function Result() {
-  const [scoreList, setScoreList] = useState([])
   const roomCode = useSelector((state: RootState) => state.roomReducer.roomCode)
+  const [scoreList, setScoreList] = useState([])
 
-  const result = {
-    roomCode: roomCode,
-    result: {
-      score: 1000,
-      life: 0,
-      stage: 3,
-      bird: 1,
-      squi: 2,
-    }
-  }
+  roomSocket.listenResult((userList: any) => {
+    setScoreList(userList)
+  })
   
-  useEffect(() => {
-    setScoreList([{
-      gameResult: {
-        score: 1000,
-        stage: 3,
-        bird: 2,
-        squi: 1
-      },
-    },
-    {
-      gameResult: {
-        score: 1000,
-        stage: 3,
-        bird: 2,
-        squi: 1
-      },
-    },
-    {
-      gameResult: {
-        score: 1000,
-        stage: 3,
-        bird: 2,
-        squi: 1
-      },
-    },
-    {
-      gameResult: {
-        score: 1000,
-        stage: 3,
-        bird: 2,
-        squi: 1
-      },
-    }
-  ])
-    roomSocket.listenResult((userList: any) => {
-      console.log('----------Result-------------',userList)
-      
-    })
-  }, [])
-
-  return (
-    <>
-    <div>결과 화면</div>
-    {scoreList.map((ele, idx) => (
-      console.log(idx,'번째', ele),
-      <div key={idx}>
-        <span>점수: {ele.gameResult.score}</span>
-        <span>스테이지: {ele.gameResult.stage}</span>
-        <span>서브캐릭터: {ele.gameResult.bird + ele.gameResult.squi}</span>
+ return (
+  <div>
+    {scoreList.map((user: any, idx: number) => (
+      <div className='' key={idx}>
+        <span className='MRcontent' style={{ position: 'relative', right: `${idx + 20 * idx}px`}}>닉네임: {user.nickName}</span>
+        <span className='MRcontent' style={{ right: `${idx + 20 * idx}px`}}>점수: {user.gameResult.score}</span>
+        <span className='MRcontent' style={{ right: `${idx + 20 * idx}px`}}>스테이지: {user.gameResult.stage}</span>
+        <span className='MRcontent' style={{ right: `${idx + 20 * idx}px`}}>서브 캐릭터: {user.gameResult.squi + user.gameResult.bird}</span>
       </div>
     ))}
-    <KakaoShareButton/>
-    </>
-  );
+    <KakaoShareButton/ >
+  </div>
+  )
 }
 
-export default Result;
+export default Result
