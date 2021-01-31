@@ -161,6 +161,12 @@ const roomReducer = createReducer<RoomState, RoomAction>(initialState, {
       ...state,
       isHost: action.value
     }
+  },
+  [IS_GAME_START]: (state: RoomState) => {
+    return {
+      ...state,
+      isGameStart: !state.isGameStart
+    }
   }
 })
 

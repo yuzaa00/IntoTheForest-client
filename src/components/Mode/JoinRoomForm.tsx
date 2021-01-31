@@ -34,12 +34,11 @@ function JoinRoomForm({ setModalOpen }: any ) {
           photoUrl: '../../images/card/card5.png'
         }
       })
-      history.push(`rooms/${roomId}`)
       dispatch({
         type: 'SET_MULTI_MODE',
         value: 'M4'   // 'M2' or 'M4'
       })
-      history.push(`rooms/${roomId}`)
+      history.push(`LoadingRoom`)
     } 
   }
 

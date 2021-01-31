@@ -9,11 +9,6 @@ import logoForest from '../../images/logoForest.png'
 
 
 function Loading () {
-
-
-
-    
-
   return (
       <div className="loadingScreen">
       <div className="preload">
@@ -29,15 +24,11 @@ function Loading () {
          timeout={7000} //3 secs
       />
       </div>
-      
       </div>
-      
       {/* img className="logoForest2" src={logoForest} alt='logoForest2' /> */}
       {/* <img className="logoForest1" src={logoForest} alt='logoForest1' /> */}
       <img className="logoForest" src={logoForest} alt='logoForest' />
-      
       </div>
-      
       </div>
   );
 }

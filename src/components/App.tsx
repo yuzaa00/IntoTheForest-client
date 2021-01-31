@@ -9,10 +9,11 @@ import Room from './Room/Room';
 import Game from './Game/Game';
 import Result from './Result/Result';
 import SingleResult from '../components/Result/SingleResult'
+import LoadingRoom from './Room/LoadingRoom'
 
 function App() {
   const dispatch = useDispatch()
-
+  
   useEffect(() => {
     dispatch({
       type: 'SAVE_CLIENT_WIDTH',
@@ -22,7 +23,6 @@ function App() {
 
    return (
      <div>
-       {/* <Game /> */}
     <Switch>
       <Route exact path='/' component={Welcome} /> 
       <Route path='/mode' component={ChoiceMode} /> 
@@ -31,6 +31,7 @@ function App() {
       <Route path='/game' component={Game} />
       <Route path='/result' component={Result} />
       <Route path='/SingleResult' component={SingleResult} />
+      <Route path='/LoadingRoom' component={LoadingRoom} />
     </Switch>
      </div>
 
