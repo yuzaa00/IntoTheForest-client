@@ -28,7 +28,7 @@ const Styles = styled.div`
     th,
     td {
       margin: 0;
-      padding: 0.5rem 0.8rem;
+      padding: 0.5rem 1.5rem;
       border-bottom: 0.5px solid gray;
       border-right: 0px solid black;
 
@@ -166,7 +166,7 @@ function SingleResult() {
               accessor: 'stage',
             },
             {
-              Header: '서브캐릭터',
+              Header: '서브캐',
               accessor: 'subcha',
             },
           ],

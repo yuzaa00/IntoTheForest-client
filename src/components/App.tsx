@@ -10,6 +10,7 @@ import Game from './Game/Game';
 import Result from './Result/Result';
 import SingleResult from '../components/Result/SingleResult'
 import LoadingRoom from './Room/LoadingRoom'
+import Ending from '../components/Result/Ending'
 
 function App() {
   const dispatch = useDispatch()
@@ -32,6 +33,7 @@ function App() {
       <Route path='/result' component={Result} />
       <Route path='/SingleResult' component={SingleResult} />
       <Route path='/LoadingRoom' component={LoadingRoom} />
+      <Route path='/Ending' component={Ending} />
     </Switch>
      </div>
 
