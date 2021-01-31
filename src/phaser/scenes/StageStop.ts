@@ -6,8 +6,6 @@ export default class StageStop extends Phaser.Scene {
   public player: any
   public x: number = 0
 
-
-
   constructor() {
     super('StageStop') 
   }  
