@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import { useTable } from 'react-table';
 import axios from "axios";
 import './SingleResult.css';
-// import family from '../../images/family.png'
 
 const Styles = styled.div`
   background-color: linear-gradient(235deg, #77EDAC, #00BCD4);
@@ -28,13 +27,17 @@ const Styles = styled.div`
     th,
     td {
       margin: 0;
-      padding: 0.5rem 1.5rem;
+      padding: 0.5rem 1.8rem;
       border-bottom: 0.5px solid gray;
       border-right: 0px solid black;
 
       :last-child {
         border-right: 0;
       }
+    }
+
+    th {
+      color: red;
     }
   }
 `
@@ -91,7 +94,6 @@ function SingleResult() {
             headers: {"secretCode": "shelter"}
         })
         .then(res => {
-            console.log(res.data)
             setPosts(res.data)
         })
         .catch(err => {
@@ -119,7 +121,6 @@ function SingleResult() {
             console.log('5', newGameDataFinal)
             await axios.post('http://localhost:4000/rank/reg', newGameDataFinal)
               .then((response) => {
-                console.log(response)
                 if (response.status === 201) {
                     alert('🙇랭크등록에 성공하셨습니다!🙏')
                 }
