@@ -22,10 +22,11 @@ export default class StageResult extends Phaser.Scene {
   public init(data: any): void {
     this.registry.set('score', data.score || 30000) // 이전 scene에서 올라온 데이터 등록
     this.registry.set('life', data.life || 10000)
-    this.registry.set('stage', data.stage - 2 || 2)
+    this.registry.set('stage', data.stage - 2 || 0)
     this.registry.set('bird', data.bird || 1)
     this.registry.set('squi', data.squi || 1)
     this.registry.set('char', data.char || 'dog')
+    this.registry.set('start', 4)
   }
 
   public preload(): void {
@@ -42,13 +43,13 @@ export default class StageResult extends Phaser.Scene {
     this.addNum = Math.floor(this.registry.values.life / 1000 / 2)
 
     //start button square
-    this.add.graphics()
-      .fillStyle(0xffffff)
-      .fillRoundedRect(500, 480, 180, 60, 20)
+    // this.add.graphics()
+    //   .fillStyle(0xffffff)
+    //   .fillRoundedRect(500, 480, 200, 60, 20)
 
 
     this.add
-      .text(600, 83, "⚡스테이지 통과⚡️", {
+      .text(600, 83, `⚡스테이지 ${this.registry.values.stage + 1} 통과⚡️`, {
         color: '#ffffff',
         fontSize: '45px',
         fontStyle: 'bold',
@@ -76,25 +77,36 @@ export default class StageResult extends Phaser.Scene {
       .setOrigin(0.5)
 
     this.startButton = this.add
-      .text(590, 515, '다음으로', {
-        color: '#000000',
+      .text(590, 515, `다음으로.. ${this.registry.values.start}`, {
+        color: '#ffffff',
         fontSize: '35px',
         fontStyle: 'bold',
       })
       .setOrigin(0.5)
-    this.startButton.setInteractive()
+
+    
   }
 
   public create(): void {
-    // this.time.addEvent({ // 게임에서 시간 이벤트 등록, 1초당 콜백 호출 (콜백내용은 초당 체력 감소)
-    //   delay: 4000,
-    //   callback: this.nextStage,
-    //   callbackScope: this,
-    //   loop: false,
-    // })
+    this.time.addEvent({ // 게임에서 시간 이벤트 등록, 1초당 콜백 호출
+      delay: 1000,
+      callback: () => {
+        this.registry.values.start--
+        this.startButton.setText(`다음으로.. ${this.registry.values.start}`)
+      },
+      callbackScope: this,
+      loop: true,
+    })
+
+    this.time.addEvent({ // 게임에서 시간 이벤트 등록, 1초당 콜백 호출
+      delay: 4000,
+      callback: this.nextStage,
+      callbackScope: this,
+      loop: false,
+    })
 
     console.log(5000 / (this.registry.values.score / 111))
-    this.worldTimer = this.time.addEvent({ // 게임에서 시간 이벤트 등록, 1초당 콜백 호출 (콜백내용은 초당 체력 감소)
+    this.worldTimer = this.time.addEvent({ // 게임에서 시간 이벤트 등록, 1초당 콜백 호출
       delay: 5000 / (this.registry.values.score / 111),
       callback: this.lifePlus,
       callbackScope: this,

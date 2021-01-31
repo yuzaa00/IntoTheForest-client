@@ -55,7 +55,7 @@ export default class Stage1 extends Phaser.Scene {
 
   public init(): void { // 내부에서 사용할 데이터 초기화 설정
     this.registry.set('score', 0)
-    this.registry.set('life', 1)
+    this.registry.set('life', 10000)
     this.registry.set('stage', 1)
     this.registry.set('char', 'dog') //const state = store.getState())
   }
@@ -105,7 +105,7 @@ export default class Stage1 extends Phaser.Scene {
     // if (store.getState().gameReducer.multi > 1) {
     //   this.socketId = store.getState().roomReducer.users[store.getState().gameReducer.multi - 1].socketId
     //   this.game.sound.mute = true
-    //   this.input.enabled = false
+    //   th0s.input.enabled = false
     // }
 
     // if (store.getState().gameReducer.multi === 4) {

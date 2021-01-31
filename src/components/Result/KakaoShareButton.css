@@ -1,0 +1,14 @@
+#kakao-link-btn {
+  margin: 10px;
+  font-family: 'BMDOHYEON';
+  font-size: 15px;
+  color: black;
+  text-align: center;
+}
+
+.ksc{
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}

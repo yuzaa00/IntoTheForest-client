@@ -19,8 +19,10 @@ import Loading from '../Ready/Loading'
 import Chat from '../chat/Chat'
 import Start from './Start'
 import Result from '../Result/Result'
+import RoomInfo from './RoomInfo'
 
 import './Room.css'
+import { JsxEmit } from 'typescript';
 
 interface RoomProps {
   renderRoom: Function
@@ -192,10 +194,12 @@ function Room({ renderRoom }: RoomProps) {
 
   return (
     <Container>
+      <RoomInfo />
       <UtilityBox />
       <ToastContainer />
       {isStart && <Loading />}
       <Chat />
+      <div className='capture'>
         <div className={isStart ? 'room_video_game_start' : 'room_video'}>
           {userList.map((user, idx) => (
             <UserVideoListMap key={idx}>
@@ -217,6 +221,7 @@ function Room({ renderRoom }: RoomProps) {
         </div>
       {!isStart && <Start callback={handleIsStart} />}
       {openResult && <Result />}
+    </div>
     </Container>
   );
   

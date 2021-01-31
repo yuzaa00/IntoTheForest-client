@@ -60,6 +60,7 @@ interface usersItem {
   socketId: string
   photoUrl: string
   nickName: string
+  ready?: boolean
 }
 
 interface RoomState  {
@@ -93,7 +94,7 @@ const initialState: RoomState = {
   isHost: '',
   isGameStart: false,
   isGameOver: false,
-  openResult: false
+  openResult: false,
 }
 
 const roomReducer = createReducer<RoomState, RoomAction>(initialState, {

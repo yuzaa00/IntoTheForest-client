@@ -1,0 +1,17 @@
+.Infocontainer {
+  position: absolute;
+  background: rgb(255, 255, 255);
+  width: 140px;
+  height: 186px;
+  text-align: center;
+  padding-top: 40px;
+  border-radius: 40px;
+  padding: 10px;
+  font-family: 'BMDOHYEON';
+}
+
+.Infocontent {
+  margin: 10px;
+  font-family: 'BMDOHYEON';
+  font-size: 20px;
+}
