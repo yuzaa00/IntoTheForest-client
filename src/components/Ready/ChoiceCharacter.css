@@ -8,6 +8,7 @@
   background: url('../../../assets/images/background/nightDark.png') no-repeat;
   background-size: 100%;
   font-family: 'Y_Spotlight';
+  position: relative;
 }
 .GCbox {
   text-align : center;
@@ -218,11 +219,16 @@
 
 
 .chaSelectBtn {
-  display: flex;
+  width: 382px;
+  /* display: flex; */
   justify-content: center;
   align-items: center;
   flex-direction: row;
   gap: 30px;
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  margin-left: -191px;
 }
 
 .chaSelectBtn-desc,
@@ -240,6 +246,10 @@
   border-radius: 40px;
   background: linear-gradient(90deg,#0162c8,#55e7fc);
   font-family: 'Y_Spotlight';
+}
+
+.chaSelectBtn-desc {
+  margin-right: 30px;
 }
 
 .chaSelectBtn-desc:nth-child(2),
