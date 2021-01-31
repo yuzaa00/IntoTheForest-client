@@ -1,3 +1,5 @@
+import { store } from '../../index'
+
 export default class StageOver extends Phaser.Scene {
 
   constructor() {
@@ -6,16 +8,32 @@ export default class StageOver extends Phaser.Scene {
 
   public init(data: any) {
     this.registry.set('score', data.score) // 이전 scene에서 올라온 데이터 등록
-    this.registry.set('life', data.life) // 이전 scene에서 올라온 데이터 등록
-    this.registry.set('stage', data.stage) // 이전 scene에서 올라온 데이터 등록
+    this.registry.set('life', data.life) 
+    this.registry.set('stage', data.stage) 
+    this.registry.set('bird', data.bird) 
+    this.registry.set('squi', data.squi) 
+    this.registry.set('char', data.char) 
   }
 
   public create(): void {
     this.add.image(200, 0, 'gameOver').setOrigin(0, 0)
+    this.time.addEvent({
+      delay: 2000,
+      callback: () => store.dispatch({
+        type: 'GAME_DESTROY',
+        score: this.registry.values.score,
+        life: this.registry.values.life, 
+        stage: this.registry.values.stage,
+        bird: this.registry.values.bird,
+        squi: this.registry.values.squi,
+      }),
+      callbackScope: this,
+      loop: false
+    })
   }
 
   public update(): void {
-    // store.dispatch
+    
   }
 
 }

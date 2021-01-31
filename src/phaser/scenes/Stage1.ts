@@ -284,21 +284,21 @@ export default class Stage1 extends Phaser.Scene {
       }, this)
 
     let didJump = Phaser.Input.Keyboard.JustDown(this.spaceBar) // 스페이스바 입력 감지
-    const mode = store.getState().gameReducer.mode // ''
-    const roomCode = store.getState().roomReducer.roomCode
+    // const mode = store.getState().gameReducer.mode // ''
+    // const roomCode = store.getState().roomReducer.roomCode
 
-    if (mode) {
-      console.log(this.socketId)
-      gameSocket.sendInput(roomCode, store.getState().roomReducer.users[0].socketId) //0번째 점프하면 서버로 1전송
-    }
-    else {}
-    //얘도 1
-    gameSocket.getInput((clientId: string) => {
-      console.log('첫번째: ', this.socketId === clientId, '두번째 :', this.socketId !== store.getState().roomReducer.users[0].socketId)
-      if(this.socketId === clientId && this.socketId !== store.getState().roomReducer.users[0].socketId) {
-        this.socketJump()
-      }
-    }) //this.socketId 1,2,3,4
+    // if (mode) {
+    //   console.log(this.socketId)
+    //   gameSocket.sendInput(roomCode, store.getState().roomReducer.users[0].socketId) //0번째 점프하면 서버로 1전송
+    // }
+    // else {}
+    // //얘도 1
+    // gameSocket.getInput((clientId: string) => {
+    //   console.log('첫번째: ', this.socketId === clientId, '두번째 :', this.socketId !== store.getState().roomReducer.users[0].socketId)
+    //   if(this.socketId === clientId && this.socketId !== store.getState().roomReducer.users[0].socketId) {
+    //     this.socketJump()
+    //   }
+    // }) //this.socketId 1,2,3,4
 
     if (didJump) {
       if (this.player.body.onFloor()) { // 점프 로직
@@ -321,7 +321,13 @@ export default class Stage1 extends Phaser.Scene {
     if (this.registry.values.life <= 0) { // 게임 오버
       this.game.sound.stopAll()
       this.scene.pause()
-      this.scene.start('StageOver', { score: this.registry.values.score, stage: 1 })
+      this.scene.start('StageOver', { 
+        score: this.registry.values.score, 
+        stage: 1,
+        bird: this.birdArr.length,
+        squi: this.squiArr.length,
+        char: this.registry.values.char 
+      })
     }
   }
 
@@ -472,14 +478,6 @@ export default class Stage1 extends Phaser.Scene {
     this.signLayer.removeTileAt(tile.x, tile.y)
     if (tile.index !== -1) {
       this.game.sound.stopAll()
-      store.dispatch({
-        type: 'GAME_DESTROY',
-        score: this.registry.values.score,
-        life: this.registry.values.life, 
-        stage: 2,
-        bird: this.birdArr.length,
-        squi: this.squiArr.length,
-      })
       this.scene.start('StageResult', {
         score: this.registry.values.score + 10000,
         life: this.registry.values.life, 

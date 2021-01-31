@@ -10,8 +10,8 @@ function LoadingRoom() {
   const roomId = store.getState().roomReducer.roomId
   useEffect(() => {
     if(!roomId) {
-      alert('잘못된 접근 입니다. 처음 화면으로 돌아갑니다.')
-      history.push('/mode')
+      alert('잘못된 접근 입니다. 선택 화면으로 돌아갑니다.')
+      window.open('/mode', '_self')
     }
     setTimeout(() => {
       history.push(`rooms/${roomId}`)
