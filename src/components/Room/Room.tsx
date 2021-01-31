@@ -50,6 +50,7 @@ function Room({ renderRoom }: RoomProps) {
   const roomCode = useSelector((state: RootState) => state.roomReducer.roomCode)
   const userList = useSelector((state: RootState) => state.roomReducer.users, shallowEqual)
   const mySocketId = useSelector((state: RootState) => state.roomReducer.mySocketId, shallowEqual)
+  const openResult = useSelector((state: RootState) => state.roomReducer.openResult, shallowEqual)
   const isVideo = useSelector((state: RootState) => state.roomReducer.isVideo, shallowEqual)
   const userPhotoUrl = useSelector((state: RootState) => state.roomReducer.currentUser.photoUrl, shallowEqual)
   const dataAWS = store.getState().roomReducer.isGameStart
@@ -116,6 +117,8 @@ function Room({ renderRoom }: RoomProps) {
         progress: undefined,
       });
     })
+    
+    roomSocket.listenGameStart(handleIsStart)
 
     return () => {
       roomSocket.leaveRoom(roomCode);
@@ -170,6 +173,14 @@ function Room({ renderRoom }: RoomProps) {
   }, [isStreaming])
 
   function handleIsStart() {
+    console.log('2222222222')
+    if(!store.getState().roomReducer.isHost) {
+      setIsStart(true)
+      dispatch({
+        type: 'IS_GAME_START'
+      })
+      return
+    }
     setIsStart(true)
     dispatch({
       type: 'IS_GAME_START'
@@ -202,6 +213,7 @@ function Room({ renderRoom }: RoomProps) {
           ))}
         </div>
       {!isStart && <Start callback={handleIsStart} />}
+      {openResult && <Result />}
     </Container>
   );
   

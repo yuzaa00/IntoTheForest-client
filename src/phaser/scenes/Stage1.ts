@@ -55,7 +55,7 @@ export default class Stage1 extends Phaser.Scene {
 
   public init(): void { // 내부에서 사용할 데이터 초기화 설정
     this.registry.set('score', 0)
-    this.registry.set('life', 9900)
+    this.registry.set('life', 1)
     this.registry.set('stage', 1)
     this.registry.set('char', 'dog') //const state = store.getState())
   }

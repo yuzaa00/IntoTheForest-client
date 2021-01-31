@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 import { RootState } from '../../redux/rootReducer'
 import styled from 'styled-components'
-import { roomSocket, peerSocket } from '../../utils/socket'
+import { roomSocket } from '../../utils/socket'
 import { store } from '../../index'
 import './Start.css'
 
@@ -26,10 +26,11 @@ function Start ({ callback }: any) {
     }
   })
 
-  return !toggle ? 
+  return toggle ? 
   (
   <>
     <div className="start_button" onClick={() => {
+      roomSocket.sendStart(roomCode)
       callback()
     }}>
       Game 
