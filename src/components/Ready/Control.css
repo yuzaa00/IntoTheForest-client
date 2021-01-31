@@ -9,6 +9,7 @@ li {
 }
 
 .control-button {
+  width: 250px;
   color: white;
   font-family: 'BMDOHYEON';
   font-size: 1rem;
@@ -70,6 +71,11 @@ li {
   margin-bottom: 30px;
 }
 
+.control-canvas .description-area .control-description h3 {
+  margin-top: 50px;
+  color: orange;
+}
+
 .control-canvas .description-area .control-description .control-layout {
   width: inherit;
   padding: 20px;
@@ -92,6 +98,32 @@ li {
 
 .control-canvas .description-area .second-p {
   padding-bottom: 50px;
+}
+
+.control-canvas .description-area .game-control {
+  margin-top: 110px;
+  line-height: 30px;
+  display: flex;
+}
+
+.control-canvas .description-area .game-control p {
+  width: 33%;
+  padding: 0 5%;
+  font-size: 22px;
+  color: orange;
+  font-weight: bold;
+  border-right: 1px solid #ddd;
+}
+
+.control-canvas .description-area .game-control p:last-child {
+  border-right: 0;
+}
+
+.control-canvas .description-area .game-control span {
+  display: block;
+  font-size: 15px;
+  color: white;
+  font-weight: normal;
 }
 
 .control-canvas .description-area .control-description .item-data li {

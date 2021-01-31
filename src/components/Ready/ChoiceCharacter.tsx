@@ -24,7 +24,12 @@ function ChoiceCharacter() {
      }
   
     const onGameStart = () => {
-      setGameOn(true)
+      if(toggleClass === 0) {
+        setErrorMessage('캐릭터를 선택하세요');
+      }
+      else {
+        setGameOn(true)
+      }
     }
 
     return gameOn ? <div className='GCbox' ><Game /></div> : gameInfo ? <Control /> : (
@@ -80,7 +85,7 @@ function ChoiceCharacter() {
         </div>
         <div className="chaSelectBtn">
           <h1>{store.getState().choice.char}</h1>
-          {errorMessage && <h1>{errorMessage}</h1> } 
+          {errorMessage && <h1>{errorMessage}</h1> }
       <button className="chaSelectBtn-desc" onClick={onGameDesc}>게임설명</button>
       <button className="chaSelectBtn-startGame" onClick={onGameStart}>GameStart</button>
        </div>

@@ -5,12 +5,12 @@ import './Control.css';
 function Control() {
 
     const controlDescription = [
-        { name: '점수 획득 아이템', data: ['뼈다귀'], img: '../../images/bone.png' },
-        { name: '몬스터', data: ['뱀', '멧돼지', '늑대'], img: '../../images/all-monster.png' },
-        { name: '장애물(체력 감소)', data: ['독버섯'], img: '../../images/mushroom.png' },
-        { name: '서브캐', data: ['서브캐 증가'], img: '../../images/subcharacters.png' },
-        { name: '포션', data: ['블루 포션 (체력 소폭 증가)', '레드 포션 (체력 증가)', '스테이지 포션 (체력 대폭 증가)'], img: '../../images/all-potion.png' },
-        { name: '푯말', data: ['다음 스테이지 넘어가기'], img: '../../images/signExit.png' },
+        { name: '점수 획득', data: ['뼈다귀'], img: 'http://localhost:4000/bone.png' },
+        { name: '몬스터', data: ['Stage1: 뱀', 'Stage2: 멧돼지', 'Stage3: 늑대'], img: 'http://localhost:4000/all-monster.png' },
+        { name: '장애물', data: ['독버섯 (체력 감소)'], img: 'http://localhost:4000/mushroom.png' },
+        { name: '서브캐', data: ['새', '다람쥐'], img: 'http://localhost:4000/subcharacters.png' },
+        { name: '포션', data: ['블루 포션 (체력 소폭 증가)', '레드 포션 (체력 증가)', '스테이지 포션 (체력 대폭 증가)'], img: 'http://localhost:4000/all-potion.png' },
+        { name: '푯말', data: ['이번 스테이지는 클리어!', '다음 스테이지로 넘어가기'], img: 'http://localhost:4000/signExit.png' },
     ];
 
     const [controlModal, setControlModal] = useState<boolean>(false);
@@ -24,10 +24,10 @@ function Control() {
             {!controlModal && (
               <div>
                 <div className="control-description">
-                  {controlDescription.map(item => {
+                  {controlDescription.map((item, idx) => {
                         return (
-                            <div className="control-layout">
-                              <img src={item.img} />
+                            <div className="control-layout" key={idx}>
+                              <img src={item.img}  height='71px'/>
                                 <h3>{item.name}</h3>
                                 <ul className="item-data">
                                   {item.data.map(el => {
@@ -44,8 +44,9 @@ function Control() {
             )}
             {controlModal && (
               <div className="game-control">
-                  <p>기본: 자동 달리기</p>
-                  <p>점프: 화면 좌측 하단 점프 버튼 또는 스페이스바 클릭</p>
+                  <p>기본 <span>자동 달리기</span></p>
+                  <p>점프 <span>화면 좌측 하단 점프 버튼 클릭 또는 스페이스바 클릭</span></p>
+                  <p>2단 점프 <span>화면 좌측 하단 점프 버튼 두 번 클릭 또는 스페이스바 두 번 클릭</span></p>
               </div>
             )}
         </div>
@@ -59,9 +60,9 @@ function Control() {
                 GAME START
               </button>
             </Link>
-            <Link to="/ready/character">
+            <Link to="/">
               <button className="backCharacter control-button">
-                뒤로가기
+                첫 화면으로 돌아가기
               </button>
             </Link>
          </div>
