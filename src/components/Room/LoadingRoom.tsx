@@ -15,7 +15,7 @@ function LoadingRoom() {
     }
     setTimeout(() => {
       history.push(`rooms/${roomId}`)
-    }, 3000)
+    }, 1000)
   }, [])
 
  return (
@@ -27,7 +27,7 @@ function LoadingRoom() {
 
 const Wrap = styled.div`
   width: 100%;
-  height: 48vw;
+  height: 52vw;
   display: flex;
   justify-content: center;
   align-items: center;

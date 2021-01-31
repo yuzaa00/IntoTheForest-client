@@ -64,7 +64,14 @@ const roomSocket = {
   },
   listenStart(callback: Function) {
     socket.on('send ready', callback)
+  },
+  sendResult(result: object) {
+    socket.emit('send result', result)
+  },
+  listenResult(callback: Function) {
+    socket.on('send result', callback)
   }
+
 };
 
 const chatSocket = {
@@ -80,12 +87,13 @@ const chatSocket = {
 }
 
 const gameSocket = {
-  sendInput(roomCode: string, socketId: String) {
-    socket.emit('space down', { roomCode, socketId })
-  },
-  getInput(callback: Function) {
-    socket.on('space down', callback)
-  },
+  // sendInput(roomCode: string, socketId: String) {
+  //   socket.emit('space down', { roomCode, socketId })
+  // },
+  // getInput(callback: Function) {
+  //   socket.on('space down', callback)
+  // },
+
 }
 
 const peerSocket = {

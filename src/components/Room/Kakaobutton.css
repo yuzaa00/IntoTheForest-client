@@ -3,12 +3,12 @@
   border-radius: 15px;
   font-family: 'BMDOHYEON';
   font-size: 15px;
-  color: #77EDAC;
+  color: deepskyblue;
   margin: 10px;
   padding: 10px;
 }
 
 .loadkprofile:hover {
-  background-color: #00BCD4;
+  background-color: gold;
   color: white;
 }

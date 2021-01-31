@@ -4,7 +4,7 @@ const KakaoShareButton = () => {
   useEffect(() => {
     createShareButton()
   }, [])
-
+x
   const createShareButton = () => {
     
     if(window.Kakao) {
@@ -18,7 +18,7 @@ const KakaoShareButton = () => {
         templateId: 45164,
         templateArgs: {
           'name': '윤지',
-          'result': 'result'
+          'image': 'image'
         }      
       })
     }

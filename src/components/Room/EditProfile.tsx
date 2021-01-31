@@ -88,7 +88,7 @@ function EditProfile({ setModalOpen }: any) {
   return (
     <Wrapper>
       <Margin >
-        <div className='EPcontainer'>프로필 설정하기</div>
+        <div className='EPcontainer'>🌈내 프로필 설정🌈</div>
           <form onSubmit={submitRoomData}>
             <div className='EPinput'>
               <div className='EPnickname'>닉네임</div>
@@ -130,7 +130,8 @@ const Wrapper = styled.div`
   bottom: 45%;
   border-radius: 24px;
   overflow: hidden;
-  background: #77EDAC;
+  background: deepskyblue;
+  box-shadow: 5px 5px 2px #0286b2;
 `;
 
 const Margin = styled.div`
@@ -175,12 +176,12 @@ const Margin = styled.div`
     border-radius: 15px;
     font-family: 'BMDOHYEON';
     font-size: 15px;
-    color: #77EDAC;
+    color: deepskyblue;
     margin: 10px;
     padding: 10px;
   }
   .NickSubmit:hover {
-    background-color: #00BCD4;
+    background-color: #0286b2;
     color: white;
   }
   

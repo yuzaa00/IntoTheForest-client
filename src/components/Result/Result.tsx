@@ -1,6 +1,6 @@
 import React, { useState, useEffect }from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
+import { roomSocket } from '../../utils/socket'
 import KakaoShareButton from './KakaoShareButton'
 
 declare global {
@@ -8,6 +8,10 @@ declare global {
 }
 
 function Result() {
+  roomSocket.listenResult((userList: any) => {
+    console.log(userList.gameResult)
+  })
+  
 
   return (
     <>
