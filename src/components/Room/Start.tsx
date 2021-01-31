@@ -5,6 +5,7 @@ import { RootState } from '../../redux/rootReducer'
 import styled from 'styled-components'
 import { roomSocket } from '../../utils/socket'
 import { store } from '../../index'
+import { ToastContainer, toast } from 'react-toastify'
 import './Start.css'
 
 interface listen {
@@ -12,40 +13,62 @@ interface listen {
   start: string
 }
 
-function Start ({ callback }: any) {
-  const [ toggle, setToggle ] = useState(false)
-  const [ isReady, setIsReady ] = useState(false)
-  const disPatch = useDispatch()
+function Start({ callback }: any) {
+  const [toggle, setToggle] = useState(false)
+  const [isReady, setIsReady] = useState(false)
+
+  const userList = useSelector((state: RootState) => state.roomReducer.users)
   const roomCode = useSelector((state: RootState) => state.roomReducer.roomCode)
-  
-  roomSocket.listenStart(({socketId, start}: listen) => {
+
+  roomSocket.listenStart(({ socketId, start }: listen) => {
     console.log('socketId :', socketId, 'start :', start, 'isHost : ', store.getState().roomReducer.isHost)
     console.log('start는 받았는데 나는 ', store.getState().roomReducer.isHost === socketId, '임')
-    if(store.getState().roomReducer.isHost === socketId) {
+    if (store.getState().roomReducer.isHost === socketId) {
       setToggle(true)
     }
   })
 
-  return toggle ? 
-  (
-  <>
-    <div className="start_button" onClick={() => {
-      roomSocket.sendStart(roomCode)
-      callback()
-    }}>
-      GAME
-      START
+  return toggle ?
+    (
+      <>
+        <div className="start_button" onClick={() => {
+          toast.success(`🦄 게임을 시작합니다. `, {
+            position: "bottom-left",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          roomSocket.sendStart(roomCode)
+          callback()
+        }}>
+          GAME
+          START
     </div>
-  </>
-  )
-   :  (
-    <div className={isReady? "ready_button_clicked":"ready_button"} onClick={() => {
-      if(!isReady) roomSocket.sendReady(roomCode)
-      setIsReady(!isReady)
-    }}>
-      READY
-    </div>
-  )
+      </>
+    )
+    : (
+      <div className={isReady ? "ready_button_clicked" : "ready_button"} onClick={() => {
+        if (userList.length < 4) {
+          toast.error(`🦄 4명이 모여야 준비가 가능합니다.`, {
+            position: "bottom-left",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+          })
+          return
+        }
+        if (!isReady) roomSocket.sendReady(roomCode)
+        setIsReady(isReady)
+      }}>
+        READY
+      </div>
+    )
 
 }
 

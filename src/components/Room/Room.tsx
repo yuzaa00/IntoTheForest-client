@@ -40,7 +40,7 @@ interface userList {
 }
 
 function Room({ renderRoom }: RoomProps) {
-  // useBeforeunload((event) => event.preventDefault());
+  useBeforeunload((event) => event.preventDefault());
   const dispatch = useDispatch()
   const [scoreList, setScoreList] = useState([])
   const [isStreaming, setIsStreaming] = useState(false)

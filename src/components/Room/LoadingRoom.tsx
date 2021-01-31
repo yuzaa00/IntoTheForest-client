@@ -8,14 +8,15 @@ import { RootState } from '../../redux/rootReducer'
 function LoadingRoom() {
   const history = useHistory()
   const roomId = store.getState().roomReducer.roomId
+  const users = store.getState().roomReducer.users
   useEffect(() => {
-    if(!roomId) {
+    if(!roomId || users.length === 0) {
       alert('잘못된 접근 입니다. 선택 화면으로 돌아갑니다.')
       window.open('/mode', '_self')
     }
     setTimeout(() => {
       history.push(`rooms/${roomId}`)
-    }, 1000)
+    }, 3000)
   }, [])
 
  return (

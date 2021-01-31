@@ -2,6 +2,7 @@ import React, { useState, useEffect }from 'react';
 import { Link } from 'react-router-dom';
 import './welcome.css'
 import './Background.css';
+import video from '../../images/stage-3.mp4'
 
 declare global {
   interface Window { Kakao: any;}
@@ -31,8 +32,16 @@ function Welcome() {
   }
 
   return (
+    <div>
     <div className="gif-background">
       <div className="dark-background">
+      <video className='videovideovideo'
+        src={video}
+        width='300px'
+        autoPlay
+        loop
+        muted>
+        </video>
         {/* <img src='images/character/logo.png' className="App-logo" alt="logo" /> */}
         {/* <div className={mouseHover? "game-title hover-white":"game-title"} onMouseOver={() => setMouseHover(true)} onMouseOut={() => setMouseHover(false)}>INTO THE FOREST</div> */}
         <div className="game-title">INTO THE FOREST</div>
@@ -43,6 +52,7 @@ function Welcome() {
         <KakaoProfileButton handleAccToken={handleAccToken} />
         <KakaoProfileDelete handleAccToken={handleAccToken} /> */}
       </div> 
+    </div>
     </div>
   );
 }

@@ -177,7 +177,7 @@ function SingleResult() {
     )
 
     const onChoiceModeBack = () => {
-      history.push('/mode');
+      window.open('/mode', '_self')
      }
    
     return !rankOn ? (
