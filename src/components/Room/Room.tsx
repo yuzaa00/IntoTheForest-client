@@ -7,7 +7,6 @@ import { roomSocket, peerSocket } from '../../utils/socket'
 import { ToastContainer, toast } from 'react-toastify'
 import styled from 'styled-components';
 import 'react-toastify/dist/ReactToastify.css'
-
 import Video, { StyledVideo } from './video'
 import * as controlStream from '../../utils/controlStream'
 import Peer from 'simple-peer'
@@ -184,7 +183,6 @@ function Room({ renderRoom }: RoomProps) {
       <ToastContainer />
       {isStart && <ChoiceCharacter />}
       <Chat />
-      
         <div className={isStart ? 'room_video_game_start' : 'room_video'}>
           {userList.map((user, idx) => (
             <UserVideoListMap key={idx}>

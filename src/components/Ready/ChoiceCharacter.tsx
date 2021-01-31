@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { useHistory } from "react-router-dom";
+import { store } from '../../index'
 
+import Control from './Control'
 import './ChoiceCharacter.css';
 import John from '../../images/siba.png'
 import Tom from '../../images/backgu.png'
@@ -9,37 +10,31 @@ import Alex from '../../images/dosaDog.png'
 import Game from '../Game/Game'
 import { useDispatch } from 'react-redux';
 
-type ChoiceCharacterProps = {
-    value: string;
-    onSelect1: () => void;
-    onSelect2: () => void;
-    onSelect3: () => void;
-  }
-
-function ChoiceCharacter({ value, onSelect1, onSelect2, onSelect3 }:ChoiceCharacterProps) {
+function ChoiceCharacter() {
     const dispatch = useDispatch()
 
     const [gameOn, setGameOn] = useState(false)
+    const [gameInfo, setGameInfo] = useState(false)
 
-    const [ toggleClass, setToggleClass] = useState<number>(0);
-    const [ errorMessage, setErrorMessage] = useState<String>("");
-
-    let history = useHistory();
+    const [toggleClass, setToggleClass] = useState<number>(0)
+    const [errorMessage, setErrorMessage] = useState<String>("")
    
     const onGameDesc = () => {
-      history.push('/ready/control');
+      setGameInfo(true)
      }
   
     const onGameStart = () => {
       setGameOn(true)
     }
 
-    return gameOn ? <div><Game /></div> : (
+    return gameOn ? <div><Game /></div> : gameInfo ? <Control /> : (
       <div className="choiceCharacterScreen">
         <div className="chaSelectWrapper">
         <div className="chaSelectBx">
           <div onClick={() => { 
-            onSelect1()
+            dispatch({
+              type: 'SELECT_CHAR_1'
+            })
             setToggleClass(1)
             setErrorMessage("")
            } } className = {toggleClass === 1 ? 'clickChoiceCard' : 'choiceCard'} >
@@ -52,7 +47,9 @@ function ChoiceCharacter({ value, onSelect1, onSelect2, onSelect3 }:ChoiceCharac
             </div>
           </div>
           <div onClick={() => { 
-            onSelect2()
+            dispatch({
+              type: 'SELECT_CHAR_2'
+            })
             setToggleClass(2)
             setErrorMessage("")
            } } className = {toggleClass === 2 ? 'clickChoiceCard' : 'choiceCard'} >
@@ -65,7 +62,9 @@ function ChoiceCharacter({ value, onSelect1, onSelect2, onSelect3 }:ChoiceCharac
             </div>
           </div>
           <div onClick={() => { 
-            onSelect3()
+            dispatch({
+              type: 'SELECT_CHAR_3'
+            })
             setToggleClass(3)
             setErrorMessage("")
            } } className = {toggleClass === 3 ? 'clickChoiceCard' : 'choiceCard'} >
@@ -80,7 +79,7 @@ function ChoiceCharacter({ value, onSelect1, onSelect2, onSelect3 }:ChoiceCharac
         </div>
         </div>
         <div className="chaSelectBtn">
-          <h1>{value}</h1>
+          <h1>{store.getState().choice.char}</h1>
           {errorMessage && <h1>{errorMessage}</h1> } 
       <button className="chaSelectBtn-desc" onClick={onGameDesc}>게임설명</button>
       <button className="chaSelectBtn-startGame" onClick={onGameStart}>GameStart</button>

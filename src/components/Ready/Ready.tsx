@@ -4,8 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import SingleResult from '../Result/SingleResult';
 import Loading from './Loading';
 import Story from './Story'
-import ChoiceContainer from '../../containers/ChoiceContainer';
-
+import ChoiceCharacter from './ChoiceCharacter'
 import Control from './Control'
 
 
@@ -15,7 +14,7 @@ function Ready() {
     <Switch>
       <Route path='/ready/loading' component={Loading} /> 
       <Route path='/ready/story' component={Story} /> 
-      <Route path='/ready/character' component={ChoiceContainer} /> 
+      <Route path='/ready/character' component={ChoiceCharacter} /> 
       <Route path='/ready/control' component={Control} />
     </Switch>
   );

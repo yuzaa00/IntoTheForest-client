@@ -1,39 +1,29 @@
-// 액션 타입
+import { createAction, ActionType, createReducer } from 'typesafe-actions'
 
-const SELECT1 = 'choiceReducer/SELECT1' as const; 
-const SELECT2 = 'choiceReducer/SELECT2' as const;
-const SELECT3 = 'choiceReducer/SELECT3' as const;
+const SELECT_CHAR_1 = 'SELECT_CHAR_1'
+const SELECT_CHAR_2 = 'SELECT_CHAR_2'
+const SELECT_CHAR_3 = 'SELECT_CHAR_3'
 
-// 액션 생성 함수
+export const selChar1 = createAction(SELECT_CHAR_1)
+export const selChar2 = createAction(SELECT_CHAR_2)
+export const selChar3 = createAction(SELECT_CHAR_3)
 
-export const select1 = () => ({ type: SELECT1 });
-export const select2 = () => ({ type: SELECT2 });
-export const select3 = () => ({ type: SELECT3 });
+const actions = { selChar1, selChar2, selChar3 }
 
-type ChoiceReducerAction =
-  | ReturnType<typeof select1>
-  | ReturnType<typeof select2>
-  | ReturnType<typeof select3>;
+type selectAction = ActionType<typeof actions>
 
-type ChoiceReducerState = {
-  value: string;
-};
+interface selChar  {
+  char: string
+}
 
-const initialState: ChoiceReducerState = {
-  value : ""
-};
+const initialState: selChar = {
+  char: ''
+}
 
-function choiceReducer (state: ChoiceReducerState = initialState, action: ChoiceReducerAction):ChoiceReducerState {
-  switch (action.type) {
-    case SELECT1:
-      return {value: "시바견"};
-    case SELECT2:
-      return {value: "진돗개"};
-    case SELECT3:
-      return {value: "도사견"};
-    default:
-      return state;
-  }
-};
+const choice = createReducer<selChar, selectAction>(initialState, {
+  [SELECT_CHAR_1]: (state: selChar) => ({ ...state, char: '시바견' }),
+  [SELECT_CHAR_2]: (state: selChar) => ({ ...state, char: '진돗개' }),
+  [SELECT_CHAR_3]: (state: selChar) => ({ ...state, char: '도사견' })
+})
 
-export default choiceReducer;
+export default choice

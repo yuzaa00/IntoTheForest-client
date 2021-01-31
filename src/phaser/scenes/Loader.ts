@@ -1,5 +1,4 @@
 import Phaser from 'phaser'
-import { images } from '../helper/image'
 
 export default class Loader extends Phaser.Scene { // resource load scene
 
@@ -9,7 +8,6 @@ export default class Loader extends Phaser.Scene { // resource load scene
 
   preload(): void {
     //character load
-    console.log(4)
     this.load.image('logo', 'http://localhost:4000/logo.png')
     this.load.image('bird', 'http://localhost:4000/bird.png')
     this.load.image('squi', 'http://localhost:4000/squi.png')
@@ -82,17 +80,13 @@ export default class Loader extends Phaser.Scene { // resource load scene
     this.load.audio('heal', 'http://localhost:4000/heal.mp3')
     
     //particles
-    console.log(5)
     this.load.atlas('particles', 'http://localhost:4000/explosion.png', 'http://localhost:4000/explosion.json')
-    console.log(6)
   }
 
-  create ():void {
-    
+  create ():void {  
   }
   
   update ():void {
-   
     this.scene.start('Stage1') // 첫 스테이지 선택
   }
 }

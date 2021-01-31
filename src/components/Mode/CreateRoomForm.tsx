@@ -5,15 +5,16 @@ import { useDispatch } from 'react-redux'
 import { roomData, response } from '../../utils/socket.type'
 import crypto from 'crypto'
 function CreateRoomForm({setModalOpen}: any){
-  
   const dispatch = useDispatch()
   const history = useHistory()
+
   const [createError, setCreateError] = useState('')
   const [user, setUser] = useState(2);
   const [inputs, setInputs] = useState({
     roomCode: '',
     nickName: ''
   })
+  
   const moveToRoom = (response: response) => {
     const { roomId, clientId, error } = response
     if (!roomId) {
@@ -43,12 +44,13 @@ function CreateRoomForm({setModalOpen}: any){
         type: 'SAVE_HOST_ID',
         value: clientId
       })
-      history.push(`rooms/${roomId}`)
+      history.push(`LoadingRoom`)
     }
   }
   const createRoom = (roomData: roomData ) => {
     roomSocket.createRoom(roomData, (roomId: response) => moveToRoom(roomId))
   }
+
   const submitRoomData = (ev: { preventDefault: () => void; }) => {
     ev.preventDefault()
     const { roomCode, nickName } = inputs

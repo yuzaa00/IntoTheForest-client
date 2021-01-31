@@ -9,7 +9,7 @@ import { store } from '../../index'
 // import { selectGame } from '~/store/gameSlice';
 
 export default function Game({ }) {
-  const history = useHistory();
+  const history = useHistory()
 
   const gameDestroy = useSelector((state: RootState) => state.singleReducer.game, shallowEqual)
 
