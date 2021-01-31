@@ -30,7 +30,7 @@ export default class Loader extends Phaser.Scene {
             delay: 1400,
             callback: () => {
               this.scene.stop()
-              this.scene.start('StageResult')
+              this.scene.start('Stage1')
             },
             callbackScope: this,
             loop: false

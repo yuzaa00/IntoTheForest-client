@@ -80,6 +80,10 @@ const roomSocket = {
     socket.on('game start', callback)
   },
 
+  listenReadyCheck(callback: Function) {
+    socket.on('ready check', callback)
+  },
+
 };
 
 const chatSocket = {

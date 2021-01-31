@@ -11,7 +11,7 @@ export default class Boot extends Phaser.Scene { // resource load scene
     this.load.image('logo', 'http://localhost:4000/logo.png')
     this.load.image('bird', 'http://localhost:4000/bird.png')
     this.load.image('squi', 'http://localhost:4000/squi.png')
-    this.load.spritesheet('dog', 'http://localhost:4000/dog2.png', { frameWidth: 500, frameHeight: 500 })
+    this.load.spritesheet('dog', 'http://localhost:4000/white-dog-2.png', { frameWidth: 500, frameHeight: 500 })
     // this.load.spritesheet('dog2', 'http://localhost:4000/dog2.png', { frameWidth: 500, frameHeight: 500 })
     // this.load.spritesheet('dog3', 'http://localhost:4000/dog2.png', { frameWidth: 500, frameHeight: 500 })
     
