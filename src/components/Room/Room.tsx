@@ -18,6 +18,7 @@ import ChoiceCharacter from '../../components/Ready/ChoiceCharacter'
 import Loading from '../Ready/Loading'
 import Chat from '../chat/Chat'
 import Start from './Start'
+import Result from '../Result/Result'
 
 import './Room.css'
 
@@ -175,13 +176,11 @@ function Room({ renderRoom }: RoomProps) {
     })
   }
 
-
-
   return (
     <Container>
       <UtilityBox />
       <ToastContainer />
-      {isStart && <ChoiceCharacter />}
+      {isStart && <Loading />}
       <Chat />
         <div className={isStart ? 'room_video_game_start' : 'room_video'}>
           {userList.map((user, idx) => (

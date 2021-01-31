@@ -11,10 +11,10 @@ const UPDATE_ROOM_LOCKING_STATUS = 'UPDATE_ROOM_LOCKING_STATUS'
 const TURN_ON_FILTER = 'TURN_ON_FILTER'
 const TURN_OFF_FILTER = 'TURN_OFF_FILTER'
 const SET_PROFILE = 'SET_PROFILE'
-const GAME_DESTROY = 'GAME_DESTROY'
 const ADD_MY_SOCKET_ID = 'ADD_MY_SOCKET_ID'
 const SAVE_HOST_ID = 'SAVE_HOST_ID'
 const IS_GAME_START = 'IS_GAME_START'
+const IS_GAME_OVER = 'IS_GAME_OVER'
 
 export const saveRoomCode = createAction(SAVE_ROOM_CODE)
 export const renderRoom = createAction(RENDER_ROOM)
@@ -22,12 +22,12 @@ export const renderRoom = createAction(RENDER_ROOM)
 export const addUser = createAction(ADD_USER)
 export const deleteUser = createAction(DELETE_USER)
 export const setProfile = createAction(SET_PROFILE)
-export const gameDestroy = createAction(GAME_DESTROY)
 export const addMySocketID = createAction(ADD_MY_SOCKET_ID)
 export const turnOnFilter = createAction(TURN_ON_FILTER)
 export const turnOffFilter = createAction(TURN_OFF_FILTER)
 export const saveHostId = createAction(SAVE_HOST_ID)
 export const isGameStart = createAction(IS_GAME_START)
+export const isGameOver = createAction(IS_GAME_OVER)
 // export const updateRoomLockingStatus = createAction(UPDATE_ROOM_LOCKING_STATUS)
 
 
@@ -38,13 +38,14 @@ const actions = {
   addUser,
   deleteUser, 
   setProfile,
-  gameDestroy,
   addMySocketID,
   // updateRoomLockingStatus, 
   turnOnFilter, 
   turnOffFilter,
   saveHostId,
-  isGameStart
+  isGameStart,
+  isGameOver,
+
 } // 모든 액션 생성함수들을 actions 객체에 넣습니다
 type RoomAction = ActionType<typeof actions> // ActionType 를 사용하여 모든 액션 객체들의 타입을 준비해줄 수 있습니다
 
@@ -70,6 +71,7 @@ interface RoomState  {
   isVideo: boolean
   isHost: string
   isGameStart: boolean
+  isGameOver: boolean
 }
 
 const initialState: RoomState = {
@@ -86,7 +88,8 @@ const initialState: RoomState = {
   mySocketId: '',
   isVideo: true,
   isHost: '',
-  isGameStart: false
+  isGameStart: false,
+  isGameOver: false
 }
 
 const roomReducer = createReducer<RoomState, RoomAction>(initialState, {
@@ -133,14 +136,7 @@ const roomReducer = createReducer<RoomState, RoomAction>(initialState, {
     //  ]
     } 
   },
-  [GAME_DESTROY]: (state: RoomState, action: any) => {
-    console.log(action)
-    state.game = true
-    state.gameData = action.value
-    return {
-      ...state
-    }
-  },
+
   [ADD_MY_SOCKET_ID]: (state: RoomState, action: any) => {
     return { ...state, mySocketId: action.value }
   },

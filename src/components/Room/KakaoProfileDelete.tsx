@@ -17,7 +17,7 @@ const KakaoProfileDelete: any = ( { handleAccToken, deleteKakao }: ProfileProps 
       
       kakao.API.request({
         url: '/v1/user/unlink',
-        success: () => console.log('ok'),
+        success: () => alert('🌼카카오 연동이 해지되었습니다🌼'),
         fail: (error: any) => console.log(error)
       })
 
