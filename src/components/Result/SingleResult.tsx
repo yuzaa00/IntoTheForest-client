@@ -118,7 +118,7 @@ function SingleResult() {
             e.preventDefault()
 
             let newGameDataFinal = Object.assign({},customerRankUp, obj);
-            console.log('5', newGameDataFinal)
+            
             await axios.post('https://elb.intotheforest.space/rank/reg', newGameDataFinal)
               .then((response) => {
                 if (response.status === 201) {
@@ -177,7 +177,7 @@ function SingleResult() {
     )
 
     const onChoiceModeBack = () => {
-      window.open('/mode', '_self')
+      window.open('/', '_self')
      }
    
     return !rankOn ? (

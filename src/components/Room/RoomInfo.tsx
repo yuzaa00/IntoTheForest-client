@@ -21,7 +21,6 @@ function RoomInfo() {
       
       // const readyUser = store.getState().roomReducer.users.filter((user) => user.socketId === socketId)[0]
       let readyUserNum = store.getState().roomReducer.users.findIndex((user) => user.socketId === socketId)
-      console.log('소켓아뒤', socketId, '인덱스', readyUserNum)
       userList[readyUserNum].ready = true
       setRender(!render)
     })

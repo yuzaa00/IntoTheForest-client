@@ -10,7 +10,7 @@ import rootReducer from './redux/rootReducer'
 import { composeWithDevTools } from 'redux-devtools-extension';
 import logger from 'redux-logger';
 
-export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(logger)))
+export const store = createStore(rootReducer)
 
 ReactDOM.render(
   <BrowserRouter>
