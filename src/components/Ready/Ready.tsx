@@ -15,7 +15,6 @@ function Ready() {
       top: '100px',
       position: 'absolute',
       left: '16%',
-      background: 'antiquewhite'
       }}>
 
     

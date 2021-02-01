@@ -49,7 +49,7 @@ const ChoiceMode = () => {
             솔로
                             </div>
           <button
-            onClick={() => history.push('/ready/story')}
+            onClick={() => history.push('/ready/loading')}
             onMouseOver={soloMode}
             className="button-design">
             혼자하기

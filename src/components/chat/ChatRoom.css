@@ -1,0 +1,7 @@
+ 
+  .my-message {
+    flex-direction: row-reverse;
+  }
+  .friend-message {
+    flex-direction: row;
+  }

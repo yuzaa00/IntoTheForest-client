@@ -5,6 +5,7 @@ import { RootState } from '../../redux/rootReducer'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import format from 'date-fns/format'
+import './ChatRoom.css'
 
 function ChatRoom({onSubmit}: any) {
   const [input, setInput] = useState('')
@@ -132,7 +133,7 @@ const MessageForm = styled.form`
 
 const ChatCell = styled.div`
   min-width: 280px;
-  max-width: 340px;
+  max-width: 405px;
   display: flex;
   align-items: flex-start;
   padding: 10px;
@@ -144,17 +145,19 @@ const ChatCell = styled.div`
     margin-bottom: 6px;
   }
 
-  span:nth-child(2) {
+  span:nth-child(2) { 
     background-color: gold;
     padding: 10px;
-    margin-right: 6px;
     border-radius: 10px;
+    margin-top: 15px;
   }
 
-  span:nth-child(3) {
+  span:nth-child(3) { 
     font-size: 12px;
     color: gray;
+    margin: 15px 10px 0px 10px;
   }
+
 `;
 
 const Profile = styled.div`
