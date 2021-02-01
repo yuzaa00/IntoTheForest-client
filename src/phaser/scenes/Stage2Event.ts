@@ -109,4 +109,9 @@ export default class Stage2Event extends Phaser.Scene {
         this
       )
   }
+  create():void {
+    this.input.enabled = true
+    this.game.input.addPointer()
+  }
+  
 }
