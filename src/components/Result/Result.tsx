@@ -4,6 +4,7 @@ import { roomSocket } from '../../utils/socket'
 import KakaoShareButton from './KakaoShareButton'
 import './Result.css'
 
+
 function Result() {
   const roomCode = useSelector((state: RootState) => state.roomReducer.roomCode)
   const [scoreList, setScoreList] = useState([])

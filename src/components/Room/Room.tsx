@@ -246,8 +246,6 @@ const Container = styled.div`
   }
 `;
 
-
-
 // h3 : 영상 하단 닉네임 
 const UserVideoListMap = styled.div`
 margin: 20px;
