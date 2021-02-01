@@ -11,22 +11,24 @@ import Control from './Control'
 function Ready() {
 
   return (
-    <div className="solo_mode" style={{     
-      top: '100px',
-      position: 'absolute',
-      left: '16%',
-      background: 'antiquewhite'
-      }}>
+    <div style={{width: '100%', height: '100vh',background: 'linear-gradient(75deg,#755bea,#ff72c0)'}}>
+      <div className="solo_mode" style={{     
+        top: '100px',
+        position: 'absolute',
+        left: '16%',
+        background: 'antiquewhite'
+        }}>
 
-    
-    <Switch>
-      <Route path='/ready/loading' component={Loading} /> 
-      <Route path='/ready/story' component={Story} /> 
-      <Route path='/ready/character' component={ChoiceCharacter} /> 
-      <Route path='/ready/control' component={Control} />
-    </Switch>
+      
+      <Switch>
+        <Route path='/ready/loading' component={Loading} /> 
+        <Route path='/ready/story' component={Story} /> 
+        <Route path='/ready/character' component={ChoiceCharacter} /> 
+        <Route path='/ready/control' component={Control} />
+      </Switch>
+      </div>
     </div>
-  );
+  )
 }
 
 export default Ready;
