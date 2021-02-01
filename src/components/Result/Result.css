@@ -4,19 +4,20 @@
   width: 200px;
   border-radius: 20px;
   position: absolute;
-  top: 15vw;
+  top: 45vw;
   left: 50%;
-  margin-left: -200px;
+  margin-left: -100px;
 }
 
 .MRcontainer {
-  position: relative;
   background: white;
+  display: flex;
   border-radius: 20px;
-  width: 140px;
-  height: 140px;
+  width: 180px;
+  height: 180px;
   text-align: center;
   padding-top: 25px;
+  flex-direction: column;
 }
 
 .MRcontent {
@@ -24,5 +25,14 @@
   font-family: 'BMDOHYEON';
   font-size: 15px;
   color: #00BCD4;
+}
+
+.MRbigcon {
+  display: flex;
+  flex-direction: row;
+  width: 65vw;
+  height: 15vw;
+  margin: auto;
+  justify-content: space-between;
 }
 
