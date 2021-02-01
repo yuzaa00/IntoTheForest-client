@@ -70,7 +70,7 @@
 .full-screen .story-area div.storytelling .storytelling-start {
   height: inherit;
   line-height: 300%;
-  padding-top: 4%;
+  padding: 10% 10% 0;
   animation: slidein-start 3s linear;
   animation-fill-mode: both;
   /* animation-duration: 15s;
@@ -84,6 +84,7 @@
   /* position: absolute;
   top: 58%; */
   margin: 0 auto;
+  padding: 0 10%;
   animation: slidein-restart 80s linear;
   animation-delay: 0.2s;
   /* animation-fill-mode: both; */
@@ -118,7 +119,7 @@
   }
 }
 
-@keyframes slidein-restart {
+/* @keyframes slidein-restart {
   0% {
       margin-top: 0;
   }
@@ -126,4 +127,4 @@
   100% {
       margin-top: -1000%;
   }
-}
+} */
