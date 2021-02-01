@@ -105,7 +105,6 @@ export default class StageResult extends Phaser.Scene {
       loop: false,
     })
 
-    console.log(5000 / (this.registry.values.score / 111))
     this.worldTimer = this.time.addEvent({ // 게임에서 시간 이벤트 등록, 1초당 콜백 호출
       delay: 5000 / (this.registry.values.score / 111),
       callback: this.lifePlus,
@@ -147,15 +146,15 @@ export default class StageResult extends Phaser.Scene {
   private scorePlus(): void {
     if (this.registry.values.score > this.num) {
       this.num += this.addNum
-      this.scoreText.setText(`스코어 ${this.num} 점`)
+      this.scoreText.setText(`스코어 ${Math.floor(this.num)} 점`)
       this.num += this.addNum * 10
-      this.scoreText.setText(`스코어 ${this.num} 점`)
+      this.scoreText.setText(`스코어 ${Math.floor(this.num)} 점`)
       this.num += this.addNum * 100
-      this.scoreText.setText(`스코어 ${this.num} 점`)
+      this.scoreText.setText(`스코어 ${Math.floor(this.num)} 점`)
     }
     else if (this.registry.values.score < this.num) {
       this.num = this.registry.values.score
-      this.scoreText.setText(`스코어 ${this.num} 점`)
+      this.scoreText.setText(`스코어 ${Math.floor(this.num)} 점`)
     }
     else if (this.registry.values.score === this.num) {
 

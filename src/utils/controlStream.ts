@@ -2,7 +2,7 @@ let stream: any;
 
 const init = async () => {
   stream = await navigator.mediaDevices.getUserMedia({
-    audio: false,
+    audio: true,
     video: true,
   });
   return stream;
