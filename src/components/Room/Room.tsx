@@ -229,7 +229,7 @@ function Room({ renderRoom }: RoomProps) {
 
 const Container = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 120vh;
   position: relative;
   background: linear-gradient(76deg
     ,#00BCD4,#77EDAC);
@@ -245,8 +245,6 @@ const Container = styled.div`
     text-align: center;
   }
 `;
-
-
 
 // h3 : 영상 하단 닉네임 
 const UserVideoListMap = styled.div`
