@@ -30,7 +30,7 @@ function RoomInfo() {
   // }, [isReady])
 
   return (
-    <div className="Infocontainer">🔥 READY 🔥
+    <div className="Infocontainer"> 레디 상태
       {store.getState().roomReducer.users.map((user, idx) => (
         <div key={idx}>
           <div className="Infocontent">{user.nickName} {user.ready ? '✅' : '☑️'} </div>
