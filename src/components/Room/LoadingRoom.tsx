@@ -16,7 +16,7 @@ function LoadingRoom() {
     }
     setTimeout(() => {
       history.push(`rooms/${roomId}`)
-    }, 3000)
+    }, 30000)
   }, [])
 
  return (

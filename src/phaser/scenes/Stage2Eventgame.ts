@@ -171,7 +171,7 @@ export default class Stage2Eventgame extends Phaser.Scene {
     sprite.body.setAllowGravity(false)
     sprite.alpha = 0
     sprite.setInteractive().on('pointerdown', () => {
-      this.sound.add('moleClick').play()
+      this.sound.add('heat').play()
       this.registry.values.moleScore += 100
       this.scoreText.setText(`점수 ${this.registry.values.moleScore}`)
       sprite.destroy()

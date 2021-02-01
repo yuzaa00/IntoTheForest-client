@@ -142,7 +142,6 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
     if (this.registry.values.time <= -1) {
       // 30초 지난 후 콜백 실행
       this.game.sound.stopAll()
-      this.cameras.main.fadeIn(3000)
       this.time.addEvent({
         delay: 1050,
         callback: () => this.scene.start('Stage2', {

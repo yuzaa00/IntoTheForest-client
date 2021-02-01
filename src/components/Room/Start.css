@@ -1,13 +1,12 @@
 .ready_button {
-  width: 230px;
   position: absolute;
   top: 49%;
   left: 67%;
-  margin-left: -115px;
+  margin-left: -41px;
   text-align: center;
-  padding: 2% 2.5%;
+  padding: 1.4% 1.4%;
   color: white;
-  box-shadow: 10px 10px 10px 10px rgb(0, 0, 0, .5);
+  box-shadow: 10px 10px 10px 10px rgb(0 0 0 / 50%);
   border-radius: 100%;
   font-family: 'Y_Spotlight';
   font-size: 2.5rem;
@@ -52,18 +51,17 @@
 }
 
 .start_button {
-  width: 230px;
   position: absolute;
-  top: 60%;
-  left: 50%;
-  margin-left: -115px;
+  top: 49%;
+  left: 67%;
+  margin-left: -60px;
   text-align: center;
-  padding: 2% 2.5%;
+  padding: 1.4% 1.4%;
   color: white;
-  box-shadow: 10px 10px 10px 10px rgb(0, 0, 0, .3);
+  box-shadow: 10px 10px 10px 10px rgb(0 0 0 / 30%);
   border-radius: 100%;
   font-family: 'Y_Spotlight';
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: bold;
   animation: move-button-red 2s infinite;
   box-sizing: border-box;
@@ -81,7 +79,7 @@
   }
 
   50% {
-    top:61%;
+    top:51%;
     box-shadow: 0 18px 0 #DC143C, 0 20px 15px 15px rgba(0,0,0,.3), 0 22px 0 19px #6d2020, 0 24px 0 19px #822e2e, 0 27px 0 19px #74211e, 0 27px 15px 20px rgba(0,0,0,.3);
   }
 
