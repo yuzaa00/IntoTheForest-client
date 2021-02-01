@@ -21,8 +21,6 @@ function Start({ callback }: any) {
   const roomCode = useSelector((state: RootState) => state.roomReducer.roomCode)
 
   roomSocket.listenStart(({ socketId, start }: listen) => {
-    console.log('socketId :', socketId, 'start :', start, 'isHost : ', store.getState().roomReducer.isHost)
-    console.log('start는 받았는데 나는 ', store.getState().roomReducer.isHost === socketId, '임')
     if (store.getState().roomReducer.isHost === socketId) {
       setToggle(true)
     }

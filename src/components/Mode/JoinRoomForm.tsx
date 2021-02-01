@@ -26,12 +26,12 @@ function JoinRoomForm({ setModalOpen }: any ) {
         user: {
           nickName: nickInput || crypto.randomBytes(3).toString("hex"),
           socketId: clientId,
-          photoUrl: '../../images/card/card5.png'
+          photoUrl: 'https://elb.intotheforest.space/card5.png'
         },
         currentUser: {
           nickName: nickInput || crypto.randomBytes(3).toString("hex"),
           socketId: clientId,
-          photoUrl: '../../images/card/card5.png'
+          photoUrl: 'https://elb.intotheforest.space/card5.png'
         }
       })
       dispatch({

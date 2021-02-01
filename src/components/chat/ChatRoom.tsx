@@ -57,7 +57,7 @@ function ChatRoom({onSubmit}: any) {
           chatList.map((chat, idx) => (
             <ChatCell key={idx} className={checkMyMessage(chat.socketId)}>
               <Profile>
-                <img src={chat.photoUrl || "../../images/card/card5.png" } />
+                <img src={chat.photoUrl || "https://elb.intotheforest.space/card5.png" } />
                 <div>{chat.nickName}</div>
               </Profile>
               <span>{chat.content}</span>

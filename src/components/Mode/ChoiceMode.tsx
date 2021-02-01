@@ -14,6 +14,10 @@ const ChoiceMode = () => {
   const [modalComponents, setmodalContent] = useState(null)
   const history = useHistory()
 
+  useEffect(() => {
+    document.body.style.zoom = 1
+  })
+
   const soloMode = () => {
     const text = '솔로 모드'
     setModeClick(text)

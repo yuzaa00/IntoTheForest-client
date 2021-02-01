@@ -178,7 +178,6 @@ function Room({ renderRoom }: RoomProps) {
   }, [isStreaming])
 
   function handleIsStart() {
-    console.log('2222222222')
     if(!store.getState().roomReducer.isHost) {
       setIsStart(true)
       dispatch({
