@@ -1,13 +1,14 @@
 .Infocontainer {
+  margin: 30px 0 0 30px;
   position: absolute;
   background: rgb(255, 255, 255);
-  width: 140px;
-  height: 186px;
+  width: 150px;
+  height: 250px;
   text-align: center;
-  padding-top: 40px;
   border-radius: 40px;
-  padding: 10px;
+  padding: 30px 10px 10px 10px;
   font-family: 'BMDOHYEON';
+  font-size: 20px;
 }
 
 .Infocontent {
