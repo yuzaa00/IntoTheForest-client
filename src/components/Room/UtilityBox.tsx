@@ -85,6 +85,7 @@ function UtilityBox() {
           right: '-6px',
           position: 'relative' 
           }}>
+        
         <ImExit
             size={50}
             color={'black'}
@@ -92,10 +93,10 @@ function UtilityBox() {
             onClick={() => window.open('/mode', '_self')}
           />
           </span>
-
       </div>
     </Wrapper>
     {isModalOpen && <EditProfile setModalOpen={setModalOpen}/>}
+    
     </>
   );
 }
