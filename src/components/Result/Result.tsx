@@ -2,6 +2,7 @@ import React, { useState, useEffect }from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { roomSocket } from '../../utils/socket'
 import KakaoShareButton from './KakaoShareButton'
+import './Result.css'
 
 function Result() {
   const roomCode = useSelector((state: RootState) => state.roomReducer.roomCode)
