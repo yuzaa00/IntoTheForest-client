@@ -351,9 +351,11 @@ export default class Stage1 extends Phaser.Scene {
   private autoMove(): void {  // 타이머 콜백함수, 자동 달리기
     this.player.setVelocityX(550)
     let self = this
-    this.subchas.children.iterate(function (child: any, idx: number): void { // 서브캐릭터 강아지 따라오는 반복 함수
-      self.physics.moveToObject(child, { x: self.player.x - (50 * idx), y: self.player.y + 10 }, 0, 150)
+    this.subchas.children.iterate(function (child: any, idx: number): void {
+       // 서브캐릭터 강아지 따라오는 반복 함수
+      self.physics.moveToObject(child, { x: self.player.x - (50 * idx), y: self.player.y + 10 }, 0, 150 + (idx * 200))
     }, this)
+
     this.player.anims.play('right', true) // 키보드 방향키 오른쪽 입력시 플레이어 뛰는 모션
     this.skyTile.tilePositionX += 0.3 // 배경 움직임
   }

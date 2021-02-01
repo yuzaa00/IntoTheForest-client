@@ -135,7 +135,7 @@ export default class StageResult extends Phaser.Scene {
       this.num = 0
       this.worldTimer.destroy()
       this.worldTimer = this.time.addEvent({ // 게임에서 시간 이벤트 등록, 1초당 콜백 호출 (콜백내용은 초당 체력 감소)
-        delay: 5000 / (this.registry.values.score / 111),
+        delay: 5000 / (this.registry.values.score / 151),
         callback: this.scorePlus,
         callbackScope: this,
         loop: true,
@@ -195,6 +195,5 @@ export default class StageResult extends Phaser.Scene {
         bird: this.registry.values.bird,
         squi: this.registry.values.squi
       })
-    
   }
 }

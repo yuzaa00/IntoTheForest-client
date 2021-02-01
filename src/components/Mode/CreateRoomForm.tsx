@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { roomData, response } from '../../utils/socket.type'
 import crypto from 'crypto'
+import { dog } from '../../utils/base64'
 function CreateRoomForm({setModalOpen}: any){
   const dispatch = useDispatch()
   const history = useHistory()
@@ -28,12 +29,12 @@ function CreateRoomForm({setModalOpen}: any){
         user: {
           nickName: inputs.nickName || crypto.randomBytes(3).toString("hex"),
           socketId: clientId,
-          photoUrl: 'https://elb.intotheforest.space/card5.png'
+          photoUrl: dog
         },
         currentUser: {
           nickName: inputs.nickName || crypto.randomBytes(3).toString("hex"),
           socketId: clientId,
-          photoUrl: 'https://elb.intotheforest.space/card5.png'
+          photoUrl: dog
         }
       })
       dispatch({
@@ -76,7 +77,7 @@ function CreateRoomForm({setModalOpen}: any){
         <form onSubmit={submitRoomData}>
           {user === 0 && <div className="error-msg">입장 가능한 인원 수를 선택하세요!</div>}
           <div className="people">
-            <div onClick={()=>setUser(2)} className={user === 2? "highlight" : "nonHighlight"}>
+            <div onClick={()=>setUser(4)} className={user === 2? "highlight" : "nonHighlight"}>
               2인
             </div>
             <div onClick={()=>setUser(4)} className={user === 4? "highlight" : "nonHighlight"}>
