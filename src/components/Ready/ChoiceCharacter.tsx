@@ -44,11 +44,10 @@ function ChoiceCharacter() {
             setErrorMessage("")
            } } className = {toggleClass === 1 ? 'clickChoiceCard' : 'choiceCard'} >
             <div className="imgBx">
-              <img src={John} alt='john' />
+              <img src={John} alt='감자' />
             </div>
             <div className="imgBxContent">
-             <h2>John</h2>
-             <h3>시바견</h3>
+             <h2>감자</h2>
             </div>
           </div>
           <div onClick={() => { 
@@ -59,11 +58,10 @@ function ChoiceCharacter() {
             setErrorMessage("")
            } } className = {toggleClass === 2 ? 'clickChoiceCard' : 'choiceCard'} >
             <div className="imgBx">
-            <img src={Tom} alt='tom' />
+            <img src={Tom} alt='사랑' />
             </div>
             <div className="imgBxContent">
-             <h2>Tom</h2>
-             <h3>진돗개</h3>
+             <h2>사랑</h2>
             </div>
           </div>
           <div onClick={() => { 
@@ -74,17 +72,16 @@ function ChoiceCharacter() {
             setErrorMessage("")
            } } className = {toggleClass === 3 ? 'clickChoiceCard' : 'choiceCard'} >
             <div className="imgBx">
-            <img src={Alex} alt='alex' />
+            <img src={Alex} alt='초코' />
             </div>
             <div className="imgBxContent">
-             <h2>Alex</h2>
-             <h3>도사견</h3>
+             <h2>초코</h2>
             </div>
           </div>
         </div>
         </div>
         <div className="chaSelectBtn">
-          <h1>{store.getState().choice.char === 'dog' ? '시바견' : store.getState().choice.char === 'dog2' ? '진돗개' : store.getState().choice.char === 'dog3' ? '도사견' : null}</h1>
+          <h1>{store.getState().choice.char === 'dog' ? '감자' : store.getState().choice.char === 'dog2' ? '사랑' : store.getState().choice.char === 'dog3' ? '초코' : null}</h1>
           {errorMessage && <h1>{errorMessage}</h1> }
       <button className="chaSelectBtn-desc" onClick={onGameDesc}>게임설명</button>
       <button className="chaSelectBtn-startGame" onClick={onGameStart}>GameStart</button>
