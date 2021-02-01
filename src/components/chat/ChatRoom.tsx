@@ -164,7 +164,7 @@ const Profile = styled.div`
   align-items: center;
   padding: 3px 10px;
   font-size: 14px;
-  color: white};
+  color: black;
 `;
 
 export default ChatRoom
