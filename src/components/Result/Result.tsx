@@ -13,8 +13,11 @@ function Result() {
 
  return (
   <div>
+    <div className='kakao_share'>
+    <KakaoShareButton></KakaoShareButton>
+    </div>
     {scoreList.map((user: any, idx: number) => (
-      <div className='' key={idx}>
+      <div className='MRcontainer' key={idx}>
         <span className='MRcontent' style={{ position: 'relative', right: `${idx + 20 * idx}px`}}>닉네임: {user.nickName}</span>
         <span className='MRcontent' style={{ right: `${idx + 20 * idx}px`}}>점수: {user.gameResult.score}</span>
         <span className='MRcontent' style={{ right: `${idx + 20 * idx}px`}}>스테이지: {user.gameResult.stage}</span>
