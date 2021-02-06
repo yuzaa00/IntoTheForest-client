@@ -27,7 +27,7 @@ li {
 .control-canvas {
   width: 1200px;
   height: 600px;
-  background: url('../../../assets/images/background/nightDark.png') no-repeat;
+  background: url('../../../assets/nightDark.png') no-repeat;
   background-size: 100%;
   text-align: center;
   margin: 0 auto;
