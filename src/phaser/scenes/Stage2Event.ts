@@ -112,6 +112,17 @@ export default class Stage2Event extends Phaser.Scene {
   create():void {
     this.input.enabled = true
     this.game.input.addPointer()
+    this.time.addEvent({
+      callback: () =>           this.scene.start('Stage2Eventgame', {
+        score: this.registry.values.score,
+        life: this.registry.values.life,
+        stage: 3,
+        bird: this.registry.values.bird,
+        squi: this.registry.values.squi
+      }),
+      callbackScope: this,
+      loop: false,
+      delay: 3000
+    })
   }
-  
 }

@@ -31,7 +31,7 @@ function Story() {
 
   useEffect((): void => {
     if(!gameMode) {
-      document.body.style.zoom = 1.2
+
     }
     
     setTimeout((): void => {
@@ -49,7 +49,7 @@ function Story() {
     if(gameMode) {
       setIsMulti(true)
     } else {
-      document.body.style.zoom = 1.2
+      
       history.push('/ready/character')
     }
   }

@@ -44,6 +44,8 @@ export default class Stage2Eventgame extends Phaser.Scene {
   }
 
   public create(): void {
+    this.game.input.addPointer()
+    this.input.enabled = true
     // store.dispatch({
     //   type: 'MUTE_MULTI_GAME'
     // })
@@ -171,7 +173,7 @@ export default class Stage2Eventgame extends Phaser.Scene {
     sprite.body.setAllowGravity(false)
     sprite.alpha = 0
     sprite.setInteractive().on('pointerdown', () => {
-      this.sound.add('heat').play()
+      this.sound.add('click').play()
       this.registry.values.moleScore += 100
       this.scoreText.setText(`점수 ${this.registry.values.moleScore}`)
       sprite.destroy()

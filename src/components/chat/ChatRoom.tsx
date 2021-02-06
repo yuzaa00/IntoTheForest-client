@@ -133,7 +133,7 @@ const MessageForm = styled.form`
 
 const ChatCell = styled.div`
   min-width: 280px;
-  max-width: 405px;
+  max-width: 340px;
   display: flex;
   align-items: flex-start;
   padding: 10px;
@@ -152,12 +152,11 @@ const ChatCell = styled.div`
     margin-top: 15px;
   }
 
-  span:nth-child(3) { 
+  span:nth-child(3) {
     font-size: 12px;
     color: gray;
     margin: 15px 10px 0px 10px;
   }
-
 `;
 
 const Profile = styled.div`

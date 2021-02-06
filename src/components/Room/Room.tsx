@@ -22,7 +22,6 @@ import Result from '../Result/Result'
 import RoomInfo from './RoomInfo'
 
 import './Room.css'
-import { JsxEmit } from 'typescript';
 
 interface RoomProps {
   renderRoom: Function
@@ -42,21 +41,16 @@ interface userList {
 function Room({ renderRoom }: RoomProps) {
   useBeforeunload((event) => event.preventDefault());
   const dispatch = useDispatch()
-  const [scoreList, setScoreList] = useState([])
   const [isStreaming, setIsStreaming] = useState(false)
   const [isStart, setIsStart] = useState(false)
-  const [error, setError] = useState('')
   const [peers, setPeers] = useState({})
-  const [test, setTest] = useState(false)
   const peersRef = useRef<any>({})
   const myVideoRef = useRef<any>()
-  const roomCode = useSelector((state: RootState) => state.roomReducer.roomCode)
-  const userList = useSelector((state: RootState) => state.roomReducer.users, shallowEqual)
-  const mySocketId = useSelector((state: RootState) => state.roomReducer.mySocketId, shallowEqual)
-  const openResult = useSelector((state: RootState) => state.roomReducer.openResult, shallowEqual)
-  const isVideo = useSelector((state: RootState) => state.roomReducer.isVideo, shallowEqual)
-  const userPhotoUrl = useSelector((state: RootState) => state.roomReducer.currentUser.photoUrl, shallowEqual)
-  const dataAWS = store.getState().roomReducer.isGameStart
+  const roomCode = store.getState().roomReducer.roomCode
+  const mySocketId = store.getState().roomReducer.mySocketId
+  const openResult = store.getState().roomReducer.openResult
+
+  const userList = useSelector((state: RootState) => state.roomReducer.users)
 
   useEffect(() => {
     toast.info('🦄 방에 입장하셨습니다.', {
@@ -96,7 +90,7 @@ function Room({ renderRoom }: RoomProps) {
         myVideoRef.current.srcObject = stream
         setIsStreaming(true)
       } catch (error) {
-        setError(error.message)
+        
       }
     })
 
@@ -122,8 +116,7 @@ function Room({ renderRoom }: RoomProps) {
     })
     
     roomSocket.listenGameStart(handleIsStart)
-
-    roomSocket.listenResult(handleIsStart)
+    roomSocket.listenResult(handleIsResult)
 
     return () => {
       roomSocket.leaveRoom(roomCode);
@@ -143,6 +136,7 @@ function Room({ renderRoom }: RoomProps) {
           trickle: false,
           stream: controlStream.get(),
         });
+        console.log(peer)
         peer.on('signal', signal => {
           peerSocket.sendingSignal({ signal, receiver: user, roomCode: roomCode })
         })
@@ -153,7 +147,6 @@ function Room({ renderRoom }: RoomProps) {
 
     peerSocket.listenSendingSignal(({ initiator, signal }) => {
       const peer = new Peer({
-        initiator: false,
         trickle: false,
         stream: controlStream.get(),
       });
@@ -189,6 +182,10 @@ function Room({ renderRoom }: RoomProps) {
     dispatch({
       type: 'IS_GAME_START'
     })
+  }
+
+  function handleIsResult(data) {
+    console.log(data)
   }
 
   return (
@@ -245,6 +242,8 @@ const Container = styled.div`
     text-align: center;
   }
 `;
+
+
 
 // h3 : 영상 하단 닉네임 
 const UserVideoListMap = styled.div`

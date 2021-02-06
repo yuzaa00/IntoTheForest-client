@@ -32,7 +32,7 @@ function ChoiceCharacter() {
       }
     }
 
-    return gameOn ? <div className='GCbox' ><Game /></div> : gameInfo ? <Control /> : (
+    return gameOn ? <Game /> : gameInfo ? <Control /> : (
       <div className="choiceCharacterScreen">
         <div className="chaSelectWrapper">
         <div className="chaSelectBx">

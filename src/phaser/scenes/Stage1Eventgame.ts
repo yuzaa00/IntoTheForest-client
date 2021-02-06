@@ -60,7 +60,7 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
     //   })
     // }
 
-    this.input.enabled = true
+    // this.input.enabled = false
     this.add.image(0, 0, 'cardbg').setOrigin(0, 0).setDepth(0)
     this.lifeText = this.add // 라이프 텍스트 생성
       .bitmapText(30, 30, 'font', `남은 시간 ${this.registry.values.time}`)
