@@ -8,7 +8,7 @@ function Ending () {
   const history = useHistory();
    
   const onAgainStartBack = () => {
-    window.open('/', '_self')  
+    history.push("/")  
   } 
   
   return (

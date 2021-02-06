@@ -18,8 +18,6 @@ const KakaoShareButton = () => {
         container: "#kakao-link-btn",
         templateId: 45164,
         templateArgs: {
-          // name: "윤지",
-          // image: "http://localhost:4000/dog2-running-test.png", 
         },
       });
     }

@@ -98,12 +98,7 @@ export default class StageResult extends Phaser.Scene {
       loop: true,
     })
 
-    this.time.addEvent({ // 게임에서 시간 이벤트 등록, 1초당 콜백 호출
-      delay: 4000,
-      callback: this.nextStage,
-      callbackScope: this,
-      loop: false,
-    })
+
 
     this.worldTimer = this.time.addEvent({ // 게임에서 시간 이벤트 등록, 1초당 콜백 호출
       delay: 5000 / (this.registry.values.score / 111),
@@ -135,7 +130,7 @@ export default class StageResult extends Phaser.Scene {
       this.num = 0
       this.worldTimer.destroy()
       this.worldTimer = this.time.addEvent({ // 게임에서 시간 이벤트 등록, 1초당 콜백 호출 (콜백내용은 초당 체력 감소)
-        delay: 5000 / (this.registry.values.score / 151),
+        delay: 5000 / (this.registry.values.score / 111),
         callback: this.scorePlus,
         callbackScope: this,
         loop: true,
@@ -157,7 +152,12 @@ export default class StageResult extends Phaser.Scene {
       this.scoreText.setText(`스코어 ${Math.floor(this.num)} 점`)
     }
     else if (this.registry.values.score === this.num) {
-
+      this.time.addEvent({ // 게임에서 시간 이벤트 등록, 1초당 콜백 호출
+        delay: 1000,
+        callback: this.nextStage,
+        callbackScope: this,
+        loop: false,
+      })
     }
   }
 
@@ -174,9 +174,15 @@ export default class StageResult extends Phaser.Scene {
         squi: this.registry.values.squi || 0,
       })
     }
+    this.scene.start(this.mainStage[this.registry.values.stage], {
+      score: this.registry.values.score,
+      life: this.registry.values.life,
+      stage: this.registry.values.stage,
+      bird: this.registry.values.bird,
+      squi: this.registry.values.squi
+    })
+
     
-
-
     // if (mode === 'M2' || mode === 'M4') {
     //   this.game.sound.stopAll()
     //   this.scene.start(this.multiStage[this.registry.values.stage + 1], {
@@ -188,12 +194,5 @@ export default class StageResult extends Phaser.Scene {
     //   })
     // }
    
-      this.scene.start(this.mainStage[this.registry.values.stage], {
-        score: this.registry.values.score,
-        life: this.registry.values.life,
-        stage: this.registry.values.stage,
-        bird: this.registry.values.bird,
-        squi: this.registry.values.squi
-      })
   }
 }

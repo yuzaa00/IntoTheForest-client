@@ -79,6 +79,7 @@ export default class Boot extends Phaser.Scene { // resource load scene
     this.load.audio('coin', 'https://elb.intotheforest.space/coin.wav')
     this.load.audio('get', 'https://elb.intotheforest.space/get.mp3')
     this.load.audio('heal', 'https://elb.intotheforest.space/heal.mp3')
+    this.load.audio('click', 'https://elb.intotheforest.space/click.wav')
     
     //particles
     this.load.atlas('particles', 'https://elb.intotheforest.space/explosion.png', 'https://elb.intotheforest.space/explosion.json')

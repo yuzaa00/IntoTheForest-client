@@ -28,8 +28,9 @@ export const config: Phaser.Types.Core.GameConfig = {
   height: SETTING.HEIGHT,
   parent: 'game-container',
   scale: {
-    mode: Phaser.Scale.MAX_ZOOM,
-    
+    mode: Phaser.Scale.MAX_ZOOM
+    // mode: Phaser.Scale.HEIGHT_CONTROLS_WIDTH,
+    // autoCenter: Phaser.Scale.CENTER_BOTH
   },
   physics: {
     default: 'arcade',

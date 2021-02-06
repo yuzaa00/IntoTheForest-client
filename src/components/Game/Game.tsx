@@ -48,14 +48,12 @@ export default function Game({ }) {
       } else {
         newGame.destroy(true)//게임삭제와 
         //동시에 게임 데이터도 스토어에 저장.,다음 컴포넌트로 이동
-        setTimeout(() => newGame.destroy(true), 3000)
         history.push('/Ending')
       }
     }
 
     return () => {
       newGame.destroy(true);
-      setTimeout(() => newGame.destroy(true), 3000)
     };
   }, [gameDestroy]);
   
@@ -66,7 +64,7 @@ export default function Game({ }) {
   return (
     <div>
       <div>
-        <span className='game1' id='game-container11' />
+      <span className='game1' id='game-container11' />
       </div>
       <div>
       </div>
