@@ -49,7 +49,7 @@ const actions = {
   isGameOver,
   openMultiResult,
 } // 모든 액션 생성함수들을 actions 객체에 넣습니다
-type RoomAction = ActionType<typeof actions> // ActionType 를 사용하여 모든 액션 객체들의 타입을 준비해줄 수 있습니다
+export type RoomAction = ActionType<typeof actions> // ActionType 를 사용하여 모든 액션 객체들의 타입을 준비해줄 수 있습니다
 
 interface Action {
   type: string
@@ -97,7 +97,7 @@ const initialState: RoomState = {
   openResult: false,
 }
 
-const roomReducer = createReducer<RoomState, RoomAction>(initialState, {
+export const roomReducer = createReducer<RoomState, RoomAction>(initialState, {
   [RENDER_ROOM]: (state: RoomState, action: any) => ({
       ...state, 
       roomId: action.roomId, 
@@ -157,7 +157,7 @@ const roomReducer = createReducer<RoomState, RoomAction>(initialState, {
       isVideo: true
     }
   },
-  [SAVE_HOST_ID]: (state: Roomstate, action: any) => {
+  [SAVE_HOST_ID]: (state: RoomState, action: any) => {
     return {
       ...state,
       isHost: action.value
@@ -177,7 +177,6 @@ const roomReducer = createReducer<RoomState, RoomAction>(initialState, {
   }
 })
 
-export default roomReducer
 // [SAVE_ROOM_CODE]: (state: RoomState, action: any) => ({ ...state, roomCode: action.value }),
   // [RENDER_ROOM]: (state, { payload: { key, value } }) => ({ ...key }), // 액션을 참조 할 필요 없으면 파라미터로 state 만 받아와도 됩니다
   // [DESTROY_ROOM]: state => ({ count: state.count - 1 }),

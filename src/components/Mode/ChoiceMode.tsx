@@ -1,11 +1,10 @@
-import React, { Component, useState, ReactElement, ReactNode, FC, ReactChild, useEffect } from 'react';
-import { Link, Route, Switch, useHistory } from 'react-router-dom';
-import './ChoiceMode.css';
-import Story from '../Ready/Story';
+import React, { useState } from 'react';
+import { Link, Route, Switch, useHistory } from 'react-router-dom'
+import './ChoiceMode.css'
+import Story from '../Ready/Story'
 import Modal from './Modal'
-import { roomSocket } from '../../utils/socket';
-import CreateRoomForm from './CreateRoomForm';
-import JoinRoomForm from './JoinRoomForm';
+import CreateRoomForm from './CreateRoomForm'
+import JoinRoomForm from './JoinRoomForm'
 
 const ChoiceMode = () => {
   const [modeClick, setModeClick] = useState('')
@@ -13,10 +12,6 @@ const ChoiceMode = () => {
   const [isModalOpen, setModalOpen] = useState(false)
   const [modalComponents, setmodalContent] = useState(null)
   const history = useHistory()
-
-  useEffect(() => {
-    document.body.style.zoom = 1
-  })
 
   const soloMode = () => {
     const text = '솔로 모드'

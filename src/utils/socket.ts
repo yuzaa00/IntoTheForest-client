@@ -28,19 +28,19 @@ const roomSocket = {
     socket.on('user joined', cb)
   },
 
-  emitSetProfile(userData) {
+  emitSetProfile(userData: types.userData) {
     socket.emit('set profile', userData)
   },
 
-  onSetProfile(cb) {
+  onSetProfile(cb: Function) {
     socket.on('set profile', cb)
   },
 
-  newUserJoined(cb) {
+  newUserJoined(cb: Function) {
     socket.on('new user', cb)
   },
 
-  userLeaved(cb) {
+  userLeaved(cb: Function) {
     socket.on('leave user', cb)
   },
 
@@ -49,7 +49,7 @@ const roomSocket = {
     socket.emit('leave room', roomCode)
   },
 
-  listenUserLeaved(cb) {
+  listenUserLeaved(cb: Function) {
     socket.on('user leaved', cb)
   },
 
@@ -87,7 +87,7 @@ const roomSocket = {
 };
 
 const chatSocket = {
-  sendMessage({ newChat }) {
+  sendMessage({ newChat }: types.newChat) {
     socket.emit('chat', newChat)
   },
   listenMessage(callback: Function) {
@@ -109,16 +109,16 @@ const gameSocket = {
 }
 
 const peerSocket = {
-  sendingSignal({ signal, receiver, roomCode }) {
+  sendingSignal({ signal, receiver, roomCode }: types.stream) {
     socket.emit('sending signal', { signal, receiver, roomCode })
   },
-  listenSendingSignal(cb) {
+  listenSendingSignal(cb: Function) {
     socket.on('sending signal', cb)
   },
-  returnSignal({ signal, receiver, roomCode }) {
+  returnSignal({ signal, receiver, roomCode }: types.stream) {
     socket.emit('returning signal', { signal, receiver, roomCode })
   },
-  listenReturningSignal(cb) {
+  listenReturningSignal(cb: Function) {
     socket.on('returning signal', cb)
   },
   cleanUpPeerListener() {

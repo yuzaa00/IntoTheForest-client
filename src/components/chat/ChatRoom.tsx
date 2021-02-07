@@ -7,14 +7,21 @@ import styled from 'styled-components'
 import format from 'date-fns/format'
 import './ChatRoom.css'
 
+interface chat {
+  photoUrl: string
+  nickName: string
+  content: string
+  date: string
+  socketId: string
+}
+
 function ChatRoom({onSubmit}: any) {
   const [input, setInput] = useState('')
   const messageRef = useRef<any>()
-  console.time('d')
   const chatList = useSelector((state: RootState) => state.chatReducer.chatList,shallowEqual)
   const roomCode = useSelector((state: RootState) => state.roomReducer.roomCode,shallowEqual)
   const user = useSelector((state: RootState) => state.roomReducer.users[0],shallowEqual)
-  console.timeEnd('d')
+
   useEffect(() => {
     messageRef.current!.scrollTop = messageRef.current!.scrollHeight
   }, [chatList])
@@ -55,7 +62,7 @@ function ChatRoom({onSubmit}: any) {
     <Wrapper>
       <MessageList ref={messageRef}>
         {chatList &&
-          chatList.map((chat, idx) => (
+          chatList.map((chat: chat, idx: number) => (
             <ChatCell key={idx} className={checkMyMessage(chat.socketId)}>
               <Profile>
                 <img src={chat.photoUrl || "https://elb.intotheforest.space/card5.png" } />

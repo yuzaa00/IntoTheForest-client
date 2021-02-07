@@ -1,7 +1,5 @@
 import Phaser from 'phaser'
 
-import { SETTING } from '../GameSetting/index'
-
 import Boot from './scenes/Boot'
 import Loader from './scenes/Loader'
   
@@ -20,12 +18,11 @@ import StageStop from './scenes/StageStop'
 import StageOver from './scenes/StageOver'
 import StageResult from './scenes/StageResult'
 
-
 export const config: Phaser.Types.Core.GameConfig = {
   title: 'Into the Forest',
   type: Phaser.AUTO,
-  width: SETTING.WIDTH,
-  height: SETTING.HEIGHT,
+  width: 0,
+  height: 0,
   parent: 'game-container',
   scale: {
     mode: Phaser.Scale.MAX_ZOOM

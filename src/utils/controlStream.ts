@@ -14,6 +14,7 @@ const remove = () => {
   if (!stream) return;
 
   stream.getVideoTracks().forEach(track => {
+    console.log('22', track)
     track.stop();
     stream.removeTrack(track);
   });
@@ -21,7 +22,8 @@ const remove = () => {
 
 const audioOption = {
   on: () => {
-    stream.getAudioTracks().forEach(track => (track.enabled = true));
+    stream.getAudioTracks().forEach(track => {(track.enabled = true)
+      console.log('22', track)});
   },
   off: () => {
     stream.getAudioTracks().forEach(track => (track.enabled = false));
