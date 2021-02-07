@@ -89,7 +89,6 @@ function SingleResult() {
     const [rankOn, setRankOn] = useState(false)
 
     useEffect(() => {
-      console.log(1,accessToken)
         axios
         .get('http://localhost:4000/rank/load',
         {
@@ -121,7 +120,10 @@ function SingleResult() {
 
             let newGameDataFinal = Object.assign({},customerRankUp, obj);
             
-            await axios.post('http://localhost:4000/rank/reg', newGameDataFinal)
+            await axios.post('http://localhost:4000/rank/reg', newGameDataFinal,
+            {
+              headers: {"Authorization": `Bearer ${accessToken}`}
+            })
               .then((response) => {
                 if (response.status === 201) {
                     alert('🙇랭크등록에 성공하셨습니다!🙏')
