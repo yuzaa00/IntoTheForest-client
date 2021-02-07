@@ -132,9 +132,9 @@ function SingleResult() {
                 setRankOn(true)
 
                 axios
-                  .get('http://localhost:4000/rank/load',//시크릿코드 쉘터 shelter
+                  .get('http://localhost:4000/rank/load',
                   {
-                      headers: {"secretCode": "shelter"}
+                    headers: {"Authorization": `Bearer ${accessToken}`}
                   })
                   .then(res => {
                       setPosts(res.data)
