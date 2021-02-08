@@ -84,14 +84,15 @@ function SingleResult() {
     const history = useHistory();
 
     const gameDataFinal = useSelector((state: RootState) => state.singleReducer.gameData, shallowEqual)
+    const accessToken = useSelector((state: RootState) => state.singleReducer.accessToken, shallowEqual)
     const [posts, setPosts] = useState([])
     const [rankOn, setRankOn] = useState(false)
 
     useEffect(() => {
         axios
-        .get('http://localhost:4000/rank/load',//시크릿코드 쉘터 shelter
+        .get('http://localhost:4000/rank/load',
         {
-            headers: {"secretCode": "shelter"}
+            headers: {"Authorization": `Bearer ${accessToken}`}
         })
         .then(res => {
             setPosts(res.data)
@@ -119,7 +120,10 @@ function SingleResult() {
 
             let newGameDataFinal = Object.assign({},customerRankUp, obj);
             
-            await axios.post('http://localhost:4000/rank/reg', newGameDataFinal)
+            await axios.post('http://localhost:4000/rank/reg', newGameDataFinal,
+            {
+              headers: {"Authorization": `Bearer ${accessToken}`}
+            })
               .then((response) => {
                 if (response.status === 201) {
                     alert('🙇랭크등록에 성공하셨습니다!🙏')
@@ -128,9 +132,9 @@ function SingleResult() {
                 setRankOn(true)
 
                 axios
-                  .get('http://localhost:4000/rank/load',//시크릿코드 쉘터 shelter
+                  .get('http://localhost:4000/rank/load',
                   {
-                      headers: {"secretCode": "shelter"}
+                    headers: {"Authorization": `Bearer ${accessToken}`}
                   })
                   .then(res => {
                       setPosts(res.data)

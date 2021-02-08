@@ -3,32 +3,43 @@ import { Link } from 'react-router-dom';
 import './welcome.css'
 import './Background.css';
 import video from '../../images/stage-3.mp4'
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
 
 declare global {
   interface Window { Kakao: any;}
 }
 
 function Welcome() {
-  const [accessToken, setAccessToken] = useState<string>('');
-  const [mouseHover, setMouseHover] = useState<boolean>(false);
+  const [accessTokenKakao, setAccessToken] = useState<string>('');
+  const dispatch = useDispatch()
   
-  //카카오 프로필 불러오기 - 시작
   useEffect(() => {
     getProfile()
-  }, [accessToken]);
+  }, [accessTokenKakao]);
 
-  const handleAccToken = (accessToken: string) => {
-    setAccessToken(accessToken);
+  const handleAccToken = (accessTokenKakao: string) => {
+    setAccessToken(accessTokenKakao);
   }
 
   const getProfile = () => {
-    if(accessToken) {
-      window.Kakao.Auth.setAccessToken(accessToken);
+    if(accessTokenKakao) {
+      window.Kakao.Auth.setAccessToken(accessTokenKakao);
       window.Kakao.API.request({
         url: '/v2/user/me',
         success: (response: any) => console.log(response),
         fail: (error: any) => console.log(error)})
     }
+  }
+
+  const handleAccess = () => {
+    axios.post('http://localhost:4000/user')
+      .then(res => {
+        dispatch({
+          type: 'ACCESS_TOKEN',
+          value: res.data.accessToken
+        })
+      })
   }
 
   return (
@@ -42,15 +53,10 @@ function Welcome() {
         loop
         muted>
         </video>
-        {/* <img src='images/character/logo.png' className="App-logo" alt="logo" /> */}
-        {/* <div className={mouseHover? "game-title hover-white":"game-title"} onMouseOver={() => setMouseHover(true)} onMouseOut={() => setMouseHover(false)}>INTO THE FOREST</div> */}
         <div className="game-title">INTO THE FOREST</div>
-        <Link to="/mode" className="game-button">
+        <Link to="/mode" className="game-button" onClick={handleAccess}>
           GAME START
         </Link>
-        {/* <KakaoShareButton/>
-        <KakaoProfileButton handleAccToken={handleAccToken} />
-        <KakaoProfileDelete handleAccToken={handleAccToken} /> */}
       </div> 
     </div>
     </div>
