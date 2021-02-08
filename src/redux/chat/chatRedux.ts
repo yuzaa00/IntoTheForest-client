@@ -17,7 +17,7 @@ const actions = {
   resetUnreadCount
 }
 
-type ChatAction = ActionType<typeof actions>
+export type ChatAction = ActionType<typeof actions>
 
 interface Action {
   type: string
@@ -33,7 +33,7 @@ interface chatItem {
 }
 
 interface ChatState {
-  chatList: any
+  chatList: chatItem[]
   unreadCount: number
 }
 
@@ -42,7 +42,7 @@ const initialState: ChatState = {
   unreadCount: 0,
 }
 
-const chatReducer = createReducer<ChatState, ChatAction>(initialState, {
+export const chatReducer = createReducer<ChatState, ChatAction>(initialState, {
   [ADD_CHAT]: (state: ChatState, action: Action) => ({...state,
       chatList: [ ...state.chatList, action.value ]})
     // state.chatList.push(action.value)
@@ -55,5 +55,3 @@ const chatReducer = createReducer<ChatState, ChatAction>(initialState, {
   [INCREASE_UNREAD_COUNT]: (state: ChatState) => ({ ...state, unreadCount: state.unreadCount + 1 }),
   [RESET_UNREAD_COUNT]: (state: ChatState) => ({ ...state, unreadCount: 0 }),
 })
-
-export default chatReducer

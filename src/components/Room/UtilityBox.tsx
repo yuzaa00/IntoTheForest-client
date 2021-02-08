@@ -7,8 +7,10 @@ import { FaVideo, FaVideoSlash, FaVolumeMute, FaVolumeUp } from 'react-icons/fa'
 import { CgProfile } from "react-icons/cg"
 import Button from '../Mode/Button'
 import EditProfile from './EditProfile'
+import { createBrowserHistory } from 'history'
 
 function UtilityBox() {
+  const history = createBrowserHistory({forceRefresh:true})
   const disPatch = useDispatch()
   const [streamOptions, setStreamOptions] = useState({
     audio: true,
@@ -19,29 +21,29 @@ function UtilityBox() {
 
   const handleAudioTrack = useCallback(() => {
     if (streamOptions.audio) {
-      controlStream.audioOption.off();
+      controlStream.audioOption.off()
       setStreamOptions(prev => ({ ...prev, audio: false }));
     } else {
-      controlStream.audioOption.on();
+      controlStream.audioOption.on()
       setStreamOptions(prev => ({ ...prev, audio: true }));
     }
-  }, [streamOptions]);
+  }, [streamOptions])
 
   const handleVideoTrack = useCallback(() => {
     if (streamOptions.video) {
-      controlStream.videoOption.off();
+      controlStream.videoOption.off()
       setStreamOptions(prev => ({ ...prev, video: false }));
       disPatch({
         type: 'TURN_ON_FILTER'
       })
     } else {
-      controlStream.videoOption.on();
+      controlStream.videoOption.on()
       setStreamOptions(prev => ({ ...prev, video: true }));
       disPatch({
         type: 'TURN_OFF_FILTER'
       })
     }
-  }, [streamOptions]);
+  }, [streamOptions])
 
   
   const openModal = (modalComponents: any) => {
@@ -90,15 +92,14 @@ function UtilityBox() {
             size={50}
             color={'black'}
             cursor={'pointer'}
-            onClick={() => window.open('/mode', '_self')}
+            onClick={() => history.push('/mode')}
           />
           </span>
       </div>
     </Wrapper>
     {isModalOpen && <EditProfile setModalOpen={setModalOpen}/>}
-    
     </>
-  );
+  )
 }
 
 const Wrapper = styled.div`

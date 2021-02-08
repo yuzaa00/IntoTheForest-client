@@ -22,7 +22,12 @@ export default function Game({ }) {
   const isOver = useSelector((state: RootState) => state.roomReducer.isGameOver, shallowEqual)
   
   useEffect(() => {
-    const newGame = new Phaser.Game(Object.assign(config, { parent: 'game-container' + 11 }))
+    const newGame: Phaser.Game = new Phaser.Game(Object.assign(config, { 
+      // width: store.getState().gameReducer.width,
+      // height: store.getState().gameReducer.height,
+      parent: 'game-container' + 11 
+    }))
+
     // const newGame1 = new Phaser.Game(Object.assign(config, { parent: 'game-container' + 21 })) // 추후에 props로 추가 로딩
     // const newGame2 = new Phaser.Game(Object.assign(config, { parent: 'game-container' + 31 }))
     // const newGame3 = new Phaser.Game(Object.assign(config, { parent: 'game-container' + 41 }))

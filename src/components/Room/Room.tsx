@@ -22,6 +22,7 @@ import Result from '../Result/Result'
 import RoomInfo from './RoomInfo'
 
 import './Room.css'
+import SimplePeer from 'simple-peer';
 
 interface RoomProps {
   renderRoom: Function
@@ -38,12 +39,17 @@ interface userList {
   clientId: string
 }
 
+interface socketId {
+  socketId: string
+}
+
 function Room({ renderRoom }: RoomProps) {
-  useBeforeunload((event) => event.preventDefault());
+  useBeforeunload((event) => event.preventDefault())
   const dispatch = useDispatch()
   const [isStreaming, setIsStreaming] = useState(false)
   const [isStart, setIsStart] = useState(false)
-  const [peers, setPeers] = useState({})
+  const myObj: {[index: string]:any} = {}
+  const [peers, setPeers] = useState(myObj)
   const peersRef = useRef<any>({})
   const myVideoRef = useRef<any>()
   const roomCode = store.getState().roomReducer.roomCode
@@ -53,6 +59,11 @@ function Room({ renderRoom }: RoomProps) {
   const userList = useSelector((state: RootState) => state.roomReducer.users)
 
   useEffect(() => {
+    if(!roomCode) {
+      alert('잘못된 접근입니다. 메인으로 돌아갑니다.')
+      window.open('/mode', '_self')
+    }
+
     toast.info('🦄 방에 입장하셨습니다.', {
       position: "bottom-left",
       autoClose: 3000,
@@ -94,17 +105,15 @@ function Room({ renderRoom }: RoomProps) {
       }
     })
 
-    roomSocket.listenUserLeaved(({ socketId }) => { // socket on
+    roomSocket.listenUserLeaved(({ socketId }: socketId) => { // socket on
       delete peersRef.current[socketId]
       setPeers(peers => {
+        console.log(peers, typeof peers)
         delete peers[socketId]
         return peers
       })
-      dispatch({
-        type: 'DELETE_USER',
-        value: socketId
-      })
-      toast.error(`🦄 ${store.getState().roomReducer.users.filter(user => user.socketId === socketId)[0].nickName} 님이 떠나셨습니다.`, {
+      const user = store.getState().roomReducer.users.filter(user => user.socketId === socketId)[0].nickName
+      toast.error(`🦄 ${user} 님이 떠나셨습니다.`, {
         position: "bottom-left",
         autoClose: 3000,
         hideProgressBar: false,
@@ -112,17 +121,21 @@ function Room({ renderRoom }: RoomProps) {
         pauseOnHover: false,
         draggable: true,
         progress: undefined,
-      });
+      })
+      dispatch({
+        type: 'DELETE_USER',
+        value: socketId
+      })
     })
     
     roomSocket.listenGameStart(handleIsStart)
     roomSocket.listenResult(handleIsResult)
 
     return () => {
-      roomSocket.leaveRoom(roomCode);
-      roomSocket.cleanUpRoomListener();
+      roomSocket.leaveRoom(roomCode)
+      roomSocket.cleanUpRoomListener()
       setIsStreaming(false)
-      controlStream.remove();
+      controlStream.remove()
     };
   }, [])
 
@@ -136,7 +149,6 @@ function Room({ renderRoom }: RoomProps) {
           trickle: false,
           stream: controlStream.get(),
         });
-        console.log(peer)
         peer.on('signal', signal => {
           peerSocket.sendingSignal({ signal, receiver: user, roomCode: roomCode })
         })
@@ -145,7 +157,7 @@ function Room({ renderRoom }: RoomProps) {
       }
     })
 
-    peerSocket.listenSendingSignal(({ initiator, signal }) => {
+    peerSocket.listenSendingSignal(({ initiator, signal }: any) => {
       const peer = new Peer({
         trickle: false,
         stream: controlStream.get(),
@@ -160,7 +172,7 @@ function Room({ renderRoom }: RoomProps) {
       setPeers(prev => ({ ...prev, [initiator.socketId]: peer }));
     });
 
-    peerSocket.listenReturningSignal(({ returner, signal }) => {
+    peerSocket.listenReturningSignal(({ returner, signal }: any) => {
       const peer = peersRef.current[returner.socketId];
       peer.signal(signal);
     });
@@ -184,7 +196,7 @@ function Room({ renderRoom }: RoomProps) {
     })
   }
 
-  function handleIsResult(data) {
+  function handleIsResult(data: any) {
     console.log(data)
   }
 

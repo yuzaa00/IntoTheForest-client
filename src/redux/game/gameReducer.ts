@@ -12,21 +12,23 @@ export const setMultiMode = createAction(SET_MULTI_MODE)
 
 const actions = { saveRoomCode, muteMultiGame, muteMultiGameReset, setMultiMode }
 
-type gameAction = ActionType<typeof actions>
+export type gameAction = ActionType<typeof actions>
 
 interface gameState  {
   width: number
+  height: number
   multi: number
   mode: string
 }
 
 const initialState: gameState = {
-  width: 0,
+  width: 1600,
+  height: 800,
   multi: 0,
   mode: ''
 }
 
-const gameReducer = createReducer<gameState, gameAction>(initialState, {
+export const gameReducer = createReducer<gameState, gameAction>(initialState, {
   [SAVE_CLIENT_WIDTH]: (state: gameState, action: any) => ({
     ...state,
     width: action.value
@@ -41,8 +43,8 @@ const gameReducer = createReducer<gameState, gameAction>(initialState, {
   }),
   [SET_MULTI_MODE]: (state: gameState, action: any) => ({
     ...state,
-    mode: action.value
+    mode: action.value,
+    width: 1200,
+    height: 600
   })
 })
-
-export default gameReducer

@@ -1,20 +1,25 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { useSelector, useDispatch, shallowEqual } from 'react-redux'
-import { chatSocket } from '../../utils/socket'
 import { RootState } from '../../redux/rootReducer'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import format from 'date-fns/format'
 import './ChatRoom.css'
 
+interface chat {
+  photoUrl: string
+  nickName: string
+  content: string
+  date: string
+  socketId: string
+}
+
 function ChatRoom({onSubmit}: any) {
   const [input, setInput] = useState('')
   const messageRef = useRef<any>()
-  console.time('d')
   const chatList = useSelector((state: RootState) => state.chatReducer.chatList,shallowEqual)
   const roomCode = useSelector((state: RootState) => state.roomReducer.roomCode,shallowEqual)
   const user = useSelector((state: RootState) => state.roomReducer.users[0],shallowEqual)
-  console.timeEnd('d')
+
   useEffect(() => {
     messageRef.current!.scrollTop = messageRef.current!.scrollHeight
   }, [chatList])
@@ -55,10 +60,10 @@ function ChatRoom({onSubmit}: any) {
     <Wrapper>
       <MessageList ref={messageRef}>
         {chatList &&
-          chatList.map((chat, idx) => (
+          chatList.map((chat: chat, idx: number) => (
             <ChatCell key={idx} className={checkMyMessage(chat.socketId)}>
               <Profile>
-                <img src={chat.photoUrl || "https://elb.intotheforest.space/card5.png" } />
+                <img src={chat.photoUrl || "http://localhost:4000/card5.png" } />
                 <div>{chat.nickName}</div>
               </Profile>
               <span>{chat.content}</span>
