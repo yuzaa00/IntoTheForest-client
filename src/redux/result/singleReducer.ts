@@ -9,7 +9,7 @@ export const accessToken = createAction(ACCESS_TOKEN)
 const actions = {
   gameDestroy,
   accessToken,
-}; // 모든 액션 생성함수들을 actions 객체에 넣습니다
+}; 
 
 type SingleReducerAction = ActionType<typeof actions> // ActionType 를 사용하여 모든 액션 객체들의 타입을 준비해줄 수 있습니다
 

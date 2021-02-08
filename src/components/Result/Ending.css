@@ -1,7 +1,7 @@
 .ending-screen {
     width: 1200px;
     height: 600px;
-    background: url('./bg_ranking.png') no-repeat;
+    background: url('../../images/bg_ranking.png') no-repeat;
     background-size: 100%;
     text-align: center;
     margin: 0 auto;
@@ -42,7 +42,6 @@
 .scroll-text h2 {
     margin-top: 78px;
 }
-
 
 .credits__double {
     display: grid;

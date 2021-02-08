@@ -7,9 +7,6 @@ import { store } from '../../index'
 import { roomSocket } from '../../utils/socket'
 import Result from '../Result/Result'
 
-// import { GameProgress } from '~/types/game.type';
-// import { selectGame } from '~/store/gameSlice';
-
 export default function Game({ }) {
   const history = useHistory()
   const disPatch = useDispatch()
