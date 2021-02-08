@@ -1,4 +1,3 @@
-  
 import { createAction, ActionType, createReducer } from 'typesafe-actions'
 
 const GAME_DESTROY = 'GAME_DESTROY'
@@ -10,9 +9,9 @@ export const accessToken = createAction(ACCESS_TOKEN)
 const actions = {
   gameDestroy,
   accessToken,
-}; 
+}; // 모든 액션 생성함수들을 actions 객체에 넣습니다
 
-type SingleReducerAction = ActionType<typeof actions> // ActionType 를 사용하여 모든 액션 객체들의 타입을 준비해줄 수 있습니다
+export type SingleReducerAction = ActionType<typeof actions> // ActionType 를 사용하여 모든 액션 객체들의 타입을 준비해줄 수 있습니다
 
 interface SingleReducerState {
   game: boolean,
@@ -37,7 +36,7 @@ const initialState: SingleReducerState = {
     squi: 0
   },
   isOver: false,
-  accessToken: '',
+  accessToken: ''
 }
 
 export const singleReducer = createReducer<SingleReducerState, SingleReducerAction>(initialState, {
@@ -54,10 +53,11 @@ export const singleReducer = createReducer<SingleReducerState, SingleReducerActi
 
     return {
       ...state,
-      gameData: newGameData,
+      gameData: newGameData
     }
   },
   [ACCESS_TOKEN]: (state: SingleReducerState, action: any) => {
+    console.log(action)
     return {
       ...state,
       accessToken: action.value

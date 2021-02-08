@@ -67,6 +67,7 @@ export namespace StoreState {
       squi: any
     }
     accessToken: string
+    isOver: boolean
   }
 
   export interface All {
