@@ -53,7 +53,7 @@ export default class Stage1 extends Phaser.Scene {
   }
 
   public init(data: any): void { // 내부에서 사용할 데이터 초기화 설정
-    this.registry.set('score', 54321)
+    this.registry.set('score', 0)
     this.registry.set('life', 10000)
     this.registry.set('stage', 1)
     this.registry.set('char', data.char) //const state = store.getState())
@@ -152,7 +152,7 @@ export default class Stage1 extends Phaser.Scene {
     this.subchas = this.physics.add.staticGroup()
     this.enemies = this.physics.add.staticGroup().setActive(true)
 
-    this.potion.create(600, 200, 'stagePotion', undefined, true, true).setScale(0.4)
+    this.potion.create(29450, 200, 'stagePotion', undefined, true, true).setScale(0.4)
 
     this.map = this.make.tilemap({ key: "map" })
 
@@ -190,7 +190,7 @@ export default class Stage1 extends Phaser.Scene {
     this.ground = this.add.tileSprite(0, 622, 100000, 100, 'way').setScrollFactor(0)
 
     this.time.addEvent({ // 게임에서 시간 이벤트 등록, 1초당 콜백 호출 (콜백내용은 초당 체력 감소)
-      delay: 80,
+      delay: 1000,
       callback: this.worldTime,
       callbackScope: this,
       loop: true,
@@ -217,7 +217,7 @@ export default class Stage1 extends Phaser.Scene {
 
     const py = store.getState().choiceReducer.char
     this.player = this.physics.add
-      .sprite(27650, 400, py) // 플레이어 생성 이동
+      .sprite(650, 400, py) // 플레이어 생성 이동
       .setScale(0.25)
       .setDepth(3)
 
@@ -417,6 +417,12 @@ export default class Stage1 extends Phaser.Scene {
       this.hp.decrease(-3)
       this.registry.values.life + 300 >= 10000 ? this.registry.values.life = 10000 : this.registry.values.life += 300
       this.lifeText.setText(`LIFE ${this.registry.values.life}`)
+      if(this.registry.values.life < 5400) {
+        this.moveHp.setColor('white')
+      }
+      else {
+        this.moveHp.setColor('black')
+      }
       this.moveHp.setText(`${Math.floor(this.registry.values.life / 100)}%`)
       player.setScale(0.4)
       clearTimeout(this.invincibility)
@@ -436,6 +442,12 @@ export default class Stage1 extends Phaser.Scene {
       this.hp.decrease(-3)
       this.registry.values.life + 300 >= 10000 ? this.registry.values.life = 10000 : this.registry.values.life += 300
       this.lifeText.setText(`LIFE ${this.registry.values.life}`)
+      if(this.registry.values.life < 5400) {
+        this.moveHp.setColor('white')
+      }
+      else {
+        this.moveHp.setColor('black')
+      }
       this.moveHp.setText(`${Math.floor(this.registry.values.life / 100)}%`)
     }
   }
@@ -446,6 +458,12 @@ export default class Stage1 extends Phaser.Scene {
     this.hp.decrease(-15)
     this.registry.values.life + 1500 >= 10000 ? this.registry.values.life = 10000 : this.registry.values.life += 1500
     this.lifeText.setText(`LIFE ${this.registry.values.life}`)
+    if(this.registry.values.life < 5400) {
+      this.moveHp.setColor('white')
+    }
+    else {
+      this.moveHp.setColor('black')
+    }
     this.moveHp.setText(`${Math.floor(this.registry.values.life / 100)}%`)
   }
 
@@ -455,6 +473,12 @@ export default class Stage1 extends Phaser.Scene {
       this.hp.decrease(3)
       this.registry.values.life -= 300
       this.lifeText.setText(`LIFE ${this.registry.values.life}`)
+      if(this.registry.values.life < 5400) {
+        this.moveHp.setColor('white')
+      }
+      else {
+        this.moveHp.setColor('black')
+      }
       this.moveHp.setText(`${Math.floor(this.registry.values.life / 100)}%`)
       let time = this.time.addEvent({
         delay: 200,
@@ -502,6 +526,12 @@ export default class Stage1 extends Phaser.Scene {
         this.hp.decrease(5)
         this.registry.values.life - 500 >= 10000 ? this.registry.values.life = 10000 : this.registry.values.life -= 800
         this.lifeText.setText(`LIFE ${this.registry.values.life}`)
+        if(this.registry.values.life < 5400) {
+          this.moveHp.setColor('white')
+        }
+        else {
+          this.moveHp.setColor('black')
+        }
         this.moveHp.setText(`${Math.floor(this.registry.values.life / 100)}%`)
       }
       else {

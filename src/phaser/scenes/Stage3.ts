@@ -464,8 +464,8 @@ export default class Stage3 extends Phaser.Scene {
   collectMush(player: any, tile: any): void { // 오브젝트 간 충돌 이벤트
     this.mushLayer.removeTileAt(tile.x, tile.y)
     if (tile.index !== -1) {
-      this.hp.decrease(3)
-      this.registry.values.life -= 300
+      this.hp.decrease(4)
+      this.registry.values.life -= 400
       this.lifeText.setText(`LIFE ${this.registry.values.life}`)
       if(this.registry.values.life < 5400) {
         this.moveHp.setColor('white')
