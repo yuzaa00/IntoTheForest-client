@@ -37,7 +37,7 @@ const Styles = styled.div`
     }
 
     th {
-      color: red;
+      color: black;
     }
   }
 `

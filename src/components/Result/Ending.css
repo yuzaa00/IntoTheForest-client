@@ -1,13 +1,13 @@
 .ending-screen {
     width: 1200px;
     height: 600px;
-    background: url('../../images/ending.png') no-repeat;
+    background: url('./bg_ranking.png') no-repeat;
     background-size: 100%;
     text-align: center;
     margin: 0 auto;
     overflow: hidden;
     color: white;
-    font-family: 'Y_Spotlight';
+    font-family: 'S-CoreDream-8Heavy';
     font-size: 1rem;
     position: relative;
 }
@@ -39,7 +39,6 @@
     text-align: center;
 }
 
-
 .scroll-text h2 {
     margin-top: 78px;
 }
@@ -52,7 +51,7 @@
   }
   .credits__double dt {
     text-align: right;
-    font-variant-caps: all-small-caps;
+    font-variant-caps:normal;
     margin-top: 1.7rem;
   }
   .credits__double dd {
@@ -66,7 +65,7 @@
 
   .credits__inline {
     list-style: none;
-    display: flex;
+    
     flex-wrap: wrap;
     justify-content: center;
     margin-top: 1.7rem;
