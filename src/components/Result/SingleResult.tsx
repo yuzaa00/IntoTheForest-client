@@ -185,6 +185,7 @@ function SingleResult() {
      }
    
     return !rankOn ? (
+      <div style={{width: '100%', height: '100vh',background: 'linear-gradient(75deg,#755bea,#ff72c0)', display: 'flex'}}>
       <div className="singleResultScreen">
         <div className="imageResultLayout">
         </div>
@@ -206,7 +207,9 @@ function SingleResult() {
          </div>
         </div>
       </div>
+      </div>
     ):(
+      <div style={{width: '100%', height: '100vh',background: 'linear-gradient(75deg,#755bea,#ff72c0)', display: 'flex'}}>
       <div className="singleResultScreen">
         <div className="imageResultLayout">
         {/* <div className="gameClearMessage">GAME CLEAR !!</div>  */}
@@ -222,6 +225,7 @@ function SingleResult() {
           <button className="btnChoiceBacK" onClick={onChoiceModeBack}>솔로/멀티 돌아가기</button>
         </div> 
         </div>
+      </div>
       </div>
     );
   }
