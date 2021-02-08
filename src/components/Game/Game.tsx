@@ -17,9 +17,9 @@ export default function Game({ }) {
 
   const gameDestroy = useSelector((state: RootState) => state.singleReducer.game, shallowEqual)
   const gameResult = useSelector((state: RootState) => state.singleReducer.gameData, shallowEqual)
-  const gameOver = useSelector((state: RootState) => state.singleReducer.isOver, shallowEqual)
   const gameMode = useSelector((state: RootState) => state.gameReducer.mode, shallowEqual)
   const roomCode = useSelector((state: RootState) => state.roomReducer.roomCode)
+  const isOver = useSelector((state: RootState) => state.roomReducer.isGameOver, shallowEqual)
   
   useEffect(() => {
     const newGame: Phaser.Game = new Phaser.Game(Object.assign(config, { 
@@ -51,9 +51,9 @@ export default function Game({ }) {
           type: 'OPEN_MULTI_RESULT',
         })
       } else {
-        newGame.destroy(true)
-        if(gameOver) history.push('/SingleResult')
-        else history.push('/Ending')
+        newGame.destroy(true)//게임삭제와 
+        //동시에 게임 데이터도 스토어에 저장.,다음 컴포넌트로 이동
+        history.push('/Ending')
       }
     }
 
@@ -62,6 +62,9 @@ export default function Game({ }) {
     };
   }, [gameDestroy]);
   
+  function handleIsOver() {
+
+  }
 
   return (
     <div>
