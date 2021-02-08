@@ -4,9 +4,7 @@ import './Ending.css';
 
 
 function Ending () {
-
   const history = useHistory();
-   
   const onAgainStartBack = () => {
     history.push("/")  
   } 

@@ -51,7 +51,7 @@ function Table({ columns, data }) {
   } = useTable({
     columns, data
   })
-  // Render the UI for your table
+  
   return (
     <table {...getTableProps()}>
       <thead>

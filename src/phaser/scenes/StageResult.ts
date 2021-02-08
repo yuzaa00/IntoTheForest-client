@@ -188,5 +188,17 @@ export default class StageResult extends Phaser.Scene {
       bird: this.registry.values.bird,
       squi: this.registry.values.squi
     })
+    
+    // if (mode === 'M2' || mode === 'M4') {
+    //   this.game.sound.stopAll()
+    //   this.scene.start(this.multiStage[this.registry.values.stage + 1], {
+    //     score: this.registry.values.score,
+    //     life: this.registry.values.life,
+    //     stage: this.registry.values.stage,
+    //     bird: this.registry.values.bird,
+    //     squi: this.registry.values.squi
+    //   })
+    // }
+   
   }
 }
