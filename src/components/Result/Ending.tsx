@@ -12,6 +12,7 @@ function Ending () {
   } 
   
   return (
+    <div style={{width: '100%', height: '100vh', background: 'linear-gradient(75deg,#755bea,#ff72c0)', display: 'flex'}}>
     <div className="ending-screen"> 
       <div className="ending-wrapper">
        <div className="scroll-text">
@@ -70,6 +71,7 @@ https://www.mewpot.com</li>
         <div>
         <button className="btnAgainStart1" onClick={() => history.push('/SingleResult')}>랭킹으로</button>
         </div>
+    </div>
     </div>
   );
 }

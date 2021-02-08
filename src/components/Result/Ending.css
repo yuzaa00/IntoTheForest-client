@@ -139,6 +139,11 @@
 
 }
 
+.ending-screen {
+  margin: 0 auto;
+  align-self: center;
+}
+
 
 .ending-screen .againStartBack .btnAgainStart {
 
