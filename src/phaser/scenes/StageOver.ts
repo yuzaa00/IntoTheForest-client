@@ -21,6 +21,7 @@ export default class StageOver extends Phaser.Scene {
       delay: 2000,
       callback: () => store.dispatch({
         type: 'GAME_DESTROY',
+        isOver: true,
         score: this.registry.values.score || 0,
         life: this.registry.values.life || 0, 
         stage: this.registry.values.stage || 1,
