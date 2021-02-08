@@ -1,4 +1,4 @@
-
+import { turnOnFilter } from 'src/redux/room/roomRedux'
 import { store } from '../../index'
 
 export default class StageOver extends Phaser.Scene {
@@ -35,6 +35,7 @@ export default class StageOver extends Phaser.Scene {
   }
 
   public update(): void {
+    
   }
 
 }

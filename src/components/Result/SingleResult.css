@@ -8,7 +8,7 @@
       margin: 0 auto;
       /* background: url('../../../assets/nightDark.png') no-repeat; */
       /* background: linear-gradient(235deg, #77EDAC,#00BCD4); */
-      background: url('../../images/bg_ranking.png'); 
+      background: url('../../images/bg_ranking_y.png'); 
       background-size: 100%;
       font-family: 'Y_Spotlight';
       display: flex;
@@ -41,13 +41,8 @@
   } 
   
   .rankUpNickname {
-  <<<<<<< feature/999/fix
       margin-top: 0px;
       color: black;
-  =======
-    margin-top: 0px;
-    color: red;
-  >>>>>>> dev
   }
   
   .rank-input-field {

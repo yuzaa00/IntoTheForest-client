@@ -44,7 +44,7 @@
   }
   
   .credits__double {
-  <<<<<<< feature/999/fix
+
       display: grid;
       grid-template-columns: auto auto;
       gap: 0 2rem;
@@ -73,11 +73,12 @@
     .credits__inline li {
       padding: 0.3rem 0.8rem;
     }
-  =======
+    .credits__double {
     display: grid;
     grid-template-columns: auto auto;
     gap: 0 2rem;
-  }
+    }
+
   .credits__double dt {
     text-align: right;
     font-variant-caps: all-small-caps;
@@ -94,7 +95,6 @@
   
   .credits__inline {
     list-style: none;
-    display: flex;
     flex-wrap: wrap;
     justify-content: center;
     margin-top: 1.7rem;
