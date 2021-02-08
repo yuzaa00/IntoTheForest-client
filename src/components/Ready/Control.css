@@ -22,6 +22,11 @@ li {
   outline: none;
 }
 
+.orange {
+  color: orange;
+  /* font-weight: bold; */
+}
+
 /***********************/
 
 .control-canvas {
@@ -84,21 +89,28 @@ li {
 .control-canvas .description-area .control-description .item-data {
   width: 205px;
   line-height: 25px;
-  /* border: 1px solid purple; */
-  /* text-align: left; */
   margin: 0 auto;
 }
 
-.control-canvas .description-area .first-p {
-  /* width: 90%; */
-  padding-top: 80px;
-  border-top: 5px solid rgba(255, 255, 255, .1);
-  /* text-align: center; */
+.control-canvas .description-area .add-description {
+  width: 100%;
+  /* display: grid;
+  grid-template-columns: repeat(2, minmax(50%, auto)); */
+  margin-top: 40px;
 }
 
+.control-canvas .description-area .add-description p {
+  width: 100%;
+  line-height: 2;
+  margin: 0 auto;
+  padding: 40px 0;
+  border-top: 2px solid rgba(255, 255, 255, .1);
+}
+
+/*
 .control-canvas .description-area .second-p {
   padding-bottom: 50px;
-}
+} */
 
 .control-canvas .description-area .game-control {
   margin-top: 110px;
