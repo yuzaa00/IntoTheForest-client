@@ -167,6 +167,7 @@ export default class StageResult extends Phaser.Scene {
     if(this.registry.values.stage === 2) {
       store.dispatch({
         type: 'GAME_DESTROY',
+        isOver: false,
         score: this.registry.values.score || 0,
         life: this.registry.values.life || 0, 
         stage: this.registry.values.stage || 1,
