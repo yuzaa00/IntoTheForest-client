@@ -1,113 +1,120 @@
+
 .singleResultScreen {
-  width: 1200px;
-  height: 600px;
-  /* text-align: center; */
-  padding: 0;
-  box-sizing: border-box;
-  margin: 0 auto;
-  background: url('../../images/bg_ranking_y.png'); 
-  background-size: 100%;
-  font-family: 'Y_Spotlight';
-  display: flex;
-  align-self: center;
-}
-
-.imageResultLayout {
-  width: 30%;
-}
-
-.gameClearMessage {
-  color: #15E810;
-  font-size: 45px;
-}
-
-.singleResultLayout {
-  width: 40%;
-}
-
-.singleRankTables {
-  text-align: center;
+      width: 1200px;
+      height: 600px;
+      /* text-align: center; */
+      padding: 0;
+      box-sizing: border-box;
+      margin: 0 auto;
+      /* background: url('../../../assets/nightDark.png') no-repeat; */
+      /* background: linear-gradient(235deg, #77EDAC,#00BCD4); */
+      background: url('../../images/bg_ranking.png'); 
+      background-size: 100%;
+      font-family: 'Y_Spotlight';
+      display: flex;
+  }
+  .imageResultLayout {
+    width: 30%;
+  }
   
-}
-
-.newNickName {
-  text-align: center;
-}
-
-.nameNickNew { 
-  width: 70%;
-  margin: 0 auto;
-} 
-
-.rankUpNickname {
-  margin-top: 0px;
-  color: red;
-}
-
-.rank-input-field {
-  display: grid;
-  grid-template-columns: auto auto;
-  column-gap: 20px;
-}
-
-.input-nickName {
-  border-radius: 20px;
-  border: 0;
-  outline: 0;
-  height: 48px;
-  text-align: center;
-  box-shadow: 2px 2px 2px 5px rgba(0, 0, 0, .2);
-}
-
-.choiceModeBack {
-  text-align: center;
-}
-
-.btnRankUp{
-  cursor: pointer;
-  position: relative;
-  display: inline-block;
-  padding: 0;
-  margin: 0;
-  color: #fff;
-  text-decoration: none;
-  text-transform: uppercase;
-  font-size: 13px;
-  letter-spacing: 2px;
-  border-radius: 20px;
-  background: linear-gradient(90deg,#0162c8,#55e7fc);
-  font-family: 'Y_Spotlight';
-  border: 0;
-  outline: 0;
-  box-shadow: 2px 2px 2px 5px rgba(0, 0, 0, .2);
-}
-
-.btnChoiceBacK:focus,
-.btnRankUp:focus {
-  outline: none;
-}
-
-.btnChoiceBacK:hover,
-.btnRankUp:hover {
-  background: linear-gradient(90deg,#755bea,#ff72c0);
-}
-
-
-.btnChoiceBacK {
-  cursor: pointer;
-  position: relative;
-  display: inline-block;
-  padding: 12px 36px;
-  margin: 10px 0;
-  color: #fff;
-  text-decoration: none;
-  text-transform: uppercase;
-  font-size: 18px;
-  letter-spacing: 2px;
-  border-radius: 40px;
-  background: linear-gradient(90deg,#0162c8,#55e7fc);
-  font-family: 'Y_Spotlight';
-  border: 0;
-  outline: 0;
-
-}
+  .gameClearMessage {
+    color: #15E810;
+    font-size: 45px;
+  }
+  
+  .singleResultLayout {
+    width: 40%;
+  }
+  
+  .singleRankTables {
+    text-align: center;
+    
+  }
+  
+  .newNickName {
+    text-align: center;
+  }
+  
+  .nameNickNew { 
+    width: 70%;
+    margin: 0 auto;
+  } 
+  
+  .rankUpNickname {
+  <<<<<<< feature/999/fix
+      margin-top: 0px;
+      color: black;
+  =======
+    margin-top: 0px;
+    color: red;
+  >>>>>>> dev
+  }
+  
+  .rank-input-field {
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 20px;
+  }
+  
+  .input-nickName {
+    border-radius: 20px;
+    border: 0;
+    outline: 0;
+    height: 48px;
+    text-align: center;
+    box-shadow: 2px 2px 2px 5px rgba(0, 0, 0, .2);
+  }
+  
+  .choiceModeBack {
+    text-align: center;
+  }
+  
+  .btnRankUp{
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 2px;
+    border-radius: 20px;
+    background: linear-gradient(90deg,#0162c8,#55e7fc);
+    font-family: 'Y_Spotlight';
+    border: 0;
+    outline: 0;
+    box-shadow: 2px 2px 2px 5px rgba(0, 0, 0, .2);
+  }
+  
+  .btnChoiceBacK:focus,
+  .btnRankUp:focus {
+    outline: none;
+  }
+  
+  .btnChoiceBacK:hover,
+  .btnRankUp:hover {
+    background: linear-gradient(90deg,#755bea,#ff72c0);
+  }
+  
+  
+  .btnChoiceBacK {
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    padding: 12px 36px;
+    margin: 10px 0;
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 18px;
+    letter-spacing: 2px;
+    border-radius: 40px;
+    background: linear-gradient(90deg,#0162c8,#55e7fc);
+    font-family: 'Y_Spotlight';
+    border: 0;
+    outline: 0;
+  
+  }
+  
