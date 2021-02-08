@@ -1,3 +1,4 @@
+
 .singleResultScreen {
     width: 1200px;
     height: 600px;
@@ -7,7 +8,7 @@
     margin: 0 auto;
     /* background: url('../../../assets/nightDark.png') no-repeat; */
     /* background: linear-gradient(235deg, #77EDAC,#00BCD4); */
-    background: url('./everest.jpg'); 
+    background: url('../../images/bg_ranking.png'); 
     background-size: 100%;
     font-family: 'Y_Spotlight';
     display: flex;
@@ -44,7 +45,7 @@
 
 .rankUpNickname {
     margin-top: 0px;
-    color: red;
+    color: black;
 }
 
 .rank-input-field {

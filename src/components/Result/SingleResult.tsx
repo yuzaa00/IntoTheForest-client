@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect }from 'react';
 import { useSelector, shallowEqual } from 'react-redux';
 import { RootState } from '../../redux/rootReducer' 
@@ -10,12 +11,10 @@ import './SingleResult.css';
 const Styles = styled.div`
   background-color: linear-gradient(235deg, #77EDAC, #00BCD4);
   padding: 1rem;
-
   table {
     border-spacing: 0;
     border: 0px solid black;
     margin: 0 auto;
-
     tr {
       :last-child {
         td {
@@ -23,21 +22,18 @@ const Styles = styled.div`
         }
       }
     }
-
     th,
     td {
       margin: 0;
       padding: 0.5rem 1.8rem;
       border-bottom: 0.5px solid gray;
       border-right: 0px solid black;
-
       :last-child {
         border-right: 0;
       }
     }
-
     th {
-      color: red;
+      color: black;
     }
   }
 `
@@ -227,7 +223,3 @@ function SingleResult() {
   }
   
   export default SingleResult;
-
- 
-
-
