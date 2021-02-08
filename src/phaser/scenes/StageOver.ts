@@ -35,7 +35,6 @@ export default class StageOver extends Phaser.Scene {
   }
 
   public update(): void {
-    
   }
 
 }

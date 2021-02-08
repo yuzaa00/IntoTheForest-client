@@ -183,7 +183,6 @@ export default class StageResult extends Phaser.Scene {
       bird: this.registry.values.bird,
       squi: this.registry.values.squi
     })
-
     
     // if (mode === 'M2' || mode === 'M4') {
     //   this.game.sound.stopAll()
