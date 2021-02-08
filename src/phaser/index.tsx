@@ -21,11 +21,11 @@ import StageResult from './scenes/StageResult'
 export const config: Phaser.Types.Core.GameConfig = {
   title: 'Into the Forest',
   type: Phaser.AUTO,
-  width: 0,
-  height: 0,
+  width: 1200,
+  height: 600,
   parent: 'game-container',
   scale: {
-    mode: Phaser.Scale.MAX_ZOOM
+    // mode: Phaser.Scale.MAX_ZOOM
     // mode: Phaser.Scale.HEIGHT_CONTROLS_WIDTH,
     // autoCenter: Phaser.Scale.CENTER_BOTH
   },

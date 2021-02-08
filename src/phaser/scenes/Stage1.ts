@@ -1,4 +1,3 @@
-import { SETTING } from '../../GameSetting/index'
 import Phaser, { Scene } from 'phaser'
 import HealthBar from '../helper/healthBar'
 import { store } from '../../index'
@@ -62,7 +61,7 @@ export default class Stage1 extends Phaser.Scene {
 
   public preload(): void {
     this.sound.volume = 0.2
-    this.moveButton = this.add.image(SETTING.WIDTH - 1100, 500, 'jump')  // 버튼 위에 텍스트 추가
+    this.moveButton = this.add.image(store.getState().gameReducer.width - 1100, 500, 'jump')  // 버튼 위에 텍스트 추가
       .setDepth(8)
       .setOrigin(0.5)
       .setScrollFactor(0)
@@ -216,7 +215,7 @@ export default class Stage1 extends Phaser.Scene {
     })
     
 
-    const py = store.getState().choice.char
+    const py = store.getState().choiceReducer.char
     this.player = this.physics.add
       .sprite(650, 400, py) // 플레이어 생성 이동
       .setScale(0.25)

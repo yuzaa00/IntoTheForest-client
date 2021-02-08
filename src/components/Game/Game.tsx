@@ -23,8 +23,8 @@ export default function Game({ }) {
   
   useEffect(() => {
     const newGame: Phaser.Game = new Phaser.Game(Object.assign(config, { 
-      width: store.getState().gameReducer.width,
-      height: store.getState().gameReducer.height,
+      // width: store.getState().gameReducer.width,
+      // height: store.getState().gameReducer.height,
       parent: 'game-container' + 11 
     }))
 

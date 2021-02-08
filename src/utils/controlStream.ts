@@ -13,8 +13,7 @@ const get = () => stream;
 const remove = () => {
   if (!stream) return;
 
-  stream.getVideoTracks().forEach(track => {
-    console.log('22', track)
+  stream.getVideoTracks().forEach((track: any) => {
     track.stop();
     stream.removeTrack(track);
   });
@@ -22,20 +21,19 @@ const remove = () => {
 
 const audioOption = {
   on: () => {
-    stream.getAudioTracks().forEach(track => {(track.enabled = true)
-      console.log('22', track)});
+    stream.getAudioTracks().forEach((track: any) => (track.enabled = true));
   },
   off: () => {
-    stream.getAudioTracks().forEach(track => (track.enabled = false));
+    stream.getAudioTracks().forEach((track: any) => (track.enabled = false));
   },
 };
 
 const videoOption = {
   on: () => {
-    stream.getVideoTracks().forEach(track => (track.enabled = true));
+    stream.getVideoTracks().forEach((track: any) => (track.enabled = true));
   },
   off: () => {
-    stream.getVideoTracks().forEach(track => (track.enabled = false));
+    stream.getVideoTracks().forEach((track: any) => (track.enabled = false));
   },
 };
 

@@ -1,8 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { useSelector, useDispatch, shallowEqual } from 'react-redux'
-import { chatSocket } from '../../utils/socket'
 import { RootState } from '../../redux/rootReducer'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import format from 'date-fns/format'
 import './ChatRoom.css'
@@ -65,7 +63,7 @@ function ChatRoom({onSubmit}: any) {
           chatList.map((chat: chat, idx: number) => (
             <ChatCell key={idx} className={checkMyMessage(chat.socketId)}>
               <Profile>
-                <img src={chat.photoUrl || "https://elb.intotheforest.space/card5.png" } />
+                <img src={chat.photoUrl || "http://localhost:4000/card5.png" } />
                 <div>{chat.nickName}</div>
               </Profile>
               <span>{chat.content}</span>

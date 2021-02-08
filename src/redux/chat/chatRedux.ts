@@ -17,7 +17,7 @@ const actions = {
   resetUnreadCount
 }
 
-type ChatAction = ActionType<typeof actions>
+export type ChatAction = ActionType<typeof actions>
 
 interface Action {
   type: string

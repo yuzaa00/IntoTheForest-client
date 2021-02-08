@@ -1,17 +1,10 @@
 import io from 'socket.io-client';
 import * as types from './socket.type'
-const socket = io('https://elb.intotheforest.space', { transports: ['websocket'] })
+const socket = io('http://localhost:4000', { transports: ['websocket'] })
 
 export const getMySocketId = () => socket.id
 
 const roomSocket = {
-  // errorHandleTest() {
-  //   socket.on('error', function () {
-  //     document.write("Sorry, there seems to be an issue with the connection!");
-  //     console.log("Sorry, there seems to be an issue with the connection!")
-  //   })
-  // },
-
   createRoom(roomData: types.roomData, cb: Function) {
     socket.emit('create room', roomData, cb)
   },
