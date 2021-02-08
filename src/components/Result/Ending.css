@@ -1,33 +1,33 @@
 .ending-screen {
-    width: 1200px;
-    height: 600px;
-    background: url('../../images/bg_ranking.png') no-repeat;
-    background-size: 100%;
-    text-align: center;
-    margin: 0 auto;
-    overflow: hidden;
-    color: white;
-    font-family: 'S-CoreDream-8Heavy';
-    font-size: 1rem;
-    position: relative;
+  width: 1200px;
+  height: 600px;
+  background: url('../../images/bg_ranking.png') no-repeat;
+  background-size: 100%;
+  text-align: center;
+  margin: 0 auto;
+  overflow: hidden;
+  color: white;
+  font-family: 'Y_Spotlight';
+  font-size: 1rem;
+  position: relative;
 }
 
 .ending-wrapper {
-    display: flex;
-    height: 100%;
-    width: 60%;
-    margin: 0 auto;
-    perspective: 450px;
+  display: flex;
+  height: 100%;
+  width: 60%;
+  margin: 0 auto;
+  perspective: 450px;
 }
 
 .scroll-text {
-    color: black;
-    font-size: 1vw;
-    line-height: 1.5em;
-    font-weight: bold;
-    text-align: justify;
-    position: relative;
-    animation: scroll 60s linear forwards;
+  color: black;
+  font-size: 1vw;
+  line-height: 1.5em;
+  font-weight: bold;
+  text-align: justify;
+  position: relative;
+  animation: scroll 60s linear forwards;
 }
 
 .againStartBack,
@@ -36,86 +36,62 @@
 .scroll-text h1, 
 .scroll-text h2,
 .scroll-text p{
-    text-align: center;
+  text-align: center;
 }
 
+
 .scroll-text h2 {
-    margin-top: 78px;
+  margin-top: 78px;
 }
 
 .credits__double {
-    display: grid;
-    grid-template-columns: auto auto;
-    gap: 0 2rem;
-  }
-  .credits__double dt {
-    text-align: right;
-    font-variant-caps:normal;
-    margin-top: 1.7rem;
-  }
-  .credits__double dd {
-    text-align: left;
-    grid-column: 2 / 3;
-    margin-top: 0.6rem;
-  }
-  .credits__double dt + dd {
-    margin-top: 1.7rem;
-  }
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 0 2rem;
+}
+.credits__double dt {
+  text-align: right;
+  font-variant-caps: all-small-caps;
+  margin-top: 1.7rem;
+}
+.credits__double dd {
+  text-align: left;
+  grid-column: 2 / 3;
+  margin-top: 0.6rem;
+}
+.credits__double dt + dd {
+  margin-top: 1.7rem;
+}
 
-  .credits__inline {
-    list-style: none;
-    
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 1.7rem;
-  }
-  .credits__inline li {
-    padding: 0.3rem 0.8rem;
-  }
+.credits__inline {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1.7rem;
+}
+.credits__inline li {
+  padding: 0.3rem 0.8rem;
+}
 
 @keyframes scroll {
-    from { top: 100%;  }
-    to {top: -500%; }
+  from { top: 100%;  }
+  to {top: -500%; }
 } 
 
 
 
 .btnAgainStart:focus {
-    outline: none;
+  outline: none;
 }
 
 
 .btnAgainStart:hover {
-    background: linear-gradient(90deg,#755bea,#ff72c0);
+  background: linear-gradient(90deg,#755bea,#ff72c0);
 }
 
 
 .btnAgainStart {
-    cursor: pointer;
-    position: relative;
-    display: inline-block;
-    padding: 12px 36px;
-    margin: 10px 0;
-    color: #fff;
-    text-decoration: none;
-    text-transform: uppercase;
-    font-size: 18px;
-    letter-spacing: 2px;
-    border-radius: 40px;
-    background: linear-gradient(90deg,#0162c8,#55e7fc);
-    font-family: 'Y_Spotlight';
-    border: 0;
-    outline: 0;
-}
-
-.btnAgainStart1:focus {
-  outline: none;
-}
-.btnAgainStart1:hover {
-  background: linear-gradient(90deg,#755bea,#ff72c0);
-}
-
-.btnAgainStart1 {
   cursor: pointer;
   position: relative;
   display: inline-block;
@@ -131,16 +107,46 @@
   font-family: 'Y_Spotlight';
   border: 0;
   outline: 0;
-  position: absolute;
-  top: 84px;
-  right: 24px;
+}
 
+.btnAgainStart1:focus {
+outline: none;
+}
+.btnAgainStart1:hover {
+background: linear-gradient(90deg,#755bea,#ff72c0);
+}
+
+.btnAgainStart1 {
+cursor: pointer;
+position: relative;
+display: inline-block;
+padding: 12px 36px;
+margin: 10px 0;
+color: #fff;
+text-decoration: none;
+text-transform: uppercase;
+font-size: 18px;
+letter-spacing: 2px;
+border-radius: 40px;
+background: linear-gradient(90deg,#0162c8,#55e7fc);
+font-family: 'Y_Spotlight';
+border: 0;
+outline: 0;
+position: absolute;
+top: 84px;
+right: 24px;
+
+}
+
+.ending-screen {
+margin: 0 auto;
+align-self: center;
 }
 
 
 .ending-screen .againStartBack .btnAgainStart {
 
-    position: absolute;
-    top: 2%;
-    right: 2%;
+  position: absolute;
+  top: 2%;
+  right: 2%;
 }

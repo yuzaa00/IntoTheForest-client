@@ -22,8 +22,8 @@ interface gameState  {
 }
 
 const initialState: gameState = {
-  width: 1600,
-  height: 800,
+  width: 1200,
+  height: 600,
   multi: 0,
   mode: ''
 }
