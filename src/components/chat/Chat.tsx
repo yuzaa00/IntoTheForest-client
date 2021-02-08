@@ -8,13 +8,24 @@ import { BsFillChatFill } from 'react-icons/bs'
 import ChatRoom from './ChatRoom'
 import Button from '../Mode/Button'
 
+interface newChat {
+  chat: {
+    nickName: string,
+    photoUrl: string,
+    content: string,
+    date: string,
+    socketId: string,
+  },
+  roomCode: string
+}
+
 function Chat() {
   const dispatch = useDispatch()
   const [isChatRoomOpen, setIsChatRoomOpen] = useState(false)
   const [background, setBackground] = useState(false)
   const chatList = useSelector((state: RootState) => state.chatReducer.chatList, shallowEqual)
   const unreadCount = useSelector((state: RootState) => state.chatReducer.unreadCount)
-  
+
 
   useEffect(() => {
     chatSocket.listenMessage(({ chat }: any) => {
@@ -30,25 +41,26 @@ function Chat() {
 
   useEffect(() => {
     if (isChatRoomOpen) return
-    
+
     if (chatList.length) {
-      dispatch({ type: 'INCREASE_UNREAD_COUNT'})
+      dispatch({ type: 'INCREASE_UNREAD_COUNT' })
     }
   }, [chatList, isChatRoomOpen])
 
   useEffect(() => {
-    dispatch({ type: 'RESET_UNREAD_COUNT'})
+    dispatch({ type: 'RESET_UNREAD_COUNT' })
   }, [isChatRoomOpen])
 
   return (
     <>
       <Button onClick={() => {
         setIsChatRoomOpen(!isChatRoomOpen)
-        setBackground(!background)}}>
+        setBackground(!background)
+      }}>
         <BsFillChatFill size={65} color={background ? 'gold' : 'yellow'} />
         {!!unreadCount && <Badge>{unreadCount}</Badge>}
       </Button>
-      {isChatRoomOpen && <ChatRoom onSubmit={(newChat: any) => chatSocket.sendMessage({ newChat })} />}
+      {isChatRoomOpen && <ChatRoom onSubmit={(newChat: newChat) => chatSocket.sendMessage({ newChat })} />}
     </>
   );
 }

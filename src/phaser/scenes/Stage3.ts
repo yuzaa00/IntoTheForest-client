@@ -1,4 +1,4 @@
-import { SETTING } from '../../GameSetting/index'
+import { SETTING } from '../../GameSetting'
 import Phaser, { Scene } from 'phaser'
 import HealthBar from '../helper/healthBar'
 import { store } from '../../index'
@@ -218,7 +218,7 @@ export default class Stage3 extends Phaser.Scene {
       loop: true,
     })
 
-    const py = store.getState().choice.char
+    const py = store.getState().choiceReducer.char
     this.player = this.physics.add
       .sprite(650, 400, py) // 플레이어 생성 이동
       .setScale(0.25)

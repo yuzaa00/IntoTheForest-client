@@ -12,7 +12,7 @@ export default class Loader extends Phaser.Scene {
   }
 
   create(): void {
-    const char = store.getState().choice.char
+    const char = store.getState().choiceReducer.char
 
     this.add.graphics()
       .fillStyle(0xffffff) 
