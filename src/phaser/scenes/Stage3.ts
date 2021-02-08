@@ -1,5 +1,5 @@
 import { SETTING } from '../../GameSetting'
-import Phaser, { Scene } from 'phaser'
+import Phaser from 'phaser'
 import HealthBar from '../helper/healthBar'
 import { store } from '../../index'
 
@@ -135,7 +135,8 @@ export default class Stage3 extends Phaser.Scene {
       .setDepth(6)
       .setScrollFactor(0)
 
-    this.moveHp = this.add.text(800, 23, `${Math.floor((this.registry.values.life + 1) / 100)}%`, {
+    this.moveHp = this.add.text(550, 23, `${Math.floor((this.registry.values.life + 1) / 100)}%`, {
+      color: '#000000',
       fontSize: '22px',
       fontStyle: 'bold',
       font: 'bold 20px Arial'
@@ -233,7 +234,7 @@ export default class Stage3 extends Phaser.Scene {
 
     this.anims.create({ // 플레이어 기본 프레임 4번
       key: 'turn',
-      frames: [{ key: 'dog', frame: 0 }],
+      frames: [{ key: py, frame: 0 }],
       frameRate: 10
     })
 
@@ -327,8 +328,13 @@ export default class Stage3 extends Phaser.Scene {
     this.registry.values.life -= 100
     this.lifeText.setText(`LIFE ${this.registry.values.life}`)
     this.hp.decrease(1)
+    if(this.registry.values.life < 5400) {
+      this.moveHp.setColor('white')
+    }
+    else {
+      this.moveHp.setColor('black')
+    }
     this.moveHp.setText(`${Math.floor(this.registry.values.life / 100)}%`)
-    this.moveHp.x -= 5.1
   }
 
   private autoMove(): void {  // 타이머 콜백함수, 자동 달리기
@@ -405,8 +411,13 @@ export default class Stage3 extends Phaser.Scene {
       this.hp.decrease(-3)
       this.registry.values.life + 300 >= 10000 ? this.registry.values.life = 10000 : this.registry.values.life += 300
       this.lifeText.setText(`LIFE ${this.registry.values.life}`)
+      if(this.registry.values.life < 5400) {
+        this.moveHp.setColor('white')
+      }
+      else {
+        this.moveHp.setColor('black')
+      }
       this.moveHp.setText(`${Math.floor(this.registry.values.life / 100)}%`)
-      this.moveHp.x += 15
       player.setScale(0.4)
       clearTimeout(this.invincibility)
       this.hurtOn = true
@@ -425,8 +436,13 @@ export default class Stage3 extends Phaser.Scene {
       this.hp.decrease(-3)
       this.registry.values.life + 300 >= 10000 ? this.registry.values.life = 10000 : this.registry.values.life += 300
       this.lifeText.setText(`LIFE ${this.registry.values.life}`)
+      if(this.registry.values.life < 5400) {
+        this.moveHp.setColor('white')
+      }
+      else {
+        this.moveHp.setColor('black')
+      }
       this.moveHp.setText(`${Math.floor(this.registry.values.life / 100)}%`)
-      this.moveHp.x += 15
     }
   }
 
@@ -436,8 +452,13 @@ export default class Stage3 extends Phaser.Scene {
       this.hp.decrease(-15)
       this.registry.values.life + 1500 >= 10000 ? this.registry.values.life = 10000 : this.registry.values.life += 1500
       this.lifeText.setText(`LIFE ${this.registry.values.life}`)
+      if(this.registry.values.life < 5400) {
+        this.moveHp.setColor('white')
+      }
+      else {
+        this.moveHp.setColor('black')
+      }
       this.moveHp.setText(`${Math.floor(this.registry.values.life / 100)}%`)
-      this.moveHp.x += 75
   }
 
   collectMush(player: any, tile: any): void { // 오브젝트 간 충돌 이벤트
@@ -446,8 +467,13 @@ export default class Stage3 extends Phaser.Scene {
       this.hp.decrease(3)
       this.registry.values.life -= 300
       this.lifeText.setText(`LIFE ${this.registry.values.life}`)
+      if(this.registry.values.life < 5400) {
+        this.moveHp.setColor('white')
+      }
+      else {
+        this.moveHp.setColor('black')
+      }
       this.moveHp.setText(`${Math.floor(this.registry.values.life / 100)}%`)
-      this.moveHp.x -= 15
       let time = this.time.addEvent({ 
         delay: 200,
         callback: () => this.player.tint = 0xff00ff,
@@ -495,8 +521,13 @@ export default class Stage3 extends Phaser.Scene {
         this.hp.decrease(x)
         this.registry.values.life - (x*100) >= 10000 ? this.registry.values.life = 10000 : this.registry.values.life -= 800
         this.lifeText.setText(`LIFE ${this.registry.values.life}`)
+        if(this.registry.values.life < 5400) {
+          this.moveHp.setColor('white')
+        }
+        else {
+          this.moveHp.setColor('black')
+        }
         this.moveHp.setText(`${Math.floor(this.registry.values.life / 100)}%`)
-        this.moveHp.x -= (x*5)
       }
       else {
         this.particles.emitParticleAt(sub[sub.length - 1].x - 30, sub[sub.length - 1].y)

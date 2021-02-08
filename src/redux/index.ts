@@ -66,6 +66,7 @@ export namespace StoreState {
       bird: any,
       squi: any
     }
+    accessToken: string
   }
 
   export interface All {

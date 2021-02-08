@@ -96,22 +96,22 @@ export default class Stage2 extends Phaser.Scene {
   }
 
   public create(): void {
-    store.dispatch({
-      type: 'MUTE_MULTI_GAME'
-    })
+    // store.dispatch({
+    //   type: 'MUTE_MULTI_GAME'
+    // })
     
-    if(store.getState().gameReducer.multi > 1) {
-      this.socketId = store.getState().roomReducer.users[store.getState().gameReducer.multi - 2].socketId
-      this.game.sound.mute = true
-      this.input.enabled = false
-    }
+    // if(store.getState().gameReducer.multi > 1) {
+    //   this.socketId = store.getState().roomReducer.users[store.getState().gameReducer.multi - 2].socketId
+    //   this.game.sound.mute = true
+    //   this.input.enabled = false
+    // }
 
-    if(store.getState().gameReducer.multi === 4) {
-      this.socketId = store.getState().roomReducer.users[3].socketId
-      store.dispatch({
-        type: 'MUTE_MULTI_GAME_RESET'
-      })
-    }
+    // if(store.getState().gameReducer.multi === 4) {
+    //   this.socketId = store.getState().roomReducer.users[3].socketId
+    //   store.dispatch({
+    //     type: 'MUTE_MULTI_GAME_RESET'
+    //   })
+    // }
 
     this.hp = new HealthBar(this, 270, 19) // 체력바 인스턴스 생성
     this.hp.set(this.registry.values.life / 100)
@@ -135,7 +135,7 @@ export default class Stage2 extends Phaser.Scene {
       .setDepth(6)
       .setScrollFactor(0)
 
-    this.moveHp = this.add.text(800, 23, `${Math.floor((this.registry.values.life + 1) / 100)}%`, {
+    this.moveHp = this.add.text(550, 23, `${Math.floor((this.registry.values.life + 1) / 100)}%`, {
       fontSize: '22px',
       fontStyle: 'bold',
       font: 'bold 20px Arial'
@@ -233,13 +233,13 @@ export default class Stage2 extends Phaser.Scene {
 
     this.anims.create({ // 플레이어 기본 프레임 4번
       key: 'turn',
-      frames: [{ key: 'dog', frame: 0 }],
+      frames: [{ key: py, frame: 0 }],
       frameRate: 10
     })
 
     this.anims.create({ // 플레이어 오른쪽 동작시 5번 ~ 8번 프레임 8fps로 재생
       key: 'right',
-      frames: this.anims.generateFrameNumbers('dog', { start: 1, end: 8 }),
+      frames: this.anims.generateFrameNumbers(py, { start: 1, end: 8 }),
       frameRate: 10,
       repeat: -1
     })
@@ -327,8 +327,13 @@ export default class Stage2 extends Phaser.Scene {
     this.registry.values.life -= 100
     this.lifeText.setText(`LIFE ${this.registry.values.life}`)
     this.hp.decrease(1)
+    if(this.registry.values.life < 5400) {
+      this.moveHp.setColor('white')
+    }
+    else {
+      this.moveHp.setColor('black')
+    }
     this.moveHp.setText(`${Math.floor(this.registry.values.life / 100)}%`)
-    this.moveHp.x -= 5.1
   }
 
   private autoMove(): void {  // 타이머 콜백함수, 자동 달리기
@@ -403,8 +408,13 @@ export default class Stage2 extends Phaser.Scene {
       this.hp.decrease(-3)
       this.registry.values.life + 300 >= 10000 ? this.registry.values.life = 10000 : this.registry.values.life += 300
       this.lifeText.setText(`LIFE ${this.registry.values.life}`)
+      if(this.registry.values.life < 5400) {
+        this.moveHp.setColor('white')
+      }
+      else {
+        this.moveHp.setColor('black')
+      }
       this.moveHp.setText(`${Math.floor(this.registry.values.life / 100)}%`)
-      this.moveHp.x += 15
       player.setScale(0.4)
       clearTimeout(this.invincibility)
       this.hurtOn = true
@@ -423,8 +433,13 @@ export default class Stage2 extends Phaser.Scene {
       this.hp.decrease(-3)
       this.registry.values.life + 300 >= 10000 ? this.registry.values.life = 10000 : this.registry.values.life += 300
       this.lifeText.setText(`LIFE ${this.registry.values.life}`)
+      if(this.registry.values.life < 5400) {
+        this.moveHp.setColor('white')
+      }
+      else {
+        this.moveHp.setColor('black')
+      }
       this.moveHp.setText(`${Math.floor(this.registry.values.life / 100)}%`)
-      this.moveHp.x += 15
     }
   }
 
@@ -434,8 +449,13 @@ export default class Stage2 extends Phaser.Scene {
       this.hp.decrease(-15)
       this.registry.values.life + 1500 >= 10000 ? this.registry.values.life = 10000 : this.registry.values.life += 1500
       this.lifeText.setText(`LIFE ${this.registry.values.life}`)
+      if(this.registry.values.life < 5400) {
+        this.moveHp.setColor('white')
+      }
+      else {
+        this.moveHp.setColor('black')
+      }
       this.moveHp.setText(`${Math.floor(this.registry.values.life / 100)}%`)
-      this.moveHp.x += 75
   }
 
   collectMush(player: any, tile: any): void { // 오브젝트 간 충돌 이벤트
@@ -444,8 +464,13 @@ export default class Stage2 extends Phaser.Scene {
       this.hp.decrease(3)
       this.registry.values.life -= 300
       this.lifeText.setText(`LIFE ${this.registry.values.life}`)
+      if(this.registry.values.life < 5400) {
+        this.moveHp.setColor('white')
+      }
+      else {
+        this.moveHp.setColor('black')
+      }
       this.moveHp.setText(`${Math.floor(this.registry.values.life / 100)}%`)
-      this.moveHp.x -= 15
       let time = this.time.addEvent({ 
         delay: 200,
         callback: () => this.player.tint = 0xff00ff,
@@ -493,8 +518,13 @@ export default class Stage2 extends Phaser.Scene {
         this.hp.decrease(x)
         this.registry.values.life - (x*100) >= 10000 ? this.registry.values.life = 10000 : this.registry.values.life -= 800
         this.lifeText.setText(`LIFE ${this.registry.values.life}`)
+        if(this.registry.values.life < 5400) {
+          this.moveHp.setColor('white')
+        }
+        else {
+          this.moveHp.setColor('black')
+        }
         this.moveHp.setText(`${Math.floor(this.registry.values.life / 100)}%`)
-        this.moveHp.x -= (x*5)
       }
       else {
         this.particles.emitParticleAt(sub[sub.length - 1].x - 30, sub[sub.length - 1].y)
