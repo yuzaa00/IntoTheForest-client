@@ -13,7 +13,6 @@ export default class Stage2Event extends Phaser.Scene {
   }
 
   preload(): void {
-
     this.add.image(0, 0, 'cardbg').setOrigin(0, 0).setDepth(0)
 
     this.add.graphics()
@@ -98,6 +97,7 @@ export default class Stage2Event extends Phaser.Scene {
       .setOrigin(0.5)
       .setInteractive()
       .on('pointerdown', () => {
+        this.scene.stop()
         this.scene.start('Stage2Eventgame', {
           score: this.registry.values.score,
           life: this.registry.values.life,
@@ -108,21 +108,5 @@ export default class Stage2Event extends Phaser.Scene {
       },
         this
       )
-  }
-  create():void {
-    this.input.enabled = true
-    this.game.input.addPointer()
-    this.time.addEvent({
-      callback: () =>           this.scene.start('Stage2Eventgame', {
-        score: this.registry.values.score,
-        life: this.registry.values.life,
-        stage: 3,
-        bird: this.registry.values.bird,
-        squi: this.registry.values.squi
-      }),
-      callbackScope: this,
-      loop: false,
-      delay: 3000
-    })
   }
 }

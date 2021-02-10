@@ -34,7 +34,6 @@ export default class Stage2Eventgame extends Phaser.Scene {
   }
 
   public preload(): void {
-    this.load.audio('moleClick', 'sound/effect/click.wav')
     this.add.image(0, 0, 'cardbg').setOrigin(0, 0).setDepth(0)
     this.add.image(370, 61, 'moleBG').setOrigin(0, 0).setDepth(0).setScale(1.4)
     this.sound.add('stage2-2_bgm').play({
