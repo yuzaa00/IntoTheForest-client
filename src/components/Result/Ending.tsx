@@ -1,14 +1,11 @@
-  
-import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { createBrowserHistory } from 'history'
 import './Ending.css';
 
-
 function Ending () {
-  const history = useHistory();
+  const history = createBrowserHistory({forceRefresh:true})
   const onAgainStartBack = () => {
-    history.push("/")  
-  } 
+    history.push("/")
+  }
   
   return (
     <div style={{width: '100%', height: '100vh', background: 'linear-gradient(75deg,#755bea,#ff72c0)', display: 'flex'}}>

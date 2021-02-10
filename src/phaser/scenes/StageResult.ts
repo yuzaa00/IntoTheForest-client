@@ -128,6 +128,8 @@ export default class StageResult extends Phaser.Scene {
       this.scoreText.setText(`스코어 ${this.num} 점`)
     }
     else if (this.registry.values.score === this.num) {
+      this.num = 0
+      this.addNum = 0
       this.worldTimer.destroy()
       this.time.addEvent({
         delay: 500,
