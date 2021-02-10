@@ -1,20 +1,20 @@
-
 import React, { useState, useEffect }from 'react';
 import { useSelector, shallowEqual } from 'react-redux';
 import { RootState } from '../../redux/rootReducer' 
 import { useHistory } from "react-router-dom";
 import styled from 'styled-components';
-import { useTable } from 'react-table';
+import { useTable, usePagination } from 'react-table';
 import axios from "axios";
 import './SingleResult.css';
+import { useDispatch } from 'react-redux';
 
 const Styles = styled.div`
-  background-color: linear-gradient(235deg, #77EDAC, #00BCD4);
   padding: 1rem;
+
   table {
     border-spacing: 0;
-    border: 0px solid black;
     margin: 0 auto;
+
     tr {
       :last-child {
         td {
@@ -22,19 +22,25 @@ const Styles = styled.div`
         }
       }
     }
+
     th,
     td {
       margin: 0;
-      padding: 0.5rem 1.8rem;
+      padding: 10px 20px;
       border-bottom: 0.5px solid gray;
-      border-right: 0px solid black;
+
       :last-child {
         border-right: 0;
       }
     }
+
     th {
-      color: black;
+      color: red;
     }
+  }
+
+  .pagination {
+    padding-top: 0.5rem;
   }
 `
 function Table({ columns, data }) {
@@ -42,13 +48,31 @@ function Table({ columns, data }) {
     getTableProps,
     getTableBodyProps,
     headerGroups,
-    rows,
-    prepareRow
+    prepareRow,
+    page, // Instead of using 'rows', we'll use page,
+    // which has only the rows for the active page
+
+    // The rest of these things are super handy, too ;)
+    canPreviousPage,
+    canNextPage,
+    pageOptions,
+    pageCount,
+    gotoPage,
+    nextPage,
+    previousPage,
+    setPageSize,
+    state: { pageIndex, pageSize },
   } = useTable({
-    columns, data
-  })
-  
+    columns,
+    data,
+    initialState: { pageIndex: 0, pageSize: 7 },
+  },
+  usePagination
+  )
+
+  // Render the UI for your table
   return (
+    <>
     <table {...getTableProps()}>
       <thead>
         {headerGroups.map(headerGroup => (
@@ -60,7 +84,7 @@ function Table({ columns, data }) {
         ))}
       </thead>
       <tbody {...getTableBodyProps()}>
-        {rows.map((row, i) => {
+        {page.map((row, i) => {
           prepareRow(row)
           return (
             <tr {...row.getRowProps()}>
@@ -72,17 +96,63 @@ function Table({ columns, data }) {
         })}
       </tbody>
     </table>
+
+    <div className="pagination">
+        <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+          {'<<'}
+        </button>{' '}
+        <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+          {'<'}
+        </button>{' '}
+        <button onClick={() => nextPage()} disabled={!canNextPage}>
+          {'>'}
+        </button>{' '}
+        <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+          {'>>'}
+        </button>{' '}
+        <span>
+          Page{' '}
+          <strong>
+            {pageIndex + 1} of {pageOptions.length}
+          </strong>{' '}
+        </span>
+        <span>
+          | Go to page:{' '}
+          <input
+            type="number"
+            defaultValue={pageIndex + 1}
+            onChange={e => {
+              const page = e.target.value ? Number(e.target.value) - 1 : 0
+              gotoPage(page)
+            }}
+            style={{ width: '100px' }}
+          />
+        </span>{' '}
+      </div>
+    </>
   )
 }
 
 
 function SingleResult() {
     const history = useHistory();
+    const dispatch = useDispatch()
 
     const gameDataFinal = useSelector((state: RootState) => state.singleReducer.gameData, shallowEqual)
-    const accessToken = useSelector((state: RootState) => state.singleReducer.accessToken, shallowEqual)
+    const accessToken = useSelector((state: RootState) => state.singleReducer.accessToken)
     const [posts, setPosts] = useState([])
     const [rankOn, setRankOn] = useState(false)
+
+
+    useEffect(() => {
+    axios.post('http://localhost:4000/user')
+          .then(res => {
+            dispatch({
+              type: 'ACCESS_TOKEN',
+              value: res.data.accessToken
+            })
+          })
+        }, [] )
 
     useEffect(() => {
         axios
@@ -96,7 +166,7 @@ function SingleResult() {
         .catch(err => {
             console.log(err)
         })
-    }, [] )
+    }, [accessToken])
     
     let obj = {
         score: gameDataFinal.score,
@@ -153,6 +223,11 @@ function SingleResult() {
         {
           Header: 'Ranking',
           columns: [
+            {
+              Header: '#',
+              id: 'index',
+              accessor: (row) => row.index+1 // 'index' is undefined
+            },
 
             {
               Header: '닉네임',
@@ -180,15 +255,16 @@ function SingleResult() {
       window.open('/', '_self')
      }
    
+    let myIndexedData = posts.map((el,index) => ({index, ...el}))
+
     return !rankOn ? (
-      <div style={{width: '100%', height: '100vh',background: 'linear-gradient(75deg,#755bea,#ff72c0)', display: 'flex'}}>
       <div className="singleResultScreen">
         <div className="imageResultLayout">
         </div>
         <div className="singleResultLayout">
          <div className="singleRankTables">
           <Styles>
-            <Table columns={columns} data={posts} />
+            <Table columns={columns} data={myIndexedData} />
           </Styles>
          </div>
           
@@ -203,9 +279,7 @@ function SingleResult() {
          </div>
         </div>
       </div>
-      </div>
     ):(
-      <div style={{width: '100%', height: '100vh',background: 'linear-gradient(75deg,#755bea,#ff72c0)', display: 'flex'}}>
       <div className="singleResultScreen">
         <div className="imageResultLayout">
         {/* <div className="gameClearMessage">GAME CLEAR !!</div>  */}
@@ -214,7 +288,7 @@ function SingleResult() {
         <div className="singleResultLayout">
         <div className="singleRankTables">
           <Styles>
-            <Table columns={columns} data={posts} />
+            <Table columns={columns} data={myIndexedData} />
           </Styles>
         </div>
         <div className="choiceModeBack">
@@ -222,8 +296,11 @@ function SingleResult() {
         </div> 
         </div>
       </div>
-      </div>
     );
   }
   
   export default SingleResult;
+
+ 
+
+
