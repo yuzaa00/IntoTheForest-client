@@ -89,14 +89,7 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
     }).slice(0, PAIRS)
 
     let total = numberOfCards
-    // positions.push({
-    //   x: 10,
-    //   y: 10
-    // })
-    // positions.push({
-    //   x: 90,
-    //   y: 90
-    // })
+
     for (let line = 0; line < lines; line++) {
       for (let pos = 0; pos < MAX_CARD_LINE; pos++) {
         if (total > 0) {
@@ -139,11 +132,11 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
   private worldTime(): void {  // 1초당 실행되는 함수 this.worldTimer 참조
     this.registry.values.time -= 1
     this.lifeText.setText(`남은 시간 ${this.registry.values.time}`)
-    if (this.registry.values.time <= -1) {
+    if (this.registry.values.time === 0) {
       // 30초 지난 후 콜백 실행
       this.game.sound.stopAll()
       this.time.addEvent({
-        delay: 1050,
+        delay: 500,
         callback: () => this.scene.start('Stage2', {
           score: this.registry.values.score,
           life: this.registry.values.life + (this.attempts * 50) > 10000 ? 10000 : this.registry.values.life + (this.attempts * 50),
@@ -154,7 +147,6 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
         callbackScope: this,
         loop: true,
       })
-
     }
   }
 
@@ -213,7 +205,6 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
     if (!this.selectedCards.length) return
     const cardA = this.selectedCards[0]
     const cardB = this.selectedCards[1]
-
     return cardA.key === cardB.key
   }
 
