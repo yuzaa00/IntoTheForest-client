@@ -120,8 +120,10 @@ export default class Stage2Eventgame extends Phaser.Scene {
   }
 
   private worldTime(): void {  // 1초당 실행되는 함수 this.worldTimer 참조
-    this.registry.values.time -= 1
-    this.lifeText.setText(`남은 시간 ${this.registry.values.time}`)
+    if(this.registry.values.time > 0){
+      this.registry.values.time -= 1
+      this.lifeText.setText(`남은 시간 ${this.registry.values.time}`)
+    }
   }
 
   private startGame() {

@@ -535,7 +535,8 @@ export default class Stage1 extends Phaser.Scene {
         this.moveHp.setText(`${Math.floor(this.registry.values.life / 100)}%`)
       }
       else {
-        this.particles.emitParticleAt(sub[sub.length - 1].x - 30, sub[sub.length - 1].y)
+        this.particles.emitParticleAt(sub[sub.length - 1].x - 10, sub[sub.length - 1].y)
+        this.sound.add('boom', { volume: 1 }).play()
         sub[sub.length - 1].destroy()
       }
       this.invincibility = setTimeout(() => this.hurtOn = false, 2000)
@@ -579,6 +580,7 @@ export default class Stage1 extends Phaser.Scene {
       this.squiArr.push(squi)
       this.subchas.add(squi)
     }
+
     this.sound.add('get', { volume: 1 }).play()
     this.registry.values.score += 500
     this.scoreText.setText(`SCORE ${this.registry.values.score > 0 && this.registry.values.score < 10
