@@ -530,7 +530,8 @@ export default class Stage3 extends Phaser.Scene {
         this.moveHp.setText(`${Math.floor(this.registry.values.life / 100)}%`)
       }
       else {
-        this.particles.emitParticleAt(sub[sub.length - 1].x - 30, sub[sub.length - 1].y)
+        this.particles.emitParticleAt(sub[sub.length - 1].x - 10, sub[sub.length - 1].y)
+        this.sound.add('boom', { volume: 1 }).play()
         sub[sub.length - 1].destroy()
       }
       this.invincibility = setTimeout(() => this.hurtOn = false, 2000)

@@ -80,6 +80,7 @@ export default class Boot extends Phaser.Scene { // resource load scene
     this.load.audio('get', 'http://localhost:4000/get.mp3')
     this.load.audio('heal', 'http://localhost:4000/heal.mp3')
     this.load.audio('click', 'http://localhost:4000/click.wav')
+    this.load.audio('boom', 'http://localhost:4000/boom.mp3')
     
     //particles
     this.load.atlas('particles', 'http://localhost:4000/explosion.png', 'http://localhost:4000/explosion.json')
