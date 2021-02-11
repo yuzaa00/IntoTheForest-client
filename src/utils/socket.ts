@@ -37,7 +37,6 @@ const roomSocket = {
     socket.on('leave user', cb)
   },
 
-
   leaveRoom(roomCode: any) {
     socket.emit('leave room', roomCode)
   },
@@ -120,4 +119,14 @@ const peerSocket = {
   },
 }
 
-export { roomSocket, chatSocket, peerSocket, gameSocket }
+const verifySocket = {
+  getAccessToken(data: string) {
+    socket.emit('access token', data)
+  },
+
+  getAccessTokenListen(cb: Function) {
+    socket.on('access token', cb)
+  },
+}
+
+export { roomSocket, chatSocket, peerSocket, gameSocket, verifySocket }

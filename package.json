@@ -13,8 +13,10 @@
     "axios": "^0.21.1",
     "connected-react-router": "^6.8.0",
     "date-fns": "^2.16.1",
+    "dotenv": "^8.2.0",
     "html2canvas": "^1.0.0-rc.7",
     "jose": "^3.6.1",
+    "jsonwebtoken": "^8.5.1",
     "phaser": "^3.51.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
@@ -39,7 +41,7 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "start": "parcel src/index.html -p 3000 --open",
+    "start": "parcel NODE_ENV=dev src/index.html -p 3000 --open",
     "build": "parcel build src/index.html --out-dir dist",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -63,6 +65,7 @@
     ]
   },
   "devDependencies": {
+    "@types/jsonwebtoken": "^8.5.0",
     "@types/react-beforeunload": "^2.1.0",
     "@types/react-loader-spinner": "^3.1.3",
     "@types/react-redux": "^7.1.15",

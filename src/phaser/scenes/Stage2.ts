@@ -516,7 +516,7 @@ export default class Stage2 extends Phaser.Scene {
       if (sub.length === 0) {
         this.sound.add('dogEcho').play()
         this.hp.decrease(x)
-        this.registry.values.life - (x*100) >= 10000 ? this.registry.values.life = 10000 : this.registry.values.life -= 800
+        this.registry.values.life - (x*100) >= 10000 ? this.registry.values.life = 10000 : this.registry.values.life -= (x*100)
         this.lifeText.setText(`LIFE ${this.registry.values.life}`)
         if(this.registry.values.life < 5400) {
           this.moveHp.setColor('white')

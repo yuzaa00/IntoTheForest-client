@@ -133,6 +133,7 @@ export default class Stage1 extends Phaser.Scene {
       .bitmapText(860, 17, 'font', `SCORE 00000`)
       .setDepth(6)
       .setScrollFactor(0)
+
     this.moveHp = this.add.text(550, 23, `${Math.floor((this.registry.values.life + 1) / 100)}%`, {
       color: '#000000',
       fontSize: '22px',

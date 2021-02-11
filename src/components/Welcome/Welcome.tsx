@@ -18,6 +18,7 @@ function Welcome() {
         muted>
         </video>
         <div className="game-title">INTO THE FOREST</div>
+        <div className="game-version">V3.8.5</div>
         <Link to="/mode" className="game-button">
           GAME START
         </Link>

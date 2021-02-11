@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Link, Route, Switch, useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import './ChoiceMode.css'
-import Story from '../Ready/Story'
 import Modal from './Modal'
 import CreateRoomForm from './CreateRoomForm'
 import JoinRoomForm from './JoinRoomForm'
-import axios from 'axios';
-import { useDispatch } from 'react-redux';
-import SignJWT from 'jose/jwt/sign'
+import { useDispatch } from 'react-redux'
+import jwt from 'jsonwebtoken'
+import { getMySocketId, verifySocket } from '../../utils/socket'
+require('dotenv').config()
 
 const ChoiceMode = () => {
   const [modeClick, setModeClick] = useState('')
@@ -16,6 +16,19 @@ const ChoiceMode = () => {
   const [modalComponents, setmodalContent] = useState(null)
   const history = useHistory()
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    if(getMySocketId()) {
+      const token = jwt.sign(getMySocketId(), process.env.REACT_APP_SECRET as string)
+      verifySocket.getAccessToken(token)
+    }
+    verifySocket.getAccessTokenListen((token: string) => {
+      dispatch({
+        type: 'ACCESS_TOKEN',
+        value: token
+      })
+    })
+  }, [])
 
   const soloMode = () => {
     const text = '솔로 모드'
@@ -40,22 +53,6 @@ const ChoiceMode = () => {
     setModalOpen(true)
   }
   
-  useEffect(() => {
-    handleAccess()
-  }, [])
-
-  const handleAccess = async() => {
-    // const jwt = await new SignJWT({ })
-     
-    axios.post('http://localhost:4000/user')
-      .then(res => {
-        dispatch({
-          type: 'ACCESS_TOKEN',
-          value: res.data.accessToken
-        })
-      })
-  }
-
   return (
     <div className="game-size" onMouseOut={() => setModeHover('')}>
       <div className="mode">
