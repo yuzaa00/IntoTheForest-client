@@ -178,7 +178,7 @@ function SingleResult() {
 
             let newGameDataFinal = Object.assign({},customerRankUp, obj);
             const rankToken = jwt.sign({data: newGameDataFinal, babo: 'e gun mol rat zzi' }, process.env.REACT_APP_SECRET_RANK as string)
-            await axios.post(`${process.env.REACT_APP_URL}/rank/reg`, rankToken,
+            await axios.post(`${process.env.REACT_APP_URL}/rank/reg`, {rankToken: rankToken},
             {
               headers: {"Authorization": `Bearer ${accessToken}`}
             })
