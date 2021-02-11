@@ -12,18 +12,11 @@
       background-size: 100%;
       font-family: 'Y_Spotlight';
       display: flex;
+      align-self: center;
   }
-  .imageResultLayout {
-    width: 30%;
-  }
-  
-  .gameClearMessage {
-    color: #15E810;
-    font-size: 45px;
-  }
-  
+
   .singleResultLayout {
-    width: 40%;
+    margin: 0 auto;
   }
   
   .singleRankTables {
