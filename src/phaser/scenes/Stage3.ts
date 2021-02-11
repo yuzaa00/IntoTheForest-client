@@ -275,6 +275,18 @@ export default class Stage3 extends Phaser.Scene {
       on: false
     })
     this.spaceBar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
+
+    const num = this.registry.values.bird + this.registry.values.squi
+    for(let i = 0; i < num; i++) {
+      if(this.registry.values.bird > 0) {
+        this.getSubcha(this.player, 'bird')
+        this.registry.values.bird --
+      }
+      else if(this.registry.values.squi > 0) {
+        this.getSubcha(this.player, 'squi')
+        this.registry.values.squi --
+      }
+    }
   }
 
   public update(): void {
@@ -341,7 +353,7 @@ export default class Stage3 extends Phaser.Scene {
     this.player.setVelocityX(550)
     let self = this
     this.subchas.children.iterate(function (child: any, idx: number): void { // 서브캐릭터 강아지 따라오는 반복 함수
-      self.physics.moveToObject(child, { x: self.player.x - (50 * idx), y: self.player.y + 10 }, 0, 150)
+      self.physics.moveToObject(child, { x: self.player.x - 50 - (50 * idx), y: self.player.y + 10 }, 0, 175)
     }, this)
     this.player.anims.play('right', true) // 키보드 방향키 오른쪽 입력시 플레이어 뛰는 모션
     this.skyTile.tilePositionX += 0.3 // 배경 움직임

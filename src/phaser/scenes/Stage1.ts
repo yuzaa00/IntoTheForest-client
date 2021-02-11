@@ -273,6 +273,7 @@ export default class Stage1 extends Phaser.Scene {
   }
 
   public update(): void {
+    console.log(this.player.x)
     this.moveButton.on( // 버튼 점프
       'pointerdown',
       () => {
@@ -357,7 +358,7 @@ export default class Stage1 extends Phaser.Scene {
     this.player.setVelocityX(550)
     let self = this
     this.subchas.children.iterate(function (child: any, idx: number): void { // 서브캐릭터 강아지 따라오는 반복 함수
-      self.physics.moveToObject(child, { x: self.player.x - (50 * idx), y: self.player.y + 10 }, 0, 150)
+      self.physics.moveToObject(child, { x: self.player.x - 50 - (50 * idx), y: self.player.y + 10 }, 0, 175)
     }, this)
     this.player.anims.play('right', true) // 키보드 방향키 오른쪽 입력시 플레이어 뛰는 모션
     this.skyTile.tilePositionX += 0.3 // 배경 움직임
