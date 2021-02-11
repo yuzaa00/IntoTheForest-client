@@ -54,7 +54,6 @@ export default class Stage3 extends Phaser.Scene {
   }
 
   public init(data: any) {
-    console.log(data)
     this.registry.set('score', data.score || 0) // 이전 scene에서 올라온 데이터 등록
     this.registry.set('life', data.life || 10000)
     this.registry.set('stage', data.stage || 4)
