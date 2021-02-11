@@ -164,7 +164,7 @@ export default class StageResult extends Phaser.Scene {
       store.dispatch({
         type: 'GAME_DESTROY',
         isOver: false,
-        score: this.registry.values.score || 0,
+        score: this.registry.values.score + (this.registry.values.bird + this.registry.values.squi) * 500 || 0,
         life: this.registry.values.life || 0,
         stage: this.registry.values.stage || 1,
         bird: this.registry.values.bird || 0,

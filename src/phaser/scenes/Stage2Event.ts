@@ -52,7 +52,7 @@ export default class Stage2Event extends Phaser.Scene {
       .setOrigin()
 
     this.add
-      .text(600, 200, '주어진 시간 30초 동안', {
+      .text(600, 200, '주어진 시간 45초 동안', {
         color: '#000000',
         fontSize: '20px',
         fontStyle: 'bold',
