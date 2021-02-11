@@ -90,7 +90,7 @@ export default class Boot extends Phaser.Scene { // resource load scene
   }
   
   update ():void {
-    this.scene.start('Loader') // 첫 스테이지 선택
+    this.scene.start('Stage2Eventgame') // 첫 스테이지 선택
   }
 }
 

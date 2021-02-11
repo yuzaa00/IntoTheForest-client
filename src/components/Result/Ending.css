@@ -102,14 +102,11 @@
   .credits__inline li {
     padding: 0.3rem 0.8rem;
   }
-  >>>>>>> dev
   
   @keyframes scroll {
     from { top: 100%;  }
     to {top: -500%; }
   } 
-  
-  
   
   .btnAgainStart:focus {
     outline: none;
