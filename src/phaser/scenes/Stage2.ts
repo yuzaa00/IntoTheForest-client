@@ -123,7 +123,7 @@ export default class Stage2 extends Phaser.Scene {
       volume: 0.3
     }) // 노래 재생하기
 
-    this.physics.world.setBounds(0, 0, 30000, 600)
+    this.physics.world.setBounds(0, 0, 100000, 600)
 
     this.lifeText = this.add // 라이프 텍스트 생성
       .bitmapText(23, 17, 'font', `LIFE ${this.registry.values.life}`)
