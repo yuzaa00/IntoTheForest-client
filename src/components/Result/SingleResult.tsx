@@ -143,17 +143,6 @@ function SingleResult() {
     const [posts, setPosts] = useState([])
     const [rankOn, setRankOn] = useState(false)
 
-
-    useEffect(() => {
-    axios.post('http://localhost:4000/user')
-          .then(res => {
-            dispatch({
-              type: 'ACCESS_TOKEN',
-              value: res.data.accessToken
-            })
-          })
-        }, [] )
-
     useEffect(() => {
         axios
         .get('http://localhost:4000/rank/load',
