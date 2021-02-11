@@ -6,6 +6,16 @@
   place-self: flex-end;
 } */
 
+.game-version {
+  position: absolute;
+  bottom: 1%;
+  right: 1%;
+  color: white;
+  font-family: 'BMDOHYEON';
+  font-size: 1rem;
+  letter-spacing: 6px;
+}
+
 .game-title {
   position: absolute;
   top: 22%;
