@@ -14,6 +14,7 @@
     "connected-react-router": "^6.8.0",
     "date-fns": "^2.16.1",
     "html2canvas": "^1.0.0-rc.7",
+    "jose": "^3.6.1",
     "phaser": "^3.51.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
