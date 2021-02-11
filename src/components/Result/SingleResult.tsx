@@ -2,13 +2,14 @@ import React, { useState, useEffect }from 'react';
 import { useSelector, shallowEqual } from 'react-redux';
 import { RootState } from '../../redux/rootReducer' 
 import { useHistory } from "react-router-dom";
-import styled from 'styled-components';
 import { useTable, usePagination } from 'react-table';
-import axios from "axios";
-import './SingleResult.css';
 import { useDispatch } from 'react-redux';
+import axios from "axios";
+import styled from 'styled-components';
+import './SingleResult.css';
 import moment from 'moment';
-
+import jwt from 'jsonwebtoken'
+require('dotenv').config()
 
 const Styles = styled.div`
   padding: 1rem;
@@ -138,11 +139,10 @@ function Table({ columns, data }) {
 
 
 function SingleResult() {
-    const history = useHistory();
     const dispatch = useDispatch()
 
     const gameDataFinal = useSelector((state: RootState) => state.singleReducer.gameData, shallowEqual)
-    const accessToken = useSelector((state: RootState) => state.singleReducer.accessToken)
+    const accessToken = sessionStorage.getItem('token')
     const [posts, setPosts] = useState([])
     const [rankOn, setRankOn] = useState(false)
 
@@ -158,12 +158,12 @@ function SingleResult() {
         .catch(err => {
             console.log(err)
         })
-    }, [accessToken])
+    }, [])
     
     let obj = {
         score: gameDataFinal.score,
         stage: gameDataFinal.stage + 1,
-        subcha: gameDataFinal.bird ? gameDataFinal.bird : 0 + gameDataFinal.squi ? gameDataFinal.squi : 0
+        subcha: gameDataFinal.bird ? gameDataFinal.bird : 0 + gameDataFinal.squi ? gameDataFinal.squi : 0,
     }
         const [customerRankUp, setCustomerRankUp] = useState(
             { nickname: ''}
@@ -177,8 +177,8 @@ function SingleResult() {
             e.preventDefault()
 
             let newGameDataFinal = Object.assign({},customerRankUp, obj);
-            
-            await axios.post(`${process.env.REACT_APP_URL}/rank/reg`, newGameDataFinal,
+            const rankToken = jwt.sign({data: newGameDataFinal, babo: 'e gun mol rat zzi' }, process.env.REACT_APP_SECRET_RANK as string)
+            await axios.post(`${process.env.REACT_APP_URL}/rank/reg`, rankToken,
             {
               headers: {"Authorization": `Bearer ${accessToken}`}
             })

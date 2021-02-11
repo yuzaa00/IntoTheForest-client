@@ -5,8 +5,8 @@ import Modal from './Modal'
 import CreateRoomForm from './CreateRoomForm'
 import JoinRoomForm from './JoinRoomForm'
 import { useDispatch } from 'react-redux'
-import jwt from 'jsonwebtoken'
 import { getMySocketId, verifySocket } from '../../utils/socket'
+import jwt from 'jsonwebtoken'
 require('dotenv').config()
 
 const ChoiceMode = () => {
@@ -23,10 +23,7 @@ const ChoiceMode = () => {
       verifySocket.getAccessToken(token)
     }
     verifySocket.getAccessTokenListen((token: string) => {
-      dispatch({
-        type: 'ACCESS_TOKEN',
-        value: token
-      })
+      sessionStorage.setItem('token', token)
     })
   }, [])
 
