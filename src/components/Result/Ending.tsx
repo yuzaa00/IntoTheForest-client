@@ -1,8 +1,9 @@
 import { createBrowserHistory } from 'history'
+import { Link, useHistory } from "react-router-dom";
 import './Ending.css';
 
 function Ending () {
-  const history = createBrowserHistory({forceRefresh:false})
+  const history = useHistory()
   const historyRefresh = createBrowserHistory({forceRefresh:true})
   const onAgainStartBack = () => {
     historyRefresh.push("/")
