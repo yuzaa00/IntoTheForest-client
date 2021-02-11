@@ -148,7 +148,7 @@ function SingleResult() {
 
     useEffect(() => {
         axios
-        .get('http://localhost:4000/rank/load',
+        .get(`${process.env.REACT_APP_URL}/rank/load`,
         {
             headers: {"Authorization": `Bearer ${accessToken}`}
         })
@@ -178,7 +178,7 @@ function SingleResult() {
 
             let newGameDataFinal = Object.assign({},customerRankUp, obj);
             
-            await axios.post('http://localhost:4000/rank/reg', newGameDataFinal,
+            await axios.post(`${process.env.REACT_APP_URL}/rank/reg`, newGameDataFinal,
             {
               headers: {"Authorization": `Bearer ${accessToken}`}
             })
@@ -190,7 +190,7 @@ function SingleResult() {
                 setRankOn(true)
 
                 axios
-                  .get('http://localhost:4000/rank/load',
+                  .get(`${process.env.REACT_APP_URL}/rank/load`,
                   {
                     headers: {"Authorization": `Bearer ${accessToken}`}
                   })

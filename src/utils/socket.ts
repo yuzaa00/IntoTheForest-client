@@ -1,6 +1,6 @@
 import io from 'socket.io-client';
 import * as types from './socket.type'
-const socket = io('http://localhost:4000', { transports: ['websocket'] })
+const socket = io(`${process.env.REACT_APP_URL}`, { transports: ['websocket'] })
 
 export const getMySocketId = () => socket.id
 
