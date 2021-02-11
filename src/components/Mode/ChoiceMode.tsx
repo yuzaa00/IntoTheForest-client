@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, Route, Switch, useHistory } from 'react-router-dom'
 import './ChoiceMode.css'
 import Story from '../Ready/Story'
 import Modal from './Modal'
 import CreateRoomForm from './CreateRoomForm'
 import JoinRoomForm from './JoinRoomForm'
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import SignJWT from 'jose/jwt/sign'
 
 const ChoiceMode = () => {
   const [modeClick, setModeClick] = useState('')
@@ -12,6 +15,7 @@ const ChoiceMode = () => {
   const [isModalOpen, setModalOpen] = useState(false)
   const [modalComponents, setmodalContent] = useState(null)
   const history = useHistory()
+  const dispatch = useDispatch()
 
   const soloMode = () => {
     const text = '솔로 모드'
@@ -34,6 +38,22 @@ const ChoiceMode = () => {
   const openModal = (modalComponents: any) => {
     setmodalContent(modalComponents)
     setModalOpen(true)
+  }
+  
+  useEffect(() => {
+    handleAccess()
+  }, [])
+
+  const handleAccess = async() => {
+    // const jwt = await new SignJWT({ })
+     
+    axios.post('http://localhost:4000/user')
+      .then(res => {
+        dispatch({
+          type: 'ACCESS_TOKEN',
+          value: res.data.accessToken
+        })
+      })
   }
 
   return (
