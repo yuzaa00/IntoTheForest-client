@@ -7,6 +7,7 @@ export default class Stage2Eventgame extends Phaser.Scene {
   private lifeText!: Phaser.GameObjects.BitmapText
   private gameState: string = 'preparing'
   private enemies!: Phaser.Physics.Arcade.Group
+  private rezenTime: number = 1500
   private holes: MyArray<object> = [
     { x: 290 + 190, y: 200 },
     { x: 403 + 190, y: 200 },
@@ -30,7 +31,7 @@ export default class Stage2Eventgame extends Phaser.Scene {
     this.registry.set('bird', data.bird)
     this.registry.set('squi', data.squi)
     this.registry.set('moleScore', 0)
-    this.registry.set('time', 30)
+    this.registry.set('time', 45)
   }
 
   public preload(): void {
@@ -80,9 +81,9 @@ export default class Stage2Eventgame extends Phaser.Scene {
   }
 
   public update(): void {
-    if (this.registry.values.time < 0) { // 30초 지난 후 콜백 실행
+    if (this.registry.values.time === 0) { // 30초 지난 후 콜백 실행
       this.time.addEvent({
-        delay: 100,
+        delay: 444,
         callback: () => {
           this.game.sound.stopAll()
           this.scene.start('Stage3', { 
@@ -130,7 +131,7 @@ export default class Stage2Eventgame extends Phaser.Scene {
     this.gameState = 'playing'
     let self = this
     this.time.addEvent({ // 게임에서 시간 이벤트 등록, 1초당 콜백 호출 (콜백내용은 초당 체력 감소)
-      delay: 1700,
+      delay: this.registry.values.time > 30 ? 1700 : this.registry.values.time > 20 ? 1500 : this.registry.values.time > 10 ? 1300 : 1100,
       callback: function () {
         if (self.gameState === 'playing') {
           self.showEnemies()
@@ -143,11 +144,18 @@ export default class Stage2Eventgame extends Phaser.Scene {
   }
 
   private showEnemies() {
-    let arr = []
+    let arr: Array<number> = []
 
-    if (this.registry.values.time > 20) arr = [1, 1, 1, 1, 1, 2, 2, 2, 2]
-    else if (this.registry.values.time > 10)  arr = [1, 1, 2, 2, 2, 2, 3, 3, 3]
-    else  arr = [2, 2, 3, 3, 3, 3, 4, 4, 5]
+    if (this.registry.values.time > 35) arr = [1, 1, 1, 1, 1, 1, 2, 2, 2]
+    else if (this.registry.values.time > 25) {
+      arr = [1, 1, 1, 2, 2, 2, 2, 2, 2]
+    } 
+    else if (this.registry.values.time > 15) {
+      arr = [2, 2, 2, 3, 2, 3, 3, 2, 1]
+    }
+    else {
+      arr = [3, 3, 3, 3, 3, 3, 3, 3, 3]
+    } 
     
     let totalEnemies = Math.floor((Math.random() * 10))
     let openSpaces = JSON.parse(JSON.stringify(this.holes))
@@ -184,25 +192,22 @@ export default class Stage2Eventgame extends Phaser.Scene {
       targets: sprite,
       alpha: 1,
       ease: 'Elastic',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
-      duration: 300,
+      duration: 400,
       repeat: 0,
       yoyo: false
     })
     // timeline.add({
     //   targets: sprite,
-    //   alpha: 0.1,
-    //   // alpha: { start: 0, to: 1 },
-    //   // alpha: 1,
-    //   // alpha: '+=1',
-    //   ease: 'Linear',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
-    //   duration: 300,
+    //   alpha: 1,
+    //   ease: 'Back',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
+    //   duration: this.registry.values.time > 30 ? 1700 - 200 : this.registry.values.time > 20 ? 1500 - 200 : this.registry.values.time > 10 ? 1300 - 200 : 1100 - 200,
     //   repeat: 0,            // -1: infinity
     //   yoyo: false
     // })
     timeline.play()
     setTimeout(function () {
       sprite.destroy()
-    }, 1200)
+    }, this.registry.values.time > 30 ? 1700 - 300 : this.registry.values.time > 20 ? 1500 - 300 : this.registry.values.time > 10 ? 1300 - 300 : 1100 - 300)
     return sprite
   }
 
