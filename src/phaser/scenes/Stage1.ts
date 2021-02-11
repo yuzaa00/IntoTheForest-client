@@ -265,7 +265,7 @@ export default class Stage1 extends Phaser.Scene {
       quantity: 10,
       lifespan: 2000,
       alpha: { start: 1, end: 0 },
-      scale: { start: 1.5, end: 0.5 },
+      scale: { start: 1, end: 0.5 },
       on: false
     })
     this.spaceBar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)

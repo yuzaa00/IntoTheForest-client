@@ -2,9 +2,10 @@ import { createBrowserHistory } from 'history'
 import './Ending.css';
 
 function Ending () {
-  const history = createBrowserHistory({forceRefresh:true})
+  const history = createBrowserHistory({forceRefresh:false})
+  const historyRefresh = createBrowserHistory({forceRefresh:true})
   const onAgainStartBack = () => {
-    history.push("/")
+    historyRefresh.push("/")
   }
   
   return (

@@ -64,7 +64,7 @@ export default class Stage2 extends Phaser.Scene {
 
   public preload(): void {
     this.sound.volume = 0.2
-    this.moveButton = this.add.image(SETTING.WIDTH - 1100, 500, 'jump')  // 버튼 위에 텍스트 추가
+    this.moveButton = this.add.image(100, 500, 'jump')  // 버튼 위에 텍스트 추가
       .setDepth(8)
       .setOrigin(0.5)
       .setScrollFactor(0)

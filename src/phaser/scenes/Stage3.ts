@@ -54,8 +54,7 @@ export default class Stage3 extends Phaser.Scene {
   }
 
   public init(data: any) {
-    console.log(data)
-    this.registry.set('score', data.score || 11) // 이전 scene에서 올라온 데이터 등록
+    this.registry.set('score', data.score || 0) // 이전 scene에서 올라온 데이터 등록
     this.registry.set('life', data.life || 10000)
     this.registry.set('stage', data.stage || 4)
     this.registry.set('bird', data.bird || 1)
@@ -65,7 +64,7 @@ export default class Stage3 extends Phaser.Scene {
 
   public preload(): void {
     this.sound.volume = 0.2
-    this.moveButton = this.add.image(SETTING.WIDTH - 1100, 500, 'jump')  // 버튼 위에 텍스트 추가
+    this.moveButton = this.add.image(100, 500, 'jump')  // 버튼 위에 텍스트 추가
       .setDepth(8)
       .setOrigin(0.5)
       .setScrollFactor(0)
