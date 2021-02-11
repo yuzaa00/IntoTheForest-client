@@ -7,6 +7,8 @@ import { useTable, usePagination } from 'react-table';
 import axios from "axios";
 import './SingleResult.css';
 import { useDispatch } from 'react-redux';
+import moment from 'moment';
+
 
 const Styles = styled.div`
   padding: 1rem;
@@ -14,6 +16,7 @@ const Styles = styled.div`
   table {
     border-spacing: 0;
     margin: 0 auto;
+    width:100%;
 
     tr {
       :last-child {
@@ -234,6 +237,15 @@ function SingleResult() {
               Header: '서브캐',
               accessor: 'subcha',
             },
+            {
+              Header: '생성일',
+              id: "createdAt",
+              accessor: (d) => {
+                return moment(d.createdAt)
+                  .local()
+                  .format("YY-MM-DD  HH:mm")
+              }
+            }
           ],
         },
       ],
@@ -248,8 +260,6 @@ function SingleResult() {
 
     return !rankOn ? (
       <div className="singleResultScreen">
-        <div className="imageResultLayout">
-        </div>
         <div className="singleResultLayout">
          <div className="singleRankTables">
           <Styles>
@@ -270,10 +280,6 @@ function SingleResult() {
       </div>
     ):(
       <div className="singleResultScreen">
-        <div className="imageResultLayout">
-        {/* <div className="gameClearMessage">GAME CLEAR !!</div>  */}
-        {/* <img className="family" src={family} alt='family' /> */}
-        </div>
         <div className="singleResultLayout">
         <div className="singleRankTables">
           <Styles>
