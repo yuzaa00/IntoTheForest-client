@@ -63,7 +63,7 @@ function ChatRoom({onSubmit}: any) {
           chatList.map((chat: chat, idx: number) => (
             <ChatCell key={idx} className={checkMyMessage(chat.socketId)}>
               <Profile>
-                <img src={chat.photoUrl || "http://localhost:4000/card5.png" } />
+                <img src={chat.photoUrl || `${process.env.REACT_APP_URL}/card5.png` } />
                 <div>{chat.nickName}</div>
               </Profile>
               <span>{chat.content}</span>

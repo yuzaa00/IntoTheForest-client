@@ -26,12 +26,12 @@ function JoinRoomForm({ setModalOpen }: any ) {
         user: {
           nickName: nickInput || crypto.randomBytes(3).toString("hex"),
           socketId: clientId,
-          photoUrl: 'http://localhost:4000/card5.png'
+          photoUrl: `${process.env.REACT_APP_URL}/card5.png`
         },
         currentUser: {
           nickName: nickInput || crypto.randomBytes(3).toString("hex"),
           socketId: clientId,
-          photoUrl: 'http://localhost:4000/card5.png'
+          photoUrl: `${process.env.REACT_APP_URL}/card5.png`
         }
       })
       dispatch({

@@ -2,16 +2,17 @@ import { getByDisplayValue } from '@testing-library/react';
 import React, { useState  }from 'react';
 import { Link } from 'react-router-dom';
 import './Control.css';
+require('dotenv').config()
 
 function Control() {
 
     const controlDescription = [
-        { name: '뼈다귀', data: ['뼈다귀를 획득하면', '점수가 올라가요!'], img: 'http://localhost:4000/bone.png' },
-        { name: '몬스터', data: ['스테이지 1: 뱀', '스테이지 2: 뱀, 멧돼지', '스테이지 3: 벰, 멧돼지, 늑대'], img: 'http://localhost:4000/all-monster.png' },
-        { name: '장애물', data: ['독버섯을 먹게 되면', '체력이 감소해요!'], img: 'http://localhost:4000/mushroom.png' },
-        { name: '펫', data: ['새・다람쥐는 몬스터의 공격을', '대신 맞아줘요!'], img: 'http://localhost:4000/subcharacters.png' },
-        { name: '포션', data: ['블루 포션: 체력 소폭 증가', '레드 포션: 체력 증가', '스테이지 포션: 체력 대폭 증가'], img: 'http://localhost:4000/all-potion.png' },
-        { name: '푯말', data: ['이번 스테이지는 클리어!', '다음 스테이지로 넘어가기'], img: 'http://localhost:4000/signExit.png' },
+        { name: '뼈다귀', data: ['뼈다귀를 획득하면', '점수가 올라가요!'], img: `${process.env.REACT_APP_URL}/bone.png` },
+        { name: '몬스터', data: ['스테이지 1: 뱀', '스테이지 2: 뱀, 멧돼지', '스테이지 3: 벰, 멧돼지, 늑대'], img: `${process.env.REACT_APP_URL}/all-monster.png` },
+        { name: '장애물', data: ['독버섯을 먹게 되면', '체력이 감소해요!'], img: `${process.env.REACT_APP_URL}/mushroom.png` },
+        { name: '펫', data: ['새・다람쥐는 몬스터의 공격을', '대신 맞아줘요!'], img: `${process.env.REACT_APP_URL}/subcharacters.png` },
+        { name: '포션', data: ['블루 포션: 체력 소폭 증가', '레드 포션: 체력 증가', '스테이지 포션: 체력 대폭 증가'], img: `${process.env.REACT_APP_URL}/all-potion.png` },
+        { name: '푯말', data: ['이번 스테이지는 클리어!', '다음 스테이지로 넘어가기'], img: `${process.env.REACT_APP_URL}/signExit.png` },
     ];
 
     const [controlModal, setControlModal] = useState<boolean>(false);
