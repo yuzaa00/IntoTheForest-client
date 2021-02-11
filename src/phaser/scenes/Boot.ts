@@ -45,6 +45,7 @@ export default class Boot extends Phaser.Scene { // resource load scene
     this.load.image('molebg', 'http://localhost:4000/bg.png')
     this.load.image('moleBG', 'http://localhost:4000/molebg.png')
     this.load.image('mole', 'http://localhost:4000/mole.png')
+    this.load.image('bomb', 'http://localhost:4000/bomb.png')
     this.load.image('card1.png', 'http://localhost:4000/card1.png') // 곰
     this.load.image('card2.png', 'http://localhost:4000/card2.png') // 치와와
     this.load.image('card3.png', 'http://localhost:4000/card3.png') // 늑대
@@ -90,7 +91,7 @@ export default class Boot extends Phaser.Scene { // resource load scene
   }
   
   update ():void {
-    this.scene.start('Stage2Eventgame') // 첫 스테이지 선택
+    this.scene.start('Loader') // 첫 스테이지 선택
   }
 }
 

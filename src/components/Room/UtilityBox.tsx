@@ -5,12 +5,14 @@ import * as controlStream from '../../utils/controlStream'
 import { ImExit } from "react-icons/im";
 import { FaVideo, FaVideoSlash, FaVolumeMute, FaVolumeUp } from 'react-icons/fa'
 import { CgProfile } from "react-icons/cg"
+import { RiScreenshot2Fill } from "react-icons/ri"
 import Button from '../Mode/Button'
 import EditProfile from './EditProfile'
 import { createBrowserHistory } from 'history'
+import html2canvas from 'html2canvas';
 
 function UtilityBox() {
-  const history = createBrowserHistory({forceRefresh:true})
+  const history = createBrowserHistory({ forceRefresh: true })
   const disPatch = useDispatch()
   const [streamOptions, setStreamOptions] = useState({
     audio: true,
@@ -45,7 +47,23 @@ function UtilityBox() {
     }
   }, [streamOptions])
 
-  
+  async function handleScreenShot() {
+    let video = document.getElementsByTagName('video')[0]
+    let canvas = document.createElement('canvas')
+    let ctx = canvas.getContext('2d')
+    ctx.drawImage(video, 0, 0, 300, 150)
+    video.style.backgroundImage = "url(" + canvas.toDataURL() + ")"
+    await html2canvas(document.body, {
+      useCORS: true,
+    }).then(canvas => {
+      var a = document.createElement('a')
+      a.href = canvas.toDataURL("image/jpeg").replace("image/jpeg", "image/octet-stream")
+      a.download = 'out.jpg'
+      a.click()
+    })
+  }
+
+
   const openModal = (modalComponents: any) => {
     setmodalContent(modalComponents)
     setModalOpen(true)
@@ -53,51 +71,58 @@ function UtilityBox() {
 
   return (
     <>
-    <Wrapper>
-      <div>
-      <Button color='deepskyblue' onClick={() => setModalOpen(!isModalOpen)}>
-          <CgProfile
-            size={34}
-            color={'black'}
+      <Wrapper>
+        <div>
+          <Button color='deepskyblue' onClick={() => setModalOpen(!isModalOpen)}>
+            <CgProfile
+              size={34}
+              color={'black'}
             />
-        </Button>
-        <Button
-          color={streamOptions.audio ? 'limegreen' : 'lightGray'}
-          onClick={handleAudioTrack}>
-          {streamOptions.audio ?
-            <FaVolumeUp size={34} />
-            :
-            <FaVolumeMute size={34} />
-          }
-        </Button>
-        <Button
-          color={streamOptions.video ? 'red' : 'lightGray'}
-          onClick={handleVideoTrack}>
-          {streamOptions.video ?
-            <FaVideo size={34} style={{
-              'position': 'relative',
-              'top': '2px',
-              'left': '1px' }} />
-            :
-            <FaVideoSlash size={34} />
-          }
-        </Button>
-        <span style={{
-          bottom: '-4px',
-          right: '-6px',
-          position: 'relative' 
+          </Button>
+          <Button
+            color={streamOptions.audio ? 'limegreen' : 'lightGray'}
+            onClick={handleAudioTrack}>
+            {streamOptions.audio ?
+              <FaVolumeUp size={34} />
+              :
+              <FaVolumeMute size={34} />
+            }
+          </Button>
+          <Button
+            color={streamOptions.video ? 'red' : 'lightGray'}
+            onClick={handleVideoTrack}>
+            {streamOptions.video ?
+              <FaVideo size={34} style={{
+                'position': 'relative',
+                'top': '2px',
+                'left': '1px'
+              }} />
+              :
+              <FaVideoSlash size={34} />
+            }
+          </Button>
+          <Button
+            color={'blue'}
+            onClick={handleScreenShot}>
+            <RiScreenshot2Fill size={34}>
+            </RiScreenshot2Fill>
+          </Button>
+          <span style={{
+            bottom: '-4px',
+            right: '-6px',
+            position: 'relative'
           }}>
-        
-        <ImExit
-            size={50}
-            color={'black'}
-            cursor={'pointer'}
-            onClick={() => history.push('/mode')}
-          />
+
+            <ImExit
+              size={50}
+              color={'black'}
+              cursor={'pointer'}
+              onClick={() => history.push('/mode')}
+            />
           </span>
-      </div>
-    </Wrapper>
-    {isModalOpen && <EditProfile setModalOpen={setModalOpen}/>}
+        </div>
+      </Wrapper>
+      {isModalOpen && <EditProfile setModalOpen={setModalOpen} />}
     </>
   )
 }
