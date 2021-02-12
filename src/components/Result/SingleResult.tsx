@@ -10,7 +10,7 @@ import './SingleResult.css';
 import moment from 'moment';
 import jwt from 'jsonwebtoken'
 import { verifySocket } from '../../utils/socket'
-import { store } from 'src';
+import { store } from '../../index'
 require('dotenv').config()
 
 const Styles = styled.div`
@@ -181,6 +181,7 @@ function SingleResult() {
         setRankOn(true)
         setPosts(data)
       }
+      alert('🙇랭크등록에 성공하셨습니다!🙏')
     })
   }
 
