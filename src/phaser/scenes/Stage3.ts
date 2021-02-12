@@ -219,7 +219,7 @@ export default class Stage3 extends Phaser.Scene {
 
     const py = store.getState().choiceReducer.char
     this.player = this.physics.add
-      .sprite(38650, 400, py) // 플레이어 생성 이동
+      .sprite(650, 400, py) // 플레이어 생성 이동
       .setScale(0.25)
       .setDepth(3)
 
@@ -323,7 +323,7 @@ export default class Stage3 extends Phaser.Scene {
     if (this.registry.values.life <= 0) { // 게임 오버
       this.game.sound.stopAll()
       this.scene.pause()
-      this.scene.start('StageOver', { score: this.registry.values.score, stage: 1 })
+      this.scene.start('StageOver', { score: this.registry.values.score, stage: 3 })
     }
   }
 

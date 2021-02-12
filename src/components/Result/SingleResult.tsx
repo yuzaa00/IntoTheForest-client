@@ -10,7 +10,7 @@ import './SingleResult.css';
 import moment from 'moment';
 import jwt from 'jsonwebtoken'
 import { verifySocket } from '../../utils/socket'
-import { store } from '../../index'
+import { store } from '../../index';
 require('dotenv').config()
 
 const Styles = styled.div`
@@ -156,7 +156,7 @@ function SingleResult() {
 
   let obj = {
     score: gameDataFinal.score,
-    stage: gameDataFinal.stage + 1,
+    stage: gameDataFinal.stage,
     subcha: gameDataFinal.bird ? gameDataFinal.bird : 0 + gameDataFinal.squi ? gameDataFinal.squi : 0,
   }
   const [customerRankUp, setCustomerRankUp] = useState(
