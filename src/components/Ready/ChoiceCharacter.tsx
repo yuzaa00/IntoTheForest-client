@@ -10,6 +10,8 @@ import Alex from '../../images/dosaDog.png'
 
 import Game from '../Game/Game'
 import { useDispatch } from 'react-redux';
+import jwt from 'jsonwebtoken'
+import { getMySocketId, verifySocket } from '../../utils/socket'
 
 function ChoiceCharacter() {
   const history = createBrowserHistory({ forceRefresh: true })
@@ -25,16 +27,28 @@ function ChoiceCharacter() {
     setGameInfo(true)
   }
 
-  const onGameStart = () => {
+  const onGameStart = async () => {
     if (toggleClass === 0) setErrorMessage('캐릭터를 선택하세요')
     else {
-      if (store.getState().gameReducer.multi === 0 && sessionStorage.getItem('token')) {
-        setGameOn(true)
+      if(getMySocketId()) {
+        const token = jwt.sign(getMySocketId(), process.env.REACT_APP_URL as string)
+        verifySocket.getAccessToken(token)
+        verifySocket.getAccessTokenListen(gotToken)
       }
       else {
         alert('잘못된 접근입니다. 모드 선택으로 돌아갑니다.')
-        history.push('/')
+        history.push('/mode')
       }
+    }
+  }
+
+  async function gotToken (token: string) {
+    if(token) {
+      dispatch({
+        type: 'ACCESS_TOKEN',
+        value: token
+      })
+      setGameOn(true)
     }
   }
 

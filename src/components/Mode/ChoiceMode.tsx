@@ -15,18 +15,7 @@ const ChoiceMode = () => {
   const [isModalOpen, setModalOpen] = useState(false)
   const [modalComponents, setmodalContent] = useState(null)
   const history = useHistory()
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    if(getMySocketId()) {
-      const token = jwt.sign(getMySocketId(), process.env.REACT_APP_SECRET as string)
-      verifySocket.getAccessToken(token)
-    }
-    verifySocket.getAccessTokenListen((token: string) => {
-      sessionStorage.setItem('token', token)
-    })
-  }, [])
-
+  
   const soloMode = () => {
     const text = '솔로 모드'
     setModeClick(text)

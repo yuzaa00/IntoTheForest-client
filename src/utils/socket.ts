@@ -127,6 +127,18 @@ const verifySocket = {
   getAccessTokenListen(cb: Function) {
     socket.on('access token', cb)
   },
+  getRankDataRequest(token: Object) {
+    socket.emit('load rank', token)
+  },
+  getRankDataResponse(cb: Function) {
+    socket.on('load rank', cb)
+  },
+  updateRankRequest(data: object) {
+    socket.emit('update rank', data)
+  },
+  updateRankResponse(cb: Function) {
+    socket.on('update rank', cb)
+  },
 }
 
 export { roomSocket, chatSocket, peerSocket, gameSocket, verifySocket }

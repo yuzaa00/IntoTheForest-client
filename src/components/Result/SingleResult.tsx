@@ -1,6 +1,6 @@
-import React, { useState, useEffect }from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, shallowEqual } from 'react-redux';
-import { RootState } from '../../redux/rootReducer' 
+import { RootState } from '../../redux/rootReducer'
 import { useHistory } from "react-router-dom";
 import { useTable, usePagination } from 'react-table';
 import { useDispatch } from 'react-redux';
@@ -9,6 +9,8 @@ import styled from 'styled-components';
 import './SingleResult.css';
 import moment from 'moment';
 import jwt from 'jsonwebtoken'
+import { verifySocket } from '../../utils/socket'
+import { store } from 'src';
 require('dotenv').config()
 
 const Styles = styled.div`
@@ -71,37 +73,37 @@ function Table({ columns, data }) {
     data,
     initialState: { pageIndex: 0, pageSize: 7 },
   },
-  usePagination
+    usePagination
   )
 
   // Render the UI for your table
   return (
     <>
-    <table {...getTableProps()}>
-      <thead>
-        {headerGroups.map(headerGroup => (
-          <tr {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map(column => (
-              <th {...column.getHeaderProps()}>{column.render('Header')}</th>
-            ))}
-          </tr>
-        ))}
-      </thead>
-      <tbody {...getTableBodyProps()}>
-        {page.map((row, i) => {
-          prepareRow(row)
-          return (
-            <tr {...row.getRowProps()}>
-              {row.cells.map(cell => {
-                return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-              })}
+      <table {...getTableProps()}>
+        <thead>
+          {headerGroups.map(headerGroup => (
+            <tr {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map(column => (
+                <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+              ))}
             </tr>
-          )
-        })}
-      </tbody>
-    </table>
+          ))}
+        </thead>
+        <tbody {...getTableBodyProps()}>
+          {page.map((row, i) => {
+            prepareRow(row)
+            return (
+              <tr {...row.getRowProps()}>
+                {row.cells.map(cell => {
+                  return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                })}
+              </tr>
+            )
+          })}
+        </tbody>
+      </table>
 
-    <div className="pagination">
+      <div className="pagination">
         <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
           {'<<'}
         </button>{' '}
@@ -139,163 +141,137 @@ function Table({ columns, data }) {
 
 
 function SingleResult() {
-    const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
-    const gameDataFinal = useSelector((state: RootState) => state.singleReducer.gameData, shallowEqual)
-    const accessToken = sessionStorage.getItem('token')
-    const [posts, setPosts] = useState([])
-    const [rankOn, setRankOn] = useState(false)
+  const gameDataFinal = useSelector((state: RootState) => state.singleReducer.gameData, shallowEqual)
+  const accessToken = sessionStorage.getItem('token')
+  const [posts, setPosts] = useState([])
+  const [rankOn, setRankOn] = useState(false)
 
-    useEffect(() => {
-        axios
-        .get(`${process.env.REACT_APP_URL}/rank/load`,
-        {
-            headers: {"Authorization": `Bearer ${accessToken}`}
-        })
-        .then(res => {
-            setPosts(res.data)
-        })
-        .catch(err => {
-            console.log(err)
-        })
-    }, [])
-    
-    let obj = {
-        score: gameDataFinal.score,
-        stage: gameDataFinal.stage + 1,
-        subcha: gameDataFinal.bird ? gameDataFinal.bird : 0 + gameDataFinal.squi ? gameDataFinal.squi : 0,
-    }
-        const [customerRankUp, setCustomerRankUp] = useState(
-            { nickname: ''}
-        );
-    
-        const handleChange = (event) => {
-            setCustomerRankUp({...customerRankUp, [event.target.name]: event.target.value})
-        }
-    
-        const handleRankUp = async (e) => {
-            e.preventDefault()
+  useEffect(() => {
+    verifySocket.getRankDataRequest({ token: store.getState().singleReducer.accessToken })
+    verifySocket.getRankDataResponse((data: any) => {
+      setPosts(data)
+    })
+  }, [])
 
-            let newGameDataFinal = Object.assign({},customerRankUp, obj);
-            const rankToken = jwt.sign({data: newGameDataFinal, babo: 'e gun mol rat zzi' }, process.env.REACT_APP_SECRET_RANK as string)
-            await axios.post(`${process.env.REACT_APP_URL}/rank/reg`, {rankToken: rankToken},
-            {
-              headers: {"Authorization": `Bearer ${accessToken}`}
-            })
-              .then((response) => {
-                if (response.status === 201) {
-                    alert('🙇랭크등록에 성공하셨습니다!🙏')
-                }
-            }).then(() => {
-                setRankOn(true)
+  let obj = {
+    score: gameDataFinal.score,
+    stage: gameDataFinal.stage + 1,
+    subcha: gameDataFinal.bird ? gameDataFinal.bird : 0 + gameDataFinal.squi ? gameDataFinal.squi : 0,
+  }
+  const [customerRankUp, setCustomerRankUp] = useState(
+    { nickname: '' }
+  );
 
-                axios
-                  .get(`${process.env.REACT_APP_URL}/rank/load`,
-                  {
-                    headers: {"Authorization": `Bearer ${accessToken}`}
-                  })
-                  .then(res => {
-                      setPosts(res.data)
-                  })
-                  .catch(err => {
-                      console.log(err)
-                  })
+  const handleChange = (event) => {
+    setCustomerRankUp({ ...customerRankUp, [event.target.name]: event.target.value })
+  }
 
+  const handleRankUp = async (e) => {
+    e.preventDefault()
 
-            })
-              .catch(function (error) {
-                  console.log(error)
-            }) 
+    let newGameDataFinal = Object.assign({}, customerRankUp, obj)
+    const rankToken = jwt.sign({ data: newGameDataFinal, babo: 'e gun mol rat zzi' }, process.env.REACT_APP_SECRET_RANK as string)
+    verifySocket.updateRankRequest({
+      token: store.getState().singleReducer.accessToken,
+      data: rankToken
+    })
+    verifySocket.updateRankResponse((data: any) => {
+      if (data) {
+        setRankOn(true)
+        setPosts(data)
+      }
+    })
+  }
 
-    }
+  const columns = React.useMemo(
+    () => [
 
-    const columns = React.useMemo (
-      () => [
-    
-        {
-          Header: 'Ranking',
-          columns: [
-            {
-              Header: '#',
-              id: 'index',
-              accessor: (row) => row.index+1 // 'index' is undefined
-            },
+      {
+        Header: 'Ranking',
+        columns: [
+          {
+            Header: '#',
+            id: 'index',
+            accessor: (row) => row.index + 1 // 'index' is undefined
+          },
 
-            {
-              Header: '닉네임',
-              accessor: 'nickname',
-            },
-            {
-              Header: '스코어',
-              accessor: 'score',
-            },
-            {
-              Header: '스테이지',
-              accessor: 'stage',
-            },
-            {
-              Header: '서브캐',
-              accessor: 'subcha',
-            },
-            {
-              Header: '생성일',
-              id: "createdAt",
-              accessor: (d) => {
-                return moment(d.createdAt)
-                  .local()
-                  .format("YY-MM-DD  HH:mm")
-              }
+          {
+            Header: '닉네임',
+            accessor: 'nickname',
+          },
+          {
+            Header: '스코어',
+            accessor: 'score',
+          },
+          {
+            Header: '스테이지',
+            accessor: 'stage',
+          },
+          {
+            Header: '서브캐',
+            accessor: 'subcha',
+          },
+          {
+            Header: '생성일',
+            id: "createdAt",
+            accessor: (d) => {
+              return moment(d.createdAt)
+                .local()
+                .format("YY-MM-DD  HH:mm")
             }
-          ],
-        },
-      ],
-      []
-    )
+          }
+        ],
+      },
+    ],
+    []
+  )
 
-    const onChoiceModeBack = () => {
-      window.open('/', '_self')
-     }
-   
-    let myIndexedData = posts.map((el,index) => ({index, ...el}))
+  const onChoiceModeBack = () => {
+    window.open('/', '_self')
+  }
 
-    return !rankOn ? (
-      <div className="singleResultScreen">
-        <div className="singleResultLayout">
-         <div className="singleRankTables">
-          <Styles>
-            <Table columns={columns} data={myIndexedData} />
-          </Styles>
-         </div>
-          
-         <div className="newNickName">
-          <form className='nameNickNew' onSubmit={handleRankUp}>
-          <h5 className="rankUpNickname">Rank Up With Nickname</h5>                        
-          <div className="rank-input-field">
-          <input className="input-nickName" type="text" placeholder="닉네임을 정해주세요" name="nickname" value={customerRankUp.nickname} onChange={handleChange}/>
-          <button className="btnRankUp" type="submit">Rank Up</button>
-          </div>
-          </form>
-         </div>
-        </div>
-      </div>
-    ):(
-      <div className="singleResultScreen">
-        <div className="singleResultLayout">
+  let myIndexedData = posts.map((el, index) => ({ index, ...el }))
+
+  return !rankOn ? (
+    <div className="singleResultScreen">
+      <div className="singleResultLayout">
         <div className="singleRankTables">
           <Styles>
             <Table columns={columns} data={myIndexedData} />
           </Styles>
         </div>
-        <div className="choiceModeBack">
-          <button className="btnChoiceBacK" onClick={onChoiceModeBack}>솔로/멀티 돌아가기</button>
-        </div> 
+
+        <div className="newNickName">
+          <form className='nameNickNew' onSubmit={handleRankUp}>
+            <h5 className="rankUpNickname">Rank Up With Nickname</h5>
+            <div className="rank-input-field">
+              <input className="input-nickName" type="text" placeholder="닉네임을 정해주세요" name="nickname" value={customerRankUp.nickname} onChange={handleChange} />
+              <button className="btnRankUp" type="submit">Rank Up</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  ) : (
+      <div className="singleResultScreen">
+        <div className="singleResultLayout">
+          <div className="singleRankTables">
+            <Styles>
+              <Table columns={columns} data={myIndexedData} />
+            </Styles>
+          </div>
+          <div className="choiceModeBack">
+            <button className="btnChoiceBacK" onClick={onChoiceModeBack}>솔로/멀티 돌아가기</button>
+          </div>
         </div>
       </div>
     );
-  }
-  
-  export default SingleResult;
+}
 
- 
+export default SingleResult;
+
+
 
 
