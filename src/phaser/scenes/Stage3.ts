@@ -123,7 +123,7 @@ export default class Stage3 extends Phaser.Scene {
       volume: 0.3
     }) // 노래 재생하기
 
-    this.physics.world.setBounds(0, 0, 100000, 600)
+    this.physics.world.setBounds(0, 0, 39700, 600)
 
     this.lifeText = this.add // 라이프 텍스트 생성
       .bitmapText(23, 17, 'font', `LIFE ${this.registry.values.life}`)
@@ -153,8 +153,6 @@ export default class Stage3 extends Phaser.Scene {
     this.potion = this.physics.add.staticGroup()
     this.subchas = this.physics.add.staticGroup()
     this.enemies = this.physics.add.staticGroup().setActive(true)
-
-    this.potion.create(29450, 200,'stagePotion',undefined,true,true).setScale(0.4)
 
     this.map = this.make.tilemap({ key: "map3" })
 
@@ -195,7 +193,7 @@ export default class Stage3 extends Phaser.Scene {
     this.ground = this.add.tileSprite(0, 622, 100000, 100, 'way').setScrollFactor(0)
 
     this.time.addEvent({ // 게임에서 시간 이벤트 등록, 1초당 콜백 호출 (콜백내용은 초당 체력 감소)
-      delay: 1000,
+      delay: 750,
       callback: this.worldTime,
       callbackScope: this,
       loop: true,
@@ -221,7 +219,7 @@ export default class Stage3 extends Phaser.Scene {
 
     const py = store.getState().choiceReducer.char
     this.player = this.physics.add
-      .sprite(650, 400, py) // 플레이어 생성 이동
+      .sprite(38650, 400, py) // 플레이어 생성 이동
       .setScale(0.25)
       .setDepth(3)
 

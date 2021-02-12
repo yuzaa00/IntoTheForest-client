@@ -101,8 +101,7 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
         total--
       }
     }
-    positions.forEach(ele => console.log(ele))
-
+    
     while (positions.length) {
       const posA = positions.splice(this.getRandomInt(positions.length), 1)[0]
       const posB = positions.splice(this.getRandomInt(positions.length), 1)[0]

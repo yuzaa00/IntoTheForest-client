@@ -9,7 +9,9 @@ import { RiScreenshot2Fill } from "react-icons/ri"
 import Button from '../Mode/Button'
 import EditProfile from './EditProfile'
 import { createBrowserHistory } from 'history'
-import html2canvas from 'html2canvas';
+import html2canvas from 'html2canvas'
+import axios from 'axios'
+
 
 function UtilityBox() {
   const history = createBrowserHistory({ forceRefresh: true })
@@ -52,16 +54,20 @@ function UtilityBox() {
     let canvas = document.createElement('canvas')
     let ctx = canvas.getContext('2d')
     ctx.drawImage(video, 0, 0, 300, 150)
-    video.style.backgroundImage = "url(" + canvas.toDataURL() + ")"
+    video.style.background = "url(" + canvas.toDataURL() + ") no-repeat 0 0"
+    video.style.backgroundSize = '100% 100%'
     await html2canvas(document.body, {
       useCORS: true,
     }).then(canvas => {
-      var a = document.createElement('a')
+      let a = document.createElement('a')
       a.href = canvas.toDataURL("image/jpeg").replace("image/jpeg", "image/octet-stream")
+      console.log(a.toString().split(',')[1])
+      axios.post(`${process.env.REACT_APP_URL as string + '/healthCheck'}`, {data: 'data:image/png;base64,' + a.toString().split(',')[1]}, {
+      })
       a.download = 'out.jpg'
       a.click()
     })
-  }
+  } // 그리고 서버쪽에서 토큰에 넣는값에 ID값을 넣는거지.
 
 
   const openModal = (modalComponents: any) => {
