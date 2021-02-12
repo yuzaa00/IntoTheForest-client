@@ -3,7 +3,10 @@ import { store } from '../../index'
 
 export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토리 줍기 미니게임
   private lifeText!: Phaser.GameObjects.BitmapText
-  private score!: Phaser.GameObjects.Text
+  private attempt!: Phaser.GameObjects.BitmapText
+  private matched!: Phaser.GameObjects.BitmapText
+  private bonus!: Phaser.GameObjects.BitmapText
+  private score!: Phaser.GameObjects.BitmapText
   private cards: Card[] = []
   private selectedCards: Card[] = []
   private attempts: number = 0
@@ -61,9 +64,24 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
     // }
 
     // this.input.enabled = false
+
+    this.add.graphics()
+    .lineStyle(10, 0x5ce0e6)
+    .fillStyle(0xffffff, 100) // 배경색, 투명도
+    .strokeRoundedRect(70, 100, 250, 80, 10)
+    .fillRoundedRect(70, 100, 250, 80, 10)
+    .setDepth(5)
+
+    this.add.graphics()
+    .lineStyle(10, 0x5ce0e6)
+    .fillStyle(0xffffff, 100) // 배경색, 투명도
+    .strokeRoundedRect(870, 100, 300, 210, 10)
+    .fillRoundedRect(870, 100, 300, 210, 10)
+    .setDepth(5)
+
     this.add.image(0, 0, 'cardbg').setOrigin(0, 0).setDepth(0)
     this.lifeText = this.add // 라이프 텍스트 생성
-      .bitmapText(30, 30, 'font', `남은 시간 ${this.registry.values.time}`)
+      .bitmapText(90, 125, 'font', `TIMER ${this.registry.values.time}`)
       .setDepth(6)
 
     this.time.addEvent({ // 게임에서 시간 이벤트 등록, 1초당 콜백 호출 (콜백내용은 초당 체력 감소)
@@ -72,6 +90,18 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
       callbackScope: this,
       loop: true,
     })
+
+    this.attempt = this.add
+    .bitmapText(890, 125, 'font',`ATTEMPT ${this.attempts}`)
+    .setDepth(6)
+
+    this.matched = this.add
+    .bitmapText(890, 175, 'font',`MATCHED ${this.matchedCards()}`)
+    .setDepth(6)
+
+    this.score= this.add
+    .bitmapText(890, 250, 'font',`SCORE ${this.matchedCards() * 100}`)
+    .setDepth(6)
 
     const MAX_CARD_LINE = 4
     const PAIRS = 8
@@ -130,7 +160,7 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
 
   private worldTime(): void {  // 1초당 실행되는 함수 this.worldTimer 참조
     this.registry.values.time -= 1
-    this.lifeText.setText(`남은 시간 ${this.registry.values.time}`)
+    this.lifeText.setText(`TIMER ${this.registry.values.time}`)
     if (this.registry.values.time === 0) {
       // 30초 지난 후 콜백 실행
       this.game.sound.stopAll()
@@ -169,16 +199,25 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
   }
 
   private updateScore() {
-    var style = { font: 'bold 20px Arial', fill: '#fff', boundsAlignH: 'center', boundsAlignV: 'middle' }
+    // var style = { font: 'bold 20px Arial', fill: '#fff', boundsAlignH: 'center', boundsAlignV: 'middle' }
 
-    if (!this.score) {
-      this.score = this.add.text(11, 50, '', style)
-    }
-    this.score.text = `
-      시도 : ${this.attempts}
-      맞춘 카드 : ${this.matchedCards()}
-      체력 회복 : ${this.matchedCards() * 100} 포인트
-    `;
+    // this.lifeText = this.add // 라이프 텍스트 생성
+    //   .bitmapText(30, 30, 'font', `남은 시간 ${this.registry.values.time}`)
+    //   .setDepth(6)
+
+    // if (!this.score) {
+
+      this.attempt.setText(`ATTEMPT ${this.attempts}`)
+
+      this.matched.setText(`MATCHED ${this.matchedCards()}`)
+
+      this.score.setText(`SCORE ${this.matchedCards() * 100}`)
+    // }
+    // this.score.text = `
+    //   시도 : ${this.attempts}
+    //   맞춘 카드 : ${this.matchedCards()}
+    //   체력 회복 : ${this.matchedCards() * 100} 포인트
+    // `;
   }
 
   private cardClickHandler(card: any) {

@@ -31,7 +31,7 @@ export default class Stage2 extends Phaser.Scene {
   private moveHp!: Phaser.GameObjects.Text
   private spaceBar!: Phaser.Input.Keyboard.Key
 
-  private moveButton!: Phaser.GameObjects.Image
+  private moveText!: Phaser.GameObjects.BitmapText
   private muteButton!: Phaser.GameObjects.Image
 
   private birdArr: Array<Phaser.GameObjects.Image> = []
@@ -64,11 +64,18 @@ export default class Stage2 extends Phaser.Scene {
 
   public preload(): void {
     this.sound.volume = 0.2
-    this.moveButton = this.add.image(100, 500, 'jump')  // 버튼 위에 텍스트 추가
+
+    this.add.graphics()  // 버튼 위에 텍스트 추가
+      .lineStyle(10, 0x208929)
+      .fillStyle(0xffffff, 100) // 배경색, 투명도
+      .strokeRoundedRect(60, 470, 150, 80, 30)
+      .fillRoundedRect(60, 470, 150, 80, 30)
       .setDepth(8)
-      .setOrigin(0.5)
       .setScrollFactor(0)
-      .setScale(2)
+
+    this.moveText = this.add.bitmapText(80, 495, 'font', `JUMP`)
+      .setDepth(10)
+      .setScrollFactor(0)
       .setInteractive()
 
     this.muteButton = this.add.image(1172, 33, 'pause')
@@ -76,7 +83,7 @@ export default class Stage2 extends Phaser.Scene {
       .setScrollFactor(0)
       .setInteractive()
       .setOrigin(0.5)
-      .setScale(0.6)
+      .setScale(0.3)
       .on('pointerdown', () => {
         this.muteButton.setInteractive(false)
         if (!this.pauseGame) {
@@ -193,7 +200,7 @@ export default class Stage2 extends Phaser.Scene {
     this.ground = this.add.tileSprite(0, 622, 100000, 100, 'way').setScrollFactor(0)
 
     this.time.addEvent({ // 게임에서 시간 이벤트 등록, 1초당 콜백 호출 (콜백내용은 초당 체력 감소)
-      delay: 800,
+      delay: 950,
       callback: this.worldTime,
       callbackScope: this,
       loop: true,
@@ -287,7 +294,7 @@ export default class Stage2 extends Phaser.Scene {
   }
 
   public update(): void {
-    this.moveButton.on( // 버튼 점프
+    this.moveText.on( // 버튼 점프
       'pointerdown',
       () => {
         if (this.player.body.onFloor()) {
