@@ -31,7 +31,7 @@ function ChoiceCharacter() {
     if (toggleClass === 0) setErrorMessage('캐릭터를 선택하세요')
     else {
       if(getMySocketId()) {
-        const token = jwt.sign(getMySocketId(), process.env.REACT_APP_URL as string)
+        const token = jwt.sign(getMySocketId(), process.env.REACT_APP_SECRET as string)
         verifySocket.getAccessToken(token)
         verifySocket.getAccessTokenListen(gotToken)
       }

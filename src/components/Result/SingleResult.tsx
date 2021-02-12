@@ -144,7 +144,6 @@ function SingleResult() {
   const dispatch = useDispatch()
 
   const gameDataFinal = useSelector((state: RootState) => state.singleReducer.gameData, shallowEqual)
-  const accessToken = sessionStorage.getItem('token')
   const [posts, setPosts] = useState([])
   const [rankOn, setRankOn] = useState(false)
 
