@@ -12,7 +12,6 @@ import { createBrowserHistory } from 'history'
 import html2canvas from 'html2canvas'
 import axios from 'axios'
 
-
 function UtilityBox() {
   const history = createBrowserHistory({ forceRefresh: true })
   const disPatch = useDispatch()
