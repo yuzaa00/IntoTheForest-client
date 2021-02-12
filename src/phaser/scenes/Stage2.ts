@@ -190,8 +190,8 @@ export default class Stage2 extends Phaser.Scene {
     let bundTiles = this.map.addTilesetImage('bund')
     this.bundLayer = this.map.createLayer('bundLayer', bundTiles, 0, 0).setCollisionBetween(1, 50)
 
-    // let bundTiles2 = this.map.addTilesetImage('bund2')
-    // this.bundLayer2 = this.map.createLayer('bundLayer2', bundTiles2, 0, 0).setCollisionBetween(1, 50)
+    let bundTiles2 = this.map.addTilesetImage('bund2')
+    this.bundLayer2 = this.map.createLayer('bundLayer2', bundTiles2, 0, 0).setCollisionBetween(1, 50)
 
     let orangePotionTiles = this.map.addTilesetImage('orangePotion')
     this.orangePotionLayer = this.map.createLayer('potionLayer2', orangePotionTiles, 0, 0)
@@ -252,7 +252,7 @@ export default class Stage2 extends Phaser.Scene {
 
      // 첫번째인자와 두번째 인자간의 충돌 관련
     this.physics.add.collider(this.player, this.bundLayer) 
-    // this.physics.add.collider(this.player, this.bundLayer2)
+    this.physics.add.collider(this.player, this.bundLayer2)
     this.physics.add.collider(this.subchas, this.ground)
     this.physics.add.collider(this.enemies, this.ground)
     this.physics.add.collider(this.player, this.enemies, this.hurt, undefined, this)
