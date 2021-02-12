@@ -42,36 +42,36 @@ export default class preloadBar {
 
     this.bar.fillStyle(0xffffff)
 
-    if (this.value < 10) {
-      this.bar.fillStyle(0x809784)
-    }
-    else if (this.value < 20) {
-      this.bar.fillStyle(0x7dab85)
+    if (this.value < 15) {
+      this.bar.fillStyle(0xF5FDCF)
     }
     else if (this.value < 30) {
-      this.bar.fillStyle(0x71b07c)
+      this.bar.fillStyle(0xEAFCA0)
     }
-    else if (this.value < 40) {
-      this.bar.fillStyle(0x63b671)
-    }
-    else if (this.value < 50) {
-      this.bar.fillStyle(0x54be66)
+    else if (this.value < 45) {
+      this.bar.fillStyle(0xD8F66F)
     }
     else if (this.value < 60) {
-      this.bar.fillStyle(0x44bc59)
+      this.bar.fillStyle(0xC4ED4B)
     }
-    else if (this.value < 70) {
-      this.bar.fillStyle(0x32c84d)
+    else if (this.value < 75) {
+      this.bar.fillStyle(0xA8E214)
     }
-    else if (this.value < 80) {
-      this.bar.fillStyle(0x1fdd41)
-    }
-    else if (this.value < 90) {
-      this.bar.fillStyle(0x2afc4d)
+    else if(this.value < 90) {
+      this.bar.fillStyle(0x8AC20E)
     }
     else {
-      this.bar.fillStyle(0x56ff72)
+      this.bar.fillStyle(0x6EA20A)
     }
+    // else if (this.value < 80) {
+    //   this.bar.fillStyle(0x558306)
+    // }
+    // else if (this.value < 90) {
+    //   this.bar.fillStyle(0x426C03)
+    // }
+    // else {
+    //   this.bar.fillStyle(0x228B22)
+    // }
   
     let length = Math.floor(this.p * this.value)
 

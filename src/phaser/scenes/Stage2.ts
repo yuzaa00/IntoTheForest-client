@@ -122,7 +122,7 @@ export default class Stage2 extends Phaser.Scene {
       volume: 0.3
     }) // 노래 재생하기
 
-    this.physics.world.setBounds(0, 0, 39700, 600)
+    this.physics.world.setBounds(0, 0, 39850, 600)
 
     this.lifeText = this.add // 라이프 텍스트 생성
       .bitmapText(23, 17, 'font', `LIFE ${this.registry.values.life}`)
@@ -219,7 +219,7 @@ export default class Stage2 extends Phaser.Scene {
 
     const py = store.getState().choiceReducer.char
     this.player = this.physics.add
-      .sprite(37600, 200, py) // 플레이어 생성 이동
+      .sprite(600, 200, py) // 플레이어 생성 이동
       .setScale(0.25)
       .setDepth(3)
 
@@ -322,7 +322,7 @@ export default class Stage2 extends Phaser.Scene {
     if (this.registry.values.life <= 0) { // 게임 오버
       this.game.sound.stopAll()
       this.scene.pause()
-      this.scene.start('StageOver', { score: this.registry.values.score, stage: 1 })
+      this.scene.start('StageOver', { score: this.registry.values.score, stage: 2 })
     }
   }
 
