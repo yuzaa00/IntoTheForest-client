@@ -31,7 +31,7 @@ export default class Stage2Eventgame extends Phaser.Scene {
     this.registry.set('bird', data.bird || 0)
     this.registry.set('squi', data.squi || 0)
     this.registry.set('moleScore', 0)
-    this.registry.set('time', 25)
+    this.registry.set('time', 45)
   }
 
   public preload(): void {
@@ -60,15 +60,28 @@ export default class Stage2Eventgame extends Phaser.Scene {
     //     type: 'MUTE_MULTI_GAME_RESET'
     //   })
     // }
+    this.add.graphics()
+    .lineStyle(10, 0x208929)
+    .fillStyle(0xffffff, 100) // 배경색, 투명도
+    .strokeRoundedRect(70, 100, 250, 80, 10)
+    .fillRoundedRect(70, 100, 250, 80, 10)
+    .setDepth(5)
+
+    this.add.graphics()
+    .lineStyle(10, 0x208929)
+    .fillStyle(0xffffff, 100) // 배경색, 투명도
+    .strokeRoundedRect(850, 100, 310, 80, 10)
+    .fillRoundedRect(850, 100, 310, 80, 10)
+    .setDepth(5)
 
     this.enemies = this.physics.add.group()
 
     this.lifeText = this.add // 라이프 텍스트 생성
-      .bitmapText(30, 30, 'font', `남은 시간 ${this.registry.values.time}`)
+      .bitmapText(90, 125, 'font', `TIMER ${this.registry.values.time}`)
       .setDepth(6)
 
     this.scoreText = this.add // 점수 텍스트 생성
-      .bitmapText(1000, 30, 'font', `점수 ${this.registry.values.moleScore}`)
+      .bitmapText(880, 125, 'font', `SCORE ${this.registry.values.moleScore}`)
       .setDepth(6)
 
     this.time.addEvent({ // 게임에서 시간 이벤트 등록, 1초당 콜백 호출 (콜백내용은 초당 체력 감소)
@@ -130,7 +143,7 @@ export default class Stage2Eventgame extends Phaser.Scene {
   private worldTime(): void {  // 1초당 실행되는 함수 this.worldTimer 참조
     if (this.registry.values.time > 0) {
       this.registry.values.time -= 1
-      this.lifeText.setText(`남은 시간 ${this.registry.values.time}`)
+      this.lifeText.setText(`TIMER ${this.registry.values.time}`)
     }
   }
 
@@ -203,11 +216,11 @@ export default class Stage2Eventgame extends Phaser.Scene {
       .setScale(sprite.texture.key === 'bomb' ? 0.7 : 1)
       .setInteractive().on('pointerdown', () => {
         if (sprite.texture.key === 'bomb') {
-          this.sound.add('dogEcho').play()
+          this.sound.add('boom').play()
           this.registry.values.moleScore - 200 < 0 ? this.registry.values.moleScore = 0 : this.registry.values.moleScore -= 200
           this.scoreText.setTintFill(0xB9062F)
           setTimeout(() => this.scoreText.clearTint(), 150)
-          this.scoreText.setText(`점수 ${this.registry.values.moleScore}`)
+          this.scoreText.setText(`SCORE ${this.registry.values.moleScore}`)
           sprite.destroy()
         }
         else {
@@ -215,7 +228,7 @@ export default class Stage2Eventgame extends Phaser.Scene {
           this.registry.values.moleScore += 100
           this.scoreText.setTintFill(0x00FF00)
           setTimeout(() => this.scoreText.clearTint(), 150)
-          this.scoreText.setText(`점수 ${this.registry.values.moleScore}`)
+          this.scoreText.setText(`SCORE ${this.registry.values.moleScore}`)
           sprite.destroy()
         }
       }).body.setAllowGravity(false)

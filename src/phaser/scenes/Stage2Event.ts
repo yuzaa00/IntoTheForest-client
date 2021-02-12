@@ -71,7 +71,7 @@ export default class Stage2Event extends Phaser.Scene {
       .setOrigin()
 
     this.add
-      .text(600, 300, '획득한 스코어만큼 보너스 체력을 얻습니다', {
+      .text(600, 300, '획득한 스코어만큼 보너스 스코어를 얻습니다', {
         color: '#000000',
         fontSize: '20px',
         fontStyle: 'bold',
