@@ -45,7 +45,7 @@ function Ending () {
           <h1>[ DEVELOPER ]</h1>
             <dl className="credits__double">
             <dt>헤실이</dt><dd>사실은 강아지 무서워합니다</dd>
-            <dt>또덩이</dt><dd>할 말이 없어요</dd>
+            <dt>또덩이</dt><dd>강아지들 너무 귀엽죠? (뿌듯)</dd>
             <dt>재지니</dt><dd>강아지 2마리 키웁니다</dd>
             <dt>주인송씨</dt><dd>하루에 한번씩 산책시킵니다</dd>
             </dl>
