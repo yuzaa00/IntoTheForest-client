@@ -16,7 +16,7 @@ export default class StageResult extends Phaser.Scene {
   }
 
   public init(data: any): void {
-    this.registry.set('score', data.score || 30000) // 이전 scene에서 올라온 데이터 등록
+    this.registry.set('score', data.score) // 이전 scene에서 올라온 데이터 등록
     this.registry.set('life', data.life || 10000)
     this.registry.set('stage', data.stage - 2 || 0)
     this.registry.set('bird', data.bird || 0)

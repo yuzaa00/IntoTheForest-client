@@ -358,6 +358,10 @@ export default class Stage1 extends Phaser.Scene {
       this.moveHp.setColor('black')
     }
     this.moveHp.setText(`${Math.floor(this.registry.values.life / 100)}%`)
+    
+    if(this.registry.values.life < 1500) {
+      this.hp.timeDraw()
+    }
   }
 
   private autoMove(): void {  // 타이머 콜백함수, 자동 달리기
@@ -394,7 +398,7 @@ export default class Stage1 extends Phaser.Scene {
     this.boneLayer.removeTileAt(tile.x, tile.y)
     if (tile.index !== -1) {
       this.sound.add('coin', { volume: 0.2 }).play()
-      this.registry.values.score += 10
+      this.registry.values.score += 20
       this.scoreText.setText(`SCORE ${this.registry.values.score > 0 && this.registry.values.score < 10
         ? '0000' : this.registry.values.score > 0 && this.registry.values.score < 100
           ? '000' : this.registry.values.score >= 100 && this.registry.values.score < 1000
@@ -513,7 +517,7 @@ export default class Stage1 extends Phaser.Scene {
     if (tile.index !== -1) {
       this.game.sound.stopAll()
       this.scene.start('StageResult', {
-        score: this.registry.values.score + 10000,
+        score: this.registry.values.score + 5000,
         life: this.registry.values.life, 
         stage: 2,
         bird: this.birdArr.length,
