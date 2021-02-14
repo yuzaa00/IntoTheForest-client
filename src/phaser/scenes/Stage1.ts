@@ -44,6 +44,7 @@ export default class Stage1 extends Phaser.Scene {
 
   private invincibility!: ReturnType<typeof setTimeout>
   private reInvincibility!: ReturnType<typeof setTimeout>
+  private rezenTimer!: ReturnType<typeof setTimeout>
   private particles!: Phaser.GameObjects.Particles.ParticleEmitterManager
 
   private socketId!: string
@@ -160,11 +161,11 @@ export default class Stage1 extends Phaser.Scene {
     this.subchas = this.physics.add.staticGroup()
     this.enemies = this.physics.add.staticGroup().setActive(true)
 
-    this.potion.create(38850, 200, 'stagePotion', undefined, true, true).setScale(0.3)
+    this.potion.create(38850, 200, 'stagePotion', undefined, true, true).setScale(0.3) // 스테이지 포션 생성
 
     this.map = this.make.tilemap({ key: "map" })
 
-    let boneTiles = this.map.addTilesetImage('bone')  // 타일 로드 130 ~ 156
+    let boneTiles = this.map.addTilesetImage('bone')  // 196번째 줄 까지 타일맵 로드과정
     this.boneLayer = this.map.createLayer('boneLayer', boneTiles, 0, 0);
     this.boneLayer.setTileIndexCallback(3, this.collectBone, this).setDepth(1).setScale(1)
 
@@ -198,7 +199,7 @@ export default class Stage1 extends Phaser.Scene {
     this.ground = this.add.tileSprite(0, 622, 100000, 100, 'way').setScrollFactor(0)
 
     this.time.addEvent({ // 게임에서 시간 이벤트 등록, 1초당 콜백 호출 (콜백내용은 초당 체력 감소)
-      delay: 1000,
+      delay: 900,
       callback: this.worldTime,
       callbackScope: this,
       loop: true,
@@ -359,7 +360,7 @@ export default class Stage1 extends Phaser.Scene {
     }
     this.moveHp.setText(`${Math.floor(this.registry.values.life / 100)}%`)
     
-    if(this.registry.values.life < 1500) {
+    if(this.registry.values.life < 1800) {
       this.hp.timeDraw()
     }
   }
@@ -378,7 +379,7 @@ export default class Stage1 extends Phaser.Scene {
     if (!this.enemiesOn) {
       this.enemiesOn = true
       this.sound.add('snakeEcho').play()
-      setTimeout(() => {
+      this.rezenTimer = setTimeout(() => {
         let monster = this.physics.add.image(this.player.x + 1000, 540, 'card6.png')
         this.physics.world.enableBody(monster, 0)
         monster.setVelocityX(-350)
@@ -516,8 +517,9 @@ export default class Stage1 extends Phaser.Scene {
     this.signLayer.removeTileAt(tile.x, tile.y)
     if (tile.index !== -1) {
       this.game.sound.stopAll()
+      clearTimeout(this.rezenTimer)
       this.scene.start('StageResult', {
-        score: this.registry.values.score + 5000,
+        score: this.registry.values.score + 3500,
         life: this.registry.values.life, 
         stage: 2,
         bird: this.birdArr.length,

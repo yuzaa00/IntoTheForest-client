@@ -47,7 +47,6 @@ function ChatRoom({onSubmit}: any) {
       },
       roomCode: roomCode
     }
-    console.log(newChat, input, trimmedInput)
     onSubmit(newChat)
     setInput('')
   }

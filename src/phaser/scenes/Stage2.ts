@@ -45,6 +45,7 @@ export default class Stage2 extends Phaser.Scene {
 
   private invincibility!: ReturnType<typeof setTimeout>
   private reInvincibility!: ReturnType<typeof setTimeout>
+  private regenTimer!: ReturnType<typeof setTimeout>
   private particles!: Phaser.GameObjects.Particles.ParticleEmitterManager
 
   private socketId!: string
@@ -200,7 +201,7 @@ export default class Stage2 extends Phaser.Scene {
     this.ground = this.add.tileSprite(0, 622, 100000, 100, 'way').setScrollFactor(0)
 
     this.time.addEvent({ // 게임에서 시간 이벤트 등록, 1초당 콜백 호출 (콜백내용은 초당 체력 감소)
-      delay: 950,
+      delay: 800,
       callback: this.worldTime,
       callbackScope: this,
       loop: true,
@@ -378,7 +379,7 @@ export default class Stage2 extends Phaser.Scene {
       if((Math.random() * 10) > 4) selectEnemy = enemyList[0]
       else selectEnemy = enemyList[1]
       this.sound.add(selectEnemy[0]).play()
-      setTimeout(() => {
+      this.regenTimer = setTimeout(() => {
         let monster = this.physics.add.image(this.player.x + 1000, 540, selectEnemy[1])
         this.physics.world.enableBody(monster, 0)
         monster.setVelocityX(selectEnemy[2])
@@ -516,8 +517,9 @@ export default class Stage2 extends Phaser.Scene {
     this.signLayer.removeTileAt(tile.x, tile.y)
     if (tile.index !== -1) {
       this.game.sound.stopAll()
+      clearTimeout(this.regenTimer)
       this.scene.start('StageResult', {
-        score: this.registry.values.score + 10000,
+        score: this.registry.values.score + 8500,
         life: this.registry.values.life, 
         stage: 3,
         bird: this.birdArr.length,

@@ -108,7 +108,6 @@ function Room({ renderRoom }: RoomProps) {
     roomSocket.listenUserLeaved(({ socketId }: socketId) => { // socket on
       delete peersRef.current[socketId]
       setPeers(peers => {
-        console.log(peers, typeof peers)
         delete peers[socketId]
         return peers
       })
@@ -197,7 +196,6 @@ function Room({ renderRoom }: RoomProps) {
   }
 
   function handleIsResult(data: any) {
-    console.log(data)
   }
 
   return (
