@@ -74,7 +74,6 @@ export default class Stage1 extends Phaser.Scene {
     this.moveText = this.add.bitmapText(80, 495, 'font', `JUMP`)
       .setDepth(10)
       .setScrollFactor(0)
-      .setInteractive()
 
     this.muteButton = this.add.image(1172, 33, 'pause')
       .setDepth(8)
@@ -281,19 +280,7 @@ export default class Stage1 extends Phaser.Scene {
   }
 
   public update(): void {
-    this.moveText.on( // 점프 버튼 텍스트
-      'pointerdown',
-      () => {
-        if (this.player.body.onFloor()) {
-          this.isDoubleJump = true;
-          this.player.body.setVelocityY(-850)
-        } else if (this.isDoubleJump) {
-          this.isDoubleJump = false;
-          this.player.body.setVelocityY(-850)
-        }
-      }, this)
-
-    this.moveButton.on( // 점프 버튼 이미지
+    this.moveButton.on( // 점프 버튼
         'pointerdown',
         () => {
           if (this.player.body.onFloor()) {
