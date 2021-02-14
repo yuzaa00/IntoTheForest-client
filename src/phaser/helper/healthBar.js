@@ -59,10 +59,10 @@ export default class HealthBar {
   }
 
   timeDraw() {
-    let length = Math.floor(this.p * this.value)
-    this.bar.fillStyle(0x000000)
-    this.bar.fillRect(this.x + 2, this.y + 2, length, 26)
-    setTimeout(() => this.draw(), 250)
+    // let length = Math.floor(this.p * this.value)
+    // this.bar.fillStyle(0x000000)
+    // this.bar.fillRect(this.x + 2, this.y + 2, length, 26)
+    // setTimeout(() => this.draw(), 250)
   }
 
 }
