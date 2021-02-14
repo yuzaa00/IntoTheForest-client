@@ -57,8 +57,8 @@ export default class Stage3 extends Phaser.Scene {
     this.registry.set('score', data.score || 0) // 이전 scene에서 올라온 데이터 등록
     this.registry.set('life', data.life || 10000)
     this.registry.set('stage', data.stage || 4)
-    this.registry.set('bird', data.bird || 1)
-    this.registry.set('squi', data.squi || 1)
+    this.registry.set('bird', data.bird || 0)
+    this.registry.set('squi', data.squi || 0)
     this.registry.set('char', data.char)
   }
 
@@ -607,4 +607,4 @@ export default class Stage3 extends Phaser.Scene {
               ? '0' : this.registry.values.score >= 10000
                 ? '' : null}${this.registry.values.score}`)
   }
-} 
+}
