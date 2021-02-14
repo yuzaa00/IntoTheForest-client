@@ -31,6 +31,7 @@ export default class Stage1 extends Phaser.Scene {
   private spaceBar!: Phaser.Input.Keyboard.Key
 
   private moveText!: Phaser.GameObjects.BitmapText
+  private moveButton!: Phaser.GameObjects.Image
   private muteButton!: Phaser.GameObjects.Image
 
   private birdArr: Array<Phaser.GameObjects.Image> = []
@@ -63,13 +64,12 @@ export default class Stage1 extends Phaser.Scene {
   public preload(): void {
     this.sound.volume = 0.2
 
-    this.add.graphics()  // 버튼 위에 텍스트 추가
-      .lineStyle(10, 0x208929)
-      .fillStyle(0xffffff, 100) // 배경색, 투명도
-      .strokeRoundedRect(60, 470, 150, 80, 30)
-      .fillRoundedRect(60, 470, 150, 80, 30)
+    this.moveButton = this.add.image(135, 515, 'jump')  // 버튼 위에 텍스트 추가
       .setDepth(8)
+      .setOrigin(0.5)
       .setScrollFactor(0)
+      .setScale(0.5)
+      .setInteractive()
 
     this.moveText = this.add.bitmapText(80, 495, 'font', `JUMP`)
       .setDepth(10)
@@ -281,7 +281,7 @@ export default class Stage1 extends Phaser.Scene {
   }
 
   public update(): void {
-    this.moveText.on( // 버튼 점프
+    this.moveText.on( // 점프 버튼 텍스트
       'pointerdown',
       () => {
         if (this.player.body.onFloor()) {
@@ -292,6 +292,18 @@ export default class Stage1 extends Phaser.Scene {
           this.player.body.setVelocityY(-850)
         }
       }, this)
+
+    this.moveButton.on( // 점프 버튼 이미지
+        'pointerdown',
+        () => {
+          if (this.player.body.onFloor()) {
+            this.isDoubleJump = true;
+            this.player.body.setVelocityY(-850)
+          } else if (this.isDoubleJump) {
+            this.isDoubleJump = false;
+            this.player.body.setVelocityY(-850)
+          }
+        }, this)
 
     let didJump = Phaser.Input.Keyboard.JustDown(this.spaceBar) // 스페이스바 입력 감지
     // const mode = store.getState().gameReducer.mode // ''
