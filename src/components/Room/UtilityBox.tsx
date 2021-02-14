@@ -51,8 +51,8 @@ function UtilityBox() {
   async function handleScreenShot() {
     let video = document.getElementsByTagName('video')[0]
     let canvas = document.createElement('canvas')
-    let ctx = canvas.getContext('2d')
-    ctx.drawImage(video, 0, 0, 300, 150)
+    let ctx = canvas.getContext('2d') as any
+    ctx.drawImage(video, 0, 0, 300, 150) 
     video.style.background = "url(" + canvas.toDataURL() + ") no-repeat 0 0"
     video.style.backgroundSize = '100% 100%'
     await html2canvas(document.body, {
@@ -60,9 +60,9 @@ function UtilityBox() {
     }).then(canvas => {
       let a = document.createElement('a')
       a.href = canvas.toDataURL("image/jpeg").replace("image/jpeg", "image/octet-stream")
-      console.log(a.toString().split(',')[1])
-      axios.post(`${process.env.REACT_APP_URL as string + '/healthCheck'}`, {data: 'data:image/png;base64,' + a.toString().split(',')[1]}, {
-      })
+      // console.log(a.toString().split(',')[1])
+      // axios.post(`${process.env.REACT_APP_URL as string + '/healthCheck'}`, {data: 'data:image/png;base64,' + a.toString().split(',')[1]}, {
+      // })
       a.download = 'out.jpg'
       a.click()
     })

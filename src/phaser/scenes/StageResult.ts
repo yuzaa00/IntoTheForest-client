@@ -19,8 +19,8 @@ export default class StageResult extends Phaser.Scene {
     this.registry.set('score', data.score || 30000) // 이전 scene에서 올라온 데이터 등록
     this.registry.set('life', data.life || 10000)
     this.registry.set('stage', data.stage - 2 || 0)
-    this.registry.set('bird', data.bird || 1)
-    this.registry.set('squi', data.squi || 1)
+    this.registry.set('bird', data.bird || 0)
+    this.registry.set('squi', data.squi || 0)
     this.registry.set('char', data.char || 'dog')
     this.registry.set('start', 3)
   }
@@ -160,13 +160,14 @@ export default class StageResult extends Phaser.Scene {
   }
 
   private nextStage(): void {
+    console.log(this.registry.values.bird, this.registry.values.squi)
     if (this.registry.values.stage === 2) {
       store.dispatch({
         type: 'GAME_DESTROY',
         isOver: false,
         score: this.registry.values.score + (this.registry.values.bird + this.registry.values.squi) * 500 || 0,
         life: this.registry.values.life || 0,
-        stage: this.registry.values.stage || 1,
+        stage: this.registry.values.stage + 1 || 1,
         bird: this.registry.values.bird || 0,
         squi: this.registry.values.squi || 0,
       })
