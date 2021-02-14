@@ -39,7 +39,10 @@ function Story() {
     }
   }
   return isMulti ? <ChoiceCharacter /> : (
-    <div className="full-screen">
+    <div className="full-screen" style={{ 
+      backgroundImage: `url(${process.env.REACT_APP_URL 
+          + "/nightDark.png"})`, backgroundRepeat: "no-repeat"
+    }}>
       <h2>게임 스토리 설명</h2>
       <div className="story-area">
         <div className="only-hidden">

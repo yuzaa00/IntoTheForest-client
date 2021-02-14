@@ -84,7 +84,6 @@
   },
   "staticFiles": {
     "staticPath": [
-      "assets",
       "src/images"
     ],
     "watcherGlob": "**"

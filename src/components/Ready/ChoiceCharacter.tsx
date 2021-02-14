@@ -53,7 +53,10 @@ function ChoiceCharacter() {
   }
 
   return gameOn ? <Game /> : gameInfo ? <Control /> : (
-    <div className="choiceCharacterScreen">
+    <div className="choiceCharacterScreen" style={{ 
+      backgroundImage: `url(${process.env.REACT_APP_URL 
+          + "/nightDark.png"})`, backgroundRepeat: "no-repeat"
+    }}>
       <div className="chaSelectWrapper">
         <div className="chaSelectBx">
           <div onClick={() => {
