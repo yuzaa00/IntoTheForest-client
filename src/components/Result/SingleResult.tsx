@@ -245,7 +245,7 @@ function SingleResult() {
 
         <div className="newNickName">
           <form className='nameNickNew' onSubmit={handleRankUp}>
-            <h4 className="rankUpPoint">나의 점수는 {obj.score}입니다.</h4>
+            <h4 className="rankUpPoint">나의 스코어는 {obj.score} 점 입니다.</h4>
             <div className="rank-input-field">
               <input className="input-nickName" type="text" placeholder="닉네임을 정해주세요" name="nickname" value={customerRankUp.nickname} onChange={handleChange} />
               <button className="btnRankUp" type="submit">Rank Up</button>
