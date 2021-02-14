@@ -104,7 +104,6 @@ export default class Stage2Eventgame extends Phaser.Scene {
       this.time.addEvent({
         delay: 444,
         callback: () => {
-          console.log(this.registry.values.moleScore)
           this.game.sound.stopAll()
           this.scene.start('Stage3', {
             score: this.registry.values.score + this.registry.values.moleScore,

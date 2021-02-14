@@ -5,7 +5,6 @@ export default class Card {
       this.handler = handler
       this.outOfTheGame = false
       this.draw(x, y)
-      console.log(x, y)
     }
   
     draw(x, y) {

@@ -160,12 +160,11 @@ export default class StageResult extends Phaser.Scene {
   }
 
   private nextStage(): void {
-    console.log(this.registry.values.bird, this.registry.values.squi)
     if (this.registry.values.stage === 2) {
       store.dispatch({
         type: 'GAME_DESTROY',
         isOver: false,
-        score: this.registry.values.score + (this.registry.values.bird + this.registry.values.squi) * 500 || 0,
+        score: this.registry.values.score + (this.registry.values.bird + this.registry.values.squi) * 500 + this.registry.values.life,
         life: this.registry.values.life || 0,
         stage: this.registry.values.stage + 1 || 1,
         bird: this.registry.values.bird || 0,

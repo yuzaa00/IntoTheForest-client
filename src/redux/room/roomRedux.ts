@@ -107,7 +107,6 @@ export const roomReducer = createReducer<RoomState, RoomAction>(initialState, {
   }),
   // [ADD_USER]: (state: RoomState, action: any) => ({ ...state, users: [...state.users, action.user] }),
   [ADD_USER]: (state: RoomState, action: any) => {
-    console.log('action', action)
     const idx = action.value.findIndex((user: any) => user.socketId === state.currentUser.socketId)
     let newArr = [
       state.currentUser,

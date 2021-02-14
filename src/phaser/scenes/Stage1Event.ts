@@ -96,8 +96,6 @@ export default class Stage1Event extends Phaser.Scene {
   }
   create():void {
     this.input.enabled = true
-    this.game.input.addPointer()
-    console.log(this.game.input.activePointer)
     this.time.addEvent({
       callback: () => this.scene.start('Stage1Eventgame', {
         score: this.registry.values.score,

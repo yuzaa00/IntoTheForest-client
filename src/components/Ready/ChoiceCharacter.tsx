@@ -36,7 +36,7 @@ function ChoiceCharacter() {
         verifySocket.getAccessTokenListen(gotToken)
       }
       else {
-        alert('잘못된 접근입니다. 모드 선택으로 돌아갑니다.')
+        alert('서버 점검 중입니다.')
         history.push('/mode')
       }
     }

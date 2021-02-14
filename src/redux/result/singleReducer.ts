@@ -57,7 +57,6 @@ export const singleReducer = createReducer<SingleReducerState, SingleReducerActi
     }
   },
   [ACCESS_TOKEN]: (state: SingleReducerState, action: any) => {
-    console.log(action)
     return {
       ...state,
       accessToken: action.value
