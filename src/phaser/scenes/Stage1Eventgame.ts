@@ -5,7 +5,7 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
   private lifeText!: Phaser.GameObjects.BitmapText
   private attempt!: Phaser.GameObjects.BitmapText
   private matched!: Phaser.GameObjects.BitmapText
-  private bonus!: Phaser.GameObjects.BitmapText
+  private bonus!: number
   private score!: Phaser.GameObjects.BitmapText
   private cards: Card[] = []
   private selectedCards: Card[] = []
@@ -91,6 +91,13 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
       loop: true,
     })
 
+    this.time.addEvent({ // 게임에서 시간 이벤트 등록, 1초당 콜백 호출 (콜백내용은 초당 체력 감소)
+      delay: 900,
+      callback: this.finalStage,
+      callbackScope: this,
+      loop: true,
+    })
+
     this.attempt = this.add
     .bitmapText(890, 125, 'font',`ATTEMPT ${this.attempts}`)
     .setDepth(6)
@@ -152,10 +159,31 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
     // this.cameras.main.once('camerafadeincomplete', function (camera) {
     //   camera.fadeOut(6000);
     // });
-
+    this.bonus = this.matchedCards()
   }
 
   public update(): void {
+    if(this.matchedCards() === 8) {
+      this.bonus = this.matchedCards()
+      this.matched.setTintFill(0x00FF00)
+      setTimeout(() => this.matched.clearTint(), 150)
+      this.matched.setText(`MATCHED ${this.matchedCards()}`)
+      this.score.setTintFill(0x00FF00)
+      setTimeout(() => this.score.clearTint(), 150)
+      this.score.setText(`SCORE ${5000}`)
+      setTimeout(() => this.matched.clearTint(), 150)
+      setTimeout(() => this.score.clearTint(), 150)
+    }
+    else if(this.bonus !== this.matchedCards()) {
+      this.bonus = this.matchedCards()
+      this.matched.setTintFill(0x00FF00)
+      setTimeout(() => this.matched.clearTint(), 150)
+      this.matched.setText(`MATCHED ${this.matchedCards()}`)
+      this.score.setTintFill(0x00FF00)
+      setTimeout(() => this.score.clearTint(), 150)
+      this.score.setText(`SCORE ${this.matchedCards() * 200}`)
+    }
+
   }
 
   private worldTime(): void {  // 1초당 실행되는 함수 this.worldTimer 참조
@@ -167,8 +195,8 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
       this.time.addEvent({
         delay: 500,
         callback: () => this.scene.start('Stage2', {
-          score: this.registry.values.score,
-          life: this.registry.values.life + (this.attempts * 50) > 10000 ? 10000 : this.registry.values.life + (this.attempts * 50),
+          score: this.registry.values.score + this.matchedCards() * 200 === 1600 ? 5000 : this.matchedCards() * 200,
+          life: this.registry.values.life,
           stage: 2,
           bird: this.registry.values.bird,
           squi: this.registry.values.squi
@@ -209,9 +237,7 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
 
       this.attempt.setText(`ATTEMPT ${this.attempts}`)
 
-      this.matched.setText(`MATCHED ${this.matchedCards()}`)
 
-      this.score.setText(`SCORE ${this.matchedCards() * 100}`)
     // }
     // this.score.text = `
     //   시도 : ${this.attempts}
@@ -248,6 +274,18 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
 
   private getRandomInt = (max: number) => {
     return Math.floor(Math.random() * Math.floor(max))
+  }
+
+  private finalStage(): void {
+    if (this.registry.values.time <= 10) {
+      this.lifeText.setTintFill(0xFF7F50)
+      this.time.addEvent({
+        delay: 450,
+        callback: () => this.lifeText.clearTint(),
+        callbackScope: this,
+        loop: false
+      })
+    }
   }
 }
 
