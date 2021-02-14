@@ -43,7 +43,7 @@
   },
   "scripts": {
     "start": "parcel NODE_ENV=dev src/index.html -p 3000 --open",
-    "build": "parcel build src/index.html --out-dir dist",
+    "build": "parcel NODE_ENV=dev build src/index.html --out-dir dist",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

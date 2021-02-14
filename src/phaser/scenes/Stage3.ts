@@ -352,6 +352,9 @@ export default class Stage3 extends Phaser.Scene {
       this.moveHp.setColor('black')
     }
     this.moveHp.setText(`${Math.floor(this.registry.values.life / 100)}%`)
+    if(this.registry.values.life < 1800) {
+      this.hp.timeDraw()
+    }
   }
 
   private autoMove(): void {  // 타이머 콜백함수, 자동 달리기
