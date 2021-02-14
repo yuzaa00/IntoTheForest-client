@@ -68,8 +68,8 @@ export default function Game({ }) {
   }
 
   return (
-    <div>
-      <div>
+    <div style={{width: '100%', height: '100vh',background: 'linear-gradient(75deg,#755bea,#ff72c0)', display: 'flex'}}>
+      <div style={{margin: '0 auto', alignSelf: 'center'}}>
       <span className='game1' id='game-container11' />
       </div>
       <div>

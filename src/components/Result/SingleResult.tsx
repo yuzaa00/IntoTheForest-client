@@ -235,6 +235,7 @@ function SingleResult() {
   let myIndexedData = posts.map((el, index) => ({ index, ...el }))
 
   return !rankOn ? (
+    <div style={{width: '100%', height: '100vh',background: 'linear-gradient(75deg,#755bea,#ff72c0)', display: 'flex'}}>
     <div className="singleResultScreen">
       <div className="singleResultLayout">
         <div className="singleRankTables">
@@ -254,7 +255,9 @@ function SingleResult() {
         </div>
       </div>
     </div>
+    </div>
   ) : (
+    <div style={{width: '100%', height: '100vh',background: 'linear-gradient(75deg,#755bea,#ff72c0)', display: 'flex'}}>
       <div className="singleResultScreen">
         <div className="singleResultLayout">
           <div className="singleRankTables">
@@ -266,6 +269,7 @@ function SingleResult() {
             <button className="btnChoiceBacK" onClick={onChoiceModeBack}>솔로/멀티 돌아가기</button>
           </div>
         </div>
+      </div>
       </div>
     );
 }

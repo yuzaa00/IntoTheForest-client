@@ -8,7 +8,7 @@ function Control() {
 
     const controlDescription = [
         { name: '뼈다귀', data: ['뼈다귀를 획득하면', '점수가 올라가요!'], img: `${process.env.REACT_APP_URL}/bone.png` },
-        { name: '몬스터', data: ['스테이지 1: 뱀', '스테이지 2: 뱀, 멧돼지', '스테이지 3: 벰, 멧돼지, 늑대'], img: `${process.env.REACT_APP_URL}/all-monster.png` },
+        { name: '몬스터', data: ['스테이지 1: 뱀', '스테이지 2: 뱀, 멧돼지', '스테이지 3: 뱀, 멧돼지, 늑대'], img: `${process.env.REACT_APP_URL}/all-monster.png` },
         { name: '장애물', data: ['독버섯을 먹게 되면', '체력이 감소해요!'], img: `${process.env.REACT_APP_URL}/mushroom.png` },
         { name: '펫', data: ['새・다람쥐는 몬스터의 공격을', '대신 맞아줘요!'], img: `${process.env.REACT_APP_URL}/subcharacters.png` },
         { name: '포션', data: ['블루 포션: 체력 소폭 증가', '레드 포션: 체력 증가', '스테이지 포션: 체력 대폭 증가'], img: `${process.env.REACT_APP_URL}/all-potion.png` },
@@ -40,8 +40,6 @@ function Control() {
                         )
                     })}
                 </div>
-                {/* <p className="first-p">주 캐릭터가 몬스터 또는 장애물을 피하지 못했을 경우,</p>
-                <p className="second-p">주 캐릭터의 체력이 깎이거나 서브캐릭터를 보유하고 있다면 서브캐릭터 감소</p> */}
                 <div className="add-description">
                   <p>
                     스테이지를 통과할 때마다 <br/> <span className="orange">이전 스테이지의 몬스터와 새로운 몬스터가 함께 출몰해요!</span> <br/>
@@ -65,7 +63,8 @@ function Control() {
                     (펫이 없다면 <span className="orange">체력이 감소</span>해요)
                   </p>
                   <p>
-                    효과음과 배경음이 방해가 된다면 게임 화면의 우측 상단에 <span className="orange">일시정지 버튼</span>을 눌러주세요!
+                    화면 우측 상단에 <span className="orange">일시정지 버튼</span>이 있어요!<br />
+                    게임 일시 중단 또는 효과음, 배경음을 끄려면 일시정지 버튼을 눌러주세요.
                   </p>
                 </div>
             </div>
@@ -73,7 +72,7 @@ function Control() {
             {controlModal && (
               <div className="game-control">
                   <p>기본 <span>자동 달리기</span></p>
-                  <p>점프 <span>화면 좌측 하단 점프 버튼 클릭 또는 스페이스바 클릭</span></p>
+                  <p>점프 <span>화면 좌측 하단 점프 버튼 클릭 <br />또는 스페이스바 클릭</span></p>
                   <p>2단 점프 <span>화면 좌측 하단 점프 버튼 두 번 클릭 또는 스페이스바 두 번 클릭</span></p>
               </div>
             )}

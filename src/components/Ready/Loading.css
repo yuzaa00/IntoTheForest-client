@@ -5,6 +5,7 @@
   margin: 0 auto;
   padding: 0;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 .preload {
@@ -14,19 +15,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 } 
 
 
 .logoForest {
     position: absolute;
-    z-index: 1;
     top: 43%;
     transform: translate(12%, -30%);
 }
 
 
 .logoDog {
-    z-index: 2;
+    z-index: 1;
     position: absolute;
     height: 55px;
     left: 0%;
@@ -36,7 +37,7 @@
 }
 
 .logoDogStop {
-    z-index: 2;
+    z-index: 1;
     position: absolute;
     height: 55px;
     top: 47%;
@@ -50,18 +51,16 @@
   column-gap: 20px;
 }
 
-.loadText h3
-{   position: relative;
+.loadText h3 {  
+  position: relative;
   top: 100%;
   font-size: 30px;
 }
 
-.loadText .loadAnime
-{
+.loadText .loadAnime {
   position: relative;
   top: 100%;
 }
-
 
 @keyframes logoDog {
     from{
