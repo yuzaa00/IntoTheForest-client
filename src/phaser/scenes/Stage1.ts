@@ -225,7 +225,7 @@ export default class Stage1 extends Phaser.Scene {
 
     const py = store.getState().choiceReducer.char
     this.player = this.physics.add
-      .sprite(38650, 400, py) // 플레이어 생성 이동
+      .sprite(650, 400, py) // 플레이어 생성 이동
       .setScale(0.25)
       .setDepth(3)
 
