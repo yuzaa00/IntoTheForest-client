@@ -18,7 +18,10 @@ function Control() {
     const [controlModal, setControlModal] = useState<boolean>(false);
 
     return (
-      <div className="control-canvas">
+      <div className="control-canvas" style={{ 
+        backgroundImage: `url(${process.env.REACT_APP_URL 
+            + "/nightDark.png"})`, backgroundRepeat: "no-repeat"
+      }}>
         <h2>
           {!controlModal? '게임 설명':'조작키 설명'}
         </h2>

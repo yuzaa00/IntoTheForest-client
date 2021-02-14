@@ -40,7 +40,10 @@ const ChoiceMode = () => {
   }
   
   return (
-    <div className="game-size" onMouseOut={() => setModeHover('')}>
+    <div className="game-size" onMouseOut={() => setModeHover('')} style={{ 
+      backgroundImage: `url(${process.env.REACT_APP_URL 
+          + "/morning2.jpg"})`, backgroundRepeat: "no-repeat"
+    }}>
       <div className="mode">
         <div className="mode-solo">
           <div className="mode-name">
