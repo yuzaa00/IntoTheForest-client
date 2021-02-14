@@ -539,6 +539,12 @@ export default class Stage1 extends Phaser.Scene {
       else {
         this.particles.emitParticleAt(sub[sub.length - 1].x - 10, sub[sub.length - 1].y)
         this.sound.add('boom', { volume: 1 }).play()
+        if(sub[sub.length - 1].texture.key === "bird") {
+          this.birdArr.pop()
+        }
+        else if(sub[sub.length - 1].texture.key === "squi"){
+          this.squiArr.pop()
+        }
         sub[sub.length - 1].destroy()
       }
       this.invincibility = setTimeout(() => this.hurtOn = false, 2000)
