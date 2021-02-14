@@ -195,7 +195,7 @@ export default class Stage1Eventgame extends Phaser.Scene { // 다람쥐 도토�
       this.time.addEvent({
         delay: 500,
         callback: () => this.scene.start('Stage2', {
-          score: this.registry.values.score + this.matchedCards() * 200 === 1600 ? 5000 : this.matchedCards() * 200,
+          score: this.registry.values.score + (this.matchedCards() * 200),
           life: this.registry.values.life,
           stage: 2,
           bird: this.registry.values.bird,

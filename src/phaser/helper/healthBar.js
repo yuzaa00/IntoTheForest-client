@@ -58,4 +58,11 @@ export default class HealthBar {
     this.bar.setDepth(8).setScrollFactor(0)
   }
 
+  timeDraw() {
+    let length = Math.floor(this.p * this.value)
+    this.bar.fillStyle(0x000000)
+    this.bar.fillRect(this.x + 2, this.y + 2, length, 26)
+    setTimeout(() => this.draw(), 500)
+  }
+
 }

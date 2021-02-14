@@ -397,7 +397,7 @@ export default class Stage3 extends Phaser.Scene {
     this.boneLayer.removeTileAt(tile.x, tile.y)
     if (tile.index !== -1) {
       this.sound.add('coin', { volume: 0.2 }).play()
-      this.registry.values.score += 10
+      this.registry.values.score += 20
       this.scoreText.setText(`SCORE ${this.registry.values.score > 0 && this.registry.values.score < 10
           ? '0000' : this.registry.values.score > 0 && this.registry.values.score < 100
             ? '000' : this.registry.values.score >= 100 && this.registry.values.score < 1000
@@ -516,7 +516,7 @@ export default class Stage3 extends Phaser.Scene {
     if (tile.index !== -1) {
       this.game.sound.stopAll()
       this.scene.start('StageResult', {
-        score: this.registry.values.score + 10000,
+        score: this.registry.values.score + 15000,
         life: this.registry.values.life, 
         stage: 4,
         bird: this.birdArr.length,

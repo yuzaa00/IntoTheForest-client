@@ -54,11 +54,11 @@ export default class Stage2 extends Phaser.Scene {
   }
 
   public init(data: any) {
-    this.registry.set('score', data.score || 0) // 이전 scene에서 올라온 데이터 등록
-    this.registry.set('life', data.life || 10000)
-    this.registry.set('stage', data.stage || 2)
-    this.registry.set('bird', data.bird || 0)
-    this.registry.set('squi', data.squi || 0)
+    this.registry.set('score', data.score) // 이전 scene에서 올라온 데이터 등록
+    this.registry.set('life', data.life)
+    this.registry.set('stage', data.stage)
+    this.registry.set('bird', data.bird)
+    this.registry.set('squi', data.squi)
     this.registry.set('char', data.char)
   }
 
@@ -137,7 +137,7 @@ export default class Stage2 extends Phaser.Scene {
       .setScrollFactor(0)
 
     this.scoreText = this.add // 점수 텍스트 생성 10000 490, 1000 500, 100 510
-      .bitmapText(860, 17, 'font', `SCORE 00000`)
+      .bitmapText(860, 17, 'font', `SCORE ${this.registry.values.score}`)
       .setDepth(6)
       .setScrollFactor(0)
 
@@ -394,7 +394,7 @@ export default class Stage2 extends Phaser.Scene {
     this.boneLayer.removeTileAt(tile.x, tile.y)
     if (tile.index !== -1) {
       this.sound.add('coin', { volume: 0.2 }).play()
-      this.registry.values.score += 10
+      this.registry.values.score += 20
       this.scoreText.setText(`SCORE ${this.registry.values.score > 0 && this.registry.values.score < 10
           ? '0000' : this.registry.values.score > 0 && this.registry.values.score < 100
             ? '000' : this.registry.values.score >= 100 && this.registry.values.score < 1000
