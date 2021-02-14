@@ -99,7 +99,7 @@ export default class Stage1Event extends Phaser.Scene {
     this.game.input.addPointer()
     console.log(this.game.input.activePointer)
     this.time.addEvent({
-      callback: () =>           this.scene.start('Stage1Eventgame', {
+      callback: () => this.scene.start('Stage1Eventgame', {
         score: this.registry.values.score,
         life: this.registry.values.life,
         stage: 2,
