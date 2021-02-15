@@ -7,26 +7,12 @@ import ChoiceCharacter from './ChoiceCharacter'
 
 function Story() {
   const history = useHistory()
-  const [showMoreButton, setShowMoreButton] = useState<boolean>(false);
-  const [showSkipButton, setShowSkipButton] = useState<boolean>(false);
   const [showText, setShowText] = useState<boolean>(false);
   const [isMulti, setIsMulti] = useState<boolean>(false);
 
   const gameMode = useSelector((state: RootState) => state.gameReducer.mode, shallowEqual)
 
-  useEffect((): void => {
-    if(!gameMode) {
-
-    }
-    
-    setTimeout((): void => {
-      setShowMoreButton(true);
-      setShowSkipButton(true);
-    }, 3000);
-  }, []);
-  
   const moreStory = (): void => {
-    setShowMoreButton(false);
     setShowText(true);
   }
 
@@ -34,7 +20,6 @@ function Story() {
     if(gameMode) {
       setIsMulti(true)
     } else {
-      
       history.push('/ready/character')
     }
   }
@@ -63,8 +48,7 @@ function Story() {
         </div>
       </div>
       <div className="moreOrSkip">
-        {/* {showMoreButton && <button className="more story-button" onClick={moreStory}>더보기</button>} */}
-        {showSkipButton && <button className="skip story-button" onClick={goChoiceCharacter}>SKIP</button>}
+        <button className="skip story-button" onClick={goChoiceCharacter}>SKIP</button>
       </div>
     </div>
   )
