@@ -518,7 +518,7 @@ export default class Stage2 extends Phaser.Scene {
       this.game.sound.stopAll()
       clearTimeout(this.regenTimer)
       this.scene.start('StageResult', {
-        score: this.registry.values.score + 8500,
+        score: this.registry.values.score + 8000,
         life: this.registry.values.life, 
         stage: 3,
         bird: this.birdArr.length,
