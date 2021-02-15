@@ -43,7 +43,11 @@ function ChoiceCharacter() {
   }
 
   async function gotToken (token: string) {
-    if(token) {
+    if(token === 'error') {
+      alert('비정상적인 접근입니다.')
+      history.push('/mode')
+    }
+    else if(token) {
       dispatch({
         type: 'ACCESS_TOKEN',
         value: token
