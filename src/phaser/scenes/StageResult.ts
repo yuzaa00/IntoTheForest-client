@@ -167,8 +167,8 @@ export default class StageResult extends Phaser.Scene {
         score: this.registry.values.score + (this.registry.values.bird + this.registry.values.squi) * 500 + this.registry.values.life,
         life: this.registry.values.life || 0,
         stage: this.registry.values.stage + 1 || 1,
-        bird: this.registry.values.bird || 0,
-        squi: this.registry.values.squi || 0,
+        bird: this.registry.values.bird,
+        squi: this.registry.values.squi,
       })
     }
     this.scene.start(this.mainStage[this.registry.values.stage], {

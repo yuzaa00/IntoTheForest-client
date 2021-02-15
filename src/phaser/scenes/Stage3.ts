@@ -330,7 +330,13 @@ export default class Stage3 extends Phaser.Scene {
     if (this.registry.values.life <= 0) { // 게임 오버
       this.game.sound.stopAll()
       this.scene.pause()
-      this.scene.start('StageOver', { score: this.registry.values.score, stage: 3 })
+      this.scene.start('StageOver', { 
+        score: this.registry.values.score, 
+        stage: 3,
+        bird: this.birdArr.length,
+        squi: this.squiArr.length,
+        char: this.registry.values.char 
+      })
     }
   }
 
