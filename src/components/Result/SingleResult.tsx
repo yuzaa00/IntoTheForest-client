@@ -175,6 +175,9 @@ function SingleResult() {
 
   const handleRankUp = async (e) => {
     e.preventDefault()
+    if(customerRankUp.nickname.length < 2) {
+      return alert('닉네임은 두 글자 이상 입력해주세요.')
+    }
 
     let newGameDataFinal = Object.assign({}, customerRankUp, obj)
     const rankToken = jwt.sign({ data: newGameDataFinal, babo: 'e gun mol rat zzi' }, process.env.REACT_APP_SECRET_RANK as string)
