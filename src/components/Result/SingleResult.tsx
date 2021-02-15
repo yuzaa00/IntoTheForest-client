@@ -3,6 +3,7 @@ import { useSelector, shallowEqual } from 'react-redux';
 import { RootState } from '../../redux/rootReducer'
 import { useHistory } from "react-router-dom";
 import { useTable, usePagination } from 'react-table';
+import { createBrowserHistory } from 'history'
 import { useDispatch } from 'react-redux';
 import axios from "axios";
 import styled from 'styled-components';
@@ -150,7 +151,12 @@ function SingleResult() {
   useEffect(() => {
     verifySocket.getRankDataRequest({ token: store.getState().singleReducer.accessToken })
     verifySocket.getRankDataResponse((data: any) => {
-      setPosts(data)
+      if(data === 'error') {
+        const history = createBrowserHistory({ forceRefresh: true })
+        alert('비정상적인 접근입니다.')
+        history.push('/mode')
+      }
+      else setPosts(data)
     })
   }, [])
 
@@ -177,11 +183,16 @@ function SingleResult() {
       data: rankToken
     })
     verifySocket.updateRankResponse((data: any) => {
-      if (data) {
+      if(data === 'error') {
+        const history = createBrowserHistory({ forceRefresh: true })
+        alert('비정상적인 접근입니다.')
+        history.push('/mode')
+      }
+      else if (data) {
         setRankOn(true)
         setPosts(data)
+        alert('🙇랭크등록에 성공하셨습니다!🙏')
       }
-      alert('🙇랭크등록에 성공하셨습니다!🙏')
     })
   }
 
