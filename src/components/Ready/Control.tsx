@@ -4,7 +4,11 @@ import { Link } from 'react-router-dom';
 import './Control.css';
 require('dotenv').config()
 
-function Control() {
+interface HandleInfo {
+  handleInfo: Function
+}
+
+function Control({ handleInfo }: HandleInfo) {
 
     const controlDescription = [
         { name: '뼈다귀', data: ['뼈다귀를 획득하면', '점수가 올라가요!'], img: `${process.env.REACT_APP_URL}/bone.png` },
@@ -85,16 +89,9 @@ function Control() {
             <button className="description control-button" onClick={() => setControlModal(!controlModal)}>
               {!controlModal? '조작키 설명' : '게임 설명'}
             </button>
-            <Link to="/game">
-              <button className="start control-button">
-                GAME START
+              <button className="backCharacter control-button" onClick={() => handleInfo()}>
+                캐릭터 선택
               </button>
-            </Link>
-            <Link to="/">
-              <button className="backCharacter control-button">
-                첫 화면으로 돌아가기
-              </button>
-            </Link>
          </div>
       </div>
     )

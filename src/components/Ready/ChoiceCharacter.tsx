@@ -56,7 +56,11 @@ function ChoiceCharacter() {
     }
   }
 
-  return gameOn ? <Game /> : gameInfo ? <Control /> : (
+  function offGameInfo () {
+    setGameInfo(false)
+  }
+
+  return gameOn ? <Game /> : gameInfo ? <Control handleInfo={offGameInfo}/> : (
     <div className="choiceCharacterScreen" style={{ 
       backgroundImage: `url(${process.env.REACT_APP_URL 
           + "/nightDark.png"})`, backgroundRepeat: "no-repeat"
