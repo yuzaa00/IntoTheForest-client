@@ -25,8 +25,8 @@ export default class StageOver extends Phaser.Scene {
         score: this.registry.values.score || 0,
         life: this.registry.values.life || 0, 
         stage: this.registry.values.stage || 1,
-        bird: this.registry.values.bird || 0,
-        squi: this.registry.values.squi || 0,
+        bird: this.registry.values.bird,
+        squi: this.registry.values.squi,
       }),
       callbackScope: this,
       loop: false

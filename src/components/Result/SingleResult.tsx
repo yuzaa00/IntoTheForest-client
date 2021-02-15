@@ -163,7 +163,7 @@ function SingleResult() {
   let obj = {
     score: gameDataFinal.score,
     stage: gameDataFinal.stage,
-    subcha: gameDataFinal.bird ? gameDataFinal.bird : 0 + gameDataFinal.squi ? gameDataFinal.squi : 0,
+    subcha: gameDataFinal.bird + gameDataFinal.squi,
   }
   const [customerRankUp, setCustomerRankUp] = useState(
     { nickname: '' }
@@ -259,7 +259,16 @@ function SingleResult() {
           <form className='nameNickNew' onSubmit={handleRankUp}>
             <h4 className="rankUpPoint">나의 스코어는 {obj.score} 점 입니다.</h4>
             <div className="rank-input-field">
-              <input className="input-nickName" type="text" placeholder="닉네임을 정해주세요" name="nickname" value={customerRankUp.nickname} onChange={handleChange} />
+              <input 
+              className="input-nickName" 
+              type="text"
+              minLength={2}
+              maxLength={12}
+              placeholder="닉네임을 정해주세요" 
+              name="nickname" 
+              value={customerRankUp.nickname} 
+              onChange={handleChange} 
+              />
               <button className="btnRankUp" type="submit">Rank Up</button>
             </div>
           </form>
