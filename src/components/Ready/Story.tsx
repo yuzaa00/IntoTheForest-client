@@ -11,7 +11,7 @@ function Story() {
   const [isMulti, setIsMulti] = useState<boolean>(false);
 
   const gameMode = useSelector((state: RootState) => state.gameReducer.mode, shallowEqual)
-
+  
   const moreStory = (): void => {
     setShowText(true);
   }

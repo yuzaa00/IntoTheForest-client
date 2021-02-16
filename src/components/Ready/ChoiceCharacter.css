@@ -271,3 +271,41 @@
   letter-spacing: 1px;
   margin-right: 40px;
 }
+
+@media (orientation: portrait) {
+	.choiceCharacterScreen {
+		transform: rotate(-90deg);
+		transform-origin: top left;
+		position: absolute;
+		top: 100%;
+		left: 0;
+		width: 100vh;
+		height: 100vw;
+	}
+}
+
+@media screen and  (min-device-width: 375px) and (max-device-width: 900px) {
+  .choiceCard {
+    width: 35vh;
+    height: 35vh;
+  }
+  .chaSelectBtn {
+    padding-bottom: 14vh;
+  }
+  .clickChoiceCard {
+    width: 50vh;
+    height: 50vh;
+  }
+  .choiceCard:hover {
+    height: 45vh;
+  }
+  .chaSelectBx {
+    padding-top: 30vh;
+  }
+  .clickChoiceCard .imgBxContent h2, .choiceCard .imgBxContent h2 {
+    margin-bottom: 15px;
+  }
+  .clickChoiceCard .imgBxContent {
+    height: 40px;
+  }
+}

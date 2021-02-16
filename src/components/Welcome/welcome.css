@@ -104,3 +104,21 @@
   object-fit: cover;
   opacity: 0.2;
 }
+
+@media screen and  (min-device-width: 375px) and (max-device-width: 480px) {
+  .game-title {
+    top: 14vh;
+    font-size: 4rem;
+    margin-left: -22vh;
+    text-align: center;
+  }
+  .videovideovideo {
+    text-align: center;
+    height: 65vh;
+    object-fit: unset;
+  }
+  .mobile-button {
+   position: sticky;  
+   top: 56.5vh; 
+  }
+}

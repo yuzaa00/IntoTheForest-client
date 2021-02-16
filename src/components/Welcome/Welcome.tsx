@@ -15,13 +15,17 @@ function Welcome() {
         width='300px'
         autoPlay
         loop
-        muted>
+        muted
+        playsInline
+        >
         </video>
         <div className="game-title">INTO THE FOREST</div>
         <div className="game-version">V4.1.2</div>
+        <div className="mobile-button">
         <Link to="/mode" className="game-button">
           GAME START
         </Link>
+          </div>
       </div> 
     </div>
     </div>
