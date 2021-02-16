@@ -28,6 +28,9 @@ function ChoiceCharacter() {
   }
 
   const onGameStart = async () => {
+    if (window.matchMedia('(orientation: portrait)').matches) {
+      return alert ('가로 모드에서 실행해주세요.')
+    }
     if (toggleClass === 0) setErrorMessage('캐릭터를 선택하세요')
     else {
       if(getMySocketId()) {

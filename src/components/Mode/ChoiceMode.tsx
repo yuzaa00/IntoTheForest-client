@@ -15,7 +15,7 @@ const ChoiceMode = () => {
   const [isModalOpen, setModalOpen] = useState(false)
   const [modalComponents, setmodalContent] = useState(null)
   const history = useHistory()
-  
+ 
   const soloMode = () => {
     const text = '솔로 모드'
     setModeClick(text)
@@ -50,7 +50,10 @@ const ChoiceMode = () => {
             솔로
                             </div>
           <button
-            onClick={() => history.push('/ready/loading')}
+            onClick={() => {
+              if(document.body.clientWidth < 480) history.push('/ready/character')
+              else history.push('/ready/loading')
+            }}
             onMouseOver={soloMode}
             className="button-design">
             혼자하기

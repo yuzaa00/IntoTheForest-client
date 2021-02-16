@@ -168,3 +168,31 @@ a {
 }
 
 /****************************/
+@media screen and (min-width: 320px) and (max-width: 480px) {
+  .mode-multi {
+    display: none;
+  }
+  .game-size {
+    height: 87vh;
+    background-size: 140vh;
+  }
+  .game-size .mode .mode-solo {
+    margin-top: 3vh;
+    width: 45vh;
+    height: 65vh;
+  }
+ 
+  .game-size .text .choiceMode {
+    width: 25vh;
+    top: 70vh;
+    margin-left: 3vh;
+  }
+  .game-size .text .exit {
+    padding: 10;
+    width: 14vh;
+    margin-left: 2vh;
+  }
+  .text {
+    display: flex;
+  }
+}
