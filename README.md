@@ -25,10 +25,10 @@ Into the Forest는 횡스크롤 러닝 액션 게임으로 길잃은 강아지�
 * [팀원 소개](#팀원-소개)
 * [개발 기간](#개발-기간)
 * [스택](#스택)
-* [WHY (About Tech Stack)](#WHY-(About-Tech-Stack))
+* [WHY (About Tech Stack)](#why-(about-tech-stack))
 * [워크플로우](#워크플로우)
 * [기능](#기능)
-* [How to 배포](#How-to-배포)
+* [How to 배포](#how-to-배포)
 
 
 
