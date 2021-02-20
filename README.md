@@ -12,7 +12,11 @@ Into the Forest는 횡스크롤 러닝 액션 게임으로 길잃은 강아지�
 
 # 시연 영상 
 
-...
+![stage1](https://user-images.githubusercontent.com/63646254/108600561-232b3b80-73db-11eb-92da-102f7a70925e.gif)
+
+![stage2](https://user-images.githubusercontent.com/63646254/108600763-5621ff00-73dc-11eb-8ab3-242cee6e397a.gif)
+
+![stage3](https://user-images.githubusercontent.com/63646254/108600776-633eee00-73dc-11eb-94bc-e0160cd0c94b.gif)
 
 * 배포 사이트: <a href="http://intotheforest.space">배포 링크</a>
 * Repository
