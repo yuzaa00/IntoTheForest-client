@@ -180,7 +180,7 @@ NestJS는 Express 다음으로 가장 주목받는 NodeJs 프레임워크입니�
     <td align="center"> <img src="https://user-images.githubusercontent.com/63646254/108621915-fd547400-7478-11eb-8a1c-724b49ebd26d.png" alt="1" width="444" height="265">
       <br>
      게임은 싱글모드와 멀티모드로 나뉘어져 있습니다.<br>
-싱글모드는 혼자, 멀티모드는 최대 4인의 유저들과 화상, 채팅으로 소통하며 게임을 즐길 수 있습니다.
+싱글모드는 혼자, 멀티모드는 최대 4인의<br> 유저들과 화상, 채팅으로 소통하며 게임을 즐길 수 있습니다.
      </td>
     <td align="center"> <img src="https://user-images.githubusercontent.com/63646254/108621920-034a5500-7479-11eb-8f94-348ba844673f.png" alt="2" width="444" height="265">
       <br>
@@ -193,26 +193,26 @@ NestJS는 Express 다음으로 가장 주목받는 NodeJs 프레임워크입니�
    <tr>
      <td align="center"><img src="https://user-images.githubusercontent.com/63646254/108621926-0c3b2680-7479-11eb-9af0-1f588b6f3f6e.png" alt="3" width="444" height="265">
        <br>
-     게임은 기본적으로 자동 달리기 형식이며, 점프 버튼 혹은 스페이스바를 클릭 시 점프가 지원되고 최대 2단 점프까지 가능합니다. <br>시간이 지날수록 체력이 감소하고 게임 내 체력 포션을 획득해야만 체력을 유지할 수 있습니다.
+     스페이스바 혹은 점프 버튼 클릭 시 점프합니다. <br>시간이 지날 수록 체력이 감소하고 포션 획득 시에만 <br>체력을 회복합니다
        <br>
        <br>
      </td>
      <td align="center"> <img src="https://user-images.githubusercontent.com/63646254/108621929-0e04ea00-7479-11eb-94b0-3967e40258c0.png" alt="4" width="444" height="265">
        <br>
-       게임 스테이지는 총 3개입니다. <br>각종 포션, 숲 속 친구들, 버섯, 몬스터가 등장하며 버섯과 몬스터를 피해 숲 속 친구들을 모아 스테이지를 모두 통과하면 게임을 클리어할 수 있습니다.
+       게임 스테이지는 총 3개입니다. 각종 포션, 숲 속 친구들, 버섯, <br>몬스터가 등장하며 버섯과 몬스터를 피해 숲 속 친구들을 모아<br> 스테이지를 모두 통과하면 게임을 클리어할 수 있습니다.
        <br>
      </td>
   </tr>
     <tr>
      <td align="center"><img src="https://user-images.githubusercontent.com/63646254/108625080-30ecc980-748c-11eb-91b9-822ecaf300a7.png" alt="5" width="444" height="265">
        <br>
-       스테이지를 통과할 때마다 미니게임을 즐길 수 있습니다. <br> 카드 뒤집기 게임과 두더지 잡기 게임이 있으며 추가 점수를 획득할 수 있습니다.
+       스테이지를 통과할 때마다 미니게임을 즐길 수 있습니다. <br>카드 뒤집기 게임과 두더지 잡기 게임이 있으며 추가 점수를<br> 획득할 수 있습니다.
        <br>
        <br>
      </td>
      <td align="center"> <img src="https://user-images.githubusercontent.com/63646254/108625083-34805080-748c-11eb-815d-f953e20873ca.png" alt="6" width="444" height="265">
        <br>
-       게임 종료 후 자신이 획득한 스코어로 닉네임 및 랭킹을 등록 할 수 있습니다.
+       게임 종료 후 자신이 획득한 스코어로 <br>닉네임 및 랭킹을 등록 할 수 있습니다.
        <br>
        <br>
        <br>
