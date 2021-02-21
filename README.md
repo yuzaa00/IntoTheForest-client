@@ -28,7 +28,7 @@ Into the Forest는 횡스크롤 러닝 액션 게임으로 길잃은 강아지�
 * [워크플로우](#워크플로우)
 * [기능](#기능)
 * [배포](#배포)
-* [어려웠던점](#어려웠던점)
+* [회고](#회고)
 
 <br/>
 
@@ -113,7 +113,9 @@ Into the Forest는 횡스크롤 러닝 액션 게임으로 길잃은 강아지�
 - CSS 마무리 + JWT   
 
 <br/>
+
 # 스택
+
 ### FRONT
 ![](https://img.shields.io/badge/FRONT-Typescript-informational?style=for-the-badge&logo=TypeScript)
 
@@ -212,6 +214,7 @@ NestJS는 Express 다음으로 가장 주목받는 NodeJs 프레임워크입니�
      게임 종료 후 랭킹을 등록 할 수 있습니다.
        <br>
        <br>
+       <br>
      </td>
   </tr>
     <tr>
@@ -224,6 +227,7 @@ NestJS는 Express 다음으로 가장 주목받는 NodeJs 프레임워크입니�
      <td align="center"> <img src="https://user-images.githubusercontent.com/63646254/108625088-3ba75e80-748c-11eb-8d4a-280b6b23df54.png" alt="8" width="444" height="265">
        <br>
      멀티모드에서 함께 게임을 즐기고 각자의 점수를 공유합니다.
+       <br>
        <br>
        <br>
        <br>
