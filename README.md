@@ -1,6 +1,6 @@
 # 🌲🌳 Into the Forest 🌳🌲
 
-![랜딩 (1)](https://user-images.githubusercontent.com/63646254/108618490-2ae1f300-7462-11eb-95c2-697d316f176d.gif)
+![랜딩페이지](https://user-images.githubusercontent.com/63646254/108619351-97132580-7467-11eb-84c9-db3ff43cd174.gif)
 
 Into the Forest는 횡스크롤 러닝 액션 게임으로 길잃은 강아지가 집을 찾아가는 게임입니다. <br>
 가볍게 솔로 모드로 플레이하시거나, 친한 친구들과 멀티 모드로 추억을 남겨보세요!
@@ -15,10 +15,7 @@ Into the Forest는 횡스크롤 러닝 액션 게임으로 길잃은 강아지�
 
 ![stage3](https://user-images.githubusercontent.com/63646254/108600776-633eee00-73dc-11eb-94bc-e0160cd0c94b.gif)
 
-* 배포 사이트: <a href="http://intotheforest.space">배포 링크</a>
-* Repository
-  * 클라이언트: <a href="https://github.com/codestates/Into-the-Forest-client">Client</a>
-  * 서버: <a href="https://github.com/codestates/Into-the-Forest-server">Server</a>
+
 
 <br/>
 
