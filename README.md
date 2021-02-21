@@ -175,6 +175,7 @@ Phaser는 2D 비디오 게임을 만들기위한 프레임 워크입니다. HTML
 <br/>
 
 # How to 배포
+![Group 2](https://user-images.githubusercontent.com/63646254/108617630-5c0af500-745b-11eb-9ee7-ac9890885831.png)
 멀티모드에서는 화상 채팅 기능을 구현했는데 이 과정에서 HTTPS가 필요하다는 것을 알게 됐습니다. WebRTC에서 제공하는 getUserMedia는 보안상의 이유로
 HTTPS를 사용하지 않으면 Media Resource에 대한 접속 권한을 얻지 못하게 됩니다.
 다만 PeerJS를 통해 피어 간의 연결이 성립된 이후엔(signaling) RTCDataChannel 이 아닌 WebSocket을 통해 데이터를 주고받게 했습니다.
