@@ -98,7 +98,9 @@ Into the Forest는 횡스크롤 러닝 액션 게임으로 길잃은 강아지�
 
 <br/>
 
-# 개발 기간
+# 개발 기간 <br/>
+
+
 📆 1주차 1/6 - 1/13
 - 프로젝트 기획  및 기술 스택 검토
 
@@ -110,13 +112,7 @@ Into the Forest는 횡스크롤 러닝 액션 게임으로 길잃은 강아지�
 
 📆 4주차 1/30 ~ 2/5
 - CSS 마무리 + JWT   
-
-<br/>
-
-
 # 스택
-
-
 ### FRONT
 ![](https://img.shields.io/badge/FRONT-Typescript-informational?style=for-the-badge&logo=TypeScript)
 
