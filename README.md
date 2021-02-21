@@ -166,11 +166,28 @@ Phaser는 2D 비디오 게임을 만들기 위한 프레임 워크입니다. HTM
 <br/>
 
 # 기능
-|제목|내용|
-|:---:|:---:|
-|왼쪽정렬|오른쪽정렬|
-|왼쪽정렬|오른쪽정렬|
-|<img src=https://s3.ap-northeast-2.amazonaws.com/dev.intotheforest.space/image+2.png></img>|오른쪽정렬|
+
+
+<table>
+  <tbody>
+   <tr>
+    <td align="center"> <img src="https://user-images.githubusercontent.com/63646254/108621915-fd547400-7478-11eb-8a1c-724b49ebd26d.png" alt="1" width="460" height="300">
+     "게임은 싱글모드와 멀티모드로 나뉘어져 있습니다.<br>
+싱글모드는 혼자서 게임을 즐길 수 있고, 멀티모드는 최대 4인까지의 유저들과 화상, 채팅으로 소통하며 게임을 즐길 수 있습니다."
+      <br>
+     </td>
+    <td align="center"> <img src="https://user-images.githubusercontent.com/63646254/108621920-034a5500-7479-11eb-8f94-348ba844673f.png" alt="2" width="460" height="300">
+      "유저는 캐릭터를 선택해 플레이할 수 있습니다"
+    </td>
+   </tr> 
+   <tr>
+     <td align="center"><img src="https://user-images.githubusercontent.com/63646254/108621926-0c3b2680-7479-11eb-9af0-1f588b6f3f6e.png" alt="3" width="460" height="300"></td>
+     <td align="center"> <img src="https://user-images.githubusercontent.com/63646254/108621929-0e04ea00-7479-11eb-94b0-3967e40258c0.png" alt="4" width="460" height="300"></td>
+  </tr>
+  </tbody>
+</table>
+
+
 
 
 <br/>
