@@ -170,7 +170,7 @@ Phaser는 2D 비디오 게임을 만들기 위한 프레임 워크입니다. HTM
 |:---:|:---:|
 |왼쪽정렬|오른쪽정렬|
 |왼쪽정렬|오른쪽정렬|
-|왼쪽정렬|오른쪽정렬|
+|<img src=https://s3.ap-northeast-2.amazonaws.com/dev.intotheforest.space/image+2.png></img>|오른쪽정렬|
 
 
 <br/>
