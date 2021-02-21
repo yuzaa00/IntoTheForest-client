@@ -187,7 +187,6 @@ NestJS는 Express 다음으로 가장 주목받는 NodeJs 프레임워크입니�
       <br>
       <br>
       <br>
-      <br>
     </td>
    </tr> 
    <tr>
@@ -227,7 +226,6 @@ NestJS는 Express 다음으로 가장 주목받는 NodeJs 프레임워크입니�
      <td align="center"> <img src="https://user-images.githubusercontent.com/63646254/108625088-3ba75e80-748c-11eb-8d4a-280b6b23df54.png" alt="8" width="444" height="265">
        <br>
      멀티모드에서 함께 게임을 즐기고 각자의 점수를 공유합니다.
-       <br>
        <br>
        <br>
        <br>
