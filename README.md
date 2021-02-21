@@ -1,6 +1,6 @@
 # 🌲🌳 Into the Forest 🌳🌲
 
-<img src="https://user-images.githubusercontent.com/63646254/108619351-97132580-7467-11eb-84c9-db3ff43cd174.gif" alt="2" width="600" height="300">
+<img src="https://user-images.githubusercontent.com/63646254/108619351-97132580-7467-11eb-84c9-db3ff43cd174.gif" alt="2" width="560" height="280">
 
 
 Into the Forest는 횡스크롤 러닝 액션 게임으로 길잃은 강아지가 집을 찾아가는 게임입니다. <br>
