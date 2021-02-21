@@ -205,7 +205,7 @@ NestJS는 Express 다음으로 가장 주목받는 NodeJs 프레임워크입니�
      </td>
   </tr>
     <tr>
-     <td align="center"><img src="https://user-images.githubusercontent.com/63646254/108625080-30ecc980-748c-11eb-91b9-822ecaf300a7.png" alt="5" width="444" height="265">
+     <td align="center"><img src="https://user-images.githubusercontent.com/65987817/108627141-74990080-7497-11eb-864c-0d310b7606ed.png" alt="5" width="444" height="265">
        <br>
        스테이지를 통과할 때마다 미니게임을 즐길 수 있습니다. <br>카드 뒤집기 게임과 두더지 잡기 게임이 있으며 추가 점수를<br> 획득할 수 있습니다.
        <br>
