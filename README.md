@@ -5,8 +5,7 @@
 Into the Forest는 횡스크롤 러닝 액션 게임으로 길잃은 강아지가 집을 찾아가는 게임입니다. <br>
 가볍게 솔로 모드로 플레이하시거나, 친한 친구들과 멀티 모드로 추억을 남겨보세요!
 
-
-
+<br/>
 
 # 시연 영상 
 
@@ -21,6 +20,7 @@ Into the Forest는 횡스크롤 러닝 액션 게임으로 길잃은 강아지�
   * 클라이언트: <a href="https://github.com/codestates/Into-the-Forest-client">Client</a>
   * 서버: <a href="https://github.com/codestates/Into-the-Forest-server">Server</a>
 
+<br/>
 
 # 목차
 
@@ -33,11 +33,12 @@ Into the Forest는 횡스크롤 러닝 액션 게임으로 길잃은 강아지�
 * [기능](#기능)
 * [How to 배포](#how-to-배포)
 
-
+<br/>
 
 # 프로젝트 소개
 
 
+<br/>
 
 # 팀원 소개
 
@@ -99,11 +100,11 @@ Into the Forest는 횡스크롤 러닝 액션 게임으로 길잃은 강아지�
 </table>
 
 
-
+<br/>
 
 # 개발 기간
 
-
+<br/>
 
 
 # 스택
@@ -133,6 +134,8 @@ Into the Forest는 횡스크롤 러닝 액션 게임으로 길잃은 강아지�
 ![](https://img.shields.io/badge/BACK-socket.io-lightgrey?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjUwMCIgaGVpZ2h0PSIyNTAwIiB2aWV3Qm94PSIwIDAgMjU2IDI1NiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWluWU1pbiBtZWV0Ij48cGF0aCBkPSJNOTYuNDQ3IDcuMzgyYzMyLjI2Ny04LjI3NSA2Ny45MjktMy40NTMgOTYuMzg2IDE0LjExIDM1Ljg0IDIxLjQzMyA1OS4yMzggNjEuOTc2IDU5LjgzMyAxMDMuNzEgMS4zMSA0Mi4xNS0yMC42NTkgODMuOTQ0LTU1Ljk2MyAxMDYuODY1LTM5LjI5MyAyNi40MzMtOTMuNjQ4IDI3LjQ0Ni0xMzMuNzc1IDIuMzIyLTQwLjktMjQuNDEtNjQuNzc0LTczLjY0NS01OC42NDEtMTIwLjkxNiA0Ljk0LTQ5Ljk1IDQzLjUyLTk0LjAwNSA5Mi4xNi0xMDYuMDl6IiBmaWxsPSIjMDEwMTAxIi8+PHBhdGggZD0iTTkxLjUwNSAyNy44MDNjNjAuOTY0LTI0LjQxIDEzNS43NCAyMC42NTggMTQyLjA1IDg2LjAyOCA5LjgyNCA1OC44Mi0zOC45OTUgMTE4LjU5My05OC41OSAxMjAuMzItNTYuNjc3IDUuNjU2LTExMS40NDktNDIuMzktMTEzLjA1Ni05OS4zMDQtNC4yMjctNDYuMDggMjYuMTM2LTkxLjgwMyA2OS41OTYtMTA3LjA0NHoiIGZpbGw9IiNGRkYiLz48cGF0aCBkPSJNOTcuNjM3IDEyMS42OWMyNy4zMjctMjIuMzI2IDU0LjA1OC00NS40MjYgODEuOTgtNjcuMDk3LTE0LjY0NiAyMi41MDUtMjkuNzA4IDQ0LjcxMS00NC4zNTQgNjcuMjE1LTEyLjU2Mi4wNi0yNS4xMjMuMDYtMzcuNjI2LS4xMTl6TTEyMC43MzcgMTM0LjEzMmMxMi42MjEgMCAyNS4xODMgMCAzNy43NDUuMTc5LTI3LjUwNSAyMi4yMDYtNTQuMTE3IDQ1LjQ4NC04Mi4wOTkgNjcuMDk2IDE0LjY0Ni0yMi41MDUgMjkuNzA4LTQ0Ljc3IDQ0LjM1NC02Ny4yNzV6IiBmaWxsPSIjMDEwMTAxIi8+PC9zdmc+)
 
 
+<br/>
+
 # WHY (About Tech Stack)
 
 
@@ -149,16 +152,16 @@ Into the Forest는 횡스크롤 러닝 액션 게임으로 길잃은 강아지�
 # 워크플로우
 
 
-
+<br/>
 
 # 기능
 
 
-
+<br/>
 
 # How to 배포
 
-
+<br/>
 
 
 # For project worklog
