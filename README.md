@@ -104,6 +104,10 @@ Into the Forest는 횡스크롤 러닝 액션 게임으로 길잃은 강아지�
 <br/>
 
 # 개발 기간
+1주차 - 프로젝트 기획  및 기술 스택 검토  
+2주차 - React, Redux, Phaser, NestJS  
+3주차 - socket.io + WebRTC 채팅, 화상 구현  
+4주차 - CSS 마무리 + JWT   
 
 <br/>
 
