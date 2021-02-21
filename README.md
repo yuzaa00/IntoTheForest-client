@@ -195,7 +195,6 @@ NestJS는 Express 다음으로 가장 주목받는 NodeJs 프레임워크입니�
        <br>
      스페이스바 혹은 점프 버튼 클릭 시 점프합니다. <br>시간이 지날 수록 체력이 감소하고 포션 획득 시에만 <br>체력을 회복합니다
        <br>
-       <br>
      </td>
      <td align="center"> <img src="https://user-images.githubusercontent.com/63646254/108621929-0e04ea00-7479-11eb-94b0-3967e40258c0.png" alt="4" width="444" height="265">
        <br>
@@ -208,12 +207,10 @@ NestJS는 Express 다음으로 가장 주목받는 NodeJs 프레임워크입니�
        <br>
        스테이지를 통과할 때마다 미니게임을 즐길 수 있습니다. <br>카드 뒤집기 게임과 두더지 잡기 게임이 있으며 추가 점수를<br> 획득할 수 있습니다.
        <br>
-       <br>
      </td>
      <td align="center"> <img src="https://user-images.githubusercontent.com/63646254/108625083-34805080-748c-11eb-815d-f953e20873ca.png" alt="6" width="444" height="265">
        <br>
        게임 종료 후 자신이 획득한 스코어로 <br>닉네임 및 랭킹을 등록 할 수 있습니다.
-       <br>
        <br>
        <br>
      </td>
@@ -227,7 +224,6 @@ NestJS는 Express 다음으로 가장 주목받는 NodeJs 프레임워크입니�
      <td align="center"> <img src="https://user-images.githubusercontent.com/63646254/108625088-3ba75e80-748c-11eb-8d4a-280b6b23df54.png" alt="8" width="444" height="265">
        <br>
      멀티모드에서 함께 게임을 즐기고 각자의 점수를 공유합니다.
-       <br>
        <br>
        <br>
      </td>
