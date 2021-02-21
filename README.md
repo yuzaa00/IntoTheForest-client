@@ -6,9 +6,11 @@
 Into the Forest는 횡스크롤 러닝 액션 게임으로 길잃은 강아지가 집을 찾아가는 게임입니다. <br>
 가볍게 솔로 모드로 플레이하시거나, 친한 친구들과 멀티 모드로 추억을 남겨보세요!
 * 배포 사이트 : <a href="http://intotheforest.space">http://intotheforest.space</a>
+* 클라이언트: <a href="https://github.com/codestates/Into-the-Forest-client">https://github.com/codestates/Into-the-Forest-client</a>
+* 서버: <a href="https://github.com/codestates/Into-the-Forest-server">https://github.com/codestates/Into-the-Forest-server</a>
 <br/>
 
-# 시연 영상 
+# 🐾 시연 영상 
 
 ![stage1](https://user-images.githubusercontent.com/63646254/108600561-232b3b80-73db-11eb-92da-102f7a70925e.gif)
 
@@ -20,24 +22,24 @@ Into the Forest는 횡스크롤 러닝 액션 게임으로 길잃은 강아지�
 
 <br/>
 
-# 목차
+# 🐾 목차
 
-* [팀원 소개](#팀원-소개)
-* [개발 기간](#개발-기간)
-* [스택](#스택)
-* [스택 선정 이유](#스택-선정-이유)
-* [워크플로우](#워크플로우)
-* [기능](#기능)
-* [배포](#배포)
-* [회고](#회고)
-
-<br/>
-
-
+* [팀원 소개](#-팀원-소개)
+* [개발 기간](#-개발-기간)
+* [스택](#-스택)
+* [스택 선정 이유](#-스택-선정-이유)
+* [워크플로우](#-워크플로우)
+* [기능](#-기능)
+* [배포](#-배포)
+* [회고](#-회고)
 
 <br/>
 
-# 팀원 소개
+
+
+<br/>
+
+# 🐾 팀원 소개
 
 <table>
   <tbody>
@@ -99,7 +101,7 @@ Into the Forest는 횡스크롤 러닝 액션 게임으로 길잃은 강아지�
 
 <br/>
 
-# 개발 기간 
+# 🐾 개발 기간 
 
 📆 1주차 1/6 - 1/13
 - 프로젝트 기획  및 기술 스택 검토
@@ -115,7 +117,7 @@ Into the Forest는 횡스크롤 러닝 액션 게임으로 길잃은 강아지�
 
 <br/>
 
-# 스택
+# 🐾 스택
 
 ### FRONT
 ![](https://img.shields.io/badge/FRONT-Typescript-informational?style=for-the-badge&logo=TypeScript)
@@ -143,7 +145,7 @@ Into the Forest는 횡스크롤 러닝 액션 게임으로 길잃은 강아지�
 
 <br/>
 
-# 스택 선정 이유
+# 🐾 스택 선정 이유
 
 
 ### Why TypeScript?
@@ -166,12 +168,12 @@ NestJS는 Express 다음으로 가장 주목받는 NodeJs 프레임워크입니�
 <br/>
 
 
-# 워크플로우
+# 🐾 워크플로우
 ![Group 2](https://user-images.githubusercontent.com/63646254/108616312-ba31db00-744f-11eb-8742-b8638904dfaf.png)
 
 <br/>
 
-# 기능
+# 🐾 기능
 
 
 <table>
@@ -235,7 +237,7 @@ NestJS는 Express 다음으로 가장 주목받는 NodeJs 프레임워크입니�
 
 <br/>
 
-# 배포
+# 🐾 배포
 ![Untitled](https://user-images.githubusercontent.com/63646254/108617703-e2273b80-745b-11eb-8efd-8c038cff712e.png)
 멀티모드에서는 화상 채팅 기능을 구현했는데 이 과정에서 HTTPS가 필요하다는 것을 알게 됐습니다. WebRTC에서 제공하는 getUserMedia는 보안상의 이유로
 HTTPS를 사용하지 않으면 Media Resource에 대한 접속 권한을 얻지 못하게 됩니다.
@@ -244,7 +246,7 @@ HTTPS의 구성은 ClondFront-S3와 ELB-EC2로 구성되어 있는데 HTTPS를 �
 
 <br/>
 
-# 회고
+# 🐾 회고
 
 ### <경훈>
 
