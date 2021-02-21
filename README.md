@@ -276,4 +276,4 @@ HTTPS의 구성은 ClondFront-S3와 ELB-EC2로 구성되어 있는데 HTTPS를 �
 
 # For project worklog
 
-[https://github.com/codestates/Into-the-Forest-client/wiki/worklog](https://github.com/codestates/Into-the-Forest-client/wiki/worklog)
+[https://github.com/codestates/Into-the-Forest-client/wiki](https://github.com/codestates/Into-the-Forest-client/wiki)
