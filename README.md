@@ -5,7 +5,7 @@
 
 Into the Forest는 횡스크롤 러닝 액션 게임으로 길잃은 강아지가 집을 찾아가는 게임입니다. <br>
 가볍게 솔로 모드로 플레이하시거나, 친한 친구들과 멀티 모드로 추억을 남겨보세요!
-
+* 배포 사이트 : <a href="http://intotheforest.space">http://intotheforest.space</a>
 <br/>
 
 # 시연 영상 
