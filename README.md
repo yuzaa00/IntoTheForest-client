@@ -91,7 +91,7 @@ Into the Forest는 횡스크롤 러닝 액션 게임으로 길잃은 강아지�
         <strong>🏁 Frontend</strong>
       </td>
     </tr>
-    <tr>
+    </tr>
   </tbody>
 </table>
 
@@ -179,7 +179,7 @@ NestJS는 Express 다음으로 가장 주목받는 NodeJs 프레임워크입니�
     <td align="center"> <img src="https://user-images.githubusercontent.com/63646254/108621915-fd547400-7478-11eb-8a1c-724b49ebd26d.png" alt="1" width="444" height="265">
       <br>
      게임은 싱글모드와 멀티모드로 나뉘어져 있습니다.<br>
-싱글모드는 혼자서 게임을 즐길 수 있고, 멀티모드는 최대 4인까지의 유저들과 화상, 채팅으로 소통하며 게임을 즐길 수 있습니다.
+싱글모드는 혼자, 멀티모드는 최대 4인의 유저들과 화상, 채팅으로 소통하며 게임을 즐길 수 있습니다.
      </td>
     <td align="center"> <img src="https://user-images.githubusercontent.com/63646254/108621920-034a5500-7479-11eb-8f94-348ba844673f.png" alt="2" width="444" height="265">
       <br>
