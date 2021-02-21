@@ -161,7 +161,7 @@ Phaser는 2D 비디오 게임을 만들기위한 프레임 워크입니다. HTML
 
 
 # 워크플로우
-
+![Group 2](https://user-images.githubusercontent.com/63646254/108616312-ba31db00-744f-11eb-8742-b8638904dfaf.png)
 
 <br/>
 
