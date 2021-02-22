@@ -1,0 +1,9 @@
+.join-room-canvas title {
+  height: 300px;
+  margin-bottom: 2%;
+  z-index: 1;
+}
+
+.join-room-canvas .button-area {
+  margin-top: 60px;
+}

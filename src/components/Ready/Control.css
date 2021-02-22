@@ -1,0 +1,176 @@
+/******** common ********/
+
+ul {
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+.control-button {
+  width: 250px;
+  color: white;
+  font-family: 'BMDOHYEON';
+  font-size: 1rem;
+  margin-top: 2%;
+  text-align: center;
+
+}
+
+.control-button:focus {
+  outline: none;
+}
+
+.orange {
+  color: orange;
+  /* font-weight: bold; */
+}
+
+/***********************/
+
+.control-canvas {
+  width: 1200px;
+  height: 600px;
+  background-size: 100%;
+  text-align: center;
+  margin: 0 auto;
+  overflow: hidden;
+  color: white;
+  font-family: 'Y_Spotlight';
+  font-size: 1rem;
+  position: relative;
+}
+
+.control-canvas h2 {
+  width: inherit;
+  height: 30px;
+  line-height: 30px;
+  font-family: 'BMDOHYEON';
+  font-size: 45px;
+  text-shadow: #FC0 1px 0 10px;
+}
+
+.control-canvas .description-area {
+  /* width: 70%;
+  height: 60%; */
+  width: 900px;
+  height: 350px;
+  line-height: 70%;
+  margin: 20px auto 0;
+  padding: 20px 0;
+  overflow: scroll;
+  background: rgba(255, 255, 255, .1);
+  border-radius: 50px;
+}
+
+/* .control-canvas .description-area .game-control h3{
+  font-size: 30px;
+  margin-bottom: 50px;
+} */
+
+.control-canvas .description-area .control-description {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(250px, auto));
+  margin-bottom: 30px;
+}
+
+.control-canvas .description-area .control-description h3 {
+  margin-top: 50px;
+  color: orange;
+}
+
+.control-canvas .description-area .control-description .control-layout {
+  width: inherit;
+  padding: 20px;
+}
+
+.control-canvas .description-area .control-description .item-data {
+  width: 205px;
+  line-height: 25px;
+  margin: 0 auto;
+}
+
+.control-canvas .description-area .add-description {
+  width: 100%;
+  /* display: grid;
+  grid-template-columns: repeat(2, minmax(50%, auto)); */
+  margin-top: 40px;
+}
+
+.control-canvas .description-area .add-description p {
+  width: 100%;
+  line-height: 2;
+  margin: 0 auto;
+  padding: 40px 0;
+  border-top: 2px solid rgba(255, 255, 255, .1);
+}
+
+/*
+.control-canvas .description-area .second-p {
+  padding-bottom: 50px;
+} */
+
+.control-canvas .description-area .game-control {
+  margin-top: 110px;
+  line-height: 30px;
+  display: flex;
+}
+
+.control-canvas .description-area .game-control p {
+  width: 33%;
+  padding: 0 5%;
+  font-size: 22px;
+  color: orange;
+  font-weight: bold;
+  border-right: 1px solid #ddd;
+}
+
+.control-canvas .description-area .game-control p:last-child {
+  border-right: 0;
+}
+
+.control-canvas .description-area .game-control span {
+  display: block;
+  font-size: 15px;
+  color: white;
+  font-weight: normal;
+}
+
+.control-canvas .description-area .control-description .item-data li {
+  /* width: 200px; */
+  /* padding-left: 8% */
+}
+
+.control-canvas .button-area .description {
+  background: #233F4E;
+  margin-right: 30px;
+  padding: 1.5% 3%;
+  border-radius: 200px;
+}
+
+.control-canvas .button-area .description:hover {
+  background: #08293B;
+}
+
+.control-canvas .button-area .start {
+  background: red;
+  margin-top: 1%;
+  padding: 1.5% 2.5%;
+  border-radius: 200px;
+}
+
+.control-canvas .button-area .start:hover {
+  background: #E60304;
+}
+
+.control-canvas .button-area .backCharacter {
+  background: #233F4E;
+  margin-left: 30px;
+  padding: 1.5% 3%;
+  border-radius: 200px;
+}
+
+.control-canvas .button-area .backCharacter:hover {
+  background: #08293B;
+}

@@ -1,0 +1,14 @@
+.loadkprofile {
+  background-color: white;
+  border-radius: 15px;
+  font-family: 'BMDOHYEON';
+  font-size: 15px;
+  color: deepskyblue;
+  margin: 10px;
+  padding: 10px;
+}
+
+.loadkprofile:hover {
+  background-color: gold;
+  color: white;
+}

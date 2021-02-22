@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    
+    <title>Into the Forest</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&family=Staatliches&display=swap" rel="stylesheet">  
+    <script src="//developers.kakao.com/sdk/js/kakao.js"></script>
+  </head>
+  <body ></body>
+  
+    <div id="root"></div>
+    <script>
+      HTMLCanvasElement.prototype.getContext = function(origFn) {
+  return function(type, attribs) {
+    attribs = attribs || {};
+    attribs.preserveDrawingBuffer = true;
+    return origFn.call(this, type, attribs);
+  };
+}(HTMLCanvasElement.prototype.getContext)
+    </script>
+    <script src="index.tsx"></script>
+  </body>
+</html>

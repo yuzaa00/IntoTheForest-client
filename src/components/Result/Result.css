@@ -1,0 +1,38 @@
+.kakao_share {
+  text-align: center;
+  background: #f8e000;
+  width: 200px;
+  border-radius: 20px;
+  position: absolute;
+  top: 45vw;
+  left: 50%;
+  margin-left: -100px;
+}
+
+.MRcontainer {
+  background: white;
+  display: flex;
+  border-radius: 20px;
+  width: 180px;
+  height: 180px;
+  text-align: center;
+  padding-top: 25px;
+  flex-direction: column;
+}
+
+.MRcontent {
+  margin: 10px;
+  font-family: 'BMDOHYEON';
+  font-size: 15px;
+  color: #00BCD4;
+}
+
+.MRbigcon {
+  display: flex;
+  flex-direction: row;
+  width: 65vw;
+  height: 15vw;
+  margin: auto;
+  justify-content: space-between;
+}
+

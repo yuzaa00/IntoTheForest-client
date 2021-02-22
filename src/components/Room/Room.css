@@ -1,0 +1,33 @@
+.room_video {
+  width: 45vw;
+  height: 45vw;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  overflow-y: scroll;
+  position: relative;
+  right: -16%;
+  margin-top: 56px;
+}
+
+.room_video_game_start {
+  width: 99vw;
+  height: 23vw;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  overflow-y: scroll;
+  margin: 0px 20px;
+}
+
+.room_video_game_start::-webkit-scrollbar {
+  display: none;
+}
+.room_video::-webkit-scrollbar {
+  display: none;
+}
+
+
+
