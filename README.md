@@ -241,7 +241,7 @@ NestJS는 Express 다음으로 가장 주목받는 NodeJs 프레임워크입니�
 ![Untitled](https://user-images.githubusercontent.com/63646254/108617703-e2273b80-745b-11eb-8efd-8c038cff712e.png)
 멀티모드에서는 화상 채팅 기능을 구현했는데 이 과정에서 HTTPS가 필요하다는 것을 알게 됐습니다. WebRTC에서 제공하는 getUserMedia는 보안상의 이유로
 HTTPS를 사용하지 않으면 Media Resource에 대한 접속 권한을 얻지 못하게 됩니다.
-다만 PeerJS를 통해 피어 간의 연결이 성립된 이후엔(signaling) RTCDataChannel 이 아닌 WebSocket을 통해 데이터를 주고받게 했습니다.
+다만 peer 라이브러리를 통해 피어 간의 연결이 성립된 이후엔(signaling) RTCDataChannel 이 아닌 WebSocket을 통해 데이터를 주고받게 했습니다.
 HTTPS의 구성은 ClondFront-S3와 ELB-EC2로 구성되어 있는데 HTTPS를 통해서 웹캠의 비디오와 오디오 스트림에 접근하고 피어 연결이 성립되면 그때 ELB의 TCP 리스너를 통해 WebSocket으로 데이터 스트림을 주고받는 방식으로 구현하였습니다.
 
 <br/>
